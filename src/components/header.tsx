@@ -1,9 +1,7 @@
 "use client";
 
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Info } from "lucide-react";
 
 export function Header() {
   return (
@@ -18,16 +16,6 @@ export function Header() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
           </div>
           <nav className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" asChild>
-              <a
-                href="https://openrouter.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Info className="h-4 w-4" />
-                <span className="sr-only">OpenRouter</span>
-              </a>
-            </Button>
             <ThemeToggle />
           </nav>
         </div>
