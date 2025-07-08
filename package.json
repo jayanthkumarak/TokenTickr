@@ -1,6 +1,7 @@
 {
-  "name": "model-comparison",
+  "name": "tokentickr",
   "version": "0.1.0",
+  "description": "A modern LLM model comparison tool for pricing and features",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
