@@ -48,25 +48,36 @@
   },
   "overrides": {
     "@visx/axis": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/grid": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/group": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/responsive": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/scale": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/shape": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
     },
     "@visx/tooltip": {
-      "react": "$react"
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "@visx/bounds": {
+      "react": "$react",
+      "react-dom": "$react-dom"
     }
   }
 }
