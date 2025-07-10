@@ -45,5 +45,28 @@
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@visx/axis": {
+      "react": "$react"
+    },
+    "@visx/grid": {
+      "react": "$react"
+    },
+    "@visx/group": {
+      "react": "$react"
+    },
+    "@visx/responsive": {
+      "react": "$react"
+    },
+    "@visx/scale": {
+      "react": "$react"
+    },
+    "@visx/shape": {
+      "react": "$react"
+    },
+    "@visx/tooltip": {
+      "react": "$react"
+    }
   }
 }
