@@ -1,12 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Group } from "@visx/group";
-import { Bar } from "@visx/shape";
-import { scaleLinear, scaleBand } from "@visx/scale";
-import { AxisBottom, AxisLeft } from "@visx/axis";
-import { GridRows } from "@visx/grid";
-import { ParentSize } from "@visx/responsive";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,11 +16,6 @@ interface PriceComparisonChartProps {
   className?: string;
 }
 
-// Color-blind friendly palette - using imported CHART_COLORS from colorblind-colors.ts
-
-// Chart dimensions - reduced margins to prevent negative width
-const CHART_MARGIN = { top: 20, right: 60, bottom: 60, left: 120 };
-
 export function PriceComparisonChart({ 
   data, 
   className 
@@ -33,17 +23,13 @@ export function PriceComparisonChart({
   const [showDetails, setShowDetails] = useState(false);
   const [showComparisons, setShowComparisons] = useState(false);
   const [showYearlyProjections, setShowYearlyProjections] = useState(false);
-  const [hoveredBar, setHoveredBar] = useState<string | null>(null);
   
   // Debug: Track when chart receives new data
   console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName} = $${data.results[0]?.totalCost.toFixed(2)}`);
 
-  // Prepare chart data with color-blind friendly colors and patterns
+  // Prepare chart data with color-blind friendly colors
   const chartData = useMemo(() => {
     const colors = COLOR_UTILS.getDataPalette(data.results.length);
-    const patterns = ['solid', 'diagonal', 'dots', 'vertical', 'horizontal', 'cross', 'diamond', 'wave'];
-    
-    // Chart data prepared for visualization
     
     return data.results.map((item, index) => ({
       ...item,
@@ -51,181 +37,27 @@ export function PriceComparisonChart({
         ? `${item.modelName.substring(0, 25)}...` 
         : item.modelName,
       color: colors[index] || CHART_COLORS.primary[0],
-      pattern: patterns[index % patterns.length],
-      patternId: `pattern-${index}`,
+      fill: colors[index] || CHART_COLORS.primary[0],
     }));
   }, [data]);
 
-  // Chart component
-  const Chart = ({ width, height }: { width: number; height: number }) => {
-    // Ensure minimum dimensions to prevent negative values
-    const minWidth = CHART_MARGIN.left + CHART_MARGIN.right + 100; // Minimum 100px for chart area
-    const minHeight = CHART_MARGIN.top + CHART_MARGIN.bottom + 200; // Minimum 200px for chart area
-    
-    if (width < minWidth || height < minHeight) {
+  // Custom tooltip component
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
       return (
-        <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-          Chart area too small. Please resize or expand the window.
+        <div className="bg-white p-3 border rounded shadow-lg">
+          <p className="font-medium">{data.modelName}</p>
+          <p className="text-sm text-muted-foreground">
+            Total Cost: {formatCostDisplay(data.totalCost)}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Ranking: #{data.ranking}
+          </p>
         </div>
       );
     }
-
-    const xMax = width - CHART_MARGIN.left - CHART_MARGIN.right;
-    const yMax = height - CHART_MARGIN.top - CHART_MARGIN.bottom;
-
-    // Scales with safe domain handling
-    const maxCost = Math.max(...chartData.map(d => d.totalCost));
-    const safeDomain = maxCost > 0 ? maxCost : 1; // Prevent division by zero
-    
-    const xScale = scaleLinear({
-      domain: [0, safeDomain],
-      range: [0, Math.max(xMax, 1)], // Ensure positive range
-    });
-
-    const yScale = scaleBand({
-      domain: chartData.map(d => d.displayName),
-      range: [0, Math.max(yMax, 1)], // Ensure positive range
-      padding: 0.2,
-    });
-
-    return (
-      <svg width={width} height={height}>
-        <defs>
-          {/* Pattern definitions for accessibility */}
-          <pattern id="pattern-0" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[0]?.color} />
-          </pattern>
-          <pattern id="pattern-1" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[1]?.color} />
-            <path d="M 0,4 L 4,0 M -1,1 L 1,-1 M 3,5 L 5,3" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-2" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[2]?.color} />
-            <circle cx="2" cy="2" r="1" fill="#ffffff" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-3" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[3]?.color} />
-            <path d="M 2,0 L 2,4" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-4" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[4]?.color} />
-            <path d="M 0,2 L 4,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-5" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[5]?.color} />
-            <path d="M 2,0 L 2,4 M 0,2 L 4,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-6" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[6]?.color} />
-            <path d="M 0,0 L 2,2 L 4,0 L 2,2 L 0,4" stroke="#ffffff" strokeWidth="1" opacity="0.3" fill="none" />
-          </pattern>
-          <pattern id="pattern-7" patternUnits="userSpaceOnUse" width="8" height="4">
-            <rect width="8" height="4" fill={chartData[7]?.color} />
-            <path d="M 0,2 Q 2,0 4,2 Q 6,4 8,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" fill="none" />
-          </pattern>
-        </defs>
-        
-        <Group left={CHART_MARGIN.left} top={CHART_MARGIN.top}>
-          <GridRows
-            scale={yScale}
-            width={xMax}
-            stroke="#e5e7eb"
-            strokeOpacity={0.5}
-          />
-          
-          {chartData.map((d, i) => {
-            const rawBarWidth = xScale(d.totalCost);
-            const barWidth = Math.max(0, rawBarWidth); // Ensure non-negative width
-            const barHeight = yScale.bandwidth() || 0; // Ensure non-negative height
-            const barY = yScale(d.displayName) || 0;
-            
-            // Ensure safe rendering with non-negative dimensions
-            
-            return (
-              <Group key={`bar-${i}`}>
-                <Bar
-                  x={0}
-                  y={barY}
-                  width={barWidth}
-                  height={barHeight}
-                  fill={d.pattern === 'solid' ? d.color : `url(#${d.patternId})`}
-                  rx={4}
-                  opacity={hoveredBar && hoveredBar !== d.modelName ? 0.4 : 1}
-                  style={{ 
-                    cursor: 'pointer',
-                    transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
-                  }}
-                  onMouseEnter={() => setHoveredBar(d.modelName)}
-                  onMouseLeave={() => setHoveredBar(null)}
-                />
-                
-                {/* Value label on bar */}
-                <text
-                  x={Math.max(barWidth + 8, 8)} // Ensure text is visible even for zero-width bars
-                  y={barY + barHeight / 2}
-                  dy="0.35em"
-                  fontSize={12}
-                  fill="#374151"
-                  fontWeight="medium"
-                >
-                  {formatCostDisplay(d.totalCost)}
-                </text>
-                
-                {/* Ranking badge - only show if bar has meaningful width */}
-                {barWidth > 40 && (
-                  <>
-                    <circle
-                      cx={barWidth - 20}
-                      cy={barY + barHeight / 2}
-                      r={10}
-                      fill="white"
-                      stroke={d.color}
-                      strokeWidth={2}
-                    />
-                    <text
-                      x={barWidth - 20}
-                      y={barY + barHeight / 2}
-                      dy="0.35em"
-                      fontSize={10}
-                      fill={d.color}
-                      textAnchor="middle"
-                      fontWeight="bold"
-                    >
-                      #{d.ranking}
-                    </text>
-                  </>
-                )}
-              </Group>
-            );
-          })}
-          
-          <AxisLeft
-            scale={yScale}
-            stroke="#6b7280"
-            tickStroke="#6b7280"
-            tickLabelProps={() => ({
-              fill: "#6b7280",
-              fontSize: 12,
-              textAnchor: "end",
-              dy: "0.35em",
-            })}
-          />
-          
-          <AxisBottom
-            top={yMax}
-            scale={xScale}
-            stroke="#6b7280"
-            tickStroke="#6b7280"
-            tickFormat={(value) => formatCostDisplay(Number(value))}
-            tickLabelProps={() => ({
-              fill: "#6b7280",
-              fontSize: 12,
-              textAnchor: "middle",
-            })}
-          />
-        </Group>
-      </svg>
-    );
+    return null;
   };
 
   if (data.results.length === 0) {
@@ -268,14 +100,39 @@ export function PriceComparisonChart({
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Main Chart */}
-        <div className="h-[500px] w-full min-h-[300px]">
-          <ParentSize>
-            {({ width, height }) => (
-              <Chart width={width} height={height} />
-            )}
-          </ParentSize>
-        </div>
+                  {/* Main Chart */}
+          <div className="h-[500px] w-full min-h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={chartData} 
+                layout="horizontal" 
+                margin={{ top: 20, right: 60, bottom: 20, left: 120 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis 
+                  type="number" 
+                  tickFormatter={(value) => formatCostDisplay(value)}
+                  stroke="#6b7280"
+                />
+                <YAxis 
+                  type="category" 
+                  dataKey="displayName"
+                  stroke="#6b7280"
+                  tick={{ fontSize: 12 }}
+                />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar 
+                  dataKey="totalCost" 
+                  name="Total Cost"
+                  radius={[0, 4, 4, 0]}
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
 
         {/* Chart Legend */}
         <div className="flex items-center justify-between text-sm">

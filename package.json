@@ -15,13 +15,7 @@
     "@radix-ui/react-popover": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
-    "@visx/axis": "^3.12.0",
-    "@visx/grid": "^3.12.0",
-    "@visx/group": "^3.12.0",
-    "@visx/responsive": "^3.12.0",
-    "@visx/scale": "^3.12.0",
-    "@visx/shape": "^3.12.0",
-    "@visx/tooltip": "^3.12.0",
+
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -46,38 +40,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "overrides": {
-    "@visx/axis": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/grid": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/group": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/responsive": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/scale": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/shape": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/tooltip": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    },
-    "@visx/bounds": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    }
-  }
+
 }
