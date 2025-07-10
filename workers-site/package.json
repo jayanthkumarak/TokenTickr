@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "tokentickr-workers-site",
+  "version": "1.0.0",
+  "description": "TokenTickr Workers Site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0"
+  }
+} 

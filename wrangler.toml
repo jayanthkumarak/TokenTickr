@@ -1,0 +1,20 @@
+name = "tokentickr"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = "./out"
+entry-point = "workers-site"
+
+[env.production]
+name = "tokentickr"
+route = "tokentickr.com/*"
+
+[env.staging]
+name = "tokentickr-staging"
+
+# Workers Sites configuration
+[build]
+command = "npm run build"
+cwd = "./"
+watch_dir = "src" 
