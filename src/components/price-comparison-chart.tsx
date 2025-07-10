@@ -42,6 +42,8 @@ export function PriceComparisonChart({
   const [showDetails, setShowDetails] = useState(false);
   const [showComparisons, setShowComparisons] = useState(false);
   const [showYearlyProjections, setShowYearlyProjections] = useState(false);
+  const [hoveredBar, setHoveredBar] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Prepare chart data
   const chartData = useMemo(() => {
@@ -95,7 +97,13 @@ export function PriceComparisonChart({
                   height={barHeight}
                   fill={d.color}
                   rx={4}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  opacity={hoveredBar && hoveredBar !== d.modelName ? 0.4 : 1}
+                  style={{ 
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
+                  }}
+                  onMouseEnter={() => setHoveredBar(d.modelName)}
+                  onMouseLeave={() => setHoveredBar(null)}
                 />
                 
                 {/* Value label on bar */}
@@ -169,6 +177,19 @@ export function PriceComparisonChart({
         <CardContent className="p-6">
           <div className="text-center text-muted-foreground">
             No models selected for comparison
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <Card className={cn("w-full", className)}>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-center space-x-2">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <span className="text-muted-foreground">Loading chart...</span>
           </div>
         </CardContent>
       </Card>

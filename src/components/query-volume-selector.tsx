@@ -26,23 +26,31 @@ export function QueryVolumeSelector({
   const selectedVolume = QUERY_VOLUMES.find(volume => volume.value === value);
   
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn("w-full space-y-2", className)}>
+      <div className="text-sm text-muted-foreground">
+        Choose your use case to see relevant cost comparisons
+      </div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className="w-full justify-between h-auto p-4"
             disabled={disabled}
           >
-            <div className="flex flex-col items-start">
-              <span className="font-medium">
+            <div className="flex flex-col items-start gap-1">
+              <span className="font-medium text-base">
                 {selectedVolume?.label || `${value.toLocaleString()} Queries`}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-sm text-muted-foreground">
                 {selectedVolume?.description || 'Custom volume'}
               </span>
+              {selectedVolume?.context && (
+                <span className="text-xs text-muted-foreground/80">
+                  {selectedVolume.context}
+                </span>
+              )}
             </div>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -60,11 +68,11 @@ export function QueryVolumeSelector({
                       onValueChange(volume.value);
                       setOpen(false);
                     }}
-                    className="cursor-pointer"
+                    className="cursor-pointer p-3"
                   >
                     <Check
                       className={cn(
-                        "mr-2 h-4 w-4",
+                        "mr-3 h-4 w-4",
                         value === volume.value ? "opacity-100" : "opacity-0"
                       )}
                     />
@@ -72,6 +80,9 @@ export function QueryVolumeSelector({
                       <span className="font-medium">{volume.label}</span>
                       <span className="text-sm text-muted-foreground">
                         {volume.description}
+                      </span>
+                      <span className="text-xs text-muted-foreground/70">
+                        {volume.context}
                       </span>
                     </div>
                   </CommandItem>

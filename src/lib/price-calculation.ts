@@ -8,13 +8,38 @@ export const TOKEN_ESTIMATES = {
   COMPLETION_TOKENS: 300,
 } as const;
 
-// Query volume options with contextual descriptions
+// Query volume options with user-friendly contextual descriptions
 export const QUERY_VOLUMES = [
-  { value: 1, label: "1 Query", description: "Single test" },
-  { value: 10, label: "10 Queries", description: "Light usage" },
-  { value: 100, label: "100 Queries", description: "Regular usage" },
-  { value: 10000, label: "10K Queries", description: "Production app" },
-  { value: 1000000, label: "1M Queries", description: "Enterprise scale" },
+  { 
+    value: 1, 
+    label: "Single Query", 
+    description: "Testing a model",
+    context: "Perfect for trying out different models before committing"
+  },
+  { 
+    value: 10, 
+    label: "10 Queries", 
+    description: "Personal project",
+    context: "Ideal for hobby projects or small experiments"
+  },
+  { 
+    value: 100, 
+    label: "100 Queries", 
+    description: "Small business",
+    context: "Great for small businesses with moderate AI usage"
+  },
+  { 
+    value: 10000, 
+    label: "10,000 Queries", 
+    description: "Production application",
+    context: "Suitable for live apps serving customers daily"
+  },
+  { 
+    value: 1000000, 
+    label: "1,000,000 Queries", 
+    description: "Enterprise scale",
+    context: "High-volume applications with millions of users"
+  },
 ] as const;
 
 export const DEFAULT_QUERY_VOLUME = 100;

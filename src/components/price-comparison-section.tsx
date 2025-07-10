@@ -6,6 +6,8 @@ import { TrendingUp, DollarSign } from "lucide-react";
 import { OpenRouterModel } from "@/types/models";
 import { QueryVolumeSelector } from "./query-volume-selector";
 import { PriceComparisonChart } from "./price-comparison-chart";
+import { HeroInsight } from "./hero-insight";
+import { InsightsPanel } from "./insights-panel";
 import { 
   calculatePriceComparison, 
   generateHeroText, 
@@ -62,35 +64,15 @@ export function PriceComparisonSection({
 
       {/* Query Volume Selector */}
       <div className="max-w-md mx-auto">
-        <div className="mb-2">
-          <label className="text-sm font-medium">Query Volume</label>
-          <p className="text-xs text-muted-foreground">
-            Select your expected usage to see cost differences
-          </p>
-        </div>
         <QueryVolumeSelector
           value={queryVolume}
           onValueChange={setQueryVolume}
         />
       </div>
 
-      {/* Hero Text */}
-      {heroText && (
-        <Card className="border-primary/20 bg-primary/5">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-3">
-              <DollarSign className="h-5 w-5 text-primary mt-0.5" />
-              <div>
-                <p className="text-lg font-semibold text-primary mb-1">
-                  Key Insight
-                </p>
-                <p className="text-foreground">
-                  {heroText}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Hero Insight */}
+      {comparisonData && (
+        <HeroInsight data={comparisonData} />
       )}
 
       {/* Price Comparison Chart */}
@@ -100,75 +82,39 @@ export function PriceComparisonSection({
         />
       )}
 
-      {/* Cost Breakdown Summary */}
+      {/* Strategic Insights Panel */}
       {comparisonData && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">
-              Cost breakdown for {queryVolume.toLocaleString()} queries per month
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Cheapest Model */}
-              <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                <div className="text-sm text-muted-foreground mb-1">Most Cost-Effective</div>
-                <div className="font-semibold text-green-700 dark:text-green-400">
-                  {comparisonData.cheapestModel.modelName}
-                </div>
-                <div className="text-lg font-bold text-green-600 dark:text-green-500">
-                  {formatCostDisplay(comparisonData.cheapestModel.totalCost)}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {formatCostDisplay(comparisonData.cheapestModel.costPerQuery)} per query
-                </div>
-              </div>
-
-              {/* Most Expensive Model */}
-              <div className="text-center p-4 bg-red-50 dark:bg-red-950/20 rounded-lg">
-                <div className="text-sm text-muted-foreground mb-1">Most Expensive</div>
-                <div className="font-semibold text-red-700 dark:text-red-400">
-                  {comparisonData.mostExpensiveModel.modelName}
-                </div>
-                <div className="text-lg font-bold text-red-600 dark:text-red-500">
-                  {formatCostDisplay(comparisonData.mostExpensiveModel.totalCost)}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {formatCostDisplay(comparisonData.mostExpensiveModel.costPerQuery)} per query
-                </div>
-              </div>
-
-              {/* Cost Ratio */}
-              <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                <div className="text-sm text-muted-foreground mb-1">Cost Difference</div>
-                <div className="font-semibold text-blue-700 dark:text-blue-400">
-                  {comparisonData.maxCostRatio.toFixed(1)}x
-                </div>
-                <div className="text-lg font-bold text-blue-600 dark:text-blue-500">
-                  {formatCostDisplay(
-                    comparisonData.mostExpensiveModel.totalCost - 
-                    comparisonData.cheapestModel.totalCost
-                  )}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  potential savings
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <InsightsPanel data={comparisonData} />
       )}
 
-      {/* Technical Details */}
-      <Card className="border-muted">
+      {/* Cost Disclaimers */}
+      <Card className="border-muted bg-muted/20">
         <CardContent className="p-4">
-          <div className="text-sm text-muted-foreground space-y-1">
-            <p>
-              <strong>Calculation basis:</strong> 150 prompt tokens + 300 completion tokens per query
-            </p>
-            <p>
-              <strong>Note:</strong> Actual costs may vary based on your specific prompts and model responses
-            </p>
+          <div className="text-sm text-muted-foreground space-y-2">
+            <div className="flex items-start gap-2">
+              <DollarSign className="h-4 w-4 mt-0.5 text-muted-foreground" />
+              <div>
+                <p className="font-medium text-foreground mb-1">Cost Calculation Details</p>
+                <ul className="space-y-1 text-xs">
+                  <li>• Based on 150 prompt tokens + 300 completion tokens per query</li>
+                  <li>• Actual costs may vary based on your specific prompts and model responses</li>
+                  <li>• Prices are current as of the latest API data and may change</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-2">
+              <TrendingUp className="h-4 w-4 mt-0.5 text-muted-foreground" />
+              <div>
+                <p className="font-medium text-foreground mb-1">Important Disclaimers</p>
+                <ul className="space-y-1 text-xs">
+                  <li>• <strong>Infrastructure costs not included:</strong> Server hosting, databases, monitoring</li>
+                  <li>• <strong>Development costs not included:</strong> Engineering time, testing, deployment</li>
+                  <li>• <strong>Operational costs not included:</strong> Support, maintenance, scaling</li>
+                  <li>• <strong>Additional services:</strong> Rate limiting, caching, load balancing may be required</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
