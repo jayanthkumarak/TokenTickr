@@ -8,6 +8,7 @@ import { Plus, Minus, RotateCcw } from "lucide-react";
 import { useComparisonStore } from "@/store/comparison-store";
 import { ModelCard } from "@/components/model-card";
 import { ModelSelector } from "@/components/model-selector";
+import { PriceComparisonSection } from "@/components/price-comparison-section";
 import { OpenRouterModel } from "@/types/models";
 import { cn } from "@/lib/utils";
 
@@ -184,6 +185,11 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
             Add Model
           </Button>
         </div>
+      </div>
+
+      {/* Price Comparison Section */}
+      <div className="mt-12">
+        <PriceComparisonSection models={activeModels} />
       </div>
 
       {/* Footer Info */}
