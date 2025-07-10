@@ -191,21 +191,6 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
       <div className="mt-12">
         <PriceComparisonSection models={activeModels} />
       </div>
-
-      {/* Footer Info */}
-      <div className="mt-12 text-center text-sm text-muted-foreground">
-        <p>
-          Data sourced from{" "}
-          <a
-            href="https://openrouter.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-foreground"
-          >
-            OpenRouter
-          </a>
-        </p>
-      </div>
     </div>
   );
 }
