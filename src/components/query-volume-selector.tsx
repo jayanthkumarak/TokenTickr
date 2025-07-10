@@ -65,6 +65,7 @@ export function QueryVolumeSelector({
                     key={volume.value}
                     value={volume.value.toString()}
                     onSelect={() => {
+                      console.log(`🎯 Query volume changed: ${value.toLocaleString()} → ${volume.value.toLocaleString()}`);
                       onValueChange(volume.value);
                       setOpen(false);
                     }}

@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { X, DollarSign, Cpu, Eye, Zap, Settings } from "lucide-react";
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
+import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
 import { cn } from "@/lib/utils";
 
 interface ModelCardProps {
@@ -103,14 +104,20 @@ export function ModelCard({
         {/* Pricing */}
         <div className="grid grid-cols-2 gap-3">
           <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-            <DollarSign className="h-4 w-4 text-green-600" />
+            <DollarSign 
+              className="h-4 w-4" 
+              style={{ color: SEMANTIC_COLORS.savings }}
+            />
             <div>
               <p className="font-medium text-sm">Prompt</p>
               <p className="text-xs text-muted-foreground">{promptPrice}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-            <DollarSign className="h-4 w-4 text-blue-600" />
+            <DollarSign 
+              className="h-4 w-4" 
+              style={{ color: SEMANTIC_COLORS.highlight }}
+            />
             <div>
               <p className="font-medium text-sm">Completion</p>
               <p className="text-xs text-muted-foreground">{completionPrice}</p>
@@ -120,7 +127,10 @@ export function ModelCard({
 
         {/* Context Length */}
         <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-          <Cpu className="h-4 w-4 text-purple-600" />
+          <Cpu 
+            className="h-4 w-4" 
+            style={{ color: SEMANTIC_COLORS.neutral }}
+          />
           <div>
             <p className="font-medium text-sm">Context Length</p>
             <p className="text-xs text-muted-foreground">{contextLength} tokens</p>

@@ -77,11 +77,12 @@ describe('Price Calculation', () => {
   });
 
   test('formatCostDisplay should format costs appropriately', () => {
-    expect(formatCostDisplay(0.000001)).toMatch(/µ/); // Micro dollars
-    expect(formatCostDisplay(0.001)).toMatch(/‰/); // Per mille
-    expect(formatCostDisplay(0.1)).toBe('$0.100');
-    expect(formatCostDisplay(1.5)).toBe('$1.50');
-    expect(formatCostDisplay(150)).toBe('$150');
+    expect(formatCostDisplay(0.000001)).toBe('$0.000001'); // Very small amounts
+    expect(formatCostDisplay(0.001)).toBe('$0.0010'); // Small amounts under cent
+    expect(formatCostDisplay(0.1)).toBe('$0.100'); // Under dollar
+    expect(formatCostDisplay(1.5)).toBe('$1.50'); // Regular amounts
+    expect(formatCostDisplay(150)).toBe('$150'); // Medium amounts
+    expect(formatCostDisplay(1500)).toBe('$1,500.00'); // Large amounts with commas
   });
 
   test('getCostRatio should calculate correct ratios', () => {

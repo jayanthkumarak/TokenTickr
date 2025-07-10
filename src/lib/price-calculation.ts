@@ -1,5 +1,44 @@
 import { OpenRouterModel } from '@/types/models';
 
+/**
+ * Safe division function that handles division by zero and infinite values
+ */
+export function safeDivision(numerator: number, denominator: number, fallback: number = 0): number {
+  if (denominator === 0) return fallback;
+  if (!isFinite(numerator) || !isFinite(denominator)) return fallback;
+  const result = numerator / denominator;
+  return isFinite(result) ? result : fallback;
+}
+
+/**
+ * Safe percentage calculation that handles division by zero
+ */
+function safePercentageDifference(expensive: number, cheap: number): number {
+  if (cheap === 0) {
+    return expensive === 0 ? 0 : 999999; // Cap at 999,999% for display purposes
+  }
+  const percentage = ((expensive - cheap) / cheap) * 100;
+  return isFinite(percentage) ? percentage : 999999;
+}
+
+/**
+ * Safe cost ratio calculation that handles division by zero
+ */
+function safeCostRatio(expensive: number, cheap: number): number {
+  if (cheap === 0) {
+    return expensive === 0 ? 1 : 999999; // Cap at 999,999x for display purposes
+  }
+  const ratio = expensive / cheap;
+  return isFinite(ratio) ? ratio : 999999;
+}
+
+/**
+ * Check if a model is effectively free (cost less than $0.000001)
+ */
+function isEffectivelyFree(cost: number): boolean {
+  return cost < 0.000001;
+}
+
 // Token estimation constants based on realistic usage patterns
 export const TOKEN_ESTIMATES = {
   // Average mixed usage: simple + elaborate + complex queries
@@ -42,7 +81,7 @@ export const QUERY_VOLUMES = [
   },
 ] as const;
 
-export const DEFAULT_QUERY_VOLUME = 100;
+export const DEFAULT_QUERY_VOLUME = 1000000;
 
 export interface PriceCalculationResult {
   modelId: string;
@@ -86,12 +125,41 @@ export interface PriceComparisonData {
  * Calculate the cost for a single query (prompt + completion) for a given model
  */
 export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResult {
-  const promptPricePerToken = parseFloat(model.pricing.prompt);
-  const completionPricePerToken = parseFloat(model.pricing.completion);
+  // Debug: Log raw API values to understand the format
+  console.log(`🔍 RAW API VALUES for ${model.name}:`);
+  console.log(`   Raw prompt string: "${model.pricing.prompt}"`);
+  console.log(`   Raw completion string: "${model.pricing.completion}"`);
+  console.log(`   parseFloat(prompt): ${parseFloat(model.pricing.prompt)}`);
+  console.log(`   parseFloat(completion): ${parseFloat(model.pricing.completion)}`);
+  
+  // Test both interpretations
+  const rawPromptPrice = parseFloat(model.pricing.prompt);
+  const rawCompletionPrice = parseFloat(model.pricing.completion);
+  
+  // If API returns price per million tokens (expected format)
+  const promptPricePerToken_v1 = rawPromptPrice / 1000000;
+  const completionPricePerToken_v1 = rawCompletionPrice / 1000000;
+  
+  // If API returns price per token (alternative format)
+  const promptPricePerToken_v2 = rawPromptPrice;
+  const completionPricePerToken_v2 = rawCompletionPrice;
+  
+  console.log(`   Interpretation 1 (divide by 1M): prompt=${promptPricePerToken_v1.toFixed(8)}, completion=${completionPricePerToken_v1.toFixed(8)}`);
+  console.log(`   Interpretation 2 (use as-is): prompt=${promptPricePerToken_v2.toFixed(8)}, completion=${completionPricePerToken_v2.toFixed(8)}`);
+  
+  // Based on analysis: OpenRouter API returns prices per token, not per million tokens
+  // So we use the raw values directly (they're already per token)
+  const promptPricePerToken = rawPromptPrice;
+  const completionPricePerToken = rawCompletionPrice;
   
   const promptCost = promptPricePerToken * TOKEN_ESTIMATES.PROMPT_TOKENS;
   const completionCost = completionPricePerToken * TOKEN_ESTIMATES.COMPLETION_TOKENS;
   const costPerQuery = promptCost + completionCost;
+  
+  // Debug: Show calculation for verification (limited to avoid spam)
+  if (Math.random() < 0.1) { // Show ~10% of calculations
+    console.log(`💡 ${model.name}: $${model.pricing.prompt}/$${model.pricing.completion} per 1M tokens → $${costPerQuery.toFixed(6)} per query`);
+  }
   
   return {
     modelId: model.id,
@@ -108,10 +176,13 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
 }
 
 /**
- * Generate detailed model-to-model comparisons
+ * Generate detailed model-to-model comparisons (optimized for 4+ models)
  */
 function generateModelComparisons(results: PriceCalculationResult[]): ModelComparison[] {
   const comparisons: ModelComparison[] = [];
+  
+  // For performance, limit comparisons for large model sets
+  const MAX_COMPARISONS = 10;
   
   // Generate all pairwise comparisons
   for (let i = 0; i < results.length; i++) {
@@ -124,8 +195,8 @@ function generateModelComparisons(results: PriceCalculationResult[]): ModelCompa
       const cheaperCost = Math.min(modelA.totalCost, modelB.totalCost);
       const expensiveCost = Math.max(modelA.totalCost, modelB.totalCost);
       
-      const percentageDifference = ((expensiveCost - cheaperCost) / cheaperCost) * 100;
-      const costRatio = expensiveCost / cheaperCost;
+      const percentageDifference = safePercentageDifference(expensiveCost, cheaperCost);
+      const costRatio = safeCostRatio(expensiveCost, cheaperCost);
       
       comparisons.push({
         modelA: modelA.modelName,
@@ -139,16 +210,48 @@ function generateModelComparisons(results: PriceCalculationResult[]): ModelCompa
   }
   
   // Sort by cost difference (descending) to show most significant differences first
-  return comparisons.sort((a, b) => b.costDifference - a.costDifference);
+  const sortedComparisons = comparisons.sort((a, b) => b.costDifference - a.costDifference);
+  
+  // For 4+ models, limit to most meaningful comparisons to prevent UI overload
+  if (results.length >= 4) {
+    const topComparisons = sortedComparisons.slice(0, MAX_COMPARISONS);
+    
+    // Always include comparison between cheapest and most expensive if not already included
+    const cheapestModel = results[0];
+    const mostExpensiveModel = results[results.length - 1];
+    const hasMinMaxComparison = topComparisons.some(comp => 
+      (comp.modelA === cheapestModel.modelName && comp.modelB === mostExpensiveModel.modelName) ||
+      (comp.modelA === mostExpensiveModel.modelName && comp.modelB === cheapestModel.modelName)
+    );
+    
+    if (!hasMinMaxComparison && topComparisons.length > 0) {
+      // Replace the last comparison with the min-max comparison
+      const costDifference = Math.abs(mostExpensiveModel.totalCost - cheapestModel.totalCost);
+      const percentageDifference = safePercentageDifference(mostExpensiveModel.totalCost, cheapestModel.totalCost);
+      const costRatio = safeCostRatio(mostExpensiveModel.totalCost, cheapestModel.totalCost);
+      
+      topComparisons[topComparisons.length - 1] = {
+        modelA: cheapestModel.modelName,
+        modelB: mostExpensiveModel.modelName,
+        costDifference,
+        percentageDifference,
+        costRatio,
+        cheaperModel: cheapestModel.modelName,
+      };
+    }
+    
+    return topComparisons;
+  }
+  
+  return sortedComparisons;
 }
 
 /**
- * Calculate yearly projections based on different scaling scenarios
+ * Calculate yearly projections based on monthly query volume
  */
-function calculateYearlyProjections(costPerQuery: number, currentQueryVolume: number) {
-  // Estimate yearly queries based on current volume
-  const dailyQueries = currentQueryVolume;
-  const yearlyQueries = dailyQueries * 365;
+function calculateYearlyProjections(costPerQuery: number, monthlyQueryVolume: number) {
+  // Calculate yearly cost based on monthly volume
+  const yearlyQueries = monthlyQueryVolume * 12;
   
   return costPerQuery * yearlyQueries;
 }
@@ -160,15 +263,51 @@ export function calculatePriceComparison(
   models: OpenRouterModel[],
   queryVolume: number = DEFAULT_QUERY_VOLUME
 ): PriceComparisonData {
+  // Input validation
+  if (!Array.isArray(models) || models.length === 0) {
+    throw new Error('Models array must be provided and not empty');
+  }
+  
+  if (typeof queryVolume !== 'number' || queryVolume < 0 || !isFinite(queryVolume)) {
+    queryVolume = DEFAULT_QUERY_VOLUME;
+  }
+  
   // Calculate costs for each model
   const results = models
     .map(model => {
-      const queryCost = calculateQueryCost(model);
-      return {
-        ...queryCost,
-        totalCost: queryCost.costPerQuery * queryVolume,
-        yearlyProjection: calculateYearlyProjections(queryCost.costPerQuery, queryVolume),
-      };
+      try {
+        const queryCost = calculateQueryCost(model);
+        const totalCost = queryCost.costPerQuery * queryVolume;
+        const yearlyProjection = calculateYearlyProjections(queryCost.costPerQuery, queryVolume);
+        
+        // Calculation verification (first model only) - always log to verify query volume changes
+        if (model.id === models[0].id) {
+          console.log(`💰 ${model.name}: $${queryCost.costPerQuery.toFixed(6)}/query × ${queryVolume.toLocaleString()} = $${totalCost.toFixed(2)} total`);
+          console.log(`🔍 Pricing: $${(parseFloat(model.pricing.prompt) * 1000000).toFixed(2)}/$${(parseFloat(model.pricing.completion) * 1000000).toFixed(2)} per 1M tokens, ${TOKEN_ESTIMATES.PROMPT_TOKENS + TOKEN_ESTIMATES.COMPLETION_TOKENS} tokens/query`);
+        }
+        
+        // Validate calculated values
+        return {
+          ...queryCost,
+          totalCost: isFinite(totalCost) ? totalCost : 0,
+          yearlyProjection: isFinite(yearlyProjection) ? yearlyProjection : 0,
+        };
+      } catch (error) {
+        console.warn(`Error calculating cost for model ${model.id}:`, error);
+        // Return a safe fallback result
+        return {
+          modelId: model.id,
+          modelName: model.name,
+          totalCost: 0,
+          costPerQuery: 0,
+          promptCost: 0,
+          completionCost: 0,
+          yearlyProjection: 0,
+          ranking: 0,
+          percentageFromCheapest: 0,
+          costRatioFromCheapest: 1,
+        };
+      }
     })
     .sort((a, b) => a.totalCost - b.totalCost); // Sort by total cost (ascending)
   
@@ -176,13 +315,13 @@ export function calculatePriceComparison(
   const cheapestCost = results[0].totalCost;
   results.forEach((result, index) => {
     result.ranking = index + 1;
-    result.percentageFromCheapest = ((result.totalCost - cheapestCost) / cheapestCost) * 100;
-    result.costRatioFromCheapest = result.totalCost / cheapestCost;
+    result.percentageFromCheapest = safePercentageDifference(result.totalCost, cheapestCost);
+    result.costRatioFromCheapest = safeCostRatio(result.totalCost, cheapestCost);
   });
   
   const cheapestModel = results[0];
   const mostExpensiveModel = results[results.length - 1];
-  const maxCostRatio = mostExpensiveModel.totalCost / cheapestModel.totalCost;
+  const maxCostRatio = safeCostRatio(mostExpensiveModel.totalCost, cheapestModel.totalCost);
   
   // Calculate statistics
   const totalCosts = results.map(r => r.totalCost);
@@ -223,6 +362,23 @@ export function generateHeroText(comparisonData: PriceComparisonData): string {
   }
   
   const volumeDescription = QUERY_VOLUMES.find(v => v.value === queryVolume)?.description || 'queries';
+  const cheapestIsFree = isEffectivelyFree(cheapestModel.totalCost);
+  const mostExpensiveIsFree = isEffectivelyFree(mostExpensiveModel.totalCost);
+  
+  // Handle all models being free
+  if (cheapestIsFree && mostExpensiveIsFree) {
+    return `Great news! All selected models are essentially free for ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month).`;
+  }
+  
+  // Handle cheapest model being free
+  if (cheapestIsFree) {
+    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), ${cheapestModel.modelName} is essentially free while ${mostExpensiveModel.modelName} costs ${formatCostDisplay(mostExpensiveModel.totalCost)}/month. Annual savings potential: ${formatCostDisplay(mostExpensiveModel.totalCost * 12)}.`;
+  }
+  
+  // Handle capped ratios (very large differences)
+  if (maxCostRatio >= 999999) {
+    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), there's an extreme cost difference between models. ${mostExpensiveModel.modelName} costs ${formatCostDisplay(costSpread)} more than ${cheapestModel.modelName}. Choose wisely to save ${formatCostDisplay(costSpread * 12)} annually.`;
+  }
   
   // Generate contextual hero text with more insights
   if (maxCostRatio >= 10) {
@@ -235,21 +391,87 @@ export function generateHeroText(comparisonData: PriceComparisonData): string {
 }
 
 /**
- * Format cost for display with appropriate precision
+ * Format cost for display with appropriate precision and comma separators
  */
 export function formatCostDisplay(cost: number): string {
-  if (cost < 0.001) return `$${(cost * 1000000).toFixed(2)}µ`; // Micro dollars
-  if (cost < 0.01) return `$${(cost * 1000).toFixed(2)}‰`; // Per mille
-  if (cost < 1) return `$${cost.toFixed(3)}`;
-  if (cost < 100) return `$${cost.toFixed(2)}`;
-  return `$${cost.toFixed(0)}`;
+  // Handle invalid inputs
+  if (typeof cost !== 'number' || isNaN(cost)) {
+    return '$0.00';
+  }
+  
+  // Handle infinite values
+  if (!isFinite(cost)) {
+    return cost > 0 ? '$999,999+' : '$0.00';
+  }
+  
+  // Handle negative values
+  if (cost < 0) return `-${formatCostDisplay(Math.abs(cost))}`;
+  
+  // Handle zero and effectively free
+  if (cost === 0 || isEffectivelyFree(cost)) return '$0.00';
+  
+  // For very small amounts, show more decimal places
+  if (cost < 0.0001) {
+    return `$${cost.toFixed(6)}`; // e.g., $0.000001
+  }
+  
+  // For small amounts under a cent
+  if (cost < 0.01) {
+    return `$${cost.toFixed(4)}`; // e.g., $0.0012
+  }
+  
+  // For amounts under a dollar
+  if (cost < 1) {
+    return `$${cost.toFixed(3)}`; // e.g., $0.123
+  }
+  
+  // For amounts under $100
+  if (cost < 100) {
+    return `$${cost.toFixed(2)}`; // e.g., $12.34
+  }
+  
+  // For larger amounts with comma separators
+  if (cost < 1000) {
+    return `$${cost.toFixed(0)}`; // e.g., $123
+  }
+  
+  // Handle very large amounts
+  if (cost >= 999999) {
+    return '$999,999+';
+  }
+  
+  return `$${cost.toLocaleString('en-US', { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}`; // e.g., $1,234.56
+}
+
+/**
+ * Format cost for per-query display
+ */
+export function formatCostPerQuery(cost: number): string {
+  return `${formatCostDisplay(cost)} per query`;
+}
+
+/**
+ * Format cost for monthly display
+ */
+export function formatMonthlyCost(cost: number): string {
+  return `${formatCostDisplay(cost)}/month`;
+}
+
+/**
+ * Format cost for yearly display
+ */
+export function formatYearlyCost(cost: number): string {
+  return `${formatCostDisplay(cost)}/year`;
 }
 
 /**
  * Get cost ratio between two models
  */
 export function getCostRatio(expensiveModel: PriceCalculationResult, cheapModel: PriceCalculationResult): number {
-  return expensiveModel.totalCost / cheapModel.totalCost;
+  return safeCostRatio(expensiveModel.totalCost, cheapModel.totalCost);
 }
 
 /**

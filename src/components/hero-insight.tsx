@@ -3,7 +3,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, DollarSign, Lightbulb } from "lucide-react";
-import { PriceComparisonData } from "@/lib/price-calculation";
+import { PriceComparisonData, formatCostDisplay } from "@/lib/price-calculation";
+import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
 
 interface HeroInsightProps {
   data: PriceComparisonData;
@@ -18,7 +19,7 @@ export function HeroInsight({ data }: HeroInsightProps) {
 
   const costDifference = mostExpensiveModel.totalCost - cheapestModel.totalCost;
   const percentageDifference = ((costDifference / cheapestModel.totalCost) * 100).toFixed(1);
-  const yearlySavings = (costDifference * 12).toFixed(2);
+  const yearlySavings = costDifference * 12;
   
   // Get volume context
   const volumeContext = queryVolume >= 1000000 ? "enterprise scale" :
@@ -49,33 +50,63 @@ export function HeroInsight({ data }: HeroInsightProps) {
             <div className="space-y-3">
               <h3 className="text-lg md:text-xl font-semibold text-foreground leading-tight">
                 For your {volumeContext}, choosing{" "}
-                <span className="text-green-600 font-bold">{cheapestModel.modelName}</span>{" "}
+                <span 
+                  className="font-bold" 
+                  style={{ color: SEMANTIC_COLORS.savings }}
+                >
+                  {cheapestModel.modelName}
+                </span>{" "}
                 over{" "}
-                <span className="text-red-600 font-bold">{mostExpensiveModel.modelName}</span>{" "}
+                <span 
+                  className="font-bold" 
+                  style={{ color: SEMANTIC_COLORS.cost }}
+                >
+                  {mostExpensiveModel.modelName}
+                </span>{" "}
                 could save you{" "}
-                <span className="text-primary font-bold">${yearlySavings}</span>{" "}
+                <span 
+                  className="font-bold" 
+                  style={{ color: SEMANTIC_COLORS.highlight }}
+                >
+                  {formatCostDisplay(yearlySavings)}
+                </span>{" "}
                 annually
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <TrendingDown className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <TrendingDown 
+                    className="w-4 h-4 flex-shrink-0" 
+                    style={{ color: SEMANTIC_COLORS.savings }}
+                  />
                   <span>
-                    <strong className="text-green-600">${cheapestModel.totalCost.toFixed(4)}</strong> per query
+                    <strong style={{ color: SEMANTIC_COLORS.savings }}>
+                      ${cheapestModel.costPerQuery.toFixed(6)}
+                    </strong> per query
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-red-600 flex-shrink-0" />
+                  <TrendingUp 
+                    className="w-4 h-4 flex-shrink-0" 
+                    style={{ color: SEMANTIC_COLORS.cost }}
+                  />
                   <span>
-                    <strong className="text-red-600">${mostExpensiveModel.totalCost.toFixed(4)}</strong> per query
+                    <strong style={{ color: SEMANTIC_COLORS.cost }}>
+                      ${mostExpensiveModel.costPerQuery.toFixed(6)}
+                    </strong> per query
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <DollarSign className="w-4 h-4 text-primary flex-shrink-0" />
+                  <DollarSign 
+                    className="w-4 h-4 flex-shrink-0" 
+                    style={{ color: SEMANTIC_COLORS.highlight }}
+                  />
                   <span>
-                    <strong className="text-primary">{percentageDifference}%</strong> cost difference
+                    <strong style={{ color: SEMANTIC_COLORS.highlight }}>
+                      {percentageDifference}%
+                    </strong> cost difference
                   </span>
                 </div>
               </div>

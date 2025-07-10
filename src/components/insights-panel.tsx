@@ -18,7 +18,8 @@ import {
   Target,
   Zap
 } from "lucide-react";
-import { PriceComparisonData } from "@/lib/price-calculation";
+import { PriceComparisonData, formatCostDisplay } from "@/lib/price-calculation";
+import { SEMANTIC_COLORS, COLOR_UTILS } from "@/lib/colorblind-colors";
 
 interface InsightsPanelProps {
   data: PriceComparisonData;
@@ -35,23 +36,31 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
 
   // Calculate ROI metrics
   const costDifference = mostExpensiveModel.totalCost - cheapestModel.totalCost;
-  const monthlyQueryCost = queryVolume * cheapestModel.totalCost;
-  const monthlySavings = queryVolume * costDifference;
-  const yearlyROI = (monthlySavings * 12 / (monthlyQueryCost * 12)) * 100;
+  const monthlyQueryCost = cheapestModel.totalCost; // totalCost is already for the full query volume
+  const monthlySavings = costDifference; // costDifference is already for the full query volume
+  
+  // Safe ROI calculation to prevent division by zero
+  const yearlyROI = monthlyQueryCost > 0 
+    ? (monthlySavings * 12 / (monthlyQueryCost * 12)) * 100
+    : monthlySavings > 0 ? 999999 : 0;
 
   // Risk assessment
-  const getRiskLevel = (model: any) => {
+  const getRiskLevel = (model: { totalCost: number }) => {
     if (model.totalCost < 0.0001) return "low";
     if (model.totalCost > 0.01) return "high";
     return "medium";
   };
 
   // Decision framework scoring
-  const calculateDecisionScore = (model: any) => {
-    const costScore = (1 - (model.totalCost / mostExpensiveModel.totalCost)) * 40; // 40% weight
+  const calculateDecisionScore = (model: { totalCost: number }) => {
+    // Safe cost score calculation to prevent division by zero
+    const costScore = mostExpensiveModel.totalCost > 0 
+      ? (1 - (model.totalCost / mostExpensiveModel.totalCost)) * 40 
+      : 40; // 40% weight
     const reliabilityScore = 30; // Placeholder - could be based on model metrics
     const performanceScore = 30; // Placeholder - could be based on benchmarks
-    return Math.round(costScore + reliabilityScore + performanceScore);
+    const totalScore = costScore + reliabilityScore + performanceScore;
+    return Math.round(Math.max(0, Math.min(100, totalScore))); // Clamp between 0-100
   };
 
   return (
@@ -99,14 +108,26 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                   
                   <TabsContent value="roi" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <Card className="border-green-200 bg-green-50">
+                      <Card 
+                        className="border"
+                        style={{ 
+                          backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.savings, 0.1),
+                          borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.savings, 0.3)
+                        }}
+                      >
                         <CardContent className="p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <TrendingUp className="w-4 h-4 text-green-600" />
+                            <TrendingUp 
+                              className="w-4 h-4" 
+                              style={{ color: SEMANTIC_COLORS.savings }}
+                            />
                             <span className="text-sm font-medium">Monthly Savings</span>
                           </div>
-                          <div className="text-2xl font-bold text-green-600">
-                            ${monthlySavings.toFixed(2)}
+                          <div 
+                            className="text-2xl font-bold" 
+                            style={{ color: SEMANTIC_COLORS.savings }}
+                          >
+                            {formatCostDisplay(monthlySavings)}
                           </div>
                           <div className="text-xs text-muted-foreground">
                             vs. most expensive option
@@ -114,14 +135,26 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                         </CardContent>
                       </Card>
                       
-                      <Card className="border-blue-200 bg-blue-50">
+                      <Card 
+                        className="border"
+                        style={{ 
+                          backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.highlight, 0.1),
+                          borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.highlight, 0.3)
+                        }}
+                      >
                         <CardContent className="p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <Calculator className="w-4 h-4 text-blue-600" />
+                            <Calculator 
+                              className="w-4 h-4" 
+                              style={{ color: SEMANTIC_COLORS.highlight }}
+                            />
                             <span className="text-sm font-medium">Annual ROI</span>
                           </div>
-                          <div className="text-2xl font-bold text-blue-600">
-                            {yearlyROI.toFixed(1)}%
+                          <div 
+                            className="text-2xl font-bold" 
+                            style={{ color: SEMANTIC_COLORS.highlight }}
+                          >
+                            {yearlyROI >= 999999 ? '999,999%+' : `${yearlyROI.toFixed(1)}%`}
                           </div>
                           <div className="text-xs text-muted-foreground">
                             return on investment
@@ -129,13 +162,25 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                         </CardContent>
                       </Card>
                       
-                      <Card className="border-purple-200 bg-purple-50">
+                      <Card 
+                        className="border"
+                        style={{ 
+                          backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.neutral, 0.1),
+                          borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.neutral, 0.3)
+                        }}
+                      >
                         <CardContent className="p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <Target className="w-4 h-4 text-purple-600" />
+                            <Target 
+                              className="w-4 h-4" 
+                              style={{ color: SEMANTIC_COLORS.neutral }}
+                            />
                             <span className="text-sm font-medium">Break-even</span>
                           </div>
-                          <div className="text-2xl font-bold text-purple-600">
+                          <div 
+                            className="text-2xl font-bold" 
+                            style={{ color: SEMANTIC_COLORS.neutral }}
+                          >
                             Day 1
                           </div>
                           <div className="text-xs text-muted-foreground">
@@ -150,11 +195,11 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span>If usage grows 5x:</span>
-                          <span className="font-medium">${(monthlySavings * 5).toFixed(2)}/month savings</span>
+                          <span className="font-medium">{formatCostDisplay(monthlySavings * 5)}/month savings</span>
                         </div>
                         <div className="flex justify-between">
                           <span>If usage grows 10x:</span>
-                          <span className="font-medium">${(monthlySavings * 10).toFixed(2)}/month savings</span>
+                          <span className="font-medium">{formatCostDisplay(monthlySavings * 10)}/month savings</span>
                         </div>
                       </div>
                     </div>
@@ -164,15 +209,27 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                     <div className="grid gap-4">
                       {results.map((model, index) => {
                         const riskLevel = getRiskLevel(model);
-                        const riskColor = riskLevel === "low" ? "green" : riskLevel === "medium" ? "yellow" : "red";
+                        const riskColor = riskLevel === "low" ? SEMANTIC_COLORS.savings : 
+                                        riskLevel === "medium" ? SEMANTIC_COLORS.neutral : 
+                                        SEMANTIC_COLORS.cost;
                         const RiskIcon = riskLevel === "low" ? CheckCircle : riskLevel === "medium" ? Info : AlertTriangle;
                         
                         return (
-                          <Card key={index} className={`border-${riskColor}-200 bg-${riskColor}-50`}>
+                          <Card 
+                            key={index} 
+                            className="border"
+                            style={{ 
+                              backgroundColor: COLOR_UTILS.withOpacity(riskColor, 0.1),
+                              borderColor: COLOR_UTILS.withOpacity(riskColor, 0.3)
+                            }}
+                          >
                             <CardContent className="p-4">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                  <RiskIcon className={`w-4 h-4 text-${riskColor}-600`} />
+                                  <RiskIcon 
+                                    className="w-4 h-4" 
+                                    style={{ color: riskColor }}
+                                  />
                                   <span className="font-medium">{model.modelName}</span>
                                 </div>
                                 <Badge variant={riskLevel === "low" ? "default" : riskLevel === "medium" ? "secondary" : "destructive"}>
@@ -186,7 +243,7 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                                 </div>
                                 <div className="flex justify-between">
                                   <span>Budget impact:</span>
-                                  <span className="font-medium">${(model.totalCost * queryVolume).toFixed(2)}/month</span>
+                                  <span className="font-medium">{formatCostDisplay(model.totalCost * queryVolume)}/month</span>
                                 </div>
                               </div>
                             </CardContent>
@@ -216,7 +273,12 @@ export function InsightsPanel({ data }: InsightsPanelProps) {
                               <div className="grid grid-cols-3 gap-4 text-sm">
                                 <div>
                                   <div className="text-muted-foreground">Cost Efficiency</div>
-                                  <div className="font-medium">{Math.round((1 - (model.totalCost / mostExpensiveModel.totalCost)) * 100)}%</div>
+                                  <div className="font-medium">
+                                    {mostExpensiveModel.totalCost > 0 
+                                      ? `${Math.round((1 - (model.totalCost / mostExpensiveModel.totalCost)) * 100)}%`
+                                      : '100%'
+                                    }
+                                  </div>
                                 </div>
                                 <div>
                                   <div className="text-muted-foreground">Reliability</div>
