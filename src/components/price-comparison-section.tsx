@@ -7,7 +7,7 @@ import { OpenRouterModel } from "@/types/models";
 import { QueryVolumeSelector } from "./query-volume-selector";
 import { PriceComparisonChart } from "./price-comparison-chart";
 import { HeroInsight } from "./hero-insight";
-import { InsightsPanel } from "./insights-panel";
+// import { InsightsPanel } from "./insights-panel";
 import { 
   calculatePriceComparison, 
   DEFAULT_QUERY_VOLUME
@@ -88,10 +88,10 @@ export function PriceComparisonSection({
         />
       )}
 
-      {/* Strategic Insights Panel - Hidden for now but code retained */}
-      {false && comparisonData && (
+      {/* Strategic Insights Panel - Hidden for now but code retained 
+      {false && comparisonData && comparisonData !== null && (
         <InsightsPanel data={comparisonData} />
-      )}
+      )} */}
 
       {/* Cost Disclaimers */}
       <Card className="border-muted bg-muted/20">

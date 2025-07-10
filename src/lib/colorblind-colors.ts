@@ -189,7 +189,7 @@ export const COLOR_UTILS = {
       ACCESSIBLE_COLORS.gray[900],
     ];
     
-    return darkColors.includes(backgroundColor) 
+    return (darkColors as string[]).includes(backgroundColor) 
       ? CHART_COLORS.text.inverse 
       : CHART_COLORS.text.primary;
   },
