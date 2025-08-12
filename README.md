@@ -29,7 +29,7 @@ Compare LLM models side-by-side with real-time pricing data from OpenRouter. Mak
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/tokentickr.git
+   git clone https://github.com/jayanthkumarak/tokentickr.git
    cd tokentickr
    ```
 
@@ -91,6 +91,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [OpenRouter](https://openrouter.ai/) for providing the API and model data
 - [Shadcn](https://ui.shadcn.com/) for the excellent UI components
 - [Lucide](https://lucide.dev/) for the beautiful icons
+- [Cursor](https://cursor.com) for the amazing AI first dev environment
+
 
 ## 📞 Support
 
