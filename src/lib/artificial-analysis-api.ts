@@ -1,7 +1,7 @@
 /**
  * Artificial Analysis Intelligence Index
  * 
- * Static map of LLM Intelligence Index scores from ArtificialAnalysis.ai
+ * Provides LLM Intelligence Index scores from ArtificialAnalysis.ai
  * These scores are composites of multiple benchmarks:
  * - MMLU-Pro (reasoning)
  * - LiveBench (general, contamination-resistant)
@@ -10,169 +10,16 @@
  * - IFBench (instruction following)
  * 
  * Attribution: Data provided by ArtificialAnalysis.ai
- * Last updated: 2025-12-26
  * 
  * @see https://artificialanalysis.ai/leaderboards/models
  */
 
-/**
- * Static Intelligence Index scores from AA leaderboard (December 2025)
- * Format: { 'model-slug': intelligence_index }
- * 
- * Higher = better. Range: 0-100.
- */
-export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
-    // === Gemini 3 Family ===
-    'gemini-3-flash': 54.5,
-    'gemini-3-flash-reasoning': 71.27,
-    'gemini-3-pro': 72.85,
-    'gemini-3-pro-low': 64.52,
+// Import auto-generated static data (361 models)
+// Run 'npm run generate:aa-data' to update
+import { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
 
-    // === GPT-5 Family ===
-    'gpt-5': 68.47,
-    'gpt-5-low': 61.79,
-    'gpt-5-medium': 66.36,
-    'gpt-5-minimal': 43.48,
-    'gpt-5-codex': 68.48,
-    'gpt-5-mini': 64.31,
-    'gpt-5-mini-medium': 60.8,
-    'gpt-5-mini-minimal': 41.58,
-    'gpt-5-nano': 51.01,
-    'gpt-5-nano-medium': 49.29,
-    'gpt-5-nano-minimal': 29.05,
-    'gpt-5-chatgpt': 41.76,
-
-    // === GPT-5.1 Family ===
-    'gpt-5-1': 69.71,
-    'gpt-5-1-non-reasoning': 42.85,
-    'gpt-5-1-codex': 66.91,
-    'gpt-5-1-codex-mini': 62.27,
-
-    // === GPT-5.2 Family ===
-    'gpt-5-2': 70.5,  // Estimated based on 5.1 progression
-    'gpt-5-2-high': 71.0,  // Estimated
-
-    // === Claude Family (from AA data) ===
-    'claude-sonnet-4': 67.5,  // Based on AA benchmarks
-    'claude-opus-4': 70.0,
-    'claude-opus-4-5': 71.5,  // Estimated
-    'claude-3-5-sonnet': 55.8,
-    'claude-3-5-haiku': 48.2,
-    'claude-3-opus': 52.4,
-    'claude-3-sonnet': 46.8,
-    'claude-3-haiku': 38.5,
-
-    // === DeepSeek Family ===
-    'deepseek-v3': 65.2,
-    'deepseek-r1': 72.0,  // Reasoning model
-    'deepseek-coder-v2': 58.4,
-
-    // === Grok Family ===
-    'grok-4': 66.0,
-    'grok-4-1': 68.5,
-    'grok-4-1-thinking': 71.0,
-
-    // === Llama Family (from AA API) ===
-    'llama-4-maverick': 35.8,
-    'llama-4-scout': 28.1,
-    'llama-3-3-instruct-70b': 27.9,
-    'llama-3-1-instruct-405b': 28.1,
-    'llama-3-1-instruct-70b': 22.6,
-    'llama-3-1-instruct-8b': 16.9,
-    'llama-3-2-instruct-90b-vision': 18.9,
-    'llama-3-2-instruct-11b-vision': 15.5,
-
-    // === Mistral Family ===
-    'mistral-large': 52.0,
-    'mistral-medium': 45.5,
-    'mixtral-8x22b': 48.0,
-    'mixtral-8x7b': 42.5,
-
-    // === Gemini 2.x Family ===
-    'gemini-2-0-flash-exp': 52.8,
-    'gemini-2-5-flash-preview': 58.0,
-    'gemini-2-5-pro-preview': 62.5,
-    'gemini-pro-1-5': 50.2,
-    'gemini-flash-1-5': 45.8,
-
-    // === Qwen Family ===
-    'qwen-2-5-72b-instruct': 54.2,
-    'qwen-2-5-coder-32b': 52.0,
-    'qwen-qwq-32b-preview': 58.5,
-
-    // === Command/Cohere ===
-    'command-r-plus': 45.0,
-    'command-r': 40.5,
-};
-
-/**
- * Lookup aliases for OpenRouter model IDs → AA slugs
- */
-const AA_ID_ALIASES: Record<string, string> = {
-    // Google/Gemini
-    'google/gemini-3-flash': 'gemini-3-flash',
-    'google/gemini-3-flash-thinking': 'gemini-3-flash-reasoning',
-    'google/gemini-3-pro': 'gemini-3-pro',
-    'google/gemini-3-pro-preview': 'gemini-3-pro',
-    'google/gemini-pro-1.5': 'gemini-pro-1-5',
-    'google/gemini-flash-1.5': 'gemini-flash-1-5',
-    'google/gemini-2.0-flash-exp': 'gemini-2-0-flash-exp',
-
-    // OpenAI GPT-5
-    'openai/gpt-5': 'gpt-5',
-    'openai/gpt-5-mini': 'gpt-5-mini',
-    'openai/gpt-5.1': 'gpt-5-1',
-    'openai/gpt-5.1-high': 'gpt-5-1',
-    'openai/gpt-5.2': 'gpt-5-2',
-    'openai/gpt-5.2-high': 'gpt-5-2-high',
-    'openai/o1-preview': 'gpt-5-minimal',
-    'openai/o1-mini': 'gpt-5-nano-minimal',
-    'openai/gpt-4o': 'gpt-5-chatgpt',
-    'openai/gpt-4o-mini': 'gpt-5-nano-minimal',
-
-    // Anthropic Claude
-    'anthropic/claude-sonnet-4': 'claude-sonnet-4',
-    'anthropic/claude-opus-4': 'claude-opus-4',
-    'anthropic/claude-opus-4.5': 'claude-opus-4-5',
-    'anthropic/claude-3.5-sonnet': 'claude-3-5-sonnet',
-    'anthropic/claude-3.5-haiku': 'claude-3-5-haiku',
-    'anthropic/claude-3-opus': 'claude-3-opus',
-    'anthropic/claude-3-sonnet': 'claude-3-sonnet',
-    'anthropic/claude-3-haiku': 'claude-3-haiku',
-
-    // DeepSeek
-    'deepseek/deepseek-chat': 'deepseek-v3',
-    'deepseek/deepseek-r1': 'deepseek-r1',
-    'deepseek/deepseek-coder': 'deepseek-coder-v2',
-
-    // xAI Grok
-    'xai/grok-4': 'grok-4',
-    'xai/grok-4.1': 'grok-4-1',
-    'xai/grok-4.1-thinking': 'grok-4-1-thinking',
-
-    // Meta Llama
-    'meta-llama/llama-4-maverick': 'llama-4-maverick',
-    'meta-llama/llama-4-scout': 'llama-4-scout',
-    'meta-llama/llama-3.3-70b-instruct': 'llama-3-3-instruct-70b',
-    'meta-llama/llama-3.1-405b-instruct': 'llama-3-1-instruct-405b',
-    'meta-llama/llama-3.1-70b-instruct': 'llama-3-1-instruct-70b',
-    'meta-llama/llama-3.1-8b-instruct': 'llama-3-1-instruct-8b',
-
-    // Mistral
-    'mistralai/mistral-large': 'mistral-large',
-    'mistralai/mistral-medium': 'mistral-medium',
-    'mistralai/mixtral-8x22b-instruct': 'mixtral-8x22b',
-    'mistralai/mixtral-8x7b-instruct': 'mixtral-8x7b',
-
-    // Qwen
-    'qwen/qwen-2.5-72b-instruct': 'qwen-2-5-72b-instruct',
-    'qwen/qwen-2.5-coder-32b-instruct': 'qwen-2-5-coder-32b',
-    'qwen/qwq-32b-preview': 'qwen-qwq-32b-preview',
-
-    // Cohere
-    'cohere/command-r-plus': 'command-r-plus',
-    'cohere/command-r': 'command-r',
-};
+// Re-export for use in other modules
+export { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META };
 
 // API constants
 const AA_API_BASE = 'https://artificialanalysis.ai/api/v2';

@@ -11,7 +11,8 @@
     "deploy": "wrangler deploy",
     "deploy:staging": "wrangler deploy --env staging",
     "preview": "wrangler dev",
-    "test": "vitest run"
+    "test": "vitest run",
+    "generate:aa-data": "node scripts/generate-aa-static-data.mjs"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.11",
