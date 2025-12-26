@@ -3,6 +3,15 @@ import { OpenRouterModel } from '@/types/models';
 import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
 import { calculateHeuristicElo } from './heuristic-engine';
 import { calculateCapabilityBonus, getCapabilityFlags } from './capability-bonus';
+import {
+  AA_ATTRIBUTION,
+  getAAIntelligenceIndexSync,
+  intelligenceIndexToElo
+} from './artificial-analysis-api';
+
+// Re-export AA attribution for UI components
+export { AA_ATTRIBUTION };
+
 
 /**
  * Safe division function that handles division by zero and infinite values
@@ -341,19 +350,38 @@ export function calculatePriceComparison(
       contextScore = Math.min(100, baseScore + bonus);
     }
 
-    // 3. Performance Score (Elo Normalized)
-    const evalData = getModelEval(result.modelId);
-    let elo: number | null = evalData?.elo || null;
-    let eloSource: string | null = evalData?.source || null;
+    // 3. Performance Score (Cascading: AA → LMSYS → Heuristic)
+    // Priority 1: Artificial Analysis Intelligence Index (most reliable)
+    // Priority 2: LMSYS Chatbot Arena Elo (human preference)
+    // Priority 3: Heuristic engine (last resort)
 
-    // If no curated Elo, use heuristic engine
+    let elo: number | null = null;
+    let eloSource: string | null = null;
+    let aaIndex: number | null = null;
+
+    // Try AA Intelligence Index first (cached sync lookup)
+    aaIndex = getAAIntelligenceIndexSync(result.modelId);
+
+    if (aaIndex !== null) {
+      // Convert AA Index (0-100) to Elo scale for backward compatibility
+      elo = intelligenceIndexToElo(aaIndex);
+      eloSource = 'artificial-analysis';
+    } else {
+      // Fallback to LMSYS Elo from static map
+      const evalData = getModelEval(result.modelId);
+      if (evalData?.elo) {
+        elo = evalData.elo;
+        eloSource = evalData.source;
+      }
+    }
+
+    // Ultimate fallback: heuristic engine (reduced reliability)
     if (!elo) {
-      // Find the original model for heuristic calculation
       const originalModel = models.find(m => m.id === result.modelId);
       if (originalModel) {
         const heuristic = calculateHeuristicElo(originalModel);
         elo = heuristic.elo;
-        eloSource = heuristic.source;
+        eloSource = 'heuristic';
       }
     }
 

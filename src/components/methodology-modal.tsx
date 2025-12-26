@@ -11,7 +11,7 @@ import {
 import { Info } from "lucide-react";
 
 interface MethodologyModalProps {
-    type: 'lmsys' | 'estimated' | 'heuristic';
+    type: 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis';
     className?: string;
 }
 
@@ -53,13 +53,28 @@ const METHODOLOGY_CONTENT = {
         description: "This Elo score is calculated algorithmically from observable model characteristics.",
         details: [
             "Used when no direct performance data exists",
-            "Formula considers: price (expensive often = capable), parameter count, model family, and context length",
+            "Formula considers: parameter count, model family, and context length",
             "Should be treated as a rough approximation only",
             "We prioritize replacing heuristic scores with verified data when available",
         ],
-        formula: `heuristicElo = baseElo + priceBonus + paramBonus + familyBonus + contextBonus` as string | null,
+        formula: `heuristicElo = baseElo + paramBonus + familyBonus + contextBonus` as string | null,
         source: null as string | null,
         confidence: "Low",
+    },
+    'artificial-analysis': {
+        title: "Intelligence Index",
+        color: "text-blue-600 dark:text-blue-400",
+        bgColor: "bg-blue-100 dark:bg-blue-900/30",
+        description: "This score is derived from Artificial Analysis' composite Intelligence Index.",
+        details: [
+            "Aggregates multiple independent benchmarks for reliability",
+            "Includes MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench",
+            "LiveBench is contamination-resistant with monthly question updates",
+            "More objective than human preference (LMSYS) for measuring raw capability",
+        ],
+        formula: null as string | null,
+        source: "https://artificialanalysis.ai",
+        confidence: "High",
     },
 };
 

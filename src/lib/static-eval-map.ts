@@ -1,8 +1,10 @@
 export interface ModelEval {
-    elo: number;    // LMSYS Arena Elo
+    elo: number;    // LMSYS Arena Elo or normalized Intelligence Index
     mmlu?: number;  // Approx MMLU (0-100)
-    source: 'lmsys' | 'estimated' | 'heuristic';
+    source: 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis';
     lastUpdated: string;
+    /** Optional: raw AA Intelligence Index (0-100) */
+    intelligenceIndex?: number;
 }
 
 /**

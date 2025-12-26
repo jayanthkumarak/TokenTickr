@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { OpenRouterModel, ComparisonState } from '@/types/models';
 import { openrouterAPI } from '@/lib/openrouter-api';
+import { initializeAAScoreCache } from '@/lib/artificial-analysis-api';
 
 interface ComparisonStore extends ComparisonState {
   // Actions
@@ -83,7 +84,12 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const models = await openrouterAPI.getModels();
+      // Fetch OpenRouter models and AA intelligence scores in parallel
+      const [models] = await Promise.all([
+        openrouterAPI.getModels(),
+        initializeAAScoreCache(), // Pre-populate AA cache for sync lookups
+      ]);
+
       set({
         filteredModels: models,
         isLoading: false

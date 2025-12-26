@@ -22,10 +22,12 @@ export interface HeuristicEloResult {
 }
 
 // Elo boundaries for heuristic estimation
+// IMPORTANT: Heuristic is now a FALLBACK only. Ceiling lowered to prevent
+// heuristic models from ranking as "Pro" tier (which requires reliable data).
 const HEURISTIC_BOUNDS = {
     BASE: 1150,        // "Competent but unproven" starting point
     FLOOR: 1050,       // Minimum (prevents ultra-cheap from going too low)
-    CAP: 1400,         // Maximum (prevents claiming SOTA status)
+    CAP: 1280,         // Maximum (well below "Pro" tier threshold of ~1350)
 } as const;
 
 // Price thresholds - documented for reference but calculations use log scale directly

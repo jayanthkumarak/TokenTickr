@@ -115,6 +115,12 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                             ? (
                                 <>
                                     <span>Elo: {topPick.eloScore}</span>
+                                    {topPick.eloSource === 'artificial-analysis' && (
+                                        <span className="text-blue-600 dark:text-blue-400 flex items-center gap-0.5">
+                                            AA Index
+                                            <MethodologyModal type="artificial-analysis" />
+                                        </span>
+                                    )}
                                     {topPick.eloSource === 'lmsys' && (
                                         <span className="text-green-600 dark:text-green-400 flex items-center gap-0.5">
                                             Verified
@@ -188,6 +194,12 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                         {model.eloScore && (
                                             <span className="text-[10px] text-zinc-500 flex items-center gap-1.5">
                                                 <span>Elo: {model.eloScore}</span>
+                                                {model.eloSource === 'artificial-analysis' && (
+                                                    <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-1 rounded-[3px] text-[9px] font-medium border border-blue-200 dark:border-blue-800 flex items-center gap-0.5">
+                                                        AA Index
+                                                        <MethodologyModal type="artificial-analysis" />
+                                                    </span>
+                                                )}
                                                 {model.eloSource === 'lmsys' && (
                                                     <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1 rounded-[3px] text-[9px] font-medium border border-green-200 dark:border-green-800 flex items-center gap-0.5">
                                                         Verified
