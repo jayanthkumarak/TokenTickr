@@ -1,24 +1,41 @@
 # TokenTickr
 
-LLM cost comparison tool with intelligence-weighted scoring. Compare models across price, performance, and context window capacity.
+**Find the smart model that saves you 20-30% while sacrificing minimal intelligence.**
+
+TokenTickr is an LLM cost comparison tool with intelligence-weighted scoring. Compare models across price, performance, and context window capacity to find the best value for your needs.
 
 **Live:** [tokentickr.com](https://tokentickr.com)
 
+## The Value Proposition
+
+Users come to TokenTickr to answer one question: *"If I use this cheaper model instead of the frontier model, how much intelligence am I giving up for how much cost savings?"*
+
+TokenTickr quantifies this tradeoff, helping teams find "good deal" models that deliver 70-90% of frontier intelligence at significantly lower cost.
+
 ## Smart Value Index
 
-TokenTickr's core feature is the **Smart Value Index** — an intelligence-first scoring system that helps teams find the best model for their needs.
+TokenTickr's core feature is the **Smart Value Index** — a dynamic scoring system that adapts based on model capability tiers.
 
-The scoring formula uses a weighted geometric mean:
+### Scoring Philosophy
 
-```
-Score = (Performance² × Price × Context)^(1/4)
-```
+The formula uses **dynamic tier-based weighting** relative to the best model in the comparison:
 
-Performance carries 50% weight. This ensures capable models rank higher even at premium prices, while still rewarding cost efficiency.
+| Tier | Definition | Intel | Context | Price | Philosophy |
+|------|------------|-------|---------|-------|------------|
+| **Frontier** | 90%+ of max perf | 60% | 35% | 5% | "Those that pay, will pay" |
+| **Pro** | 70-90% of max | 50% | 30% | 20% | The "deals" zone — tradeoff land |
+| **Budget** | <70% of max | 35% | 25% | 40% | Volume-first, price matters |
 
-Two scoring modes:
-- **Smart Score** — Intelligence-first. Best for quality-focused teams.
-- **Budget Score** — Cost-conscious. Best for high-volume workloads.
+### Key Features
+
+- **Context Gate**: Models with <64K context are penalized — intelligence without context capacity is limited
+- **Dynamic Thresholds**: Tiers adjust automatically as model landscape evolves
+- **Notable Mentions**: Elite intelligence models that rank lower due to price are highlighted separately
+
+### Two Scoring Modes
+
+- **Smart Score** — Intelligence-first. Best for quality-focused teams seeking optimal value.
+- **Budget Score** — Efficiency-first. Values context capacity per dollar for high-volume workloads.
 
 ## Stack
 
@@ -62,3 +79,7 @@ npm run build
 ## Data Source
 
 Real-time model data and pricing via [OpenRouter API](https://openrouter.ai).
+
+## Research
+
+Scoring methodology research and simulations are documented in `docs/research/`.

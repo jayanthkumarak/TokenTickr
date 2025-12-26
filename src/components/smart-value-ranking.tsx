@@ -3,8 +3,9 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { PriceCalculationResult } from "@/lib/price-calculation";
-import { calculateValueScore, ScoringMode } from "@/lib/scoring-utils";
+import { calculateValueScore, ScoringMode, getModelTier, getTierDisplayInfo } from "@/lib/scoring-utils";
 import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
+import { MethodologyModal } from "@/components/methodology-modal";
 import { cn } from "@/lib/utils";
 import { Sparkles, Trophy } from "lucide-react";
 
@@ -38,16 +39,22 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
 
     // Recalculate scores based on current mode
     const rankedModels = useMemo(() => {
+        // Calculate max perf score for dynamic tier thresholds
+        const maxPerfScore = Math.max(...results.map(r => r.perfScore), 1);
+
         const recalculated = results.map(result => {
             const newValueScore = calculateValueScore(
                 result.priceScore,
                 result.perfScore,
                 result.contextScore,
-                scoringMode
+                scoringMode,
+                maxPerfScore
             );
+            const tier = getModelTier(result.perfScore, maxPerfScore);
             return {
                 ...result,
                 valueScore: Math.round(newValueScore * 10) / 10,
+                tier,
             };
         });
         const sorted = recalculated.sort((a, b) => b.valueScore - a.valueScore);
@@ -103,17 +110,33 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                         {topPick.valueScore}
                         <span className="text-sm text-zinc-500 font-normal ml-1">/100</span>
                     </div>
-                    <p className="text-xs text-center text-zinc-500">
+                    <div className="text-xs text-center text-zinc-500 flex items-center justify-center gap-1">
                         {topPick.eloScore
                             ? (
-                                <span>
-                                    Elo: {topPick.eloScore} <span className="opacity-70">
-                                        {topPick.eloSource === 'estimated' ? '(Est.)' : topPick.eloSource === 'heuristic' ? '(Heuristic)' : 'Verified'}
-                                    </span>
-                                </span>
+                                <>
+                                    <span>Elo: {topPick.eloScore}</span>
+                                    {topPick.eloSource === 'lmsys' && (
+                                        <span className="text-green-600 dark:text-green-400 flex items-center gap-0.5">
+                                            Verified
+                                            <MethodologyModal type="lmsys" />
+                                        </span>
+                                    )}
+                                    {topPick.eloSource === 'estimated' && (
+                                        <span className="text-yellow-600 dark:text-yellow-400 flex items-center gap-0.5">
+                                            Est.
+                                            <MethodologyModal type="estimated" />
+                                        </span>
+                                    )}
+                                    {topPick.eloSource === 'heuristic' && (
+                                        <span className="text-purple-600 dark:text-purple-400 flex items-center gap-0.5">
+                                            Heuristic
+                                            <MethodologyModal type="heuristic" />
+                                        </span>
+                                    )}
+                                </>
                             )
                             : "Best Value Pick"}
-                    </p>
+                    </div>
                 </div>
 
                 {/* Detailed Rankings */}
@@ -145,20 +168,42 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                         {idx + 1}
                                     </span>
                                     <div className="flex flex-col min-w-0 flex-1">
-                                        <span className="font-medium text-sm">
-                                            {model.modelName}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-medium text-sm">
+                                                {model.modelName}
+                                            </span>
+                                            {scoringMode === "geometric" && model.tier && (() => {
+                                                const tierInfo = getTierDisplayInfo(model.tier);
+                                                return (
+                                                    <span className={cn(
+                                                        "px-1.5 py-0.5 rounded text-[9px] font-medium",
+                                                        tierInfo.bgColor,
+                                                        tierInfo.color
+                                                    )}>
+                                                        {tierInfo.label}
+                                                    </span>
+                                                );
+                                            })()}
+                                        </div>
                                         {model.eloScore && (
                                             <span className="text-[10px] text-zinc-500 flex items-center gap-1.5">
                                                 <span>Elo: {model.eloScore}</span>
+                                                {model.eloSource === 'lmsys' && (
+                                                    <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1 rounded-[3px] text-[9px] font-medium border border-green-200 dark:border-green-800 flex items-center gap-0.5">
+                                                        Verified
+                                                        <MethodologyModal type="lmsys" />
+                                                    </span>
+                                                )}
                                                 {model.eloSource === 'estimated' && (
-                                                    <span className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-500 px-1 rounded-[3px] text-[9px] font-medium border border-yellow-200 dark:border-yellow-800">
+                                                    <span className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-500 px-1 rounded-[3px] text-[9px] font-medium border border-yellow-200 dark:border-yellow-800 flex items-center gap-0.5">
                                                         Est.
+                                                        <MethodologyModal type="estimated" />
                                                     </span>
                                                 )}
                                                 {model.eloSource === 'heuristic' && (
-                                                    <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-1 rounded-[3px] text-[9px] font-medium border border-purple-200 dark:border-purple-800">
+                                                    <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-1 rounded-[3px] text-[9px] font-medium border border-purple-200 dark:border-purple-800 flex items-center gap-0.5">
                                                         Heuristic
+                                                        <MethodologyModal type="heuristic" />
                                                     </span>
                                                 )}
                                             </span>

@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TokenTickr v2 | Documentation</title>
+    <title>TokenTickr v2.0.1 | Documentation</title>
     <style>
         :root {
             --bg-dark: #09090b;
             --bg-card: #18181b;
             --text-primary: #fafafa;
             --text-secondary: #a1a1aa;
-            --accent: #22c55e;
-            /* Green for tickr */
-            --accent-glow: rgba(34, 197, 94, 0.2);
+            --accent: #f59e0b;
+            /* Amber for Smart Value */
+            --accent-glow: rgba(245, 158, 11, 0.2);
             --border: #27272a;
+            --frontier: #8b5cf6;
+            --pro: #22c55e;
+            --budget: #3b82f6;
         }
 
         * {
@@ -122,6 +125,13 @@
             max-width: 800px;
         }
 
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
         code {
             background: #27272a;
             padding: 0.2rem 0.4rem;
@@ -146,14 +156,77 @@
             color: var(--text-secondary);
         }
 
-        /* Interactive Calculator */
+        /* Tier Cards */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tier-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .tier-card.frontier {
+            border-color: var(--frontier);
+        }
+
+        .tier-card.pro {
+            border-color: var(--pro);
+        }
+
+        .tier-card.budget {
+            border-color: var(--budget);
+        }
+
+        .tier-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-card.frontier h4 {
+            color: var(--frontier);
+        }
+
+        .tier-card.pro h4 {
+            color: var(--pro);
+        }
+
+        .tier-card.budget h4 {
+            color: var(--budget);
+        }
+
+        .tier-card .definition {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .tier-card .weights {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .tier-card .philosophy {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Calculator */
         .calculator-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 2rem;
             margin: 2rem 0;
-            max-width: 600px;
+            max-width: 700px;
         }
 
         .slider-group {
@@ -180,25 +253,40 @@
             opacity: 1;
         }
 
+        .tier-indicator {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .tier-indicator.frontier {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--frontier);
+        }
+
+        .tier-indicator.pro {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--pro);
+        }
+
+        .tier-indicator.budget {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--budget);
+        }
+
         .total-score {
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             color: var(--accent);
             text-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Diagrams */
-        .diagram {
-            border: 1px dashed var(--border);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            color: var(--text-secondary);
-            margin: 1rem 0;
-        }
-
+        /* Architecture Grid */
         .architecture-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -214,11 +302,33 @@
             text-align: center;
         }
 
-        .arch-arrow {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            padding: 0.5rem;
+        /* Value Prop Box */
+        .value-prop {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .value-prop h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        /* Version Badge */
+        .version-badge {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .version-badge .status {
+            color: var(--pro);
         }
     </style>
 </head>
@@ -227,13 +337,15 @@
 
     <div class="container">
         <aside>
-            <a href="#" class="logo">Token<span>Tickr</span> v2</a>
+            <a href="#" class="logo">Token<span>Tickr</span></a>
             <nav>
                 <ul>
                     <li><a href="#overview" class="active">Overview</a></li>
+                    <li><a href="#value-prop">Value Proposition</a></li>
+                    <li><a href="#scoring">Smart Score Formula</a></li>
+                    <li><a href="#tiers">Dynamic Tiers</a></li>
+                    <li><a href="#calculator">Interactive Calculator</a></li>
                     <li><a href="#architecture">Architecture</a></li>
-                    <li><a href="#scoring">The Balanced Trinity</a></li>
-                    <li><a href="#components">Core Components</a></li>
                     <li><a href="#deployment">Deployment</a></li>
                 </ul>
             </nav>
@@ -243,14 +355,166 @@
             <!-- Overview -->
             <section id="overview">
                 <h1>Documentation</h1>
+                <p class="tagline">Find the smart model that saves you 20-30% while sacrificing minimal intelligence.
+                </p>
                 <p>TokenTickr is a next-generation LLM model comparison tool. It moves beyond simple price checking to
-                    provide a holistic <strong>Value Score</strong> based on three pillars: Price, Intelligence (Elo),
-                    and Context Capacity.</p>
+                    provide a holistic <strong>Smart Value Index</strong> that quantifies the tradeoff between cost
+                    savings
+                    and intelligence.</p>
 
-                <div class="diagram">
-                    <h3>Current Version: v2.0.0</h3>
-                    <p>Status: <span style="color: var(--accent)">● Stable</span></p>
-                    <p>Latest Feature: Balanced Trinity Scoring & Elo Source Transparency</p>
+                <div class="version-badge">
+                    <strong>Version 2.0.1</strong> &nbsp;|&nbsp; Status: <span class="status">● Stable</span>
+                </div>
+            </section>
+
+            <!-- Value Proposition -->
+            <section id="value-prop">
+                <h2>The Value Proposition</h2>
+
+                <div class="value-prop">
+                    <h3>Why TokenTickr Exists</h3>
+                    <p style="color: var(--text-primary);">Users come to TokenTickr to answer one question:</p>
+                    <p style="font-size: 1.2rem; color: var(--text-primary); font-style: italic; margin: 1rem 0;">
+                        "If I use this cheaper model instead of the frontier model, how much intelligence am I giving up
+                        for how much cost savings?"
+                    </p>
+                    <p>TokenTickr quantifies this tradeoff, helping teams find "good deal" models that deliver 70-90% of
+                        frontier intelligence at significantly lower cost.</p>
+                </div>
+
+                <h3>Key Insights</h3>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Intelligence is the X-factor</strong> — its value is non-linear and hard to quantify
+                    </li>
+                    <li><strong>Context enables intelligence</strong> — a genius model with 4K context is useless for
+                        complex tasks</li>
+                    <li><strong>Price tolerance scales with consequence</strong> — mission-critical tasks justify
+                        premium pricing</li>
+                </ul>
+            </section>
+
+            <!-- Scoring Formula -->
+            <section id="scoring">
+                <h2>Smart Score Formula</h2>
+                <p>The Smart Score uses <strong>dynamic tier-based weighting</strong> with a context gate. Unlike simple
+                    weighted averages, the formula adapts based on how close a model is to the current state-of-the-art.
+                </p>
+
+                <pre><code>function calculateSmartScore(perf, price, ctx, allModels) {
+  // 1. Dynamic tier threshold (relative to current max)
+  const maxPerf = Math.max(...allModels.map(m => m.perfScore));
+  
+  // 2. Context gate: models with &lt;64K context are penalized
+  const contextGate = ctx >= 50 ? 1.0 : 0.5 + (ctx / 100);
+  
+  // 3. Dynamic weights based on relative position
+  const ratio = perf / maxPerf;
+  let weights;
+  
+  if (ratio >= 0.90) {
+    weights = { intel: 0.60, context: 0.35, price: 0.05 };  // FRONTIER
+  } else if (ratio >= 0.70) {
+    weights = { intel: 0.50, context: 0.30, price: 0.20 };  // PRO
+  } else {
+    weights = { intel: 0.35, context: 0.25, price: 0.40 };  // BUDGET
+  }
+  
+  // 4. Weighted score with gate
+  const raw = (weights.intel * perf) + (weights.context * ctx) + (weights.price * price);
+  return contextGate * raw;
+}</code></pre>
+
+                <h3>Why This Approach?</h3>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Future-proof</strong> — thresholds adjust automatically as models improve</li>
+                    <li><strong>Context gate</strong> — ensures intelligence without capacity doesn't dominate</li>
+                    <li><strong>Tier-appropriate pricing</strong> — frontier users don't care about price; budget users
+                        do</li>
+                </ul>
+            </section>
+
+            <!-- Dynamic Tiers -->
+            <section id="tiers">
+                <h2>Dynamic Tier System</h2>
+                <p>Models are classified into tiers based on their performance relative to the best model currently
+                    being compared. This ensures the scoring stays relevant as the model landscape evolves.</p>
+
+                <div class="tier-grid">
+                    <div class="tier-card frontier">
+                        <h4>Frontier</h4>
+                        <div class="definition">90%+ of max performance</div>
+                        <div class="weights">
+                            Intel: 60% | Context: 35% | Price: 5%
+                        </div>
+                        <div class="philosophy">"Those that pay, will pay"</div>
+                    </div>
+                    <div class="tier-card pro">
+                        <h4>Pro</h4>
+                        <div class="definition">70-90% of max performance</div>
+                        <div class="weights">
+                            Intel: 50% | Context: 30% | Price: 20%
+                        </div>
+                        <div class="philosophy">"The deals zone — tradeoff land"</div>
+                    </div>
+                    <div class="tier-card budget">
+                        <h4>Budget</h4>
+                        <div class="definition">&lt;70% of max performance</div>
+                        <div class="weights">
+                            Intel: 35% | Context: 25% | Price: 40%
+                        </div>
+                        <div class="philosophy">"Volume-first, price matters"</div>
+                    </div>
+                </div>
+
+                <h3>The "Pro" Tier is TokenTickr's Sweet Spot</h3>
+                <p>This is where the "deals" live — models that offer 70-90% of frontier intelligence at significantly
+                    lower cost. TokenTickr helps users identify the best value in this tier.</p>
+            </section>
+
+            <!-- Interactive Calculator -->
+            <section id="calculator">
+                <h2>Interactive Calculator</h2>
+                <p>Experiment with the dynamic tier-based scoring. Adjust the sliders to see how the score changes based
+                    on tier classification.</p>
+
+                <div class="calculator-card">
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Performance Score</span>
+                            <span id="perf-val">85</span>
+                        </div>
+                        <input type="range" id="perf" min="0" max="100" value="85">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Context Score (64K+ = no penalty)</span>
+                            <span id="context-val">75</span>
+                        </div>
+                        <input type="range" id="context" min="0" max="100" value="75">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Price Score</span>
+                            <span id="price-val">40</span>
+                        </div>
+                        <input type="range" id="price" min="0" max="100" value="40">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Max Performance in Set (reference)</span>
+                            <span id="maxperf-val">100</span>
+                        </div>
+                        <input type="range" id="maxperf" min="50" max="100" value="100">
+                    </div>
+
+                    <div id="tier-display" class="tier-indicator pro">Tier: PRO</div>
+
+                    <div class="total-score">
+                        Smart Score: <span id="final-score">71.5</span>
+                    </div>
                 </div>
             </section>
 
@@ -283,74 +547,6 @@
                 </div>
             </section>
 
-            <!-- Interactive Scoring Logic -->
-            <section id="scoring">
-                <h2>The "Balanced Trinity" Scoring</h2>
-                <p>Unlike v1 which heavily favored price, v2 introduces a balanced weighting system to identify truly
-                    high-value models.</p>
-
-                <div class="calculator-card">
-                    <h3>Interactive Calculator</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 2rem;">Adjust the sub-scores to see how the final Value
-                        Score is calculated using the <strong>37.5/37.5/25</strong> formula.</p>
-
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span>Price Score (37.5%)</span>
-                            <span id="price-val">80</span>
-                        </div>
-                        <input type="range" id="price" min="0" max="100" value="80">
-                    </div>
-
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span>Performance/Elo (37.5%)</span>
-                            <span id="perf-val">90</span>
-                        </div>
-                        <input type="range" id="perf" min="0" max="100" value="90">
-                    </div>
-
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span>Context Length (25%)</span>
-                            <span id="context-val">70</span>
-                        </div>
-                        <input type="range" id="context" min="0" max="100" value="70">
-                    </div>
-
-                    <div class="total-score">
-                        Value Score: <span id="final-score">80.0</span>
-                    </div>
-                </div>
-
-                <h3>Logic Breakdown</h3>
-                <pre><code>const valueScore =
-  (0.375 * priceScore) +
-  (0.375 * perfScore) +
-  (0.25 * contextScore);</code></pre>
-                <p><strong>Context Fallbacks:</strong> For models reporting 0 context (e.g. Opus 4.5), we use a fallback
-                    map <code>src/lib/static-eval-map.ts</code> to ensure fair scoring.</p>
-            </section>
-
-            <!-- Components -->
-            <section id="components">
-                <h2>Core Components</h2>
-
-                <h3>SmartValueRanking</h3>
-                <p><code>src/components/smart-value-ranking.tsx</code></p>
-                <p>Displays the top-ranked model card. Features:</p>
-                <ul>
-                    <li>Value Score Badge (0-100)</li>
-                    <li>Elo Source Indicator ("Verified" vs "Est.")</li>
-                    <li>Animated progress bars for the 3 sub-metrics.</li>
-                </ul>
-
-                <h3 style="margin-top: 2rem;">ContextComparisonChart</h3>
-                <p><code>src/components/context-comparison-chart.tsx</code></p>
-                <p>A VisX-powered bar chart comparing context windows. Includes "Witty Analogies" (e.g., "1 Novel",
-                    "Entire Wikipedia") that dynamically position inside or outside bars based on width.</p>
-            </section>
-
             <!-- Deployment -->
             <section id="deployment">
                 <h2>Deployment & Verification</h2>
@@ -363,9 +559,9 @@
                 <p>The project is deployed via Cloudflare Pages. Deployment is triggered automatically via Git.</p>
 
                 <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
-                    <li>Commit changes to <code>tokentickr_v2</code> (feature branch).</li>
-                    <li>Merge Pull Request to <code>main</code>.</li>
-                    <li><strong>Cloudflare</strong> detects the push to <code>main</code> and builds.</li>
+                    <li>Commit changes to <code>main</code> branch.</li>
+                    <li><strong>Cloudflare</strong> detects the push and builds automatically.</li>
+                    <li>Live at <a href="https://tokentickr.com" style="color: var(--accent);">tokentickr.com</a></li>
                 </ol>
 
                 <blockquote
@@ -399,23 +595,59 @@
             });
         });
 
-        // Scoring Calculator Logic
-        const inputs = ['price', 'perf', 'context'];
-        const weights = { price: 0.375, perf: 0.375, context: 0.25 };
-
+        // Dynamic Tier-Based Calculator
         function calculate() {
-            let total = 0;
-            inputs.forEach(id => {
-                const val = parseInt(document.getElementById(id).value);
-                document.getElementById(id + '-val').textContent = val;
-                total += val * weights[id];
-            });
-            document.getElementById('final-score').textContent = total.toFixed(1);
+            const perf = parseInt(document.getElementById('perf').value);
+            const ctx = parseInt(document.getElementById('context').value);
+            const price = parseInt(document.getElementById('price').value);
+            const maxPerf = parseInt(document.getElementById('maxperf').value);
+
+            // Update display values
+            document.getElementById('perf-val').textContent = perf;
+            document.getElementById('context-val').textContent = ctx;
+            document.getElementById('price-val').textContent = price;
+            document.getElementById('maxperf-val').textContent = maxPerf;
+
+            // Calculate context gate
+            const contextGate = ctx >= 50 ? 1.0 : 0.5 + (ctx / 100);
+
+            // Determine tier
+            const ratio = perf / maxPerf;
+            let weights, tierName, tierClass;
+
+            if (ratio >= 0.90) {
+                weights = { intel: 0.60, context: 0.35, price: 0.05 };
+                tierName = 'FRONTIER';
+                tierClass = 'frontier';
+            } else if (ratio >= 0.70) {
+                weights = { intel: 0.50, context: 0.30, price: 0.20 };
+                tierName = 'PRO';
+                tierClass = 'pro';
+            } else {
+                weights = { intel: 0.35, context: 0.25, price: 0.40 };
+                tierName = 'BUDGET';
+                tierClass = 'budget';
+            }
+
+            // Calculate score
+            const raw = (weights.intel * perf) + (weights.context * ctx) + (weights.price * price);
+            const finalScore = contextGate * raw;
+
+            // Update UI
+            const tierDisplay = document.getElementById('tier-display');
+            tierDisplay.textContent = `Tier: ${tierName} (${Math.round(ratio * 100)}% of max)`;
+            tierDisplay.className = 'tier-indicator ' + tierClass;
+
+            document.getElementById('final-score').textContent = finalScore.toFixed(1);
         }
 
-        inputs.forEach(id => {
+        // Attach listeners
+        ['perf', 'context', 'price', 'maxperf'].forEach(id => {
             document.getElementById(id).addEventListener('input', calculate);
         });
+
+        // Initial calculation
+        calculate();
     </script>
 
 </body>
