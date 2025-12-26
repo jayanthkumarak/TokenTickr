@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { PriceCalculationResult } from "@/lib/price-calculation";
 import { calculateValueScore, ScoringMode } from "@/lib/scoring-utils";
 import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
@@ -17,8 +16,9 @@ interface SmartValueRankingProps {
 }
 
 export function SmartValueRanking({ results, className }: SmartValueRankingProps) {
-    // Scoring mode state with localStorage persistence
     const [scoringMode, setScoringMode] = useState<ScoringMode>("geometric");
+    const [isAnimating, setIsAnimating] = useState(false);
+    const prevOrderRef = useRef<string[]>([]);
 
     // Load saved preference on mount
     useEffect(() => {
@@ -28,10 +28,12 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
         }
     }, []);
 
-    // Save preference on change
+    // Save preference on change with animation trigger
     const handleModeChange = (mode: ScoringMode) => {
+        setIsAnimating(true);
         setScoringMode(mode);
         localStorage.setItem(SCORING_MODE_KEY, mode);
+        setTimeout(() => setIsAnimating(false), 500);
     };
 
     // Recalculate scores based on current mode
@@ -45,10 +47,12 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
             );
             return {
                 ...result,
-                valueScore: Math.round(newValueScore * 10) / 10, // 1 decimal place
+                valueScore: Math.round(newValueScore * 10) / 10,
             };
         });
-        return recalculated.sort((a, b) => b.valueScore - a.valueScore);
+        const sorted = recalculated.sort((a, b) => b.valueScore - a.valueScore);
+        prevOrderRef.current = sorted.map(m => m.modelId);
+        return sorted;
     }, [results, scoringMode]);
 
     const topPick = rankedModels[0];
@@ -56,106 +60,146 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
     if (!topPick) return null;
 
     return (
-        <Card className={cn("overflow-hidden border-2 border-primary/20", className)}>
-            <CardHeader className="bg-muted/30 pb-4">
+        <Card className={cn("overflow-hidden border border-zinc-200 dark:border-zinc-800", className)}>
+            <CardHeader className="bg-zinc-50 dark:bg-zinc-900/50 pb-4">
                 <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-indigo-500 fill-indigo-500 animate-pulse" />
+                        <Sparkles className="h-5 w-5 text-amber-500" />
                         <div className="flex flex-col">
-                            <CardTitle>Smart Value Index</CardTitle>
-                            <CardDescription>
-                                Intelligence-weighted composite • Performance prioritized
+                            <CardTitle className="text-lg">Smart Value Index</CardTitle>
+                            <CardDescription className="text-xs">
+                                Intelligence-weighted composite score
                             </CardDescription>
                         </div>
                     </div>
                     <ScoringModeToggle value={scoringMode} onChange={handleModeChange} />
                 </div>
-                {/* Contextual explanation of selected mode */}
+                {/* Contextual explanation */}
                 <div className={cn(
-                    "mt-3 px-3 py-2 rounded-md text-xs",
+                    "mt-3 px-3 py-2 rounded text-xs border",
                     scoringMode === "geometric"
-                        ? "bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900"
-                        : "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-900"
+                        ? "bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700"
+                        : "bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700"
                 )}>
                     {scoringMode === "geometric" ? (
-                        <><strong>Smart Score:</strong> Intelligence counts 2× — rewards capable models even at higher cost</>
+                        <><strong>Smart Score:</strong> Intelligence 50% weight — rewards capable models</>
                     ) : (
-                        <><strong>Budget Score:</strong> Efficiency-first — values context capacity per dollar for high-volume workloads</>
+                        <><strong>Budget Score:</strong> Context capacity 60% weight — optimizes for throughput</>
                     )}
                 </div>
             </CardHeader>
 
-            <CardContent className="pt-6 grid gap-6 md:grid-cols-3">
+            <CardContent className="pt-5 grid gap-5 md:grid-cols-3">
                 {/* Winner Highlight */}
-                <div className="md:col-span-1 flex flex-col items-center justify-center p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
+                <div className="md:col-span-1 flex flex-col items-center justify-center p-4 bg-zinc-50 dark:bg-zinc-900/30 rounded-lg border border-zinc-200 dark:border-zinc-800">
                     <div className="relative mb-3">
-                        <Trophy className="h-12 w-12 text-yellow-500 fill-yellow-500" />
-                        <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                        <Trophy className="h-10 w-10 text-amber-500" />
+                        <div className="absolute -top-1 -right-2 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                             #1
                         </div>
                     </div>
-                    <h3 className="text-xl font-bold text-center mb-1">{topPick.modelName}</h3>
-                    <div className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-2">
+                    <h3 className="text-lg font-semibold text-center mb-1">{topPick.modelName}</h3>
+                    <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-1">
                         {topPick.valueScore}
-                        <span className="text-sm text-muted-foreground font-normal ml-1">/100</span>
+                        <span className="text-sm text-zinc-500 font-normal ml-1">/100</span>
                     </div>
-                    <p className="text-xs text-center text-muted-foreground">
+                    <p className="text-xs text-center text-zinc-500">
                         {topPick.eloScore
-                            ? `Elo: ${topPick.eloScore} ${topPick.eloSource === 'estimated' ? '(Estimated)' : topPick.eloSource === 'heuristic' ? '(Heuristic)' : '(LMSYS Verified)'}`
+                            ? `Elo: ${topPick.eloScore}`
                             : "Best Value Pick"}
                     </p>
                 </div>
 
                 {/* Detailed Rankings */}
-                <div className="md:col-span-2 space-y-4">
+                <div className="md:col-span-2 space-y-3">
                     {rankedModels.map((model, idx) => (
-                        <div key={model.modelId} className="space-y-1.5">
-                            <div className="flex items-center justify-between text-sm">
-                                <div className="flex items-center gap-2">
+                        <div
+                            key={model.modelId}
+                            className={cn(
+                                "p-3 rounded-lg border transition-all duration-300",
+                                idx === 0
+                                    ? "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50"
+                                    : "bg-zinc-50 dark:bg-zinc-900/30 border-zinc-200 dark:border-zinc-800",
+                                isAnimating && "opacity-80"
+                            )}
+                            style={{
+                                transform: isAnimating ? "translateY(2px)" : "translateY(0)",
+                                transition: "all 0.3s ease-out"
+                            }}
+                        >
+                            <div className="flex items-center justify-between">
+                                {/* Left: Rank + Model Name */}
+                                <div className="flex items-center gap-3">
                                     <span className={cn(
-                                        "font-bold w-5 h-5 flex items-center justify-center rounded text-xs",
-                                        idx === 0 ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-500" : "text-muted-foreground"
+                                        "w-6 h-6 flex items-center justify-center rounded text-xs font-bold",
+                                        idx === 0
+                                            ? "bg-amber-200 text-amber-800 dark:bg-amber-800 dark:text-amber-200"
+                                            : "bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300"
                                     )}>
                                         {idx + 1}
                                     </span>
                                     <div className="flex flex-col">
-                                        <span className="font-medium truncate max-w-[150px] sm:max-w-xs">{model.modelName}</span>
+                                        <span className="font-medium text-sm truncate max-w-[180px]">
+                                            {model.modelName}
+                                        </span>
                                         {model.eloScore && (
-                                            <span className="text-[10px] text-muted-foreground flex items-center gap-1">
+                                            <span className="text-[10px] text-zinc-500">
                                                 Elo: {model.eloScore}
-                                                {model.eloSource === 'estimated' && (
-                                                    <span className="text-[9px] bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-500 px-1 rounded">
-                                                        Est
-                                                    </span>
-                                                )}
-                                                {model.eloSource === 'heuristic' && (
-                                                    <span className="text-[9px] bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-400 px-1 rounded">
-                                                        Heuristic
-                                                    </span>
-                                                )}
                                             </span>
                                         )}
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 text-xs">
-                                    <span className="text-muted-foreground hidden sm:inline">
-                                        Price: <span className="text-foreground font-medium">{model.priceScore}</span>
-                                    </span>
-                                    <span className="text-muted-foreground hidden sm:inline">
-                                        Intel: <span className="text-foreground font-medium">{model.perfScore}</span>
-                                    </span>
-                                    <span className="text-muted-foreground hidden sm:inline">
-                                        Ctx: <span className="text-foreground font-medium">{model.contextScore}</span>
-                                    </span>
-                                    <span className="font-bold text-primary w-8 text-right">
-                                        {model.valueScore}
-                                    </span>
+
+                                {/* Right: Score breakdown */}
+                                <div className="flex items-center gap-2">
+                                    {/* Component scores - clearer labels with subtle styling */}
+                                    <div className="hidden sm:flex items-center gap-1.5 text-[11px]">
+                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
+                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Price</span>
+                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.priceScore}</span>
+                                        </div>
+                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
+                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Intel</span>
+                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.perfScore}</span>
+                                        </div>
+                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
+                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Ctx</span>
+                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.contextScore}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Total Score - prominent */}
+                                    <div className={cn(
+                                        "flex flex-col items-center px-3 py-1 rounded-lg ml-2",
+                                        idx === 0
+                                            ? "bg-amber-200 dark:bg-amber-800"
+                                            : "bg-zinc-200 dark:bg-zinc-700"
+                                    )}>
+                                        <span className="text-[9px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">Total</span>
+                                        <span className={cn(
+                                            "font-bold text-lg",
+                                            idx === 0
+                                                ? "text-amber-800 dark:text-amber-200"
+                                                : "text-zinc-800 dark:text-zinc-200"
+                                        )}>
+                                            {model.valueScore}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <Progress
-                                value={model.valueScore}
-                                className={cn("h-2", idx === 0 ? "bg-indigo-100 dark:bg-indigo-950" : "")}
-                            />
+
+                            {/* Progress bar */}
+                            <div className="mt-2 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                                <div
+                                    className={cn(
+                                        "h-full rounded-full transition-all duration-500",
+                                        idx === 0
+                                            ? "bg-amber-500"
+                                            : "bg-zinc-400 dark:bg-zinc-500"
+                                    )}
+                                    style={{ width: `${model.valueScore}%` }}
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>
