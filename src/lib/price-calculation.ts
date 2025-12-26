@@ -311,7 +311,7 @@ export function calculatePriceComparison(
     // At rawScore=100: result ≈ 90, at rawScore=50: result ≈ 69, at rawScore=10: result ≈ 38
     const LOG_CEILING = 90; // Maximum dampened price score
     const LOG_BASE = Math.log10(11); // Normalizer so score=100 → ~90
-    let priceScore = LOG_CEILING * Math.log10(1 + rawPriceScore / 10) / LOG_BASE;
+    const priceScore = LOG_CEILING * Math.log10(1 + rawPriceScore / 10) / LOG_BASE;
 
     // 2. Context Score (Enhanced with Diminishing Returns)
     // Sweet spot: 128k = 75 points, 256k+ has slower gains
@@ -381,18 +381,10 @@ export function calculatePriceComparison(
       result.capabilityFlags = getCapabilityFlags(originalModel);
     }
 
-    // 4. Composite Value Score (Geometric Mean)
-    // Philosophy: Balanced excellence - weak in any dimension drags down overall score
-    // Geometric mean naturally handles the "5x context" problem via cube root scaling
-
-    // Anti-gaming Part 2: Intelligence-based price penalty
-    // Models with Intel < 65 (likely quantized/limited) get reduced price benefit
-    // This prevents ultra-cheap low-quality models from dominating the index
-    const INTEL_THRESHOLD = 65;
-    if (perfScore < INTEL_THRESHOLD) {
-      const intelPenalty = perfScore / INTEL_THRESHOLD; // 0.0 to 1.0
-      priceScore = priceScore * intelPenalty;
-    }
+    // 4. Composite Value Score (WEIGHTED Geometric Mean)
+    // Philosophy: Intelligence is KING - a smarter model should almost always win
+    // Weights: Performance 2x, Price 1x, Context 1x → (perf² × price × context)^(1/4)
+    // This ensures a 100 intel model beats a 73 intel model even with price disadvantage
 
     // Add epsilon to prevent 0s from completely zeroing the score
     const epsilon = 1;
@@ -400,8 +392,10 @@ export function calculatePriceComparison(
     const perfNorm = (perfScore + epsilon) / 100;
     const ctxNorm = (contextScore + epsilon) / 100;
 
-    // Geometric mean: cube root of product, then scale back to 0-100
-    const geometricMean = Math.pow(pNorm * perfNorm * ctxNorm, 1 / 3) * 100;
+    // Weighted geometric mean: performance counts DOUBLE (50% weight vs 25% each for price/context)
+    // Formula: (perf² × price × context)^(1/4) - the 4th root normalizes total weight of 4
+    const weightedProduct = Math.pow(perfNorm, 2) * pNorm * ctxNorm;
+    const geometricMean = Math.pow(weightedProduct, 1 / 4) * 100;
     const valueScore = Math.min(100, geometricMean);
 
     // Assign to result object
