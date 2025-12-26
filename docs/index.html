@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokenTickr v2 | Documentation</title>
+    <style>
+        :root {
+            --bg-dark: #09090b;
+            --bg-card: #18181b;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #22c55e; /* Green for tickr */
+            --accent-glow: rgba(34, 197, 94, 0.2);
+            --border: #27272a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 2rem;
+            height: calc(100vh - 4rem);
+            border-right: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            display: block;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.05em;
+        }
+        
+        .logo span { color: var(--accent); }
+
+        nav ul { list-style: none; }
+        
+        nav li { margin-bottom: 0.5rem; }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-primary);
+            background: var(--bg-card);
+            border-left: 2px solid var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            padding-bottom: 5rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 4rem;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.05em; }
+        h2 { font-size: 1.8rem; margin: 2rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.3rem; margin: 1.5rem 0 0.5rem; color: var(--text-primary); }
+        p { color: var(--text-secondary); margin-bottom: 1rem; max-width: 800px; }
+
+        code {
+            background: #27272a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #ec4899;
+        }
+
+        pre {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Calculator */
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            max-width: 600px;
+        }
+
+        .slider-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        
+        input[type="range"]:hover { opacity: 1; }
+
+        .total-score {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Diagrams */
+        .diagram {
+            border: 1px dashed var(--border);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .arch-box {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .arch-arrow { text-align: center; font-size: 1.5rem; color: var(--text-secondary); padding: 0.5rem;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <aside>
+        <a href="#" class="logo">Token<span>Tickr</span> v2</a>
+        <nav>
+            <ul>
+                <li><a href="#overview" class="active">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#scoring">The Balanced Trinity</a></li>
+                <li><a href="#components">Core Components</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <!-- Overview -->
+        <section id="overview">
+            <h1>Documentation</h1>
+            <p>TokenTickr is a next-generation LLM model comparison tool. It moves beyond simple price checking to provide a holistic <strong>Value Score</strong> based on three pillars: Price, Intelligence (Elo), and Context Capacity.</p>
+            
+            <div class="diagram">
+                <h3>Current Version: v2.0.0</h3>
+                <p>Status: <span style="color: var(--accent)">● Stable</span></p>
+                <p>Latest Feature: Balanced Trinity Scoring & Elo Source Transparency</p>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture">
+            <h2>Architecture Stack</h2>
+            <p>Built on a modern, edge-ready stack designed for performance and scalability.</p>
+
+            <div class="architecture-grid">
+                <div class="arch-box">
+                    <h3>Frontend</h3>
+                    <p>Next.js 15 (App Router)</p>
+                    <p>React 19, Shadcn/ui</p>
+                </div>
+                <div class="arch-box">
+                    <h3>State</h3>
+                    <p>Zustand</p>
+                    <p>Local Storage Persist</p>
+                </div>
+                <div class="arch-box">
+                    <h3>Data</h3>
+                    <p>OpenRouter API</p>
+                    <p>Static Eval Maps</p>
+                </div>
+                <div class="arch-box">
+                    <h3>Deployment</h3>
+                    <p>Cloudflare Pages</p>
+                    <p>Edge Network</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Scoring Logic -->
+        <section id="scoring">
+            <h2>The "Balanced Trinity" Scoring</h2>
+            <p>Unlike v1 which heavily favored price, v2 introduces a balanced weighting system to identify truly high-value models.</p>
+            
+            <div class="calculator-card">
+                <h3>Interactive Calculator</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 2rem;">Adjust the sub-scores to see how the final Value Score is calculated using the <strong>33/33/34</strong> formula.</p>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span>Price Score (33%)</span>
+                        <span id="price-val">80</span>
+                    </div>
+                    <input type="range" id="price" min="0" max="100" value="80">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span>Performance/Elo (33%)</span>
+                        <span id="perf-val">90</span>
+                    </div>
+                    <input type="range" id="perf" min="0" max="100" value="90">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span>Context Length (34%)</span>
+                        <span id="context-val">70</span>
+                    </div>
+                    <input type="range" id="context" min="0" max="100" value="70">
+                </div>
+
+                <div class="total-score">
+                    Value Score: <span id="final-score">80.0</span>
+                </div>
+            </div>
+
+            <h3>Logic Breakdown</h3>
+            <pre><code>const valueScore =
+  (0.33 * priceScore) +
+  (0.33 * perfScore) +
+  (0.34 * contextScore);</code></pre>
+            <p><strong>Context Fallbacks:</strong> For models reporting 0 context (e.g. Opus 4.5), we use a fallback map <code>src/lib/static-eval-map.ts</code> to ensure fair scoring.</p>
+        </section>
+
+        <!-- Components -->
+        <section id="components">
+            <h2>Core Components</h2>
+            
+            <h3>SmartValueRanking</h3>
+            <p><code>src/components/smart-value-ranking.tsx</code></p>
+            <p>Displays the top-ranked model card. Features:</p>
+            <ul>
+                <li>Value Score Badge (0-100)</li>
+                <li>Elo Source Indicator ("Verified" vs "Est.")</li>
+                <li>Animated progress bars for the 3 sub-metrics.</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">ContextComparisonChart</h3>
+            <p><code>src/components/context-comparison-chart.tsx</code></p>
+            <p>A VisX-powered bar chart comparing context windows. Includes "Witty Analogies" (e.g., "1 Novel", "Entire Wikipedia") that dynamically position inside or outside bars based on width.</p>
+        </section>
+
+        <!-- Deployment -->
+        <section id="deployment">
+            <h2>Deployment & Verification</h2>
+
+            <h3>Testing</h3>
+            <p>We use <strong>Vitest</strong> for unit testing core logic. Always run tests before pushing.</p>
+            <pre><code>npm run test</code></pre>
+
+            <h3>Deploying to Production</h3>
+            <p>The project is deployed via Cloudflare Pages. Deployment is triggered automatically via Git.</p>
+            
+            <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
+                <li>Commit changes to <code>tokentickr_v2</code> (feature branch).</li>
+                <li>Merge Pull Request to <code>main</code>.</li>
+                <li><strong>Cloudflare</strong> detects the push to <code>main</code> and builds.</li>
+            </ol>
+
+            <blockquote style="margin-top: 1rem; border-left: 3px solid var(--accent); padding-left: 1rem; color: var(--text-primary);">
+                <strong>Troubleshooting:</strong> If a build fails, check for unused variables. The CI treats warnings as errors.
+            </blockquote>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    // Navigation Highlighting
+    const navLinks = document.querySelectorAll('nav a');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        document.querySelectorAll('section').forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scoring Calculator Logic
+    const inputs = ['price', 'perf', 'context'];
+    const weights = { price: 0.33, perf: 0.33, context: 0.34 };
+
+    function calculate() {
+        let total = 0;
+        inputs.forEach(id => {
+            const val = parseInt(document.getElementById(id).value);
+            document.getElementById(id + '-val').textContent = val;
+            total += val * weights[id];
+        });
+        document.getElementById('final-score').textContent = total.toFixed(1);
+    }
+
+    inputs.forEach(id => {
+        document.getElementById(id).addEventListener('input', calculate);
+    });
+</script>
+
+</body>
+</html>
