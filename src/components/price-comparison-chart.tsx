@@ -249,31 +249,33 @@ export function PriceComparisonChart({
 
   return (
     <Card className={cn("w-full border-2 border-border/50", className)}>
-      <CardHeader className="pb-4">
-        <div className="flex flex-col space-y-2 mb-2">
-          <CardTitle className="flex items-center justify-between text-xl">
-            <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries per month</span>
-            <Badge variant="secondary" className="ml-2">
-              {data.results.length} models
-            </Badge>
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Comparison of estimated monthly costs based on standard usage patterns.
-          </p>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6 pt-0">
-        {/* Main Price Chart */}
-        <div className="h-[500px] w-full min-h-[300px]">
-          <ParentSize>
-            {({ width, height }) => (
-              <Chart width={width} height={height} />
-            )}
-          </ParentSize>
-        </div>
-
-        {/* Smart Value Index - Moved here so it's below the cost chart */}
+      <CardContent className="space-y-6 pt-6">
+        {/* HERO: Smart Value Index - Lead with our differentiator */}
         <SmartValueRanking results={data.results} />
+
+        {/* Cost Breakdown Section */}
+        <div className="space-y-4">
+          <div className="flex flex-col space-y-1">
+            <h3 className="flex items-center justify-between text-lg font-semibold">
+              <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries/month</span>
+              <Badge variant="secondary">
+                {data.results.length} models
+              </Badge>
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Estimated monthly costs based on standard usage patterns.
+            </p>
+          </div>
+
+          {/* Main Price Chart */}
+          <div className="h-[500px] w-full min-h-[300px]">
+            <ParentSize>
+              {({ width, height }) => (
+                <Chart width={width} height={height} />
+              )}
+            </ParentSize>
+          </div>
+        </div>
 
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
