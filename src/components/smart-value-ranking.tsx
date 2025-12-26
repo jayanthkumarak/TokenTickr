@@ -91,7 +91,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     {scoringMode === "geometric" ? (
                         <><strong>Smart Score:</strong> Intelligence 50% weight — rewards capable models</>
                     ) : (
-                        <><strong>Budget Score:</strong> Context capacity 60% weight — optimizes for throughput</>
+                        <><strong>Budget Score:</strong> Balanced weighting — best overall value</>
                     )}
                 </div>
             </CardHeader>

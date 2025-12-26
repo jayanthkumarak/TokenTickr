@@ -95,16 +95,13 @@ export function calculateSmartScore(
 }
 
 /**
- * Calculate BUDGET SCORE using efficiency model.
+ * Calculate BUDGET SCORE using balanced model.
  * 
- * Philosophy: For high-volume workloads, what matters is:
- * 1. Context capacity per dollar (throughput efficiency)
- * 2. Acceptable intelligence (must clear a quality bar)
- * 3. Price as a major factor
+ * Philosophy: For cost-conscious users who want a good all-around model.
+ * Equal weighting ensures no single dimension dominates.
  * 
- * This creates genuine differentiation from Smart Score:
- * - Smart Score: "What's the smartest model I can afford?"
- * - Budget Score: "What's the most efficient model that's smart enough?"
+ * - Smart Score: "Intelligence-first, price barely matters for frontier"
+ * - Budget Score: "Balanced approach, find the best value overall"
  */
 export function calculateBudgetScore(
     priceScore: number,
@@ -119,17 +116,19 @@ export function calculateBudgetScore(
         qualityMultiplier = Math.pow(perfScore / QUALITY_FLOOR, 2);
     }
 
-    // Efficiency metric: context per dollar
-    const contextWeight = 0.6;  // Context highly valued for throughput
-    const priceWeight = 0.4;    // Price matters but context matters more
-    const efficiencyScore = (contextScore * contextWeight) + (priceScore * priceWeight);
+    // Balanced weights: equal importance
+    const priceWeight = 0.34;
+    const intelWeight = 0.33;
+    const contextWeight = 0.33;
 
-    // Small intelligence bonus (not dominant)
-    const INTEL_BONUS_WEIGHT = 0.15;
-    const intelBonus = perfScore * INTEL_BONUS_WEIGHT;
+    // Simple weighted average
+    const rawScore = (
+        (priceScore * priceWeight) +
+        (perfScore * intelWeight) +
+        (contextScore * contextWeight)
+    );
 
-    // Combine with quality gate
-    const rawScore = (efficiencyScore * 0.85) + intelBonus;
+    // Apply quality gate
     const finalScore = rawScore * qualityMultiplier;
 
     return Math.min(100, Math.max(0, finalScore));
