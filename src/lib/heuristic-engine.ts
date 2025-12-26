@@ -28,22 +28,12 @@ const HEURISTIC_BOUNDS = {
     CAP: 1400,         // Maximum (prevents claiming SOTA status)
 } as const;
 
-// Price thresholds (per-token, as returned by OpenRouter API)
+// Price thresholds - documented for reference but calculations use log scale directly
 // Reference: GPT-4o is ~$5/1M input = $0.000005/token
-const PRICE_TIERS = {
-    CHEAP: 0.0000005,      // < $0.50/1M (budget tier)
-    MID: 0.000002,         // $0.50-$2/1M (standard tier)  
-    PREMIUM: 0.000010,     // $2-$10/1M (premium tier)
-    FLAGSHIP: 0.000030,    // > $10/1M (flagship tier)
-} as const;
+// CHEAP: <$0.50/1M, MID: $0.50-$2/1M, PREMIUM: $2-$10/1M, FLAGSHIP: >$10/1M
 
-// Parameter count patterns (extracted from model names)
-const PARAM_PATTERNS: [RegExp, number][] = [
-    [/\b405b\b/i, 100],    // 400B+ class
-    [/\b(\d{2,3})b\b/i, 0], // Dynamic: 70b, 72b, 180b, etc.
-    [/\b(7|8)b\b/i, 20],   // 7-8B class
-    [/\b(1|2|3)b\b/i, -10], // 1-3B class (tiny)
-];
+// Parameter count patterns - extraction uses simpler regex in extractParamCount()
+// Reference: 405B+ = 100pt, 70-100B = 60-80pt, 7-8B = 20pt, 1-3B = -10pt
 
 // Keyword boosts/penalties
 const KEYWORD_MODIFIERS: Record<string, number> = {

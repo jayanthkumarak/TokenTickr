@@ -277,9 +277,8 @@ export function calculatePriceComparison(
   const minCost = results[0].totalCost; // Already sorted
   const maxContext = Math.max(...results.map(r => r.contextLength));
   const minContext = Math.min(...results.map(r => r.contextLength));
-  // Use a sensible minimum for log scale (e.g., 1024 or 4096) to prevent 0 or negative logs from bad data
-  const logMaxContext = Math.log10(Math.max(maxContext, 2048));
-  const logMinContext = Math.log10(Math.max(minContext, 2048));
+  // Note: minContext and maxContext are kept for potential future dynamic scaling
+  void maxContext; void minContext; // Silence unused warnings
 
   // Calculate specific scores for each model
   results.forEach((result) => {
@@ -293,16 +292,26 @@ export function calculatePriceComparison(
     // Update the result object so charts show the corrected value
     result.contextLength = effectiveContext;
 
-    // 1. Price Score (Inverse Cost Ratio)
-    let priceScore = 0;
+    // 1. Price Score (Inverse Cost Ratio with Anti-Gaming Dampening)
+    // Problem: Ultra-cheap/free models can game the index with perfect price scores
+    // Solution: Log dampening + intelligence weighting
+    let rawPriceScore = 0;
     if (result.totalCost <= 0.000001) {
-      priceScore = 100;
+      rawPriceScore = 100;
     } else {
       // If minCost is 0 (effectively free), we can't do inverse ratio properly against non-zero.
       // But if minCost > 0, we do min/current.
       // If result.totalCost is huge, ratio -> 0.
-      priceScore = (Math.max(minCost, 0.000001) / result.totalCost) * 100;
+      rawPriceScore = (Math.max(minCost, 0.000001) / result.totalCost) * 100;
     }
+
+    // Anti-gaming: Log dampening to prevent extreme price scores
+    // Maps 0-100 to ~10-90 range with diminishing returns
+    // Formula: 90 * log10(1 + rawScore/10) / log10(11) 
+    // At rawScore=100: result ≈ 90, at rawScore=50: result ≈ 69, at rawScore=10: result ≈ 38
+    const LOG_CEILING = 90; // Maximum dampened price score
+    const LOG_BASE = Math.log10(11); // Normalizer so score=100 → ~90
+    let priceScore = LOG_CEILING * Math.log10(1 + rawPriceScore / 10) / LOG_BASE;
 
     // 2. Context Score (Enhanced with Diminishing Returns)
     // Sweet spot: 128k = 75 points, 256k+ has slower gains
@@ -375,6 +384,15 @@ export function calculatePriceComparison(
     // 4. Composite Value Score (Geometric Mean)
     // Philosophy: Balanced excellence - weak in any dimension drags down overall score
     // Geometric mean naturally handles the "5x context" problem via cube root scaling
+
+    // Anti-gaming Part 2: Intelligence-based price penalty
+    // Models with Intel < 65 (likely quantized/limited) get reduced price benefit
+    // This prevents ultra-cheap low-quality models from dominating the index
+    const INTEL_THRESHOLD = 65;
+    if (perfScore < INTEL_THRESHOLD) {
+      const intelPenalty = perfScore / INTEL_THRESHOLD; // 0.0 to 1.0
+      priceScore = priceScore * intelPenalty;
+    }
 
     // Add epsilon to prevent 0s from completely zeroing the score
     const epsilon = 1;
