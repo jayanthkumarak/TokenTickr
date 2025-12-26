@@ -70,6 +70,19 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     </div>
                     <ScoringModeToggle value={scoringMode} onChange={handleModeChange} />
                 </div>
+                {/* Contextual explanation of selected mode */}
+                <div className={cn(
+                    "mt-3 px-3 py-2 rounded-md text-xs",
+                    scoringMode === "geometric"
+                        ? "bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900"
+                        : "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-900"
+                )}>
+                    {scoringMode === "geometric" ? (
+                        <><strong>Smart Score:</strong> Intelligence counts 2× — rewards capable models even at higher cost</>
+                    ) : (
+                        <><strong>Budget Score:</strong> Optimizes for cost-efficiency — best for high-volume, budget-conscious usage</>
+                    )}
+                </div>
             </CardHeader>
 
             <CardContent className="pt-6 grid gap-6 md:grid-cols-3">

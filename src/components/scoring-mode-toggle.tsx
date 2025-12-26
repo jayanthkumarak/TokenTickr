@@ -20,13 +20,15 @@ interface ScoringModeToggleProps {
 const SCORING_MODES = [
     {
         value: "geometric" as const,
-        label: "Balanced Score",
-        description: "Geometric mean - rewards balanced models",
+        label: "Smart Score",
+        description: "Intelligence-first • Best for quality-focused teams",
+        shortTip: "Prioritizes model intelligence (50% weight) over cost savings",
     },
     {
         value: "utility" as const,
-        label: "Utility Score",
-        description: "Economic utility with diminishing returns",
+        label: "Budget Score",
+        description: "Cost-conscious • Best for high-volume workloads",
+        shortTip: "Balances quality with aggressive cost optimization",
     },
 ];
 
