@@ -62,9 +62,9 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     <div className="flex items-center gap-2">
                         <Sparkles className="h-5 w-5 text-indigo-500 fill-indigo-500 animate-pulse" />
                         <div className="flex flex-col">
-                            <CardTitle>TokenTickr Value Index</CardTitle>
+                            <CardTitle>Smart Value Index</CardTitle>
                             <CardDescription>
-                                Balanced composite of Price • Intelligence • Capacity
+                                Intelligence-weighted composite • Performance prioritized
                             </CardDescription>
                         </div>
                     </div>
