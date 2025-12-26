@@ -8,7 +8,6 @@ import { AxisLeft } from "@visx/axis";
 import { GridRows } from "@visx/grid";
 import { ParentSize } from "@visx/responsive";
 import { PriceCalculationResult } from "@/lib/price-calculation";
-import { BookOpen } from "lucide-react";
 import { getWittyAnalogy } from "@/lib/witty-context";
 import { cn } from "@/lib/utils";
 
@@ -137,25 +136,9 @@ export function ContextComparisonChart({ results, className }: ContextComparison
     };
 
     return (
-        <div className={cn("w-full space-y-4", className)}>
+        <div className={cn("w-full", className)}>
             <div className="h-[300px] w-full">
                 <ParentSize>{({ width, height }) => <Chart width={width} height={height} />}</ParentSize>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {sortedData.slice(0, 4).map(model => (
-                    <div key={model.modelId} className="flex items-center gap-3 p-3 bg-muted/30 rounded border border-border/50 text-sm">
-                        <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full text-indigo-600 dark:text-indigo-400">
-                            <BookOpen className="h-4 w-4" />
-                        </div>
-                        <div>
-                            <div className="font-semibold truncate w-24">{model.modelName}</div>
-                            <div className="text-xs text-muted-foreground">
-                                ≈ {model.stats.books} Books
-                            </div>
-                        </div>
-                    </div>
-                ))}
             </div>
         </div>
     );
