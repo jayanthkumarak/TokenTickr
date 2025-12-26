@@ -1,12 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { PriceCalculationResult } from "@/lib/price-calculation";
+import { calculateValueScore, ScoringMode } from "@/lib/scoring-utils";
+import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
 import { cn } from "@/lib/utils";
 import { Sparkles, Trophy } from "lucide-react";
+
+const SCORING_MODE_KEY = "tokentickr-scoring-mode";
 
 interface SmartValueRankingProps {
     results: PriceCalculationResult[];
@@ -14,10 +17,39 @@ interface SmartValueRankingProps {
 }
 
 export function SmartValueRanking({ results, className }: SmartValueRankingProps) {
-    // Sort by value score (descending)
+    // Scoring mode state with localStorage persistence
+    const [scoringMode, setScoringMode] = useState<ScoringMode>("geometric");
+
+    // Load saved preference on mount
+    useEffect(() => {
+        const saved = localStorage.getItem(SCORING_MODE_KEY);
+        if (saved === "geometric" || saved === "utility") {
+            setScoringMode(saved);
+        }
+    }, []);
+
+    // Save preference on change
+    const handleModeChange = (mode: ScoringMode) => {
+        setScoringMode(mode);
+        localStorage.setItem(SCORING_MODE_KEY, mode);
+    };
+
+    // Recalculate scores based on current mode
     const rankedModels = useMemo(() => {
-        return [...results].sort((a, b) => b.valueScore - a.valueScore);
-    }, [results]);
+        const recalculated = results.map(result => {
+            const newValueScore = calculateValueScore(
+                result.priceScore,
+                result.perfScore,
+                result.contextScore,
+                scoringMode
+            );
+            return {
+                ...result,
+                valueScore: Math.round(newValueScore * 10) / 10, // 1 decimal place
+            };
+        });
+        return recalculated.sort((a, b) => b.valueScore - a.valueScore);
+    }, [results, scoringMode]);
 
     const topPick = rankedModels[0];
 
@@ -26,19 +58,17 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
     return (
         <Card className={cn("overflow-hidden border-2 border-primary/20", className)}>
             <CardHeader className="bg-muted/30 pb-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2">
                         <Sparkles className="h-5 w-5 text-indigo-500 fill-indigo-500 animate-pulse" />
                         <div className="flex flex-col">
                             <CardTitle>TokenTickr Value Index</CardTitle>
                             <CardDescription>
-                                Triple Threat Score: 37.5% Price • 37.5% Intelligence • 25% Capacity
+                                Balanced composite of Price • Intelligence • Capacity
                             </CardDescription>
                         </div>
                     </div>
-                    <Badge variant="outline" className="text-xs font-normal border-indigo-200 bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800">
-                        Weighted Composite
-                    </Badge>
+                    <ScoringModeToggle value={scoringMode} onChange={handleModeChange} />
                 </div>
             </CardHeader>
 
@@ -58,7 +88,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     </div>
                     <p className="text-xs text-center text-muted-foreground">
                         {topPick.eloScore
-                            ? `Elo: ${topPick.eloScore} ${topPick.eloSource === 'estimated' ? '(Estimated)' : '(LMSYS Verified)'}`
+                            ? `Elo: ${topPick.eloScore} ${topPick.eloSource === 'estimated' ? '(Estimated)' : topPick.eloSource === 'heuristic' ? '(Heuristic)' : '(LMSYS Verified)'}`
                             : "Best Value Pick"}
                     </p>
                 </div>
@@ -83,6 +113,11 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                                 {model.eloSource === 'estimated' && (
                                                     <span className="text-[9px] bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-500 px-1 rounded">
                                                         Est
+                                                    </span>
+                                                )}
+                                                {model.eloSource === 'heuristic' && (
+                                                    <span className="text-[9px] bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-400 px-1 rounded">
+                                                        Heuristic
                                                     </span>
                                                 )}
                                             </span>

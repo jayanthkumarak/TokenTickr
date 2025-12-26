@@ -1,6 +1,8 @@
 
 import { OpenRouterModel } from '@/types/models';
 import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
+import { calculateHeuristicElo } from './heuristic-engine';
+import { calculateCapabilityBonus, getCapabilityFlags } from './capability-bonus';
 
 /**
  * Safe division function that handles division by zero and infinite values
@@ -102,12 +104,14 @@ export interface PriceCalculationResult {
   valueScore: number;
   contextScore: number;
   priceScore: number;
-  /** Normalized performance score (0-100, based on Elo) */
+  /** Normalized performance score (0-100, based on Elo + capability bonuses) */
   perfScore: number;
   /** Raw Elo score if available */
   eloScore: number | null;
-  /** Source of the Elo score ('lmsys' or 'estimated') */
+  /** Source of the Elo score ('lmsys', 'estimated', or 'heuristic') */
   eloSource: string | null;
+  /** Detected capabilities (e.g., ['Thinking', 'Multimodal', 'Tools']) */
+  capabilityFlags?: string[];
 }
 
 export interface ModelComparison {
@@ -300,20 +304,49 @@ export function calculatePriceComparison(
       priceScore = (Math.max(minCost, 0.000001) / result.totalCost) * 100;
     }
 
-    // 2. Context Score (Logarithmic Scale)
+    // 2. Context Score (Enhanced with Diminishing Returns)
+    // Sweet spot: 128k = 75 points, 256k+ has slower gains
     let contextScore = 0;
-    if (Math.abs(logMaxContext - logMinContext) < 0.0001) {
-      // If range is effectively 0, everyone gets 100 (if they have context) or 0
-      contextScore = maxContext > 0 ? 100 : 0;
+    const MIN_USEFUL = 4096;
+    const SWEET_SPOT = 128000;
+    const DIMINISHING_THRESHOLD = 256000;
+    const MAX_CONTEXT = 2000000; // 2M ceiling
+
+    const effectiveLength = Math.max(result.contextLength, MIN_USEFUL);
+    const logContext = Math.log10(effectiveLength);
+    const logMin = Math.log10(MIN_USEFUL);
+    const logSweet = Math.log10(SWEET_SPOT);
+    const logMax = Math.log10(MAX_CONTEXT);
+
+    if (result.contextLength <= MIN_USEFUL) {
+      contextScore = 0;
+    } else if (result.contextLength <= DIMINISHING_THRESHOLD) {
+      // Normal log scaling up to 256k (0-85 range)
+      contextScore = ((logContext - logMin) / (logSweet - logMin)) * 75;
+      contextScore = Math.min(85, contextScore);
     } else {
-      const logCurrent = Math.log10(Math.max(result.contextLength, 2048));
-      contextScore = ((logCurrent - logMinContext) / (logMaxContext - logMinContext)) * 100;
+      // Diminishing returns after 256k (85-100 range)
+      const logDim = Math.log10(DIMINISHING_THRESHOLD);
+      const baseScore = 85;
+      const bonus = ((logContext - logDim) / (logMax - logDim)) * 15;
+      contextScore = Math.min(100, baseScore + bonus);
     }
 
     // 3. Performance Score (Elo Normalized)
     const evalData = getModelEval(result.modelId);
-    const elo = evalData?.elo || null;
-    const eloSource = evalData?.source || null;
+    let elo: number | null = evalData?.elo || null;
+    let eloSource: string | null = evalData?.source || null;
+
+    // If no curated Elo, use heuristic engine
+    if (!elo) {
+      // Find the original model for heuristic calculation
+      const originalModel = models.find(m => m.id === result.modelId);
+      if (originalModel) {
+        const heuristic = calculateHeuristicElo(originalModel);
+        elo = heuristic.elo;
+        eloSource = heuristic.source;
+      }
+    }
 
     let perfScore = 0;
     if (elo) {
@@ -322,25 +355,36 @@ export function calculatePriceComparison(
       const normalized = ((elo - ELO_BOUNDARRIES.MIN_RELEVANT) / (ELO_BOUNDARRIES.MAX_SOTA - ELO_BOUNDARRIES.MIN_RELEVANT)) * 100;
       perfScore = Math.max(0, Math.min(100, normalized));
       result.eloSource = eloSource; // Store source for UI
+      result.eloScore = elo; // Store elo for display
     } else {
-      // Fallback for unrated models: Assume "Average" (50) so they don't get 0, but penalize slightly
+      // Ultimate fallback (should rarely happen now)
       perfScore = 50;
       result.eloSource = null;
     }
 
-    // 4. Composite Value Score ("The Balanced Trinity")
-    // Weights: 33% Price, 33% Perf, 34% Context
-    // Philosophy: A winner must be reasonably smart, priced well, AND capable of heavy lifting.
-    const uniqueWeights = {
-      price: 0.375,
-      perf: 0.375,
-      context: 0.25
-    };
+    // 3b. Apply capability bonuses to perfScore (thinking, multimodal, tools)
+    // Find the original model to check capabilities
+    const originalModel = models.find(m => m.id === result.modelId);
+    if (originalModel) {
+      const capabilityBonus = calculateCapabilityBonus(originalModel);
+      perfScore = Math.min(100, perfScore + capabilityBonus);
+      // Store capability flags for UI display
+      result.capabilityFlags = getCapabilityFlags(originalModel);
+    }
 
-    const valueScore =
-      (uniqueWeights.price * priceScore) +
-      (uniqueWeights.perf * perfScore) +
-      (uniqueWeights.context * contextScore);
+    // 4. Composite Value Score (Geometric Mean)
+    // Philosophy: Balanced excellence - weak in any dimension drags down overall score
+    // Geometric mean naturally handles the "5x context" problem via cube root scaling
+
+    // Add epsilon to prevent 0s from completely zeroing the score
+    const epsilon = 1;
+    const pNorm = (priceScore + epsilon) / 100;
+    const perfNorm = (perfScore + epsilon) / 100;
+    const ctxNorm = (contextScore + epsilon) / 100;
+
+    // Geometric mean: cube root of product, then scale back to 0-100
+    const geometricMean = Math.pow(pNorm * perfNorm * ctxNorm, 1 / 3) * 100;
+    const valueScore = Math.min(100, geometricMean);
 
     // Assign to result object
     result.priceScore = Math.round(Math.max(0, Math.min(100, priceScore)));
