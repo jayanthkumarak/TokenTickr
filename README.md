@@ -1,67 +1,64 @@
 # TokenTickr
 
-TokenTickr is a web application for comparing Large Language Model (LLM) pricing and features using the OpenRouter API. It provides real-time cost analysis and model comparison capabilities.
+LLM cost comparison tool with intelligence-weighted scoring. Compare models across price, performance, and context window capacity.
 
-## Architecture & Stack
+**Live:** [tokentickr.com](https://tokentickr.com)
 
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript 5
-- **Styling:** Tailwind CSS 4
-- **UI Components:** Shadcn/ui
-- **State Management:** Zustand
-- **Visualization:** VisX
-- **Testing:**
-  - **Unit:** Vitest
-  - **E2E:** Playwright
+## Smart Value Index
+
+TokenTickr's core feature is the **Smart Value Index** — an intelligence-first scoring system that helps teams find the best model for their needs.
+
+The scoring formula uses a weighted geometric mean:
+
+```
+Score = (Performance² × Price × Context)^(1/4)
+```
+
+Performance carries 50% weight. This ensures capable models rank higher even at premium prices, while still rewarding cost efficiency.
+
+Two scoring modes:
+- **Smart Score** — Intelligence-first. Best for quality-focused teams.
+- **Budget Score** — Cost-conscious. Best for high-volume workloads.
+
+## Stack
+
+- Next.js 15 (App Router)
+- TypeScript 5
+- Tailwind CSS 4
+- Shadcn/ui components
+- Zustand state management
+- VisX visualization
 
 ## Development
-
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Setup
 
 ```bash
 git clone https://github.com/jayanthkumarak/tokentickr.git
 cd tokentickr
 npm install
-```
-
-### Running Locally
-
-```bash
 npm run dev
 ```
-Access the application at `http://localhost:3000`.
 
-To run on a specific port:
-```bash
-npm run dev -- -p 4823
-```
+Opens at `http://localhost:3000`
 
 ## Testing
 
-### Unit Tests
-Validates core logic including price calculations and API utility hardening.
 ```bash
+# Unit tests
 npm run test
-```
 
-### End-to-End (E2E) Tests
-Validates user flows (Search, Selection, Comparison) and rendering stability. Requires Playwright browsers to be installed.
-```bash
+# E2E tests (requires Playwright)
 npx playwright test
 ```
 
 ## Deployment
 
-The application is configured for deployment on Cloudflare Pages or any static hosting compatible with `next build`.
+Static export to Cloudflare Pages.
 
-**Build Command:**
 ```bash
 npm run build
+# Output: ./out
 ```
 
-**Output Directory:**
-`out`
+## Data Source
+
+Real-time model data and pricing via [OpenRouter API](https://openrouter.ai).
