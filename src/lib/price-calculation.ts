@@ -332,9 +332,9 @@ export function calculatePriceComparison(
     // Weights: 33% Price, 33% Perf, 34% Context
     // Philosophy: A winner must be reasonably smart, priced well, AND capable of heavy lifting.
     const uniqueWeights = {
-      price: 0.33,
-      perf: 0.33,
-      context: 0.34
+      price: 0.375,
+      perf: 0.375,
+      context: 0.25
     };
 
     const valueScore =

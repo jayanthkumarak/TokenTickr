@@ -32,7 +32,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                         <div className="flex flex-col">
                             <CardTitle>TokenTickr Value Index</CardTitle>
                             <CardDescription>
-                                Triple Threat Score: 33% Price • 33% Intelligence • 34% Capacity
+                                Triple Threat Score: 37.5% Price • 37.5% Intelligence • 25% Capacity
                             </CardDescription>
                         </div>
                     </div>

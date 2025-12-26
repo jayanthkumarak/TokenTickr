@@ -48,6 +48,12 @@ export const MODEL_EVALS: Record<string, ModelEval> = {
     // DeepSeek (Correction for missing data)
     'deepseek/deepseek-chat': { elo: 1250, source: 'estimated', lastUpdated: '2024-06' }, // Approx Llama3 70b level
     'deepseek/deepseek-coder': { elo: 1240, source: 'estimated', lastUpdated: '2024-06' },
+
+    // Legacy / Common Fallbacks
+    'openai/gpt-3.5-turbo': { elo: 1100, source: 'lmsys', lastUpdated: '2024-01' },
+    'google/gemini-pro': { elo: 1150, source: 'lmsys', lastUpdated: '2024-01' },
+    'mistralai/mistral-small': { elo: 1150, source: 'estimated', lastUpdated: '2024-02' },
+    'perplexity/llama-3-sonar-large-32k-online': { elo: 1220, source: 'estimated', lastUpdated: '2024-05' },
 };
 
 export const CONTEXT_FALLBACKS: Record<string, number> = {
@@ -60,7 +66,7 @@ export const CONTEXT_FALLBACKS: Record<string, number> = {
 
 export const ELO_BOUNDARRIES = {
     MIN_RELEVANT: 1000,
-    MAX_SOTA: 1350, // Adjusted current realistic top for widely available API models
+    MAX_SOTA: 1550, // Raised ceiling to 1550 to allow granularity between 1450 (Gemini 3) and 1500+ (GPT-6?)
 };
 
 export function getModelEval(modelId: string): ModelEval | null {
