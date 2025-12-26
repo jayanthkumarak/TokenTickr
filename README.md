@@ -78,7 +78,9 @@ npm run build
 
 ## Data Source
 
-Real-time model data and pricing via [OpenRouter API](https://openrouter.ai).
+- **Model Pricing**: Real-time data via [OpenRouter API](https://openrouter.ai)
+- **Intelligence Index**: Composite benchmark scores from [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models) — aggregates MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench
+- **LMSYS Elo**: Human preference ratings from [LMSYS Chatbot Arena](https://chat.lmsys.org/?leaderboard)
 
 ## Research
 
