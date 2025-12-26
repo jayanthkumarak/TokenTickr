@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Minus, RotateCcw } from "lucide-react";
 import { useComparisonStore } from "@/store/comparison-store";
@@ -18,7 +18,7 @@ interface ComparisonLayoutProps {
 
 export function ComparisonLayout({ className }: ComparisonLayoutProps) {
   const [showingSelector, setShowingSelector] = useState<number | null>(null);
-  
+
   const {
     selectedModels,
     maxModels,
@@ -118,30 +118,18 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         </Button>
       </div>
 
-      {/* Model Selector Modal */}
-      {showingSelector !== null && (
-        <Card className="mb-6 border-primary">
-          <CardHeader>
-            <CardTitle>Select Model for Column {showingSelector + 1}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <ModelSelector
-                placeholder="Search and select a model..."
-                onSelect={(model) => handleModelSelect(showingSelector, model)}
-                excludeModels={excludedModelIds}
-              />
-              <Button
-                variant="outline"
-                onClick={() => setShowingSelector(null)}
-                className="w-full"
-              >
-                Cancel
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      {/* Model Selector Modal (Spotlight) */}
+      <ModelSelector
+        open={showingSelector !== null}
+        onOpenChange={(open) => !open && setShowingSelector(null)}
+        onSelect={(model) => {
+          if (showingSelector !== null) {
+            handleModelSelect(showingSelector, model);
+          }
+        }}
+        excludeModels={excludedModelIds}
+        slotLabel={showingSelector !== null ? `Model ${showingSelector + 1}` : undefined}
+      />
 
       {/* Comparison Grid */}
       <div className={cn(
