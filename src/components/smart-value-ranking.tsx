@@ -138,8 +138,8 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                     )}>
                                         {idx + 1}
                                     </span>
-                                    <div className="flex flex-col">
-                                        <span className="font-medium text-sm truncate max-w-[180px]">
+                                    <div className="flex flex-col min-w-0 flex-1">
+                                        <span className="font-medium text-sm">
                                             {model.modelName}
                                         </span>
                                         {model.eloScore && (
