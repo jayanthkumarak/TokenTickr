@@ -250,7 +250,7 @@ export function PriceComparisonChart({
   return (
     <Card className={cn("w-full border-2 border-border/50", className)}>
       <CardHeader className="pb-4">
-        <div className="flex flex-col space-y-2 mb-6">
+        <div className="flex flex-col space-y-2 mb-2">
           <CardTitle className="flex items-center justify-between text-xl">
             <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries per month</span>
             <Badge variant="secondary" className="ml-2">
@@ -261,9 +261,6 @@ export function PriceComparisonChart({
             Comparison of estimated monthly costs based on standard usage patterns.
           </p>
         </div>
-
-        {/* Value Index Ranking */}
-        <SmartValueRanking results={data.results} />
       </CardHeader>
       <CardContent className="space-y-6 pt-0">
         {/* Main Price Chart */}
@@ -274,6 +271,9 @@ export function PriceComparisonChart({
             )}
           </ParentSize>
         </div>
+
+        {/* Smart Value Index - Moved here so it's below the cost chart */}
+        <SmartValueRanking results={data.results} />
 
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
