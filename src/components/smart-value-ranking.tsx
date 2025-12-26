@@ -105,7 +105,13 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     </div>
                     <p className="text-xs text-center text-zinc-500">
                         {topPick.eloScore
-                            ? `Elo: ${topPick.eloScore}`
+                            ? (
+                                <span>
+                                    Elo: {topPick.eloScore} <span className="opacity-70">
+                                        {topPick.eloSource === 'estimated' ? '(Est.)' : topPick.eloSource === 'heuristic' ? '(Heuristic)' : 'Verified'}
+                                    </span>
+                                </span>
+                            )
                             : "Best Value Pick"}
                     </p>
                 </div>
@@ -143,8 +149,18 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                             {model.modelName}
                                         </span>
                                         {model.eloScore && (
-                                            <span className="text-[10px] text-zinc-500">
-                                                Elo: {model.eloScore}
+                                            <span className="text-[10px] text-zinc-500 flex items-center gap-1.5">
+                                                <span>Elo: {model.eloScore}</span>
+                                                {model.eloSource === 'estimated' && (
+                                                    <span className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-500 px-1 rounded-[3px] text-[9px] font-medium border border-yellow-200 dark:border-yellow-800">
+                                                        Est.
+                                                    </span>
+                                                )}
+                                                {model.eloSource === 'heuristic' && (
+                                                    <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-1 rounded-[3px] text-[9px] font-medium border border-purple-200 dark:border-purple-800">
+                                                        Heuristic
+                                                    </span>
+                                                )}
                                             </span>
                                         )}
                                     </div>
