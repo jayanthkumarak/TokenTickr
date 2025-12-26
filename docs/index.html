@@ -346,6 +346,7 @@
                     <li><a href="#tiers">Dynamic Tiers</a></li>
                     <li><a href="#calculator">Interactive Calculator</a></li>
                     <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#data-sources">Data Sources</a></li>
                     <li><a href="#deployment">Deployment</a></li>
                 </ul>
             </nav>
@@ -537,7 +538,7 @@
                     <div class="arch-box">
                         <h3>Data</h3>
                         <p>OpenRouter API</p>
-                        <p>Static Eval Maps</p>
+                        <p>Artificial Analysis API</p>
                     </div>
                     <div class="arch-box">
                         <h3>Deployment</h3>
@@ -545,6 +546,45 @@
                         <p>Edge Network</p>
                     </div>
                 </div>
+            </section>
+
+            <!-- Data Sources -->
+            <section id="data-sources">
+                <h2>Data Sources</h2>
+                <p>TokenTickr uses a cascading data quality system for performance scores, clearly labeled in the UI.
+                </p>
+
+                <h3>🔵 AA Intelligence Index (361 models)</h3>
+                <p>Primary source from <a href="https://artificialanalysis.ai" style="color: var(--accent);">Artificial
+                        Analysis</a>.
+                    A composite benchmark aggregating MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench.
+                </p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Confidence:</strong> High — objective, multi-source composite</li>
+                    <li><strong>Coverage:</strong> 361 models auto-generated from API</li>
+                    <li><strong>UI Badge:</strong> Blue "AA Index"</li>
+                </ul>
+
+                <h3>🟢 LMSYS Verified (Fallback)</h3>
+                <p>Human preference ratings from <a href="https://chat.lmsys.org" style="color: var(--accent);">LMSYS
+                        Chatbot Arena</a>.
+                    Uses anonymous pairwise comparisons with 1M+ human evaluations.</p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Confidence:</strong> High — crowdsourced blind testing</li>
+                    <li><strong>UI Badge:</strong> Green "Verified"</li>
+                </ul>
+
+                <h3>🟣 Heuristic (Last Resort)</h3>
+                <p>Algorithmic calculation based on parameter count, model family, and context length.
+                    Conservative ceiling of 1280 Elo to avoid overestimating unknown models.</p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Confidence:</strong> Low — rough approximation</li>
+                    <li><strong>UI Badge:</strong> Purple "Heuristic"</li>
+                </ul>
+
+                <h3>Updating Data</h3>
+                <pre><code># Refresh AA Intelligence Index (requires API key)
+npm run generate:aa-data</code></pre>
             </section>
 
             <!-- Deployment -->

@@ -6,63 +6,89 @@ This document explains how TokenTickr obtains and validates model performance da
 
 TokenTickr uses three tiers of data quality, clearly labeled in the UI:
 
-### 🟢 LMSYS Verified
+### 🔵 AA Intelligence Index (Highest Priority)
+
+**Source**: [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models)
+
+A composite benchmark aggregating multiple independent evaluations:
+
+- **MMLU-Pro** — Multi-task reasoning (harder than MMLU)
+- **LiveBench** — Contamination-resistant with monthly updates
+- **AIME 2024/2025** — Mathematical olympiad problems
+- **GPQA Diamond** — Graduate-level science questions
+- **IFBench** — Instruction following
+
+**Why we prefer this:**
+- Aggregates multiple benchmarks for reliability
+- Less prone to training data contamination than single benchmarks
+- More objective than human preference voting
+- Measures raw capability rather than "vibes"
+
+**Coverage**: 361 models (auto-generated from API)
+
+- **Confidence**: High — objective, multi-source composite
+- **Flag in UI**: Blue "AA Index" badge
+- **Update**: Run `npm run generate:aa-data` to refresh from API
+
+---
+
+### 🟢 LMSYS Verified (Fallback #1)
 
 **Source**: [LMSYS Chatbot Arena](https://chat.lmsys.org)
 
-The gold standard for LLM evaluation. LMSYS Arena uses anonymous pairwise comparisons where users interact with two models and choose their preferred response. These votes are aggregated using a Bradley-Terry model to produce Elo-like ratings with confidence intervals.
+The standard for human preference evaluation. LMSYS Arena uses anonymous pairwise comparisons where users interact with two models and choose their preferred response. These votes are aggregated using a Bradley-Terry model to produce Elo-like ratings.
 
 - **Methodology**: Crowdsourced, blind A/B testing
-- **Update Frequency**: Continuous (we sync periodically)
+- **Update Frequency**: Periodic syncs
 - **Confidence**: High — backed by 1M+ human evaluations
-- **Last Sync**: December 23, 2025
+- **Flag in UI**: Green "Verified" badge
 
-### 🟡 Estimated
+---
 
-**Source**: Internal analysis based on model family and capabilities
-
-Used when a model is not yet in LMSYS Arena but belongs to a known model family. We estimate Elo based on:
-
-1. **Parent model performance** — e.g., Llama 3.1 70B estimated from verified Llama 3 70B
-2. **Announced capabilities** — official benchmarks from model providers
-3. **Architecture similarity** — parameter count, training approach
-
-- **Confidence**: Medium — educated guess, may be 50-100 Elo off
-- **Flag in UI**: Yellow "Est." badge
-
-### 🟣 Heuristic
+### 🟣 Heuristic (Last Resort)
 
 **Source**: Algorithmic calculation from observable characteristics
 
-Used when we have no direct performance data. The heuristic formula considers:
+Used when we have no benchmark data. The heuristic formula considers:
 
 ```
 baseElo = 1100  // GPT-3.5 level baseline
-
-// Price signal (expensive often = capable)
-priceBonus = log10(pricePerMillion) * 30
 
 // Parameter count bonus
 paramBonus = log10(parameters) * 20
 
 // Model family bonuses
 familyBonus = {
-  'gpt-4': +150,
-  'claude-3': +100,
-  'gemini': +80,
-  'llama-3': +50,
+  'gpt-4': +100,
+  'claude-3': +80,
+  'gemini': +60,
+  'llama-3': +40,
   ...
 }
 
-// Context length bonus (larger = more capable architecture)
-contextBonus = min(50, log10(contextLength) * 10)
+// Context length bonus
+contextBonus = min(40, log10(contextLength) * 8)
 
-heuristicElo = baseElo + priceBonus + paramBonus + familyBonus + contextBonus
+heuristicElo = baseElo + paramBonus + familyBonus + contextBonus
 ```
+
+**Ceiling**: Maximum 1280 Elo (conservative to avoid overestimating)
 
 - **Confidence**: Low — should be treated as rough approximation
 - **Flag in UI**: Purple "Heuristic" badge
-- **When used**: New models, obscure providers, missing data
+- **When used**: Brand new models, obscure providers
+
+---
+
+## Scoring Cascade
+
+When calculating performance scores, we check sources in order:
+
+```
+1. AA Intelligence Index (best) — 361 models
+2. LMSYS Chatbot Arena Elo    — fallback
+3. Heuristic engine           — last resort (ceiling: 1280)
+```
 
 ## Context Window Data
 
@@ -71,30 +97,36 @@ Context window sizes are sourced from:
 1. **OpenRouter API** — Primary source (real-time from providers)
 2. **Fallback Map** — Manual overrides for known incorrect values
 
-Some providers report context windows incorrectly. We maintain a fallback map (`CONTEXT_FALLBACKS` in `static-eval-map.ts`) to correct known issues.
-
 ## Price Data
 
 All pricing data comes directly from the [OpenRouter API](https://openrouter.ai) in real-time.
 
 - **Format**: USD per token (converted to per-million for display)
 - **Update Frequency**: Real-time on each page load
-- **Caveats**: Prices may vary from direct provider APIs due to OpenRouter margin
 
 ## Transparency Principles
 
-1. **Always show the source** — Every Elo score is labeled with its provenance
-2. **Prefer verified data** — LMSYS > Estimated > Heuristic
+1. **Always show the source** — Every score is labeled with its provenance
+2. **Prefer objective data** — AA Index > LMSYS > Heuristic
 3. **Document uncertainty** — Low-confidence scores are flagged
-4. **Keep data fresh** — Regular syncs with LMSYS Arena
+4. **Keep data fresh** — Auto-generate from APIs
 
-## Contributing
+## Updating AA Data
 
-If you notice incorrect data:
+To refresh the Intelligence Index data from Artificial Analysis:
 
-1. Check the [LMSYS Arena leaderboard](https://chat.lmsys.org) for latest scores
-2. Open an issue or PR to update `src/lib/static-eval-map.ts`
-3. Include source links for verification
+```bash
+# Requires NEXT_PUBLIC_AA_API_KEY environment variable
+npm run generate:aa-data
+```
+
+This generates `src/lib/aa-static-scores.ts` with latest scores for all 361+ models.
+
+## Attribution
+
+- **Intelligence Index**: Data provided by [ArtificialAnalysis.ai](https://artificialanalysis.ai)
+- **Human Preference**: Data from [LMSYS Chatbot Arena](https://chat.lmsys.org)
+- **Model Pricing**: [OpenRouter](https://openrouter.ai)
 
 ---
 
