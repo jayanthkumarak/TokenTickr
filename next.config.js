@@ -8,9 +8,9 @@ const nextConfig = {
     unoptimized: true
   },
   // Disable server-side features for static export
-  experimental: {
-    esmExternals: 'loose'
-  }
+  // experimental: {
+  //   esmExternals: 'loose'
+  // }
 }
 
 module.exports = nextConfig 
