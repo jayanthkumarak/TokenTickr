@@ -1,7 +1,7 @@
 /**
  * Advanced Scoring Utilities
  * 
- * Provides multiple scoring algorithms for the TokenTickr Value Index:
+ * Provides multiple scoring algorithms for the Smart Value Index:
  * 1. Geometric Mean - Balanced excellence, weak dimension drags down score
  * 2. Utility Function - Economic utility with configurable diminishing returns
  */
