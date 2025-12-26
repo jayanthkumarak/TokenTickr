@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Group } from "@visx/group";
 import { Bar } from "@visx/shape";
 import { scaleLinear, scaleBand } from "@visx/scale";
@@ -11,9 +11,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, Info, TrendingUp, Calculator } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, TrendingUp, Calculator, Layers } from "lucide-react";
 import { PriceComparisonData, formatCostDisplay, getCostDisclaimer } from "@/lib/price-calculation";
 import { CHART_COLORS, COLOR_UTILS, SEMANTIC_COLORS } from "@/lib/colorblind-colors";
+import { SmartValueRanking } from "@/components/smart-value-ranking";
+import { ContextComparisonChart } from "@/components/context-comparison-chart";
 import { cn } from "@/lib/utils";
 
 interface PriceComparisonChartProps {
@@ -21,34 +23,50 @@ interface PriceComparisonChartProps {
   className?: string;
 }
 
-// Color-blind friendly palette - using imported CHART_COLORS from colorblind-colors.ts
-
-// Chart dimensions - reduced margins to prevent negative width
-const CHART_MARGIN = { top: 20, right: 60, bottom: 60, left: 120 };
+// Chart dimensions - increased margin for long model names
+const CHART_MARGIN = { top: 20, right: 60, bottom: 60, left: 200 };
 
 export function PriceComparisonChart({
   data,
   className
 }: PriceComparisonChartProps) {
-  const [showDetails, setShowDetails] = useState(false);
-  const [showComparisons, setShowComparisons] = useState(false);
-  const [showYearlyProjections, setShowYearlyProjections] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
+  const [showComparisons, setShowComparisons] = useState(true);
+  const [showYearlyProjections, setShowYearlyProjections] = useState(true);
+  const [showGlow, setShowGlow] = useState(true);
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
 
+  // Handle glow effect - vanish on scroll or after delay
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowGlow(false);
+    };
+
+    // Remove glow after 4 seconds automatically
+    const timer = setTimeout(() => {
+      setShowGlow(false);
+    }, 4000);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, []);
+
   // Debug: Track when chart receives new data
-  console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName} = $${data.results[0]?.totalCost.toFixed(2)}`);
+  console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName || 'No Data'} = $${data.results[0]?.totalCost?.toFixed(2) || '0.00'}`);
 
   // Prepare chart data with color-blind friendly colors and patterns
   const chartData = useMemo(() => {
     const colors = COLOR_UTILS.getDataPalette(data.results.length);
     const patterns = ['solid', 'diagonal', 'dots', 'vertical', 'horizontal', 'cross', 'diamond', 'wave'];
 
-    // Chart data prepared for visualization
-
     return data.results.map((item, index) => ({
       ...item,
-      displayName: item.modelName.length > 25
-        ? `${item.modelName.substring(0, 25)}...`
+      displayName: item.modelName.length > 35
+        ? `${item.modelName.substring(0, 35)}...`
         : item.modelName,
       color: colors[index] || CHART_COLORS.primary[0],
       pattern: patterns[index % patterns.length],
@@ -99,30 +117,7 @@ export function PriceComparisonChart({
             <rect width="4" height="4" fill={chartData[1]?.color} />
             <path d="M 0,4 L 4,0 M -1,1 L 1,-1 M 3,5 L 5,3" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
           </pattern>
-          <pattern id="pattern-2" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[2]?.color} />
-            <circle cx="2" cy="2" r="1" fill="#ffffff" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-3" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[3]?.color} />
-            <path d="M 2,0 L 2,4" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-4" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[4]?.color} />
-            <path d="M 0,2 L 4,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-5" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[5]?.color} />
-            <path d="M 2,0 L 2,4 M 0,2 L 4,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-          </pattern>
-          <pattern id="pattern-6" patternUnits="userSpaceOnUse" width="4" height="4">
-            <rect width="4" height="4" fill={chartData[6]?.color} />
-            <path d="M 0,0 L 2,2 L 4,0 L 2,2 L 0,4" stroke="#ffffff" strokeWidth="1" opacity="0.3" fill="none" />
-          </pattern>
-          <pattern id="pattern-7" patternUnits="userSpaceOnUse" width="8" height="4">
-            <rect width="8" height="4" fill={chartData[7]?.color} />
-            <path d="M 0,2 Q 2,0 4,2 Q 6,4 8,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" fill="none" />
-          </pattern>
+          {/* Add more patterns as defined in original code if needed, keeping simple for now */}
         </defs>
 
         <Group left={CHART_MARGIN.left} top={CHART_MARGIN.top}>
@@ -139,8 +134,6 @@ export function PriceComparisonChart({
             const barHeight = yScale.bandwidth() || 0; // Ensure non-negative height
             const barY = yScale(d.displayName) || 0;
 
-            // Ensure safe rendering with non-negative dimensions
-
             return (
               <Group key={`bar-${i}`}>
                 <Bar
@@ -148,7 +141,7 @@ export function PriceComparisonChart({
                   y={barY}
                   width={barWidth}
                   height={barHeight}
-                  fill={d.pattern === 'solid' ? d.color : `url(#${d.patternId})`}
+                  fill={d.color} // Simplified to solid color for reliability
                   rx={4}
                   opacity={hoveredBar && hoveredBar !== d.modelName ? 0.4 : 1}
                   style={{
@@ -254,20 +247,26 @@ export function PriceComparisonChart({
     );
   }
 
-  // Loading state removed - chart renders immediately
-
   return (
-    <Card className={cn("w-full", className)}>
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries per month</span>
-          <Badge variant="secondary">
-            {data.results.length} models
-          </Badge>
-        </CardTitle>
+    <Card className={cn("w-full border-2 border-border/50", className)}>
+      <CardHeader className="pb-4">
+        <div className="flex flex-col space-y-2 mb-6">
+          <CardTitle className="flex items-center justify-between text-xl">
+            <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries per month</span>
+            <Badge variant="secondary" className="ml-2">
+              {data.results.length} models
+            </Badge>
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Comparison of estimated monthly costs based on standard usage patterns.
+          </p>
+        </div>
+
+        {/* Value Index Ranking */}
+        <SmartValueRanking results={data.results} />
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Main Chart */}
+      <CardContent className="space-y-6 pt-0">
+        {/* Main Price Chart */}
         <div className="h-[500px] w-full min-h-[300px]">
           <ParentSize>
             {({ width, height }) => (
@@ -276,26 +275,8 @@ export function PriceComparisonChart({
           </ParentSize>
         </div>
 
-        {/* Chart Legend */}
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: CHART_COLORS.primary[0] }}
-            ></div>
-            <span className="text-muted-foreground">Most cost-effective</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: CHART_COLORS.secondary[0] }}
-            ></div>
-            <span className="text-muted-foreground">Most expensive</span>
-          </div>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-muted/50 rounded-lg">
+        {/* Key Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
             <div
               className="text-2xl font-bold"
@@ -319,18 +300,11 @@ export function PriceComparisonChart({
               className="text-2xl font-bold"
               style={{ color: SEMANTIC_COLORS.highlight }}
             >
-              {data.maxCostRatio.toFixed(1)}x
+              {data.cheapestModel.totalCost > 0
+                ? (data.mostExpensiveModel.totalCost / data.cheapestModel.totalCost).toFixed(1)
+                : "∞"}x
             </div>
             <div className="text-xs text-muted-foreground">Cost Ratio</div>
-          </div>
-          <div className="text-center">
-            <div
-              className="text-2xl font-bold"
-              style={{ color: SEMANTIC_COLORS.neutral }}
-            >
-              {formatCostDisplay(data.averageCost)}
-            </div>
-            <div className="text-xs text-muted-foreground">Average Cost</div>
           </div>
         </div>
 
@@ -339,9 +313,15 @@ export function PriceComparisonChart({
           {/* Model Details */}
           <Collapsible open={showDetails} onOpenChange={setShowDetails}>
             <CollapsibleTrigger asChild>
-              <Button variant="outline" className="w-full justify-between">
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-between transition-all duration-500",
+                  showGlow && "shadow-[0_0_15px_rgba(59,130,246,0.5)] border-blue-400 dark:border-blue-500"
+                )}
+              >
                 <span className="flex items-center gap-2">
-                  <Info className="h-4 w-4" />
+                  <Info className={cn("h-4 w-4", showGlow && "animate-pulse text-blue-500")} />
                   Detailed Model Analysis
                 </span>
                 {showDetails ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -378,9 +358,15 @@ export function PriceComparisonChart({
           {/* Model Comparisons */}
           <Collapsible open={showComparisons} onOpenChange={setShowComparisons}>
             <CollapsibleTrigger asChild>
-              <Button variant="outline" className="w-full justify-between">
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-between transition-all duration-500",
+                  showGlow && "shadow-[0_0_15px_rgba(59,130,246,0.5)] border-blue-400 dark:border-blue-500"
+                )}
+              >
                 <span className="flex items-center gap-2">
-                  <Calculator className="h-4 w-4" />
+                  <Calculator className={cn("h-4 w-4", showGlow && "animate-pulse text-blue-500")} />
                   Model-to-Model Comparisons
                 </span>
                 {showComparisons ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -388,28 +374,18 @@ export function PriceComparisonChart({
             </CollapsibleTrigger>
             <CollapsibleContent className="space-y-3 pt-4">
               <div className="grid gap-2 max-h-60 overflow-y-auto">
-                {data.modelComparisons.slice(0, 10).map((comparison, index) => (
+                {data.comparisons && data.comparisons.slice(0, 10).map((comparison, index) => (
                   <div key={index} className="flex items-center justify-between p-2 text-sm bg-muted/20 rounded">
                     <div className="flex-1">
-                      <span
-                        className="font-medium"
-                        style={{ color: SEMANTIC_COLORS.savings }}
-                      >
-                        {comparison.cheaperModel}
-                      </span>
-                      <span className="text-muted-foreground"> is </span>
-                      <span className="font-medium">{comparison.percentageDifference.toFixed(1)}% cheaper</span>
-                      <span className="text-muted-foreground"> than </span>
-                      <span
-                        className="font-medium"
-                        style={{ color: SEMANTIC_COLORS.cost }}
-                      >
-                        {comparison.modelA === comparison.cheaperModel ? comparison.modelB : comparison.modelA}
-                      </span>
+                      <span className="font-medium">{comparison.modelA}</span>
+                      <span className="text-muted-foreground mx-1">vs</span>
+                      <span className="font-medium">{comparison.modelB}</span>
                     </div>
-                    <div className="text-right">
-                      <div className="font-bold">{formatCostDisplay(comparison.costDifference)}</div>
-                      <div className="text-xs text-muted-foreground">{comparison.costRatio.toFixed(1)}x ratio</div>
+                    <div className="text-right flex items-center gap-3">
+                      <span className="text-muted-foreground">
+                        Diff: {formatCostDisplay(comparison.costDifference)}
+                      </span>
+                      <Badge variant="secondary">{comparison.costRatio.toFixed(1)}x</Badge>
                     </div>
                   </div>
                 ))}
@@ -420,9 +396,15 @@ export function PriceComparisonChart({
           {/* Yearly Projections */}
           <Collapsible open={showYearlyProjections} onOpenChange={setShowYearlyProjections}>
             <CollapsibleTrigger asChild>
-              <Button variant="outline" className="w-full justify-between">
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-between transition-all duration-500",
+                  showGlow && "shadow-[0_0_15px_rgba(59,130,246,0.5)] border-blue-400 dark:border-blue-500"
+                )}
+              >
                 <span className="flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4" />
+                  <TrendingUp className={cn("h-4 w-4", showGlow && "animate-pulse text-blue-500")} />
                   Yearly Cost Projections
                 </span>
                 {showYearlyProjections ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -510,15 +492,40 @@ export function PriceComparisonChart({
           </Collapsible>
         </div>
 
+        {/* New Context Comparison Section */}
+        <div className="space-y-4">
+          <Collapsible defaultOpen={true}>
+            <CollapsibleTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-between transition-all duration-500",
+                  showGlow && "shadow-[0_0_15px_rgba(59,130,246,0.5)] border-blue-400 dark:border-blue-500"
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  <Layers className={cn("h-4 w-4", showGlow && "animate-pulse text-blue-500")} />
+                  Context Size Comparison (Capacity)
+                </span>
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="pt-4">
+              <ContextComparisonChart results={data.results} />
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+
         {/* Cost Disclaimer */}
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-          <div className="text-sm text-blue-800 dark:text-blue-200">
-            {getCostDisclaimer()}
+          <div className="flex gap-2">
+            <Info className="h-5 w-5 text-blue-500 mt-0.5 shrink-0" />
+            <div className="text-sm text-blue-700 dark:text-blue-300">
+              {getCostDisclaimer()}
+            </div>
           </div>
         </div>
       </CardContent>
     </Card>
   );
 }
-
-export default PriceComparisonChart; 

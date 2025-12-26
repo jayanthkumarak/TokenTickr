@@ -8,8 +8,8 @@ import { QueryVolumeSelector } from "./query-volume-selector";
 import { PriceComparisonChart } from "./price-comparison-chart";
 import { HeroInsight } from "./hero-insight";
 // import { InsightsPanel } from "./insights-panel";
-import { 
-  calculatePriceComparison, 
+import {
+  calculatePriceComparison,
   DEFAULT_QUERY_VOLUME
 } from "@/lib/price-calculation";
 import { cn } from "@/lib/utils";
@@ -19,21 +19,21 @@ interface PriceComparisonSectionProps {
   className?: string;
 }
 
-export function PriceComparisonSection({ 
-  models, 
-  className 
+export function PriceComparisonSection({
+  models,
+  className
 }: PriceComparisonSectionProps) {
   const [queryVolume, setQueryVolume] = useState(DEFAULT_QUERY_VOLUME);
-  
+
   // Debug: Track state changes
   console.log(`🔄 PriceComparisonSection render: queryVolume = ${queryVolume.toLocaleString()}`);
-  
+
   // Custom setter with logging
   const handleQueryVolumeChange = (newVolume: number) => {
     console.log(`🎯 State update: ${queryVolume.toLocaleString()} → ${newVolume.toLocaleString()}`);
     setQueryVolume(newVolume);
   };
-  
+
   // Filter out null models and ensure we have at least 2 models
   const validModels = useMemo(() => {
     return models.filter((model): model is OpenRouterModel => model !== null);
@@ -44,7 +44,7 @@ export function PriceComparisonSection({
     if (validModels.length < 2) return null;
     console.log(`🧮 Calculating costs for ${validModels.length} models at ${queryVolume.toLocaleString()} queries`);
     const data = calculatePriceComparison(validModels, queryVolume);
-    console.log(`📊 Results: ${data.results[0]?.modelName} = $${data.results[0]?.totalCost.toFixed(2)} total`);
+    console.log(`📊 Results: ${data.results[0]?.modelName || 'No Data'} = $${data.results[0]?.totalCost?.toFixed(2) || '0.00'} total`);
     return data;
   }, [validModels, queryVolume]);
 
@@ -110,7 +110,7 @@ export function PriceComparisonSection({
                 </ul>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-2">
               <TrendingUp className="h-4 w-4 mt-0.5 text-muted-foreground" />
               <div>

@@ -1,85 +1,88 @@
+
 import { OpenRouterModel } from '@/types/models';
+import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
 
 /**
  * Safe division function that handles division by zero and infinite values
  */
-export function safeDivision(numerator: number, denominator: number, fallback: number = 0): number {
-  if (denominator === 0) return fallback;
-  if (!isFinite(numerator) || !isFinite(denominator)) return fallback;
-  const result = numerator / denominator;
-  return isFinite(result) ? result : fallback;
-}
-
-/**
- * Safe percentage calculation that handles division by zero
- */
-function safePercentageDifference(expensive: number, cheap: number): number {
-  if (cheap === 0) {
-    return expensive === 0 ? 0 : 999999; // Cap at 999,999% for display purposes
+export function safeCostRatio(costA: number, costB: number): number {
+  if (costB === 0) {
+    if (costA === 0) return 1; // Both free = 1x
+    return 0; // If B is free and A is not, ratio is undefined/infinite, return 0 as "infinite" symbol
   }
-  const percentage = ((expensive - cheap) / cheap) * 100;
-  return isFinite(percentage) ? percentage : 999999;
+  const ratio = costA / costB;
+  return isFinite(ratio) ? ratio : 0;
 }
 
 /**
- * Safe cost ratio calculation that handles division by zero
+ * Safe percentage calculation
  */
-function safeCostRatio(expensive: number, cheap: number): number {
-  if (cheap === 0) {
-    return expensive === 0 ? 1 : 999999; // Cap at 999,999x for display purposes
-  }
-  const ratio = expensive / cheap;
-  return isFinite(ratio) ? ratio : 999999;
+export function safePercentageDifference(costA: number, costB: number): number {
+  if (costB === 0) return 0;
+  const percentage = ((costA - costB) / costB) * 100;
+  return isFinite(percentage) ? percentage : 0;
 }
 
 /**
- * Check if a model is effectively free (cost less than $0.000001)
+ * Formats a cost value for display
+ * - Shows $0.00 for very small values but not zero
+ * - Shows <$0.01 for values between 0 and 0.01
  */
-function isEffectivelyFree(cost: number): boolean {
-  return cost < 0.000001;
+export function formatCostDisplay(cost: number): string {
+  if (cost === 0) return "$0.00";
+  if (cost < 0.01) return "<$0.01";
+  return `$${cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-// Token estimation constants based on realistic usage patterns
+/**
+ * Gets a cost disclaimer message
+ */
+export function getCostDisclaimer(): string {
+  return "Cost estimates based on public API pricing. Actual costs may vary due to provider differences, volume discounts, or pricing updates.";
+}
+
+// Default constants for calculations
 export const TOKEN_ESTIMATES = {
-  // Average mixed usage: simple + elaborate + complex queries
-  PROMPT_TOKENS: 150,
-  // Average AI response length
-  COMPLETION_TOKENS: 300,
+  // Average tokens per "query" (prompt + completion)
+  // Assumes a mix of short/long tasks. 
+  // 1k input + 500 output is a reasonable average for complex tasks
+  PROMPT_TOKENS: 1000,
+  COMPLETION_TOKENS: 500
 } as const;
 
-// Query volume options with user-friendly contextual descriptions
-export const QUERY_VOLUMES = [
-  { 
-    value: 1, 
-    label: "Single Query", 
-    description: "Testing a model",
-    context: "Perfect for trying out different models before committing"
+export const USAGE_SCENARIOS = [
+  {
+    id: 'light',
+    label: 'Light Use',
+    value: 10000,
+    description: "Personal projects, testing",
+    context: "Occasional API calls"
   },
-  { 
-    value: 10, 
-    label: "10 Queries", 
-    description: "Personal project",
-    context: "Ideal for hobby projects or small experiments"
+  {
+    id: 'moderate',
+    label: 'Moderate Use',
+    value: 100000,
+    description: "Production apps, small teams",
+    context: "Regular daily usage"
   },
-  { 
-    value: 100, 
-    label: "100 Queries", 
-    description: "Small business",
-    context: "Great for small businesses with moderate AI usage"
+  {
+    id: 'heavy',
+    label: 'Heavy Use',
+    value: 1000000,
+    description: "High-traffic services",
+    context: "SaaS platforms, data processing"
   },
-  { 
-    value: 10000, 
-    label: "10,000 Queries", 
-    description: "Production application",
-    context: "Suitable for live apps serving customers daily"
-  },
-  { 
-    value: 1000000, 
-    label: "1,000,000 Queries", 
+  {
+    id: 'enterprise',
+    label: 'Enterprise Scale',
+    value: 10000000,
     description: "Enterprise scale",
     context: "High-volume applications with millions of users"
   },
 ] as const;
+
+// Alias for backward compatibility if needed
+export const QUERY_VOLUMES = USAGE_SCENARIOS;
 
 export const DEFAULT_QUERY_VOLUME = 1000000;
 
@@ -94,6 +97,17 @@ export interface PriceCalculationResult {
   ranking: number;
   percentageFromCheapest: number;
   costRatioFromCheapest: number;
+  // New scoring fields
+  contextLength: number;
+  valueScore: number;
+  contextScore: number;
+  priceScore: number;
+  /** Normalized performance score (0-100, based on Elo) */
+  perfScore: number;
+  /** Raw Elo score if available */
+  eloScore: number | null;
+  /** Source of the Elo score ('lmsys' or 'estimated') */
+  eloSource: string | null;
 }
 
 export interface ModelComparison {
@@ -102,18 +116,14 @@ export interface ModelComparison {
   costDifference: number;
   percentageDifference: number;
   costRatio: number;
-  cheaperModel: string;
 }
 
 export interface PriceComparisonData {
-  queryVolume: number;
   results: PriceCalculationResult[];
   cheapestModel: PriceCalculationResult;
   mostExpensiveModel: PriceCalculationResult;
-  maxCostRatio: number;
-  modelComparisons: ModelComparison[];
-  averageCost: number;
-  costSpread: number;
+  comparisons: ModelComparison[];
+  queryVolume: number;
   yearlyProjections: {
     min: number;
     max: number;
@@ -122,45 +132,32 @@ export interface PriceComparisonData {
 }
 
 /**
- * Calculate the cost for a single query (prompt + completion) for a given model
+ * Calculate cost for a single query using a specific model
  */
 export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResult {
-  // Debug: Log raw API values to understand the format
-  console.log(`🔍 RAW API VALUES for ${model.name}:`);
-  console.log(`   Raw prompt string: "${model.pricing.prompt}"`);
-  console.log(`   Raw completion string: "${model.pricing.completion}"`);
-  console.log(`   parseFloat(prompt): ${parseFloat(model.pricing.prompt)}`);
-  console.log(`   parseFloat(completion): ${parseFloat(model.pricing.completion)}`);
-  
-  // Test both interpretations
-  const rawPromptPrice = parseFloat(model.pricing.prompt);
-  const rawCompletionPrice = parseFloat(model.pricing.completion);
-  
-  // If API returns price per million tokens (expected format)
-  const promptPricePerToken_v1 = rawPromptPrice / 1000000;
-  const completionPricePerToken_v1 = rawCompletionPrice / 1000000;
-  
-  // If API returns price per token (alternative format)
-  const promptPricePerToken_v2 = rawPromptPrice;
-  const completionPricePerToken_v2 = rawCompletionPrice;
-  
-  console.log(`   Interpretation 1 (divide by 1M): prompt=${promptPricePerToken_v1.toFixed(8)}, completion=${completionPricePerToken_v1.toFixed(8)}`);
-  console.log(`   Interpretation 2 (use as-is): prompt=${promptPricePerToken_v2.toFixed(8)}, completion=${completionPricePerToken_v2.toFixed(8)}`);
-  
-  // Based on analysis: OpenRouter API returns prices per token, not per million tokens
+  // Parse pricing strings to numbers (handle "0" and various formats)
+  const parsePrice = (priceStr: string | undefined): number => {
+    if (!priceStr) return 0;
+    // Handle "-1" which OpenRouter sometimes returns for unknown prices? 
+    // Usually it's just "0" or "0.0000..."
+    const parsed = parseFloat(priceStr);
+    return isNaN(parsed) || parsed < 0 ? 0 : parsed;
+  };
+
+  const rawPromptPrice = parsePrice(model.pricing.prompt);
+  const rawCompletionPrice = parsePrice(model.pricing.completion);
+
+  // OpenRouter pricing is typically per 1M tokens, but the string is usually raw per-token value?
+  // Let's verify standard OpenRouter API format.
+  // Actually, OpenRouter API returns pricing per token as a string, e.g. "0.0000005"
   // So we use the raw values directly (they're already per token)
   const promptPricePerToken = rawPromptPrice;
   const completionPricePerToken = rawCompletionPrice;
-  
+
   const promptCost = promptPricePerToken * TOKEN_ESTIMATES.PROMPT_TOKENS;
   const completionCost = completionPricePerToken * TOKEN_ESTIMATES.COMPLETION_TOKENS;
   const costPerQuery = promptCost + completionCost;
-  
-  // Debug: Show calculation for verification (limited to avoid spam)
-  if (Math.random() < 0.1) { // Show ~10% of calculations
-    console.log(`💡 ${model.name}: $${model.pricing.prompt}/$${model.pricing.completion} per 1M tokens → $${costPerQuery.toFixed(6)} per query`);
-  }
-  
+
   return {
     modelId: model.id,
     modelName: model.name,
@@ -172,6 +169,14 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
     ranking: 0, // Will be assigned later
     percentageFromCheapest: 0, // Will be calculated later
     costRatioFromCheapest: 0, // Will be calculated later
+    // Initialize new fields
+    contextLength: model.context_length,
+    valueScore: 0,
+    contextScore: 0,
+    priceScore: 0,
+    perfScore: 0,
+    eloScore: null,
+    eloSource: null,
   };
 }
 
@@ -180,113 +185,57 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
  */
 function generateModelComparisons(results: PriceCalculationResult[]): ModelComparison[] {
   const comparisons: ModelComparison[] = [];
-  
+
   // For performance, limit comparisons for large model sets
   const MAX_COMPARISONS = 10;
-  
+
   // Generate all pairwise comparisons
   for (let i = 0; i < results.length; i++) {
     for (let j = i + 1; j < results.length; j++) {
+      if (comparisons.length >= MAX_COMPARISONS) break;
+
       const modelA = results[i];
       const modelB = results[j];
-      
-      const costDifference = Math.abs(modelA.totalCost - modelB.totalCost);
-      const cheaperModel = modelA.totalCost < modelB.totalCost ? modelA.modelName : modelB.modelName;
-      const cheaperCost = Math.min(modelA.totalCost, modelB.totalCost);
-      const expensiveCost = Math.max(modelA.totalCost, modelB.totalCost);
-      
-      const percentageDifference = safePercentageDifference(expensiveCost, cheaperCost);
-      const costRatio = safeCostRatio(expensiveCost, cheaperCost);
-      
+
       comparisons.push({
         modelA: modelA.modelName,
         modelB: modelB.modelName,
-        costDifference,
-        percentageDifference,
-        costRatio,
-        cheaperModel,
+        costDifference: Math.abs(modelA.totalCost - modelB.totalCost),
+        percentageDifference: safePercentageDifference(modelA.totalCost, modelB.totalCost),
+        costRatio: safeCostRatio(modelA.totalCost, modelB.totalCost),
       });
     }
   }
-  
-  // Sort by cost difference (descending) to show most significant differences first
-  const sortedComparisons = comparisons.sort((a, b) => b.costDifference - a.costDifference);
-  
-  // For 4+ models, limit to most meaningful comparisons to prevent UI overload
-  if (results.length >= 4) {
-    const topComparisons = sortedComparisons.slice(0, MAX_COMPARISONS);
-    
-    // Always include comparison between cheapest and most expensive if not already included
-    const cheapestModel = results[0];
-    const mostExpensiveModel = results[results.length - 1];
-    const hasMinMaxComparison = topComparisons.some(comp => 
-      (comp.modelA === cheapestModel.modelName && comp.modelB === mostExpensiveModel.modelName) ||
-      (comp.modelA === mostExpensiveModel.modelName && comp.modelB === cheapestModel.modelName)
-    );
-    
-    if (!hasMinMaxComparison && topComparisons.length > 0) {
-      // Replace the last comparison with the min-max comparison
-      const costDifference = Math.abs(mostExpensiveModel.totalCost - cheapestModel.totalCost);
-      const percentageDifference = safePercentageDifference(mostExpensiveModel.totalCost, cheapestModel.totalCost);
-      const costRatio = safeCostRatio(mostExpensiveModel.totalCost, cheapestModel.totalCost);
-      
-      topComparisons[topComparisons.length - 1] = {
-        modelA: cheapestModel.modelName,
-        modelB: mostExpensiveModel.modelName,
-        costDifference,
-        percentageDifference,
-        costRatio,
-        cheaperModel: cheapestModel.modelName,
-      };
-    }
-    
-    return topComparisons;
-  }
-  
-  return sortedComparisons;
+
+  return comparisons;
 }
 
 /**
- * Calculate yearly projections based on monthly query volume
- */
-function calculateYearlyProjections(costPerQuery: number, monthlyQueryVolume: number) {
-  // Calculate yearly cost based on monthly volume
-  const yearlyQueries = monthlyQueryVolume * 12;
-  
-  return costPerQuery * yearlyQueries;
-}
-
-/**
- * Calculate price comparison data for multiple models at a given query volume
+ * Main calculation function suitable for server-side or client-side use
  */
 export function calculatePriceComparison(
   models: OpenRouterModel[],
   queryVolume: number = DEFAULT_QUERY_VOLUME
 ): PriceComparisonData {
-  // Input validation
-  if (!Array.isArray(models) || models.length === 0) {
-    throw new Error('Models array must be provided and not empty');
+  if (!models || models.length === 0) {
+    return {
+      results: [],
+      cheapestModel: {} as PriceCalculationResult,
+      mostExpensiveModel: {} as PriceCalculationResult,
+      comparisons: [],
+      queryVolume,
+      yearlyProjections: { min: 0, max: 0, average: 0 }
+    };
   }
-  
-  if (typeof queryVolume !== 'number' || queryVolume < 0 || !isFinite(queryVolume)) {
-    queryVolume = DEFAULT_QUERY_VOLUME;
-  }
-  
-  // Calculate costs for each model
+
+  // Calculate base costs for all models
   const results = models
     .map(model => {
       try {
         const queryCost = calculateQueryCost(model);
         const totalCost = queryCost.costPerQuery * queryVolume;
-        const yearlyProjection = calculateYearlyProjections(queryCost.costPerQuery, queryVolume);
-        
-        // Calculation verification (first model only) - always log to verify query volume changes
-        if (model.id === models[0].id) {
-          console.log(`💰 ${model.name}: $${queryCost.costPerQuery.toFixed(6)}/query × ${queryVolume.toLocaleString()} = $${totalCost.toFixed(2)} total`);
-          console.log(`🔍 Pricing: $${(parseFloat(model.pricing.prompt) * 1000000).toFixed(2)}/$${(parseFloat(model.pricing.completion) * 1000000).toFixed(2)} per 1M tokens, ${TOKEN_ESTIMATES.PROMPT_TOKENS + TOKEN_ESTIMATES.COMPLETION_TOKENS} tokens/query`);
-        }
-        
-        // Validate calculated values
+        const yearlyProjection = totalCost * 12;
+
         return {
           ...queryCost,
           totalCost: isFinite(totalCost) ? totalCost : 0,
@@ -306,177 +255,128 @@ export function calculatePriceComparison(
           ranking: 0,
           percentageFromCheapest: 0,
           costRatioFromCheapest: 1,
+          contextLength: 0,
+          valueScore: 0,
+          contextScore: 0,
+          priceScore: 0,
+          perfScore: 0,
+          eloScore: null,
         };
       }
     })
     .sort((a, b) => a.totalCost - b.totalCost); // Sort by total cost (ascending)
-  
-  // Calculate rankings and percentages from cheapest
-  const cheapestCost = results[0].totalCost;
+
+  // --- SCORING LOGIC (The "Better Math") ---
+
+  // Find min/max for normalization
+  const minCost = results[0].totalCost; // Already sorted
+  const maxContext = Math.max(...results.map(r => r.contextLength));
+  const minContext = Math.min(...results.map(r => r.contextLength));
+  // Use a sensible minimum for log scale (e.g., 1024 or 4096) to prevent 0 or negative logs from bad data
+  const logMaxContext = Math.log10(Math.max(maxContext, 2048));
+  const logMinContext = Math.log10(Math.max(minContext, 2048));
+
+  // Calculate specific scores for each model
+  results.forEach((result) => {
+    // Determine effective context length (Use fallbacks for API errors like DeepSeek = 0)
+    let effectiveContext = result.contextLength;
+    if (effectiveContext === 0 && CONTEXT_FALLBACKS[result.modelId]) {
+      effectiveContext = CONTEXT_FALLBACKS[result.modelId];
+    } else if (effectiveContext === 0) {
+      effectiveContext = 4096; // Safe minimum fallback
+    }
+    // Update the result object so charts show the corrected value
+    result.contextLength = effectiveContext;
+
+    // 1. Price Score (Inverse Cost Ratio)
+    let priceScore = 0;
+    if (result.totalCost <= 0.000001) {
+      priceScore = 100;
+    } else {
+      // If minCost is 0 (effectively free), we can't do inverse ratio properly against non-zero.
+      // But if minCost > 0, we do min/current.
+      // If result.totalCost is huge, ratio -> 0.
+      priceScore = (Math.max(minCost, 0.000001) / result.totalCost) * 100;
+    }
+
+    // 2. Context Score (Logarithmic Scale)
+    let contextScore = 0;
+    if (Math.abs(logMaxContext - logMinContext) < 0.0001) {
+      // If range is effectively 0, everyone gets 100 (if they have context) or 0
+      contextScore = maxContext > 0 ? 100 : 0;
+    } else {
+      const logCurrent = Math.log10(Math.max(result.contextLength, 2048));
+      contextScore = ((logCurrent - logMinContext) / (logMaxContext - logMinContext)) * 100;
+    }
+
+    // 3. Performance Score (Elo Normalized)
+    const evalData = getModelEval(result.modelId);
+    const elo = evalData?.elo || null;
+    const eloSource = evalData?.source || null;
+
+    let perfScore = 0;
+    if (elo) {
+      // Normalize: (Elo - Min) / (Max - Min) * 100
+      // Clamp to 0-100 range
+      const normalized = ((elo - ELO_BOUNDARRIES.MIN_RELEVANT) / (ELO_BOUNDARRIES.MAX_SOTA - ELO_BOUNDARRIES.MIN_RELEVANT)) * 100;
+      perfScore = Math.max(0, Math.min(100, normalized));
+      result.eloSource = eloSource; // Store source for UI
+    } else {
+      // Fallback for unrated models: Assume "Average" (50) so they don't get 0, but penalize slightly
+      perfScore = 50;
+      result.eloSource = null;
+    }
+
+    // 4. Composite Value Score ("The Balanced Trinity")
+    // Weights: 33% Price, 33% Perf, 34% Context
+    // Philosophy: A winner must be reasonably smart, priced well, AND capable of heavy lifting.
+    const uniqueWeights = {
+      price: 0.33,
+      perf: 0.33,
+      context: 0.34
+    };
+
+    const valueScore =
+      (uniqueWeights.price * priceScore) +
+      (uniqueWeights.perf * perfScore) +
+      (uniqueWeights.context * contextScore);
+
+    // Assign to result object
+    result.priceScore = Math.round(Math.max(0, Math.min(100, priceScore)));
+    result.contextScore = Math.round(Math.max(0, Math.min(100, contextScore)));
+    result.perfScore = Math.round(Math.max(0, Math.min(100, perfScore)));
+    result.eloScore = elo;
+    result.valueScore = Math.round(Math.max(0, Math.min(100, valueScore)) * 10) / 10; // 1 decimal place
+
+    // Standard rankings & metrics
+    result.ranking = 0; // Set in next loop
+    result.percentageFromCheapest = safePercentageDifference(result.totalCost, minCost);
+    result.costRatioFromCheapest = safeCostRatio(result.totalCost, minCost);
+  });
+
+  // Calculate rankings based on Cost (standard behavior)
   results.forEach((result, index) => {
     result.ranking = index + 1;
-    result.percentageFromCheapest = safePercentageDifference(result.totalCost, cheapestCost);
-    result.costRatioFromCheapest = safeCostRatio(result.totalCost, cheapestCost);
   });
-  
+
   const cheapestModel = results[0];
   const mostExpensiveModel = results[results.length - 1];
-  const maxCostRatio = safeCostRatio(mostExpensiveModel.totalCost, cheapestModel.totalCost);
-  
-  // Calculate statistics
-  const totalCosts = results.map(r => r.totalCost);
-  const averageCost = totalCosts.reduce((sum, cost) => sum + cost, 0) / totalCosts.length;
-  const costSpread = mostExpensiveModel.totalCost - cheapestModel.totalCost;
-  
-  // Generate model comparisons
-  const modelComparisons = generateModelComparisons(results);
-  
-  // Calculate yearly projections
-  const yearlyProjections = {
-    min: Math.min(...results.map(r => r.yearlyProjection)),
-    max: Math.max(...results.map(r => r.yearlyProjection)),
-    average: results.reduce((sum, r) => sum + r.yearlyProjection, 0) / results.length,
-  };
-  
+  // const maxCostRatio = safeCostRatio(mostExpensiveModel.totalCost, cheapestModel.totalCost); // Unused
+
+  // Calculate aggregate stats
+  const totalYearly = results.reduce((sum, r) => sum + r.yearlyProjection, 0);
+  const averageYearly = totalYearly / results.length;
+
   return {
-    queryVolume,
     results,
     cheapestModel,
     mostExpensiveModel,
-    maxCostRatio,
-    modelComparisons,
-    averageCost,
-    costSpread,
-    yearlyProjections,
+    comparisons: generateModelComparisons(results),
+    queryVolume,
+    yearlyProjections: {
+      min: cheapestModel.yearlyProjection,
+      max: mostExpensiveModel.yearlyProjection,
+      average: averageYearly
+    }
   };
 }
-
-/**
- * Generate enhanced hero text with more detailed insights
- */
-export function generateHeroText(comparisonData: PriceComparisonData): string {
-  const { queryVolume, results, cheapestModel, mostExpensiveModel, maxCostRatio, costSpread } = comparisonData;
-  
-  if (results.length < 2) {
-    return `Cost analysis for ${queryVolume.toLocaleString()} queries per month`;
-  }
-  
-  const volumeDescription = QUERY_VOLUMES.find(v => v.value === queryVolume)?.description || 'queries';
-  const cheapestIsFree = isEffectivelyFree(cheapestModel.totalCost);
-  const mostExpensiveIsFree = isEffectivelyFree(mostExpensiveModel.totalCost);
-  
-  // Handle all models being free
-  if (cheapestIsFree && mostExpensiveIsFree) {
-    return `Great news! All selected models are essentially free for ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month).`;
-  }
-  
-  // Handle cheapest model being free
-  if (cheapestIsFree) {
-    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), ${cheapestModel.modelName} is essentially free while ${mostExpensiveModel.modelName} costs ${formatCostDisplay(mostExpensiveModel.totalCost)}/month. Annual savings potential: ${formatCostDisplay(mostExpensiveModel.totalCost * 12)}.`;
-  }
-  
-  // Handle capped ratios (very large differences)
-  if (maxCostRatio >= 999999) {
-    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), there's an extreme cost difference between models. ${mostExpensiveModel.modelName} costs ${formatCostDisplay(costSpread)} more than ${cheapestModel.modelName}. Choose wisely to save ${formatCostDisplay(costSpread * 12)} annually.`;
-  }
-  
-  // Generate contextual hero text with more insights
-  if (maxCostRatio >= 10) {
-    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), ${mostExpensiveModel.modelName} costs ${formatCostDisplay(costSpread)} more than ${cheapestModel.modelName} — that's ${maxCostRatio.toFixed(1)}x more expensive! Choosing wisely could save ${formatCostDisplay(costSpread * 12)} annually.`;
-  } else if (maxCostRatio >= 2) {
-    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), ${mostExpensiveModel.modelName} is ${maxCostRatio.toFixed(1)}x more expensive than ${cheapestModel.modelName}. Annual savings potential: ${formatCostDisplay(costSpread * 12)}.`;
-  } else {
-    return `For ${volumeDescription.toLowerCase()} (${queryVolume.toLocaleString()} queries/month), model costs are relatively similar with ${formatCostDisplay(costSpread)} monthly difference.`;
-  }
-}
-
-/**
- * Format cost for display with appropriate precision and comma separators
- */
-export function formatCostDisplay(cost: number): string {
-  // Handle invalid inputs
-  if (typeof cost !== 'number' || isNaN(cost)) {
-    return '$0.00';
-  }
-  
-  // Handle infinite values
-  if (!isFinite(cost)) {
-    return cost > 0 ? '$999,999+' : '$0.00';
-  }
-  
-  // Handle negative values
-  if (cost < 0) return `-${formatCostDisplay(Math.abs(cost))}`;
-  
-  // Handle zero and effectively free
-  if (cost === 0 || isEffectivelyFree(cost)) return '$0.00';
-  
-  // For very small amounts, show more decimal places
-  if (cost < 0.0001) {
-    return `$${cost.toFixed(6)}`; // e.g., $0.000001
-  }
-  
-  // For small amounts under a cent
-  if (cost < 0.01) {
-    return `$${cost.toFixed(4)}`; // e.g., $0.0012
-  }
-  
-  // For amounts under a dollar
-  if (cost < 1) {
-    return `$${cost.toFixed(3)}`; // e.g., $0.123
-  }
-  
-  // For amounts under $100
-  if (cost < 100) {
-    return `$${cost.toFixed(2)}`; // e.g., $12.34
-  }
-  
-  // For larger amounts with comma separators
-  if (cost < 1000) {
-    return `$${cost.toFixed(0)}`; // e.g., $123
-  }
-  
-  // Handle very large amounts
-  if (cost >= 999999) {
-    return '$999,999+';
-  }
-  
-  return `$${cost.toLocaleString('en-US', { 
-    minimumFractionDigits: 2, 
-    maximumFractionDigits: 2 
-  })}`; // e.g., $1,234.56
-}
-
-/**
- * Format cost for per-query display
- */
-export function formatCostPerQuery(cost: number): string {
-  return `${formatCostDisplay(cost)} per query`;
-}
-
-/**
- * Format cost for monthly display
- */
-export function formatMonthlyCost(cost: number): string {
-  return `${formatCostDisplay(cost)}/month`;
-}
-
-/**
- * Format cost for yearly display
- */
-export function formatYearlyCost(cost: number): string {
-  return `${formatCostDisplay(cost)}/year`;
-}
-
-/**
- * Get cost ratio between two models
- */
-export function getCostRatio(expensiveModel: PriceCalculationResult, cheapModel: PriceCalculationResult): number {
-  return safeCostRatio(expensiveModel.totalCost, cheapModel.totalCost);
-}
-
-/**
- * Generate cost disclaimer text
- */
-export function getCostDisclaimer(): string {
-  return "💡 Cost estimates are based on OpenRouter pricing for API calls only. This does not include compute costs for web app hosting, database operations, CDN delivery, or additional infrastructure required to support LLM integration in production environments.";
-} 
