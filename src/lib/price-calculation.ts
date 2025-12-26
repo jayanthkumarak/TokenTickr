@@ -1,6 +1,6 @@
 
 import { OpenRouterModel } from '@/types/models';
-import { getModelEval, getModelElo, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
+import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
 
 /**
  * Safe division function that handles division by zero and infinite values

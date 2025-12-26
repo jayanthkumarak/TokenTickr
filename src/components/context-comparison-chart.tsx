@@ -108,7 +108,7 @@ export function ContextComparisonChart({ results, className }: ContextComparison
 
                                 {/* Witty Analogy (Conditional Position) */}
                                 <text
-                                    x={isBarWideEnough ? barWidth - 10 : barWidth + 60} // If outside, push past value label
+                                    x={textX} // Used calculated position
                                     y={(barY || 0) + (barHeight || 0) / 2}
                                     dy="0.35em"
                                     fontSize={11}

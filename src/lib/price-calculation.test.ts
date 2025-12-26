@@ -58,6 +58,7 @@ describe('TokenTickr Core Logic', () => {
                 }
             ];
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const result = calculatePriceComparison(models as any[], 1000);
 
             const gpt5 = result.results.find(r => r.modelId === 'openai/gpt-5.2');
