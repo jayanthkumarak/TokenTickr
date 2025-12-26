@@ -27,8 +27,8 @@ const SCORING_MODES = [
     {
         value: "utility" as const,
         label: "Budget Score",
-        description: "Cost-conscious • Best for high-volume workloads",
-        shortTip: "Balances quality with aggressive cost optimization",
+        description: "Efficiency-first • Best for high-volume throughput",
+        shortTip: "Values context capacity per dollar — great for bulk workloads",
     },
 ];
 

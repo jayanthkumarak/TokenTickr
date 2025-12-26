@@ -9,8 +9,9 @@
 export type ScoringMode = "geometric" | "utility";
 
 /**
- * Calculate composite value score using geometric mean.
- * Cube root of product - rewards balanced models, penalizes extreme weaknesses.
+ * Calculate composite value score using geometric mean - SMART MODE.
+ * Performance-weighted: (perf² × price × context)^(1/4)
+ * Performance has 50% weight (2x), price and context 25% each.
  */
 export function calculateGeometricMeanScore(
     priceScore: number,
@@ -22,42 +23,58 @@ export function calculateGeometricMeanScore(
     const perf = (perfScore + epsilon) / 100;
     const ctx = (contextScore + epsilon) / 100;
 
-    const geometric = Math.pow(p * perf * ctx, 1 / 3) * 100;
+    // Weighted: perf² × price × context, then 4th root
+    const weightedProduct = Math.pow(perf, 2) * p * ctx;
+    const geometric = Math.pow(weightedProduct, 1 / 4) * 100;
     return Math.min(100, geometric);
 }
 
 /**
- * Calculate composite value score using utility function with diminishing returns.
- * Each dimension has its own elasticity coefficient.
+ * Calculate composite value score using EFFICIENCY model - BUDGET MODE.
+ * 
+ * Philosophy: For high-volume workloads, what matters is:
+ * 1. Context capacity per dollar (throughput efficiency)
+ * 2. Acceptable intelligence (must clear a quality bar)
+ * 3. Price as a tie-breaker
+ * 
+ * This creates genuine differentiation from Smart Score:
+ * - Smart Score: "What's the smartest model I can afford?"
+ * - Budget Score: "What's the most efficient model that's smart enough?"
  */
 export function calculateUtilityScore(
     priceScore: number,
     perfScore: number,
     contextScore: number
 ): number {
-    // Elasticity coefficients (< 1 = diminishing returns)
-    const PRICE_ELASTICITY = 0.7;    // Price has good returns
-    const PERF_ELASTICITY = 0.9;     // Performance is nearly linear
-    const CONTEXT_ELASTICITY = 0.5;  // Context has strong diminishing returns
+    // STEP 1: Quality gate - models must be "smart enough"
+    // Below this threshold, models are progressively penalized
+    const QUALITY_FLOOR = 55;
+    let qualityMultiplier = 1;
+    if (perfScore < QUALITY_FLOOR) {
+        // Quadratic penalty for low-quality models
+        qualityMultiplier = Math.pow(perfScore / QUALITY_FLOOR, 2);
+    }
 
-    // Importance weights (sum to 1)
-    const PRICE_WEIGHT = 0.35;
-    const PERF_WEIGHT = 0.40;
-    const CONTEXT_WEIGHT = 0.25;
+    // STEP 2: Calculate efficiency bonus
+    // High context + low price = great efficiency
+    // This creates a "tokens per dollar" vibe
+    const contextWeight = 0.6;  // Context is highly valued for throughput
+    const priceWeight = 0.4;    // Price matters but context matters more
 
-    // Calculate utility for each dimension
-    const priceUtility = Math.pow(priceScore / 100, PRICE_ELASTICITY);
-    const perfUtility = Math.pow(perfScore / 100, PERF_ELASTICITY);
-    const contextUtility = Math.pow(contextScore / 100, CONTEXT_ELASTICITY);
+    // Combine context and price into an efficiency metric
+    // Both are already 0-100 normalized scores
+    const efficiencyScore = (contextScore * contextWeight) + (priceScore * priceWeight);
 
-    // Weighted sum of utilities
-    const totalUtility =
-        (PRICE_WEIGHT * priceUtility) +
-        (PERF_WEIGHT * perfUtility) +
-        (CONTEXT_WEIGHT * contextUtility);
+    // STEP 3: Add a small intelligence bonus (but not dominant)
+    // Smart models get a boost, but it's not the main factor
+    const INTEL_BONUS_WEIGHT = 0.15;
+    const intelBonus = perfScore * INTEL_BONUS_WEIGHT;
 
-    // Scale back to 0-100
-    return Math.min(100, totalUtility * 100);
+    // STEP 4: Combine with quality gate
+    const rawScore = (efficiencyScore * 0.85) + intelBonus;
+    const finalScore = rawScore * qualityMultiplier;
+
+    return Math.min(100, Math.max(0, finalScore));
 }
 
 /**

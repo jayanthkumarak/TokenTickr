@@ -80,7 +80,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                     {scoringMode === "geometric" ? (
                         <><strong>Smart Score:</strong> Intelligence counts 2× — rewards capable models even at higher cost</>
                     ) : (
-                        <><strong>Budget Score:</strong> Optimizes for cost-efficiency — best for high-volume, budget-conscious usage</>
+                        <><strong>Budget Score:</strong> Efficiency-first — values context capacity per dollar for high-volume workloads</>
                     )}
                 </div>
             </CardHeader>
