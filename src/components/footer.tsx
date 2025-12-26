@@ -18,7 +18,7 @@ export function Footer() {
             Real-time model data and pricing
           </p>
           <p className="text-xs">
-            Built by <a href="http://jayanthkumar.com/" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4 hover:no-underline">Jayanth Kumar</a> with <a href="https://www.anthropic.com/claude/sonnet" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4 hover:no-underline">Claude Sonnet 4</a> in <a href="https://cursor.com/en" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4 hover:no-underline">Cursor</a>. We love AI! 💜
+            Built by <a href="http://jayanthkumar.com/" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4 hover:no-underline">Jayanth Kumar</a> with <span className="font-medium">Antigravity</span>. We love AI! 💜
           </p>
         </div>
       </div>
