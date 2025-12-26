@@ -26,15 +26,15 @@ interface PriceComparisonChartProps {
 // Chart dimensions - reduced margins to prevent negative width
 const CHART_MARGIN = { top: 20, right: 60, bottom: 60, left: 120 };
 
-export function PriceComparisonChart({ 
-  data, 
-  className 
+export function PriceComparisonChart({
+  data,
+  className
 }: PriceComparisonChartProps) {
   const [showDetails, setShowDetails] = useState(false);
   const [showComparisons, setShowComparisons] = useState(false);
   const [showYearlyProjections, setShowYearlyProjections] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
-  
+
   // Debug: Track when chart receives new data
   console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName} = $${data.results[0]?.totalCost.toFixed(2)}`);
 
@@ -42,13 +42,13 @@ export function PriceComparisonChart({
   const chartData = useMemo(() => {
     const colors = COLOR_UTILS.getDataPalette(data.results.length);
     const patterns = ['solid', 'diagonal', 'dots', 'vertical', 'horizontal', 'cross', 'diamond', 'wave'];
-    
+
     // Chart data prepared for visualization
-    
+
     return data.results.map((item, index) => ({
       ...item,
-      displayName: item.modelName.length > 25 
-        ? `${item.modelName.substring(0, 25)}...` 
+      displayName: item.modelName.length > 25
+        ? `${item.modelName.substring(0, 25)}...`
         : item.modelName,
       color: colors[index] || CHART_COLORS.primary[0],
       pattern: patterns[index % patterns.length],
@@ -61,7 +61,7 @@ export function PriceComparisonChart({
     // Ensure minimum dimensions to prevent negative values
     const minWidth = CHART_MARGIN.left + CHART_MARGIN.right + 100; // Minimum 100px for chart area
     const minHeight = CHART_MARGIN.top + CHART_MARGIN.bottom + 200; // Minimum 200px for chart area
-    
+
     if (width < minWidth || height < minHeight) {
       return (
         <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
@@ -76,7 +76,7 @@ export function PriceComparisonChart({
     // Scales with safe domain handling
     const maxCost = Math.max(...chartData.map(d => d.totalCost));
     const safeDomain = maxCost > 0 ? maxCost : 1; // Prevent division by zero
-    
+
     const xScale = scaleLinear({
       domain: [0, safeDomain],
       range: [0, Math.max(xMax, 1)], // Ensure positive range
@@ -124,7 +124,7 @@ export function PriceComparisonChart({
             <path d="M 0,2 Q 2,0 4,2 Q 6,4 8,2" stroke="#ffffff" strokeWidth="1" opacity="0.3" fill="none" />
           </pattern>
         </defs>
-        
+
         <Group left={CHART_MARGIN.left} top={CHART_MARGIN.top}>
           <GridRows
             scale={yScale}
@@ -132,15 +132,15 @@ export function PriceComparisonChart({
             stroke="#e5e7eb"
             strokeOpacity={0.5}
           />
-          
+
           {chartData.map((d, i) => {
             const rawBarWidth = xScale(d.totalCost);
             const barWidth = Math.max(0, rawBarWidth); // Ensure non-negative width
             const barHeight = yScale.bandwidth() || 0; // Ensure non-negative height
             const barY = yScale(d.displayName) || 0;
-            
+
             // Ensure safe rendering with non-negative dimensions
-            
+
             return (
               <Group key={`bar-${i}`}>
                 <Bar
@@ -151,26 +151,25 @@ export function PriceComparisonChart({
                   fill={d.pattern === 'solid' ? d.color : `url(#${d.patternId})`}
                   rx={4}
                   opacity={hoveredBar && hoveredBar !== d.modelName ? 0.4 : 1}
-                  style={{ 
+                  style={{
                     cursor: 'pointer',
                     transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
                   }}
                   onMouseEnter={() => setHoveredBar(d.modelName)}
                   onMouseLeave={() => setHoveredBar(null)}
                 />
-                
+
                 {/* Value label on bar */}
                 <text
                   x={Math.max(barWidth + 8, 8)} // Ensure text is visible even for zero-width bars
                   y={barY + barHeight / 2}
                   dy="0.35em"
                   fontSize={12}
-                  fill="#374151"
-                  fontWeight="medium"
+                  className="fill-foreground font-medium"
                 >
                   {formatCostDisplay(d.totalCost)}
                 </text>
-                
+
                 {/* Ranking badge - only show if bar has meaningful width */}
                 {barWidth > 40 && (
                   <>
@@ -178,7 +177,7 @@ export function PriceComparisonChart({
                       cx={barWidth - 20}
                       cy={barY + barHeight / 2}
                       r={10}
-                      fill="white"
+                      fill="white" // Keep white for contrast against colored bar
                       stroke={d.color}
                       strokeWidth={2}
                     />
@@ -198,27 +197,27 @@ export function PriceComparisonChart({
               </Group>
             );
           })}
-          
+
           <AxisLeft
             scale={yScale}
-            stroke="#6b7280"
-            tickStroke="#6b7280"
+            stroke="var(--muted-foreground)"
+            tickStroke="var(--muted-foreground)"
             tickLabelProps={() => ({
-              fill: "#6b7280",
+              fill: "var(--muted-foreground)",
               fontSize: 12,
               textAnchor: "end",
               dy: "0.35em",
             })}
           />
-          
+
           <AxisBottom
             top={yMax}
             scale={xScale}
-            stroke="#6b7280"
-            tickStroke="#6b7280"
+            stroke="var(--muted-foreground)"
+            tickStroke="var(--muted-foreground)"
             tickFormat={(value) => formatCostDisplay(Number(value))}
             tickLabelProps={() => ({
-              fill: "#6b7280",
+              fill: "var(--muted-foreground)",
               fontSize: 12,
               textAnchor: "middle",
             })}
@@ -280,15 +279,15 @@ export function PriceComparisonChart({
         {/* Chart Legend */}
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
-            <div 
-              className="w-3 h-3 rounded-full" 
+            <div
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: CHART_COLORS.primary[0] }}
             ></div>
             <span className="text-muted-foreground">Most cost-effective</span>
           </div>
           <div className="flex items-center gap-2">
-            <div 
-              className="w-3 h-3 rounded-full" 
+            <div
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: CHART_COLORS.secondary[0] }}
             ></div>
             <span className="text-muted-foreground">Most expensive</span>
@@ -298,8 +297,8 @@ export function PriceComparisonChart({
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-muted/50 rounded-lg">
           <div className="text-center">
-            <div 
-              className="text-2xl font-bold" 
+            <div
+              className="text-2xl font-bold"
               style={{ color: SEMANTIC_COLORS.savings }}
             >
               {formatCostDisplay(data.cheapestModel.totalCost)}
@@ -307,8 +306,8 @@ export function PriceComparisonChart({
             <div className="text-xs text-muted-foreground">Cheapest Option</div>
           </div>
           <div className="text-center">
-            <div 
-              className="text-2xl font-bold" 
+            <div
+              className="text-2xl font-bold"
               style={{ color: SEMANTIC_COLORS.cost }}
             >
               {formatCostDisplay(data.mostExpensiveModel.totalCost)}
@@ -316,8 +315,8 @@ export function PriceComparisonChart({
             <div className="text-xs text-muted-foreground">Most Expensive</div>
           </div>
           <div className="text-center">
-            <div 
-              className="text-2xl font-bold" 
+            <div
+              className="text-2xl font-bold"
               style={{ color: SEMANTIC_COLORS.highlight }}
             >
               {data.maxCostRatio.toFixed(1)}x
@@ -325,8 +324,8 @@ export function PriceComparisonChart({
             <div className="text-xs text-muted-foreground">Cost Ratio</div>
           </div>
           <div className="text-center">
-            <div 
-              className="text-2xl font-bold" 
+            <div
+              className="text-2xl font-bold"
               style={{ color: SEMANTIC_COLORS.neutral }}
             >
               {formatCostDisplay(data.averageCost)}
@@ -353,7 +352,7 @@ export function PriceComparisonChart({
                 {data.results.map((model, index) => (
                   <div key={model.modelId} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
                     <div className="flex items-center gap-3">
-                      <div 
+                      <div
                         className="w-4 h-4 rounded-full"
                         style={{ backgroundColor: chartData[index]?.color || CHART_COLORS.primary[0] }}
                       />
@@ -392,8 +391,8 @@ export function PriceComparisonChart({
                 {data.modelComparisons.slice(0, 10).map((comparison, index) => (
                   <div key={index} className="flex items-center justify-between p-2 text-sm bg-muted/20 rounded">
                     <div className="flex-1">
-                      <span 
-                        className="font-medium" 
+                      <span
+                        className="font-medium"
                         style={{ color: SEMANTIC_COLORS.savings }}
                       >
                         {comparison.cheaperModel}
@@ -401,8 +400,8 @@ export function PriceComparisonChart({
                       <span className="text-muted-foreground"> is </span>
                       <span className="font-medium">{comparison.percentageDifference.toFixed(1)}% cheaper</span>
                       <span className="text-muted-foreground"> than </span>
-                      <span 
-                        className="font-medium" 
+                      <span
+                        className="font-medium"
                         style={{ color: SEMANTIC_COLORS.cost }}
                       >
                         {comparison.modelA === comparison.cheaperModel ? comparison.modelB : comparison.modelA}
@@ -431,16 +430,16 @@ export function PriceComparisonChart({
             </CollapsibleTrigger>
             <CollapsibleContent className="space-y-3 pt-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div 
+                <div
                   className="p-4 rounded-lg"
-                  style={{ 
+                  style={{
                     backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.savings, 0.1),
                     borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.savings, 0.3),
                     borderWidth: '1px'
                   }}
                 >
-                  <div 
-                    className="text-2xl font-bold" 
+                  <div
+                    className="text-2xl font-bold"
                     style={{ color: SEMANTIC_COLORS.savings }}
                   >
                     {formatCostDisplay(data.yearlyProjections.min)}
@@ -450,16 +449,16 @@ export function PriceComparisonChart({
                     {data.cheapestModel.modelName}
                   </div>
                 </div>
-                <div 
+                <div
                   className="p-4 rounded-lg"
-                  style={{ 
+                  style={{
                     backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.neutral, 0.1),
                     borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.neutral, 0.3),
                     borderWidth: '1px'
                   }}
                 >
-                  <div 
-                    className="text-2xl font-bold" 
+                  <div
+                    className="text-2xl font-bold"
                     style={{ color: SEMANTIC_COLORS.neutral }}
                   >
                     {formatCostDisplay(data.yearlyProjections.average)}
@@ -469,16 +468,16 @@ export function PriceComparisonChart({
                     Across all {data.results.length} models
                   </div>
                 </div>
-                <div 
+                <div
                   className="p-4 rounded-lg"
-                  style={{ 
+                  style={{
                     backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.cost, 0.1),
                     borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.cost, 0.3),
                     borderWidth: '1px'
                   }}
                 >
-                  <div 
-                    className="text-2xl font-bold" 
+                  <div
+                    className="text-2xl font-bold"
                     style={{ color: SEMANTIC_COLORS.cost }}
                   >
                     {formatCostDisplay(data.yearlyProjections.max)}
@@ -489,16 +488,16 @@ export function PriceComparisonChart({
                   </div>
                 </div>
               </div>
-              <div 
+              <div
                 className="p-4 rounded-lg"
-                style={{ 
+                style={{
                   backgroundColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.highlight, 0.1),
                   borderColor: COLOR_UTILS.withOpacity(SEMANTIC_COLORS.highlight, 0.3),
                   borderWidth: '1px'
                 }}
               >
-                <div 
-                  className="text-lg font-bold" 
+                <div
+                  className="text-lg font-bold"
                   style={{ color: SEMANTIC_COLORS.highlight }}
                 >
                   Annual Savings Potential: {formatCostDisplay(data.yearlyProjections.max - data.yearlyProjections.min)}

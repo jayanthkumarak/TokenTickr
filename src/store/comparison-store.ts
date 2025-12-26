@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { OpenRouterModel, ComparisonState } from '@/types/models';
-import { openRouterAPI } from '@/lib/openrouter-api';
+import { openrouterAPI } from '@/lib/openrouter-api';
 
 interface ComparisonStore extends ComparisonState {
   // Actions
@@ -39,11 +39,11 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
     set((state) => {
       const newSelectedModels = [...state.selectedModels];
       const emptyIndex = newSelectedModels.findIndex(m => m === null);
-      
+
       if (emptyIndex !== -1 && emptyIndex < state.maxModels) {
         newSelectedModels[emptyIndex] = model;
       }
-      
+
       return { selectedModels: newSelectedModels };
     });
   },
@@ -64,15 +64,15 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
     set((state) => {
       const newMaxModels = Math.min(Math.max(count, 2), 4);
       const newSelectedModels = [...state.selectedModels];
-      
+
       // If reducing max models, clear models beyond the new limit
       if (newMaxModels < state.maxModels) {
         for (let i = newMaxModels; i < state.selectedModels.length; i++) {
           newSelectedModels[i] = null;
         }
       }
-      
-      return { 
+
+      return {
         maxModels: newMaxModels,
         selectedModels: newSelectedModels
       };
@@ -81,15 +81,15 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
 
   fetchModels: async () => {
     set({ isLoading: true, error: null });
-    
+
     try {
-      const models = await openRouterAPI.getModels();
-      set({ 
+      const models = await openrouterAPI.getModels();
+      set({
         filteredModels: models,
         isLoading: false
       });
     } catch (error) {
-      set({ 
+      set({
         error: error instanceof Error ? error.message : 'Failed to fetch models',
         isLoading: false
       });
@@ -98,23 +98,23 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
 
   searchModels: async (query: string) => {
     set({ isLoading: true, error: null, searchTerm: query });
-    
+
     try {
       if (query.trim() === '') {
-        const models = await openRouterAPI.getModels();
-        set({ 
+        const models = await openrouterAPI.getModels();
+        set({
           filteredModels: models,
           isLoading: false
         });
       } else {
-        const models = await openRouterAPI.searchModels(query);
-        set({ 
+        const models = await openrouterAPI.searchModels(query);
+        set({
           filteredModels: models,
           isLoading: false
         });
       }
     } catch (error) {
-      set({ 
+      set({
         error: error instanceof Error ? error.message : 'Failed to search models',
         isLoading: false
       });
@@ -147,14 +147,14 @@ export const useIsLoading = () => useComparisonStore((state) => state.isLoading)
 export const useError = () => useComparisonStore((state) => state.error);
 
 // Computed selectors
-export const useActiveModels = () => useComparisonStore((state) => 
+export const useActiveModels = () => useComparisonStore((state) =>
   state.selectedModels.filter(model => model !== null)
 );
 
-export const useAvailableSlots = () => useComparisonStore((state) => 
+export const useAvailableSlots = () => useComparisonStore((state) =>
   state.selectedModels.slice(0, state.maxModels).filter(model => model === null).length
 );
 
-export const useCanAddModel = () => useComparisonStore((state) => 
+export const useCanAddModel = () => useComparisonStore((state) =>
   state.selectedModels.slice(0, state.maxModels).some(model => model === null)
 ); 

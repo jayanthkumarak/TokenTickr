@@ -10,7 +10,8 @@
     "lint": "next lint",
     "deploy": "wrangler deploy",
     "deploy:staging": "wrangler deploy --env staging",
-    "preview": "wrangler dev"
+    "preview": "wrangler dev",
+    "test": "vitest run"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.11",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -55,6 +57,7 @@
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vitest": "^4.0.16",
     "wrangler": "^4.24.3"
   }
 }

@@ -1,9 +1,10 @@
-import { 
-  calculateQueryCost, 
-  calculatePriceComparison, 
+import { describe, test, expect } from 'vitest';
+import {
+  calculateQueryCost,
+  calculatePriceComparison,
   generateHeroText,
   formatCostDisplay,
-  getCostRatio 
+  getCostRatio
 } from '../price-calculation';
 import { OpenRouterModel } from '@/types/models';
 
@@ -46,10 +47,10 @@ const mockModels: OpenRouterModel[] = [
 describe('Price Calculation', () => {
   test('calculateQueryCost should calculate correct costs', () => {
     const result = calculateQueryCost(mockModels[0]);
-    
+
     expect(result.modelId).toBe('gpt-3.5-turbo');
     expect(result.modelName).toBe('GPT-3.5 Turbo');
-    
+
     // Expected: (150 * 0.0000015) + (300 * 0.000002) = 0.000225 + 0.0006 = 0.000825
     expect(result.costPerQuery).toBeCloseTo(0.000825, 6);
     expect(result.promptCost).toBeCloseTo(0.000225, 6);
@@ -58,11 +59,11 @@ describe('Price Calculation', () => {
 
   test('calculatePriceComparison should sort models by cost', () => {
     const result = calculatePriceComparison(mockModels, 100);
-    
+
     expect(result.results).toHaveLength(2);
     expect(result.results[0].modelId).toBe('gpt-3.5-turbo'); // Cheaper model first
     expect(result.results[1].modelId).toBe('gpt-4'); // More expensive model second
-    
+
     expect(result.cheapestModel.modelId).toBe('gpt-3.5-turbo');
     expect(result.mostExpensiveModel.modelId).toBe('gpt-4');
   });
@@ -70,7 +71,7 @@ describe('Price Calculation', () => {
   test('generateHeroText should create meaningful comparisons', () => {
     const comparisonData = calculatePriceComparison(mockModels, 100);
     const heroText = generateHeroText(comparisonData);
-    
+
     expect(heroText).toContain('GPT-4');
     expect(heroText).toContain('GPT-3.5 Turbo');
     expect(heroText).toContain('more expensive');
@@ -88,7 +89,7 @@ describe('Price Calculation', () => {
   test('getCostRatio should calculate correct ratios', () => {
     const cheap = { totalCost: 0.1 } as { totalCost: number };
     const expensive = { totalCost: 1.0 } as { totalCost: number };
-    
+
     expect(getCostRatio(expensive, cheap)).toBe(10);
   });
 }); 
