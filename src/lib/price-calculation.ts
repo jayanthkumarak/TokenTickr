@@ -261,6 +261,7 @@ export function calculatePriceComparison(
           priceScore: 0,
           perfScore: 0,
           eloScore: null,
+          eloSource: null,
         };
       }
     })
