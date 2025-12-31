@@ -1,10 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { X, DollarSign, Cpu, Eye, Zap, Settings } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { X, DollarSign, Cpu, Settings, ChevronDown } from "lucide-react";
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
 import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
@@ -27,6 +33,8 @@ export function ModelCard({
   className,
   showRemoveButton = true,
 }: ModelCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   if (isLoading) {
     return (
       <Card className={cn("w-full", className)}>
@@ -71,13 +79,13 @@ export function ModelCard({
 
   return (
     <Card className={cn("w-full", className)}>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg leading-tight">
               {model.name}
             </CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 font-mono opacity-60">
               {model.id}
             </p>
           </div>
@@ -93,114 +101,140 @@ export function ModelCard({
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 pt-0">
         {/* Description */}
         {model.description && (
-          <div className="text-sm text-muted-foreground">
-            <p className="line-clamp-2">{model.description}</p>
-          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {model.description}
+          </p>
         )}
 
-        {/* Pricing */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-            <DollarSign 
-              className="h-4 w-4" 
+        {/* Core Stats - Always Visible */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="flex items-center gap-2 p-2.5 bg-muted/40 rounded-lg">
+            <DollarSign
+              className="h-4 w-4 shrink-0"
               style={{ color: SEMANTIC_COLORS.savings }}
             />
-            <div>
-              <p className="font-medium text-sm">Prompt</p>
-              <p className="text-xs text-muted-foreground">{promptPrice}</p>
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Prompt</p>
+              <p className="font-medium text-sm truncate">{promptPrice}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-            <DollarSign 
-              className="h-4 w-4" 
+          <div className="flex items-center gap-2 p-2.5 bg-muted/40 rounded-lg">
+            <DollarSign
+              className="h-4 w-4 shrink-0"
               style={{ color: SEMANTIC_COLORS.highlight }}
             />
-            <div>
-              <p className="font-medium text-sm">Completion</p>
-              <p className="text-xs text-muted-foreground">{completionPrice}</p>
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Completion</p>
+              <p className="font-medium text-sm truncate">{completionPrice}</p>
             </div>
           </div>
         </div>
 
-        {/* Context Length */}
-        <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-          <Cpu 
-            className="h-4 w-4" 
+        <div className="flex items-center gap-2 p-2.5 bg-muted/40 rounded-lg">
+          <Cpu
+            className="h-4 w-4 shrink-0"
             style={{ color: SEMANTIC_COLORS.neutral }}
           />
           <div>
-            <p className="font-medium text-sm">Context Length</p>
-            <p className="text-xs text-muted-foreground">{contextLength} tokens</p>
+            <p className="text-xs text-muted-foreground">Context Window</p>
+            <p className="font-medium text-sm">{contextLength} tokens</p>
           </div>
         </div>
 
-        {/* Modalities */}
-        <div className="space-y-2">
-          <p className="text-sm font-medium">Input Modalities</p>
-          <div className="flex flex-wrap gap-1">
-            {model.architecture.input_modalities.map((modality) => (
-              <Badge key={modality} variant="outline" className="text-xs">
-                {modality}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* Output Modalities */}
-        <div className="space-y-2">
-          <p className="text-sm font-medium">Output Modalities</p>
-          <div className="flex flex-wrap gap-1">
-            {model.architecture.output_modalities.map((modality) => (
-              <Badge key={modality} variant="outline" className="text-xs">
-                {modality}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* Supported Parameters */}
-        {model.supported_parameters && model.supported_parameters.length > 0 && (
-          <div className="space-y-2">
-            <p className="text-sm font-medium">Supported Parameters</p>
-            <div className="flex flex-wrap gap-1">
-              {model.supported_parameters.slice(0, 5).map((param) => (
-                <Badge key={param} variant="secondary" className="text-xs">
-                  {param}
-                </Badge>
-              ))}
-              {model.supported_parameters.length > 5 && (
-                <Badge variant="secondary" className="text-xs">
-                  +{model.supported_parameters.length - 5} more
-                </Badge>
-              )}
+        {/* Collapsible Details */}
+        <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
+          <CollapsibleTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-full justify-between h-8 text-xs text-muted-foreground hover:text-foreground"
+            >
+              <span>{isExpanded ? "Less details" : "More details"}</span>
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 transition-transform duration-200",
+                  isExpanded && "rotate-180"
+                )}
+              />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="space-y-3 pt-2">
+            {/* Modalities */}
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                Capabilities
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {model.architecture.input_modalities.map((modality) => (
+                  <Badge
+                    key={`in-${modality}`}
+                    variant="outline"
+                    className="text-xs px-2 py-0.5"
+                  >
+                    ↓ {modality}
+                  </Badge>
+                ))}
+                {model.architecture.output_modalities.map((modality) => (
+                  <Badge
+                    key={`out-${modality}`}
+                    variant="secondary"
+                    className="text-xs px-2 py-0.5"
+                  >
+                    ↑ {modality}
+                  </Badge>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* Tokenizer */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Zap className="h-4 w-4" />
-          <span>Tokenizer: {model.architecture.tokenizer}</span>
-        </div>
+            {/* Supported Parameters */}
+            {model.supported_parameters &&
+              model.supported_parameters.length > 0 && (
+                <div className="space-y-1.5">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Parameters
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {model.supported_parameters.slice(0, 6).map((param) => (
+                      <Badge
+                        key={param}
+                        variant="outline"
+                        className="text-xs px-2 py-0.5 font-mono"
+                      >
+                        {param}
+                      </Badge>
+                    ))}
+                    {model.supported_parameters.length > 6 && (
+                      <Badge
+                        variant="outline"
+                        className="text-xs px-2 py-0.5 opacity-60"
+                      >
+                        +{model.supported_parameters.length - 6}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              )}
 
-        {/* Moderation */}
-        {model.top_provider.is_moderated && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Eye className="h-4 w-4" />
-            <span>Moderated</span>
-          </div>
-        )}
-
-        {/* Creation Date */}
-        <div className="text-xs text-muted-foreground">
-          Created: {new Date(model.created * 1000).toLocaleDateString()}
-        </div>
+            {/* Technical Details */}
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground pt-1 border-t border-border/50">
+              <span>
+                Tokenizer: <span className="font-mono">{model.architecture.tokenizer}</span>
+              </span>
+              {model.top_provider.is_moderated && (
+                <span className="text-amber-500/80">• Moderated</span>
+              )}
+              <span className="opacity-60">
+                Created {new Date(model.created * 1000).toLocaleDateString()}
+              </span>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       </CardContent>
     </Card>
   );
 }
 
-export default ModelCard; 
+export default ModelCard;

@@ -6,20 +6,22 @@ import Link from "next/link";
 export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold text-xl">TokenTickr</span>
-          </Link>
-        </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-          </div>
-          <nav className="flex items-center space-x-2">
-            <ThemeToggle />
-          </nav>
+      <div className="container flex h-16 items-center">
+        {/* Spacer to help center the logo */}
+        <div className="flex-1" />
+
+        {/* Centered Logo */}
+        <Link href="/" className="flex items-center">
+          <span className="text-2xl font-semibold tracking-tight">
+            Token<span className="text-primary">Tickr</span>
+          </span>
+        </Link>
+
+        {/* Right side with toggle */}
+        <div className="flex-1 flex justify-end">
+          <ThemeToggle />
         </div>
       </div>
     </header>
   );
-} 
+}
