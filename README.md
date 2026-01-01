@@ -57,13 +57,14 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - Zustand state management
 - VisX visualization
 
-## v2.5 Release: Performance Upgrade
-TokenTickr v2.5 introduces significant performance optimizations:
+## v2.5.1 Release: Performance & UI Polish
+TokenTickr v2.5.1 includes performance optimizations and UI refinements:
 - **Build-Time Data**: Model data is now statically generated, removing client-side API latency.
 - **Lazy Loading**: Heavy components (charts, selectors) are loaded only when needed.
+- **UI Polish**: Fixed card alignment issues and expanded model selector list to show all 350+ models.
 - **Optimized Bundle**: Initial load size reduced to ~144kB.
 
-See [v2.5 Release Notes](docs/v2.5-performance.md) for details.
+See [v2.5 Performance Notes](docs/v2.5-performance.md) for architectural details.
 
 ## Development
 

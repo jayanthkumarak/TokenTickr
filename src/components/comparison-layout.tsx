@@ -250,7 +250,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         maxModels === 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
       )}>
         {activeModels.map((model, index) => (
-          <div key={index} className="flex flex-col">
+          <div key={index} className="flex flex-col h-full">
             <div className="mb-2">
               <h3 className={cn(
                 "font-semibold",

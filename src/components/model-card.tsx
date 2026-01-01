@@ -124,7 +124,7 @@ export function ModelCard({
   // Compact mode renders a minimal card
   if (variant === "compact") {
     return (
-      <Card className={cn("w-full flex flex-col min-h-[220px]", className)}>
+      <Card className={cn("w-full h-full flex flex-col min-h-[220px]", className)}>
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0">
