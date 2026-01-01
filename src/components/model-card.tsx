@@ -10,30 +10,45 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { X, DollarSign, Cpu, Settings, ChevronDown } from "lucide-react";
+import { X, DollarSign, Cpu, Settings, ChevronDown, Info } from "lucide-react";
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
-import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
+import { SEMANTIC_COLORS, ACCESSIBLE_COLORS } from "@/lib/colorblind-colors";
 import { cn } from "@/lib/utils";
+
+export type ModelCardVariant = "detailed" | "compact";
+
+export interface ModelRanking {
+  costRank: "cheapest" | "expensive" | "middle";
+  contextRank: "largest" | "smallest" | "middle";
+  combinedCost: number; // for tooltip/display
+}
 
 interface ModelCardProps {
   model: OpenRouterModel | null;
   onRemove?: () => void;
   onSelect?: () => void;
+  onViewDetails?: () => void;
   isLoading?: boolean;
   className?: string;
   showRemoveButton?: boolean;
+  variant?: ModelCardVariant;
+  ranking?: ModelRanking;
 }
 
 export function ModelCard({
   model,
   onRemove,
   onSelect,
+  onViewDetails,
   isLoading = false,
   className,
   showRemoveButton = true,
+  variant = "detailed",
+  ranking,
 }: ModelCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   if (isLoading) {
     return (
@@ -77,6 +92,141 @@ export function ModelCard({
   const completionPrice = OpenRouterAPI.formatPrice(model.pricing.completion);
   const contextLength = OpenRouterAPI.formatContextLength(model.context_length);
 
+  // Helper to get ranking badge styles
+  const getCostRankingStyle = () => {
+    if (!ranking) return null;
+    if (ranking.costRank === "cheapest") {
+      return { bg: ACCESSIBLE_COLORS.success[600], label: "Cheapest" };
+    }
+    if (ranking.costRank === "expensive") {
+      return { bg: ACCESSIBLE_COLORS.warning[600], label: "Most Expensive" };
+    }
+    return null;
+  };
+
+  const getContextRankingStyle = () => {
+    if (!ranking) return null;
+    if (ranking.contextRank === "largest") {
+      return { bg: ACCESSIBLE_COLORS.success[600], label: "Largest Context" };
+    }
+    if (ranking.contextRank === "smallest") {
+      return { bg: ACCESSIBLE_COLORS.warning[600], label: "Smallest Context" };
+    }
+    return null;
+  };
+
+  const costRankStyle = getCostRankingStyle();
+  const contextRankStyle = getContextRankingStyle();
+
+  // Check if description is long enough to need truncation
+  const needsTruncation = model.description && model.description.length > 150;
+
+  // Compact mode renders a minimal card
+  if (variant === "compact") {
+    return (
+      <Card className={cn("w-full", className)}>
+        <CardHeader className="pb-2">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <CardTitle className="text-base leading-tight truncate">
+                {model.name}
+              </CardTitle>
+              <p className="text-xs text-muted-foreground mt-0.5 font-mono opacity-60 truncate">
+                {model.id}
+              </p>
+            </div>
+            {showRemoveButton && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onRemove}
+                className="h-7 w-7 p-0 shrink-0"
+              >
+                <X className="h-3.5 w-3.5" />
+              </Button>
+            )}
+          </div>
+          {/* Ranking Badges - Compact */}
+          {(costRankStyle || contextRankStyle) && (
+            <div className="flex flex-wrap gap-1 mt-1.5">
+              {costRankStyle && (
+                <span
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white"
+                  style={{ backgroundColor: costRankStyle.bg }}
+                >
+                  {costRankStyle.label}
+                </span>
+              )}
+              {contextRankStyle && (
+                <span
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white"
+                  style={{ backgroundColor: contextRankStyle.bg }}
+                >
+                  {contextRankStyle.label}
+                </span>
+              )}
+            </div>
+          )}
+          {/* Modality Badges - Compact inline */}
+          <div className="flex flex-wrap gap-1 mt-1.5">
+            {model.architecture.input_modalities.map((modality) => (
+              <Badge
+                key={`in-${modality}`}
+                variant="outline"
+                className="text-[10px] px-1.5 py-0 h-4"
+              >
+                in: {modality}
+              </Badge>
+            ))}
+            {model.architecture.output_modalities.map((modality) => (
+              <Badge
+                key={`out-${modality}`}
+                variant="secondary"
+                className="text-[10px] px-1.5 py-0 h-4"
+              >
+                out: {modality}
+              </Badge>
+            ))}
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-2 pt-0">
+          {/* Compact Cost Display - Single Row */}
+          <div className="flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-1">
+              <DollarSign className="h-3 w-3" style={{ color: SEMANTIC_COLORS.savings }} />
+              <span className="text-muted-foreground">Prompt:</span>
+              <span className="font-medium">{promptPrice}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <DollarSign className="h-3 w-3" style={{ color: SEMANTIC_COLORS.highlight }} />
+              <span className="text-muted-foreground">Completion:</span>
+              <span className="font-medium">{completionPrice}</span>
+            </div>
+          </div>
+
+          {/* Compact Context Display */}
+          <div className="flex items-center gap-1 text-xs">
+            <Cpu className="h-3 w-3" style={{ color: SEMANTIC_COLORS.neutral }} />
+            <span className="text-muted-foreground">Context:</span>
+            <span className="font-medium">{contextLength} tokens</span>
+          </div>
+
+          {/* View Details Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onViewDetails}
+            className="w-full justify-center h-7 text-xs text-muted-foreground hover:text-foreground mt-1"
+          >
+            <Info className="h-3 w-3 mr-1" />
+            View Details
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Detailed mode (default)
   return (
     <Card className={cn("w-full", className)}>
       <CardHeader className="pb-3">
@@ -100,13 +250,70 @@ export function ModelCard({
             </Button>
           )}
         </div>
+        {/* Ranking Badges */}
+        {(costRankStyle || contextRankStyle) && (
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {costRankStyle && (
+              <span
+                className="text-xs font-medium px-2 py-0.5 rounded text-white"
+                style={{ backgroundColor: costRankStyle.bg }}
+              >
+                {costRankStyle.label}
+              </span>
+            )}
+            {contextRankStyle && (
+              <span
+                className="text-xs font-medium px-2 py-0.5 rounded text-white"
+                style={{ backgroundColor: contextRankStyle.bg }}
+              >
+                {contextRankStyle.label}
+              </span>
+            )}
+          </div>
+        )}
+        {/* Modality Badges - Always Visible */}
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {model.architecture.input_modalities.map((modality) => (
+            <Badge
+              key={`in-${modality}`}
+              variant="outline"
+              className="text-xs px-2 py-0.5"
+            >
+              in: {modality}
+            </Badge>
+          ))}
+          {model.architecture.output_modalities.map((modality) => (
+            <Badge
+              key={`out-${modality}`}
+              variant="secondary"
+              className="text-xs px-2 py-0.5"
+            >
+              out: {modality}
+            </Badge>
+          ))}
+        </div>
       </CardHeader>
       <CardContent className="space-y-4 pt-0">
-        {/* Description */}
+        {/* Description with truncation */}
         {model.description && (
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {model.description}
-          </p>
+          <div>
+            <p
+              className={cn(
+                "text-sm text-muted-foreground leading-relaxed",
+                !isDescriptionExpanded && needsTruncation && "line-clamp-3"
+              )}
+            >
+              {model.description}
+            </p>
+            {needsTruncation && (
+              <button
+                onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                className="text-xs text-primary hover:underline mt-1"
+              >
+                {isDescriptionExpanded ? "Show less" : "Read more..."}
+              </button>
+            )}
+          </div>
         )}
 
         {/* Core Stats - Always Visible */}

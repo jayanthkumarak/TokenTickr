@@ -163,4 +163,4 @@ export const useAvailableSlots = () => useComparisonStore((state) =>
 
 export const useCanAddModel = () => useComparisonStore((state) =>
   state.selectedModels.slice(0, state.maxModels).some(model => model === null)
-); 
+);

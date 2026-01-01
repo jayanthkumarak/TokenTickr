@@ -37,6 +37,17 @@ The formula uses **dynamic tier-based weighting** relative to the best model in 
 - **Smart Score** — Intelligence-first. Best for quality-focused teams seeking optimal value.
 - **Budget Score** — Efficiency-first. Values context capacity per dollar for high-volume workloads.
 
+## Model Comparison Cards
+
+Side-by-side model cards are designed to reduce cognitive load:
+
+- **Visual Ranking Badges**: Instantly see which model is cheapest, most expensive, or has the largest context
+- **Adaptive Card Layouts**: 4-column view defaults to compact mode; toggle to detailed view as needed
+- **Progressive Disclosure**: Descriptions truncate to 3 lines with "Read more..." expansion
+- **Always-Visible Modalities**: Input/output modality badges shown in card headers
+
+See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesign.md) for design rationale.
+
 ## Stack
 
 - Next.js 15 (App Router)

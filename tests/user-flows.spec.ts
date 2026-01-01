@@ -80,11 +80,16 @@ test.describe('User Flows', () => {
         // Initial state: 3 columns
         await expect(page.getByText('Columns:')).toBeVisible();
 
-        // The columns control group
-        const colControls = page.locator('.flex.items-center.gap-2.mb-6');
-        const addColBtn = colControls.getByRole('button').last();
-        const removeColBtn = colControls.getByRole('button').first();
-        const countDisplay = colControls.locator('span.font-medium');
+        // Find the column control section
+        const columnsSection = page.locator('text=Columns:').locator('..');
+
+        // The column count is the text between Minus and Plus buttons
+        // Use a more specific selector - find span with just number text
+        const countDisplay = columnsSection.locator('span.font-medium');
+
+        // Find the column control buttons
+        const addColBtn = columnsSection.getByRole('button').nth(1); // Plus button
+        const removeColBtn = columnsSection.getByRole('button').first(); // Minus button
 
         await expect(countDisplay).toHaveText('3'); // Default
 
@@ -93,10 +98,51 @@ test.describe('User Flows', () => {
         await expect(countDisplay).toHaveText('4');
         await expect(addColBtn).toBeDisabled();
 
+        // At 4 columns, View toggle should appear
+        await expect(page.getByText('View:')).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Compact' })).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Detailed' })).toBeVisible();
+
         // Remove column
         await removeColBtn.click(); // 3
         await removeColBtn.click(); // 2
         await expect(countDisplay).toHaveText('2');
         await expect(removeColBtn).toBeDisabled();
+
+        // View toggle should be hidden at 2 columns
+        await expect(page.getByText('View:')).not.toBeVisible();
+    });
+
+    test('can toggle between compact and detailed view at 4 columns', async ({ page }) => {
+        // Select two models first
+        await page.getByRole('button', { name: /Select Model/i }).first().click();
+        const searchInput = page.locator('input[placeholder*="Search models"]');
+        await searchInput.fill('GPT');
+        await page.locator('[role="dialog"]').getByText(/GPT/i).first().click();
+
+        await page.getByRole('button', { name: /Select Model/i }).first().click();
+        await searchInput.fill('Claude');
+        await page.getByText('Claude 3 Opus').first().click();
+
+        // Add columns to reach 4
+        const colControls = page.locator('text=Columns:').locator('..');
+        const addColBtn = colControls.getByRole('button').nth(1);
+        await addColBtn.click(); // 4 columns
+
+        // Verify View toggle appears
+        await expect(page.getByText('View:')).toBeVisible();
+
+        // Default should be Compact mode
+        const compactBtn = page.getByRole('button', { name: 'Compact', exact: true });
+        const detailedBtn = page.getByRole('button', { name: 'Detailed', exact: true });
+
+        // Compact mode should show "View Details" buttons
+        await expect(page.getByRole('button', { name: 'View Details' }).first()).toBeVisible();
+
+        // Toggle to Detailed view
+        await detailedBtn.click();
+
+        // In detailed view, "More details" should be visible instead
+        await expect(page.getByText('More details').first()).toBeVisible();
     });
 });
