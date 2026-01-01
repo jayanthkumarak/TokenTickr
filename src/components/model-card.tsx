@@ -124,7 +124,7 @@ export function ModelCard({
   // Compact mode renders a minimal card
   if (variant === "compact") {
     return (
-      <Card className={cn("w-full", className)}>
+      <Card className={cn("w-full flex flex-col min-h-[220px]", className)}>
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0">
@@ -189,34 +189,37 @@ export function ModelCard({
             ))}
           </div>
         </CardHeader>
-        <CardContent className="space-y-2 pt-0">
-          {/* Compact Cost Display - Single Row */}
-          <div className="flex items-center gap-3 text-xs">
-            <div className="flex items-center gap-1">
-              <DollarSign className="h-3 w-3" style={{ color: SEMANTIC_COLORS.savings }} />
-              <span className="text-muted-foreground">Prompt:</span>
-              <span className="font-medium">{promptPrice}</span>
+        <CardContent className="flex-1 flex flex-col pt-0">
+          {/* Content Section */}
+          <div className="space-y-2">
+            {/* Compact Cost Display - Allow wrapping at narrow widths */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+              <div className="flex items-center gap-1">
+                <DollarSign className="h-3 w-3 shrink-0" style={{ color: SEMANTIC_COLORS.savings }} />
+                <span className="text-muted-foreground">Prompt:</span>
+                <span className="font-medium">{promptPrice}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <DollarSign className="h-3 w-3 shrink-0" style={{ color: SEMANTIC_COLORS.highlight }} />
+                <span className="text-muted-foreground">Completion:</span>
+                <span className="font-medium">{completionPrice}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              <DollarSign className="h-3 w-3" style={{ color: SEMANTIC_COLORS.highlight }} />
-              <span className="text-muted-foreground">Completion:</span>
-              <span className="font-medium">{completionPrice}</span>
+
+            {/* Compact Context Display */}
+            <div className="flex items-center gap-1 text-xs">
+              <Cpu className="h-3 w-3" style={{ color: SEMANTIC_COLORS.neutral }} />
+              <span className="text-muted-foreground">Context:</span>
+              <span className="font-medium">{contextLength} tokens</span>
             </div>
           </div>
 
-          {/* Compact Context Display */}
-          <div className="flex items-center gap-1 text-xs">
-            <Cpu className="h-3 w-3" style={{ color: SEMANTIC_COLORS.neutral }} />
-            <span className="text-muted-foreground">Context:</span>
-            <span className="font-medium">{contextLength} tokens</span>
-          </div>
-
-          {/* View Details Button */}
+          {/* View Details Button - Anchored to bottom */}
           <Button
             variant="ghost"
             size="sm"
             onClick={onViewDetails}
-            className="w-full justify-center h-7 text-xs text-muted-foreground hover:text-foreground mt-1"
+            className="w-full justify-center h-7 text-xs text-muted-foreground hover:text-foreground mt-auto"
           >
             <Info className="h-3 w-3 mr-1" />
             View Details

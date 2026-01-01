@@ -58,19 +58,32 @@ export function PriceComparisonChart({
   // Debug: Track when chart receives new data
   console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName || 'No Data'} = $${data.results[0]?.totalCost?.toFixed(2) || '0.00'}`);
 
-  // Prepare chart data with color-blind friendly colors and patterns
-  const chartData = useMemo(() => {
-    const colors = COLOR_UTILS.getDataPalette(data.results.length);
-    const patterns = ['solid', 'diagonal', 'dots', 'vertical', 'horizontal', 'cross', 'diamond', 'wave'];
+  // Single-hue teal gradient: light (cheapest) to dark (most expensive)
+  const getCostGradientColor = (rank: number, total: number) => {
+    // Teal gradient from light (#4db6ac) to dark (#00695c)
+    const lightTeal = { r: 77, g: 182, b: 172 };
+    const darkTeal = { r: 0, g: 105, b: 92 };
 
-    return data.results.map((item, index) => ({
+    // t = 0 for cheapest (rank 1), t = 1 for most expensive
+    const t = total > 1 ? (rank - 1) / (total - 1) : 0;
+
+    const r = Math.round(lightTeal.r + t * (darkTeal.r - lightTeal.r));
+    const g = Math.round(lightTeal.g + t * (darkTeal.g - lightTeal.g));
+    const b = Math.round(lightTeal.b + t * (darkTeal.b - lightTeal.b));
+
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
+  // Prepare chart data with gradient colors based on cost ranking
+  const chartData = useMemo(() => {
+    const totalModels = data.results.length;
+
+    return data.results.map((item) => ({
       ...item,
       displayName: item.modelName.length > 35
         ? `${item.modelName.substring(0, 35)}...`
         : item.modelName,
-      color: colors[index] || CHART_COLORS.primary[0],
-      pattern: patterns[index % patterns.length],
-      patternId: `pattern-${index}`,
+      color: getCostGradientColor(item.ranking, totalModels),
     }));
   }, [data]);
 

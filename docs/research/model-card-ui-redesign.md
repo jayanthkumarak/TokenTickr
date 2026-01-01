@@ -1,17 +1,16 @@
 # Model Card UI Redesign Research
 
 **Date**: January 2025  
-**Version**: 2.1.0
+**Version**: 2.2.0
 
 ## Problem Statement
 
-When comparing 3-4 LLM models side-by-side, users experienced:
+When comparing 3-5 LLM models side-by-side, users experienced:
 
-1. **Asymmetric card heights** — Long model descriptions (Claude Sonnet 4.5 ~280 words vs GPT-5.2 ~80 words) caused cards to have vastly different heights, making cost comparisons difficult.
-
-2. **Information overload at 4 columns** — Same full-length descriptions in narrower columns created walls of text.
-
-3. **No visual ranking** — Users had to mentally compare prices and context windows across cards with no at-a-glance indicators.
+1. **Asymmetric card heights** — Long model descriptions caused cards to have vastly different heights
+2. **Information overload at 4+ columns** — Same full-length descriptions in narrower columns created walls of text
+3. **No visual ranking** — Users had to mentally compare prices and context windows
+4. **Arbitrary chart colors** — Multi-color bar graphs didn't encode cost meaning
 
 ---
 
@@ -19,66 +18,70 @@ When comparing 3-4 LLM models side-by-side, users experienced:
 
 ### 1. Description Truncation
 
-Descriptions now clamp to 3 lines with expandable "Read more..." toggle:
-
-```tsx
-<p className={cn(
-  "text-sm text-muted-foreground leading-relaxed",
-  !isDescriptionExpanded && needsTruncation && "line-clamp-3"
-)}>
-  {model.description}
-</p>
-{needsTruncation && (
-  <button onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}>
-    {isDescriptionExpanded ? "Show less" : "Read more..."}
-  </button>
-)}
-```
-
-**Implementation**: Uses CSS `line-clamp-3` utility (already defined in `globals.css`).
+Descriptions clamp to 3 lines with expandable "Read more..." toggle using CSS `line-clamp-3`.
 
 ---
 
 ### 2. Adaptive Card Variants
 
-Two card variants based on column count:
-
 | Columns | Variant | Features |
 |---------|---------|----------|
-| 2-3 | Detailed | Full card with truncated description, all stats visible |
-| 4 | Compact (default) | Minimal card, inline costs, "View Details" modal |
-
-Users can toggle between Compact and Detailed view when using 4 columns.
-
-**Compact mode layout**:
-- Model name + ID (truncated)
-- Ranking badges
-- Modality badges (inline)
-- Single-line cost display
-- "View Details" button → opens modal
+| 2-3 | Detailed | Full card with truncated description |
+| 4-5 | Compact (default) | Minimal card, "View Details" modal |
 
 ---
 
-### 3. Visual Ranking System
+### 3. Visual Ranking Badges
 
-Rankings calculated in `ComparisonLayout` using combined weighted cost formula:
-
-```typescript
-const calculateCombinedCost = (model: OpenRouterModel): number => {
-  const promptPrice = parseFloat(model.pricing.prompt) || 0;
-  const completionPrice = parseFloat(model.pricing.completion) || 0;
-  return (promptPrice * 150) + (completionPrice * 300); // 150 prompt + 300 completion tokens
-};
-```
-
-**Ranking badges** (using colorblind-accessible palette):
+Rankings calculated using combined weighted cost: `(promptPrice * 150) + (completionPrice * 300)`
 
 | Rank | Badge | Color |
 |------|-------|-------|
-| Lowest cost | "Cheapest" | Blue-green (#009688) |
+| Lowest cost | "Cheapest" | Teal (#009688) |
 | Highest cost | "Most Expensive" | Amber (#fb8c00) |
-| Largest context | "Largest Context" | Blue-green (#009688) |
-| Smallest context | "Smallest Context" | Amber (#fb8c00) |
+
+---
+
+### 4. 5-Column Support (New)
+
+Extended max columns from 4 to 5 for comprehensive model comparison:
+
+- `selectedModels` array expanded to 5 slots
+- Added `grid-cols-5` Tailwind class
+- Compact mode triggers at 4+ columns
+
+---
+
+### 5. Cost Gradient Bar Graph (New)
+
+Replaced arbitrary multi-color bars with **single-hue teal gradient**:
+
+```typescript
+const getCostGradientColor = (rank: number, total: number) => {
+  const lightTeal = { r: 77, g: 182, b: 172 };  // Cheapest
+  const darkTeal = { r: 0, g: 105, b: 92 };     // Most expensive
+  const t = (rank - 1) / (total - 1);
+  // Linear interpolation
+  return `rgb(${lerp(...)})`;
+};
+```
+
+**Rationale**: Single hue encodes cost magnitude intuitively — darker = more expensive.
+
+---
+
+### 6. Card Alignment (New)
+
+Fixed misaligned "View Details" buttons using flexbox:
+
+```tsx
+<Card className="flex flex-col min-h-[220px]">
+  <CardContent className="flex-1 flex flex-col">
+    <div>/* content */</div>
+    <Button className="mt-auto">View Details</Button>
+  </CardContent>
+</Card>
+```
 
 ---
 
@@ -86,25 +89,17 @@ const calculateCombinedCost = (model: OpenRouterModel): number => {
 
 | File | Changes |
 |------|---------|
-| `src/components/model-card.tsx` | Added `variant` prop, ranking badges, modality badges in header, description truncation |
-| `src/components/comparison-layout.tsx` | Added ranking calculations, view toggle, details modal |
-
----
-
-## Cognitive Load Reduction
-
-The redesign addresses cognitive load through:
-
-1. **Consistent card heights** — Eyes can scan horizontally without jumping
-2. **Information hierarchy** — Most important data (rankings, costs) visible first
-3. **Progressive disclosure** — Details hidden behind expandable sections
-4. **Visual encoding** — Color-coded badges reduce need to mentally compare numbers
-5. **Reduced density at 4 columns** — Compact mode prevents text walls
+| `model-card.tsx` | Flex layout, min-height, mt-auto for button |
+| `comparison-layout.tsx` | 5-column grid, ranking calcs |
+| `comparison-store.ts` | 5-slot array, max=5 |
+| `price-comparison-chart.tsx` | Teal cost gradient |
+| `colorblind-colors.ts` | Purple 5th color (fallback) |
 
 ---
 
 ## References
 
-- Apple Human Interface Guidelines: Information Hierarchy
-- Nielsen Norman Group: Progressive Disclosure
-- WCAG 2.1: Color accessibility (4.5:1 contrast ratio)
+- Apple HIG: Information Hierarchy
+- WCAG 2.1: Color accessibility (4.5:1 contrast)
+- Data Viz: Sequential color scales for quantitative data
+

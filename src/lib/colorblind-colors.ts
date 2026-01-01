@@ -20,7 +20,7 @@ export const ACCESSIBLE_COLORS = {
   // Primary blues (safe for all color vision types)
   blue: {
     50: '#e3f2fd',
-    100: '#bbdefb', 
+    100: '#bbdefb',
     200: '#90caf9',
     300: '#64b5f6',
     400: '#42a5f5',
@@ -30,7 +30,7 @@ export const ACCESSIBLE_COLORS = {
     800: '#1565c0',
     900: '#0d47a1'
   },
-  
+
   // Secondary oranges (complementary to blue)
   orange: {
     50: '#fff3e0',
@@ -44,7 +44,7 @@ export const ACCESSIBLE_COLORS = {
     800: '#ef6c00',
     900: '#e65100'
   },
-  
+
   // Neutral grays (safe for all users)
   gray: {
     50: '#fafafa',
@@ -58,7 +58,7 @@ export const ACCESSIBLE_COLORS = {
     800: '#424242',
     900: '#212121'
   },
-  
+
   // Success (using blue-green instead of pure green)
   success: {
     50: '#e0f2f1',
@@ -72,7 +72,7 @@ export const ACCESSIBLE_COLORS = {
     800: '#00695c',
     900: '#004d40'
   },
-  
+
   // Warning (using amber instead of yellow-green)
   warning: {
     50: '#fff8e1',
@@ -86,7 +86,7 @@ export const ACCESSIBLE_COLORS = {
     800: '#ff8f00',
     900: '#ff6f00'
   },
-  
+
   // Error (using high-contrast red-orange)
   error: {
     50: '#ffebee',
@@ -104,18 +104,18 @@ export const ACCESSIBLE_COLORS = {
 
 // Chart-specific color palette (optimized for data visualization)
 export const CHART_COLORS = {
-  // Primary data series (blue-orange system)
+  // Primary data series (5 vibrant colors for model comparison)
   primary: [
-    ACCESSIBLE_COLORS.blue[600],   // Primary blue
-    ACCESSIBLE_COLORS.orange[500], // Primary orange
-    ACCESSIBLE_COLORS.success[600], // Blue-green
-    ACCESSIBLE_COLORS.warning[600], // Amber
-    ACCESSIBLE_COLORS.gray[700],    // Dark gray
+    ACCESSIBLE_COLORS.blue[600],    // #1e88e5 - Primary blue
+    ACCESSIBLE_COLORS.orange[500],  // #ff9800 - Primary orange
+    ACCESSIBLE_COLORS.success[600], // #009688 - Teal/Blue-green
+    ACCESSIBLE_COLORS.warning[600], // #fb8c00 - Amber
+    '#9c27b0',                      // Purple - Vibrant 5th color (instead of gray)
     ACCESSIBLE_COLORS.blue[400],    // Light blue
     ACCESSIBLE_COLORS.orange[700],  // Dark orange
     ACCESSIBLE_COLORS.success[400], // Light blue-green
   ],
-  
+
   // Secondary data series (for contrast and comparison)
   secondary: [
     ACCESSIBLE_COLORS.error[600],    // Red-orange for expensive/negative
@@ -127,21 +127,21 @@ export const CHART_COLORS = {
     ACCESSIBLE_COLORS.warning[800],  // Darkest amber
     ACCESSIBLE_COLORS.gray[800],     // Dark gray
   ],
-  
+
   // High contrast pairs for comparisons
   comparison: {
     cheapest: ACCESSIBLE_COLORS.success[600], // Blue-green for positive
     expensive: ACCESSIBLE_COLORS.error[600],  // Red for negative
     neutral: ACCESSIBLE_COLORS.gray[600],     // Gray for neutral
   },
-  
+
   // Background and surface colors
   background: {
     primary: '#ffffff',
     secondary: ACCESSIBLE_COLORS.gray[50],
     muted: ACCESSIBLE_COLORS.gray[100],
   },
-  
+
   // Text colors with proper contrast
   text: {
     primary: ACCESSIBLE_COLORS.gray[900],
@@ -158,12 +158,12 @@ export const SEMANTIC_COLORS = {
   cost: ACCESSIBLE_COLORS.orange[600],        // Orange for costs
   neutral: ACCESSIBLE_COLORS.gray[600],       // Gray for neutral
   highlight: ACCESSIBLE_COLORS.blue[600],     // Blue for highlights
-  
+
   // Interactive elements
   interactive: ACCESSIBLE_COLORS.blue[600],   // Blue for buttons, links
   hover: ACCESSIBLE_COLORS.blue[700],         // Darker blue for hover
   active: ACCESSIBLE_COLORS.blue[800],        // Darkest blue for active
-  
+
   // Borders and dividers
   border: ACCESSIBLE_COLORS.gray[300],
   divider: ACCESSIBLE_COLORS.gray[200],
@@ -188,12 +188,12 @@ export const COLOR_UTILS = {
       ACCESSIBLE_COLORS.gray[800],
       ACCESSIBLE_COLORS.gray[900],
     ];
-    
-    return (darkColors as string[]).includes(backgroundColor) 
-      ? CHART_COLORS.text.inverse 
+
+    return (darkColors as string[]).includes(backgroundColor)
+      ? CHART_COLORS.text.inverse
       : CHART_COLORS.text.primary;
   },
-  
+
   /**
    * Get a color-blind safe palette for the given number of data series
    */
@@ -201,7 +201,7 @@ export const COLOR_UTILS = {
     if (count <= CHART_COLORS.primary.length) {
       return CHART_COLORS.primary.slice(0, count);
     }
-    
+
     // For more than 8 series, repeat with different opacity
     const base = CHART_COLORS.primary;
     const extended = [];
@@ -210,7 +210,7 @@ export const COLOR_UTILS = {
     }
     return extended;
   },
-  
+
   /**
    * Get pattern/shape identifiers for secondary encoding
    */
@@ -225,10 +225,10 @@ export const COLOR_UTILS = {
       'grid',       // ⚏
       'circle',     // ○
     ];
-    
+
     return patterns.slice(0, count);
   },
-  
+
   /**
    * Add opacity to a color
    */
@@ -241,17 +241,17 @@ export const COLOR_UTILS = {
       const b = parseInt(hex.slice(4, 6), 16);
       return `rgba(${r}, ${g}, ${b}, ${opacity})`;
     }
-    
+
     // If already rgba, modify the alpha
     if (color.startsWith('rgba')) {
       return color.replace(/[\d.]+\)$/, `${opacity})`);
     }
-    
+
     // If rgb, convert to rgba
     if (color.startsWith('rgb')) {
       return color.replace('rgb', 'rgba').replace(')', `, ${opacity})`);
     }
-    
+
     // Fallback
     return color;
   }

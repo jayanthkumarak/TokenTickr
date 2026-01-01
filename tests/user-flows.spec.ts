@@ -93,17 +93,22 @@ test.describe('User Flows', () => {
 
         await expect(countDisplay).toHaveText('3'); // Default
 
-        // Add column (max is 4)
+        // Add column (max is 5)
         await addColBtn.click();
         await expect(countDisplay).toHaveText('4');
-        await expect(addColBtn).toBeDisabled();
 
         // At 4 columns, View toggle should appear
         await expect(page.getByText('View:')).toBeVisible();
-        await expect(page.getByRole('button', { name: 'Compact' })).toBeVisible();
-        await expect(page.getByRole('button', { name: 'Detailed' })).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Compact', exact: true })).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Detailed', exact: true })).toBeVisible();
 
-        // Remove column
+        // Add one more to reach max
+        await addColBtn.click();
+        await expect(countDisplay).toHaveText('5');
+        await expect(addColBtn).toBeDisabled();
+
+        // Remove columns: 5 -> 4 -> 3 -> 2
+        await removeColBtn.click(); // 4
         await removeColBtn.click(); // 3
         await removeColBtn.click(); // 2
         await expect(countDisplay).toHaveText('2');

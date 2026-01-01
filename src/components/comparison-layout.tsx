@@ -55,7 +55,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
   };
 
   const handleAddColumn = () => {
-    if (maxModels < 4) {
+    if (maxModels < 5) {
       setMaxModels(maxModels + 1);
     }
   };
@@ -125,7 +125,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
 
   // Determine card variant based on column count and toggle
   const cardVariant: ModelCardVariant =
-    maxModels === 4 && !detailedViewFor4Columns ? "compact" : "detailed";
+    maxModels >= 4 && !detailedViewFor4Columns ? "compact" : "detailed";
 
   return (
     <div className={cn("w-full", className)}>
@@ -183,14 +183,14 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
             variant="outline"
             size="sm"
             onClick={handleAddColumn}
-            disabled={maxModels >= 4}
+            disabled={maxModels >= 5}
           >
             <Plus className="h-4 w-4" />
           </Button>
         </div>
 
-        {/* View Toggle - Only shown for 4 columns */}
-        {maxModels === 4 && (
+        {/* View Toggle - Only shown for 4+ columns */}
+        {maxModels >= 4 && (
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">View:</span>
             <Button
@@ -233,7 +233,8 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         "grid gap-6",
         maxModels === 2 && "grid-cols-1 md:grid-cols-2",
         maxModels === 3 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-        maxModels === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+        maxModels === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+        maxModels === 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
       )}>
         {activeModels.map((model, index) => (
           <div key={index} className="flex flex-col">

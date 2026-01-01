@@ -17,7 +17,7 @@ interface ComparisonStore extends ComparisonState {
 }
 
 const initialState: ComparisonState = {
-  selectedModels: [null, null, null, null],
+  selectedModels: [null, null, null, null, null],
   maxModels: 3,
   searchTerm: '',
   filteredModels: [],
@@ -63,7 +63,7 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
 
   setMaxModels: (count: number) => {
     set((state) => {
-      const newMaxModels = Math.min(Math.max(count, 2), 4);
+      const newMaxModels = Math.min(Math.max(count, 2), 5);
       const newSelectedModels = [...state.selectedModels];
 
       // If reducing max models, clear models beyond the new limit
@@ -129,14 +129,14 @@ export const useComparisonStore = create<ComparisonStore>((set) => ({
 
   clearAll: () => {
     set({
-      selectedModels: [null, null, null, null],
+      selectedModels: [null, null, null, null, null],
       searchTerm: '',
     });
   },
 
   resetToDefaults: () => {
     set({
-      selectedModels: [null, null, null, null],
+      selectedModels: [null, null, null, null, null],
       maxModels: 3,
       searchTerm: '',
       error: null,
