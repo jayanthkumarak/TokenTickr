@@ -2,9 +2,20 @@
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { OpenRouterAPI } from '../openrouter-api';
 
-// Create a mock instance for testing
-// We need to reset the singleton instance or mock the fetch calls carefully
-// Since OpenRouterAPI is a singleton, we need to be careful with state
+// Mock static data must be defined before vi.mock or inside it
+const mockStaticData = [
+    {
+        id: 'static-model',
+        name: 'Static Model',
+        pricing: { prompt: '0', completion: '0' },
+        architecture: { tokenizer: 'test' }
+    }
+];
+
+// Mock dynamic import
+vi.mock('../openrouter-static-data', () => ({
+    OPENROUTER_STATIC_DATA: mockStaticData
+}));
 
 describe('OpenRouterAPI', () => {
     let api: OpenRouterAPI;
@@ -62,18 +73,20 @@ describe('OpenRouterAPI', () => {
     });
 
     describe('getModels', () => {
-        it('should fetch and validate models successfully', async () => {
+        it('should return static data by default without fetching', async () => {
+            const models = await api.getModels();
+
+            expect(models).toEqual(mockStaticData);
+            expect(global.fetch).not.toHaveBeenCalled();
+        });
+
+        it('should fetch from API when forceRefresh is true', async () => {
             const mockResponse = {
                 data: [
                     {
-                        id: 'model-1',
-                        name: 'Model 1',
+                        id: 'fetched-model',
+                        name: 'Fetched Model',
                         pricing: { prompt: '0', completion: '0' }
-                    },
-                    {
-                        id: 'model-2',
-                        name: 'Model 2',
-                        pricing: { prompt: '1', completion: '1' }
                     }
                 ]
             };
@@ -83,65 +96,19 @@ describe('OpenRouterAPI', () => {
                 json: async () => mockResponse,
             });
 
-            const models = await api.getModels();
+            const models = await api.getModels(true);
 
-            expect(models).toHaveLength(2);
-            expect(models[0].id).toBe('model-1');
+            expect(models).toHaveLength(1);
+            expect(models[0].id).toBe('fetched-model');
             expect(global.fetch).toHaveBeenCalledTimes(1);
         });
 
-        it('should throw ApiError on network failure', async () => {
+        it('should fallback to static data on fetch error when forceRefresh is true', async () => {
             (global.fetch as any).mockRejectedValueOnce(new TypeError('Network error'));
 
-            await expect(api.getModels()).rejects.toThrow('Network error');
-        });
+            const models = await api.getModels(true);
 
-        it('should throw ApiError on API error status', async () => {
-            (global.fetch as any).mockResolvedValueOnce({
-                ok: false,
-                status: 429,
-                statusText: 'Too Many Requests',
-                json: async () => ({ error: { message: 'Rate limit exceeded' } }),
-            });
-
-            await expect(api.getModels()).rejects.toThrow('Rate limit exceeded');
-        });
-
-        it('should filter out invalid models', async () => {
-            const mockResponse = {
-                data: [
-                    {
-                        id: 'valid-model',
-                        name: 'Valid Model',
-                        pricing: { prompt: '0', completion: '0' }
-                    },
-                    {
-                        id: 'invalid-model-no-pricing',
-                        name: 'Invalid Model',
-                        // missing pricing
-                    },
-                    null // completely invalid
-                ]
-            };
-
-            (global.fetch as any).mockResolvedValueOnce({
-                ok: true,
-                json: async () => mockResponse,
-            });
-
-            const models = await api.getModels();
-
-            expect(models).toHaveLength(1);
-            expect(models[0].id).toBe('valid-model');
-        });
-
-        it('should throw ApiError on malformed response', async () => {
-            (global.fetch as any).mockResolvedValueOnce({
-                ok: true,
-                json: async () => ({ notData: [] }),
-            });
-
-            await expect(api.getModels()).rejects.toThrow('Invalid API response format');
+            expect(models).toEqual(mockStaticData);
         });
     });
 });

@@ -14,12 +14,22 @@ import {
 import { Plus, Minus, RotateCcw, LayoutGrid, List, DollarSign, Cpu } from "lucide-react";
 import { useComparisonStore } from "@/store/comparison-store";
 import { ModelCard, ModelCardVariant, ModelRanking } from "@/components/model-card";
-import { ModelSelector } from "@/components/model-selector";
-import { PriceComparisonSection } from "@/components/price-comparison-section";
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
 import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+// Dynamic imports for heavy components
+const ModelSelector = dynamic(() => import("@/components/model-selector").then(mod => mod.ModelSelector), {
+  loading: () => null,
+  ssr: false // Client-side interaction only
+});
+
+const PriceComparisonSection = dynamic(() => import("@/components/price-comparison-section").then(mod => mod.PriceComparisonSection), {
+  loading: () => <div className="h-64 animate-pulse bg-muted/20 rounded-lg" />,
+  ssr: true // Can be SSR'd but better split for hydration
+});
 
 // Constants for cost calculation (matching price-calculation.ts)
 const PROMPT_TOKENS_PER_QUERY = 150;
@@ -216,17 +226,20 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
       </div>
 
       {/* Model Selector Modal (Spotlight) */}
-      <ModelSelector
-        open={showingSelector !== null}
-        onOpenChange={(open) => !open && setShowingSelector(null)}
-        onSelect={(model) => {
-          if (showingSelector !== null) {
-            handleModelSelect(showingSelector, model);
-          }
-        }}
-        excludeModels={excludedModelIds}
-        slotLabel={showingSelector !== null ? `Model ${showingSelector + 1}` : undefined}
-      />
+      {/* Conditionally render to ensure it's not even mounted until needed */}
+      {showingSelector !== null && (
+        <ModelSelector
+          open={showingSelector !== null}
+          onOpenChange={(open) => !open && setShowingSelector(null)}
+          onSelect={(model) => {
+            if (showingSelector !== null) {
+              handleModelSelect(showingSelector, model);
+            }
+          }}
+          excludeModels={excludedModelIds}
+          slotLabel={showingSelector !== null ? `Model ${showingSelector + 1}` : undefined}
+        />
+      )}
 
       {/* Comparison Grid */}
       <div className={cn(

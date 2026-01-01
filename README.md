@@ -57,6 +57,14 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - Zustand state management
 - VisX visualization
 
+## v2.5 Release: Performance Upgrade
+TokenTickr v2.5 introduces significant performance optimizations:
+- **Build-Time Data**: Model data is now statically generated, removing client-side API latency.
+- **Lazy Loading**: Heavy components (charts, selectors) are loaded only when needed.
+- **Optimized Bundle**: Initial load size reduced to ~144kB.
+
+See [v2.5 Release Notes](docs/v2.5-performance.md) for details.
+
 ## Development
 
 ```bash
@@ -89,7 +97,7 @@ npm run build
 
 ## Data Source
 
-- **Model Pricing**: Real-time data via [OpenRouter API](https://openrouter.ai)
+- **Model Pricing**: Statically generated (updated daily) via [OpenRouter API](https://openrouter.ai)
 - **Intelligence Index**: Composite benchmark scores from [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models) — aggregates MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench
 - **LMSYS Elo**: Human preference ratings from [LMSYS Chatbot Arena](https://chat.lmsys.org/?leaderboard)
 

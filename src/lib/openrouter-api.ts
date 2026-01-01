@@ -1,5 +1,6 @@
 import { OpenRouterResponse, OpenRouterModel } from '@/types/models';
 
+
 const OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1';
 const DEFAULT_TIMEOUT_MS = 15000; // 15 seconds
 
@@ -17,6 +18,7 @@ export class OpenRouterAPI {
 
   private constructor() {
     this.baseURL = OPENROUTER_API_BASE;
+    // API key optional since we use static data by default
     this.apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
   }
 
@@ -99,13 +101,30 @@ export class OpenRouterAPI {
     });
   }
 
-  public async getModels(): Promise<OpenRouterModel[]> {
+  public async getModels(forceRefresh = false): Promise<OpenRouterModel[]> {
     try {
+      // Use static data by default for performance
+      if (!forceRefresh) {
+        // Dynamic import to keep initial bundle size small (lazy load ~280KB data)
+        const { OPENROUTER_STATIC_DATA } = await import('./openrouter-static-data');
+        return OPENROUTER_STATIC_DATA;
+      }
+
+      // Original fetch logic as fallback/forced refresh
       const response = await this.makeRequest<OpenRouterResponse>('/models');
       return this.validateModels(response);
     } catch (error) {
       console.error('Error fetching models:', error);
-      throw error; // Re-throw to let store handle it, but now it's a typed error
+      // Fallback to static data on error if we tried to fetch
+      if (forceRefresh) {
+        try {
+          const { OPENROUTER_STATIC_DATA } = await import('./openrouter-static-data');
+          return OPENROUTER_STATIC_DATA;
+        } catch {
+          throw error;
+        }
+      }
+      throw error;
     }
   }
 

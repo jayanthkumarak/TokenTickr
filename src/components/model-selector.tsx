@@ -36,7 +36,7 @@ export function ModelSelector({
 
   const searchResults = useMemo(() => {
     if (!searchValue.trim()) {
-      return availableModels.slice(0, 20); // Limit initial results
+      return availableModels;
     }
 
     const searchTerm = searchValue.toLowerCase();
@@ -45,8 +45,7 @@ export function ModelSelector({
         model.name.toLowerCase().includes(searchTerm) ||
         model.id.toLowerCase().includes(searchTerm) ||
         (model.description && model.description.toLowerCase().includes(searchTerm))
-      )
-      .slice(0, 20);
+      );
   }, [availableModels, searchValue]);
 
   const handleSelect = (model: OpenRouterModel) => {
