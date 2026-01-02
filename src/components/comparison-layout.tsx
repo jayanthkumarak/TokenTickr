@@ -139,29 +139,71 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
 
   return (
     <div className={cn("w-full", className)}>
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">TokenTickr</h1>
-            <p className="text-muted-foreground">
-              Compare pricing and features of LLM models
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary">
-              {filledSlots}/{maxModels} models selected
-            </Badge>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={clearAll}
-              disabled={filledSlots === 0}
-            >
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Clear All
-            </Button>
-          </div>
+      {/* Header Controls */}
+      <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Left Side: Column Controls */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground mr-1">Columns:</span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleRemoveColumn}
+            disabled={maxModels <= 2}
+            className="h-8 w-8 p-0"
+          >
+            <Minus className="h-4 w-4" />
+          </Button>
+          <span className="text-sm font-medium min-w-[1.5rem] text-center">{maxModels}</span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleAddColumn}
+            disabled={maxModels >= 5}
+            className="h-8 w-8 p-0"
+          >
+            <Plus className="h-4 w-4" />
+          </Button>
+
+          {/* View Toggle - Only shown for 4+ columns */}
+          {maxModels >= 4 && (
+            <div className="flex items-center gap-2 ml-4 border-l pl-4">
+              <Button
+                variant={!detailedViewFor4Columns ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => setDetailedViewFor4Columns(false)}
+                className="h-8 w-8 p-0"
+                title="Compact View"
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                variant={detailedViewFor4Columns ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => setDetailedViewFor4Columns(true)}
+                className="h-8 w-8 p-0"
+                title="Detailed View"
+              >
+                <List className="h-3.5 w-3.5" />
+              </Button>
+            </div>
+          )}
+        </div>
+
+        {/* Right Side: Selection Status & Clear */}
+        <div className="flex items-center gap-3">
+          <Badge variant="secondary" className="font-normal">
+            {filledSlots}/{maxModels} selected
+          </Badge>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearAll}
+            disabled={filledSlots === 0}
+            className="text-muted-foreground hover:text-foreground h-8"
+          >
+            <RotateCcw className="h-3.5 w-3.5 mr-2" />
+            Reset
+          </Button>
         </div>
       </div>
 
@@ -176,54 +218,6 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         </Card>
       )}
 
-      {/* Column Controls */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Columns:</span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleRemoveColumn}
-            disabled={maxModels <= 2}
-          >
-            <Minus className="h-4 w-4" />
-          </Button>
-          <span className="text-sm font-medium">{maxModels}</span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleAddColumn}
-            disabled={maxModels >= 5}
-          >
-            <Plus className="h-4 w-4" />
-          </Button>
-        </div>
-
-        {/* View Toggle - Only shown for 4+ columns */}
-        {maxModels >= 4 && (
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">View:</span>
-            <Button
-              variant={!detailedViewFor4Columns ? "secondary" : "outline"}
-              size="sm"
-              onClick={() => setDetailedViewFor4Columns(false)}
-              className="gap-1.5"
-            >
-              <LayoutGrid className="h-3.5 w-3.5" />
-              Compact
-            </Button>
-            <Button
-              variant={detailedViewFor4Columns ? "secondary" : "outline"}
-              size="sm"
-              onClick={() => setDetailedViewFor4Columns(true)}
-              className="gap-1.5"
-            >
-              <List className="h-3.5 w-3.5" />
-              Detailed
-            </Button>
-          </div>
-        )}
-      </div>
 
       {/* Model Selector Modal (Spotlight) */}
       {/* Conditionally render to ensure it's not even mounted until needed */}

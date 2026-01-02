@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { ComparisonLayout } from "@/components/comparison-layout";
 import { Footer } from "@/components/footer";
+import { NUXPopup } from "@/components/nux-popup";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <ComparisonLayout />
       </main>
       <Footer />
+      <NUXPopup />
     </div>
   );
 }

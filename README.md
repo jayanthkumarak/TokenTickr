@@ -57,9 +57,13 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - Zustand state management
 - VisX visualization
 
-## v2.5.2 Release
-- **CI Fix**: Configured Playwright to strictly match `*.spec.ts` files, preventing it from attempting to run Vitest unit tests.
-- **Performance & UI**: Includes all v2.5.1 optimization and alignment improvements.
+## v2.6.0 Release
+- **NUX Popup**: New "Frosted Glass" welcome modal for first-time visitors.
+- **Layout Polish**: Refined header to remove redundant branding and streamlined column controls.
+- **LLM Context**: Added `LLM_READ_ME_NOW.md` for efficient codebase context loading by AI agents.
+
+## For AI Agents
+If you are an LLM or AI agent trying to understand this codebase, please read [LLM_READ_ME_NOW.md](LLM_READ_ME_NOW.md) first. It contains a high-density technical summary designed to save tokens and provide immediate context.
 
 See [v2.5 Performance Notes](docs/v2.5-performance.md) for architectural details.
 
