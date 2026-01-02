@@ -2,27 +2,14 @@ name = "tokentickr"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Main worker entry point (module format for D1 access)
-main = "workers-site/index.js"
-
-# Static assets from Next.js export
-[site]
-bucket = "./out"
-
 # D1 Database for pricing history and usage logs
+# Note: For Cloudflare Pages, also add this binding in the dashboard:
+# Settings -> Functions -> D1 database bindings -> Variable: DB, Database: tokentickr
 [[d1_databases]]
 binding = "DB"
 database_name = "tokentickr"
 database_id = "ec60c702-e95d-4f25-9223-ed83e552ed8d"
 
-[env.production]
-name = "tokentickr"
-route = "tokentickr.com/*"
-
-[env.staging]
-name = "tokentickr-staging"
-
-[build]
-command = "npm run build"
-cwd = "./"
-watch_dir = "src"
+# For local development with wrangler pages dev
+[env.development]
+name = "tokentickr-dev"
