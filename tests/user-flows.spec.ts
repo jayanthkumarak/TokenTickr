@@ -2,6 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test.describe('User Flows', () => {
     test.beforeEach(async ({ page }) => {
+        // Prevent NUX popup from appearing
+        await page.addInitScript(() => {
+            localStorage.setItem('tokentickr-nux-seen', 'true');
+        });
+
         await page.goto('/');
         // Mock the API response to ensure deterministic testing
         await page.route('**/api/v1/models**', async route => {
@@ -97,10 +102,9 @@ test.describe('User Flows', () => {
         await addColBtn.click();
         await expect(countDisplay).toHaveText('4');
 
-        // At 4 columns, View toggle should appear
-        await expect(page.getByText('View:')).toBeVisible();
-        await expect(page.getByRole('button', { name: 'Compact', exact: true })).toBeVisible();
-        await expect(page.getByRole('button', { name: 'Detailed', exact: true })).toBeVisible();
+        // At 4 columns, View toggle buttons should appear
+        await expect(page.getByRole('button', { name: 'Compact View' })).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Detailed View' })).toBeVisible();
 
         // Add one more to reach max
         await addColBtn.click();
@@ -114,8 +118,8 @@ test.describe('User Flows', () => {
         await expect(countDisplay).toHaveText('2');
         await expect(removeColBtn).toBeDisabled();
 
-        // View toggle should be hidden at 2 columns
-        await expect(page.getByText('View:')).not.toBeVisible();
+        // View buttons should be hidden at 2 columns
+        await expect(page.getByRole('button', { name: 'Compact View' })).not.toBeVisible();
     });
 
     test('can toggle between compact and detailed view at 4 columns', async ({ page }) => {
@@ -134,12 +138,12 @@ test.describe('User Flows', () => {
         const addColBtn = colControls.getByRole('button').nth(1);
         await addColBtn.click(); // 4 columns
 
-        // Verify View toggle appears
-        await expect(page.getByText('View:')).toBeVisible();
+        // Verify View toggle buttons appear
+        await expect(page.getByRole('button', { name: 'Compact View' })).toBeVisible();
 
         // Default should be Compact mode
-        const compactBtn = page.getByRole('button', { name: 'Compact', exact: true });
-        const detailedBtn = page.getByRole('button', { name: 'Detailed', exact: true });
+        const compactBtn = page.getByRole('button', { name: 'Compact View' });
+        const detailedBtn = page.getByRole('button', { name: 'Detailed View' });
 
         // Compact mode should show "View Details" buttons
         await expect(page.getByRole('button', { name: 'View Details' }).first()).toBeVisible();

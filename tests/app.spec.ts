@@ -2,6 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test.describe('TokenTickr Homepage', () => {
     test.beforeEach(async ({ page }) => {
+        // Prevent NUX popup from appearing
+        await page.addInitScript(() => {
+            localStorage.setItem('tokentickr-nux-seen', 'true');
+        });
+
         await page.goto('/');
     });
 

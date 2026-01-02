@@ -11,7 +11,8 @@
     "deploy": "wrangler deploy",
     "deploy:staging": "wrangler deploy --env staging",
     "preview": "wrangler dev",
-    "test": "vitest run",
+    "test": "vitest run src",
+    "test:e2e": "playwright test",
     "generate:aa-data": "node scripts/generate-aa-static-data.mjs",
     "generate:openrouter-data": "node scripts/generate-openrouter-static-data.mjs",
     "generate:static-data": "npm run generate:openrouter-data && npm run generate:aa-data"
