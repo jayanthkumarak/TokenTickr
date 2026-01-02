@@ -72,9 +72,9 @@ test.describe('User Flows', () => {
         await searchInput.fill('Claude');
         await page.getByText('Claude 3 Opus').first().click();
 
-        // 2. Click Clear All
-        const clearButton = page.locator('button', { hasText: 'Clear All' }).first();
-        await clearButton.click();
+        // 2. Click Reset
+        const resetButton = page.getByRole('button', { name: 'Reset' });
+        await resetButton.click();
 
         // 3. Verify model is gone and select button returns
         await expect(page.getByText('Claude 3 Opus', { exact: true })).not.toBeVisible();

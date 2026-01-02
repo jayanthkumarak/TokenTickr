@@ -2,9 +2,18 @@ name = "tokentickr"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
+# Main worker entry point (module format for D1 access)
+main = "workers-site/index.js"
+
+# Static assets from Next.js export
 [site]
 bucket = "./out"
-entry-point = "workers-site"
+
+# D1 Database for pricing history and usage logs
+[[d1_databases]]
+binding = "DB"
+database_name = "tokentickr"
+database_id = "ec60c702-e95d-4f25-9223-ed83e552ed8d"
 
 [env.production]
 name = "tokentickr"
@@ -13,8 +22,7 @@ route = "tokentickr.com/*"
 [env.staging]
 name = "tokentickr-staging"
 
-# Workers Sites configuration
 [build]
 command = "npm run build"
 cwd = "./"
-watch_dir = "src" 
+watch_dir = "src"

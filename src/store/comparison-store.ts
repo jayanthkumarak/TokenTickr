@@ -1,7 +1,9 @@
 import { create } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 import { OpenRouterModel, ComparisonState } from '@/types/models';
 import { openrouterAPI } from '@/lib/openrouter-api';
 import { initializeAAScoreCache } from '@/lib/artificial-analysis-api';
+import { logSessionStart, logComparison } from '@/lib/usage-logger';
 
 interface ComparisonStore extends ComparisonState {
   // Actions
@@ -25,124 +27,145 @@ const initialState: ComparisonState = {
   error: null,
 };
 
-export const useComparisonStore = create<ComparisonStore>((set) => ({
-  ...initialState,
+export const useComparisonStore = create<ComparisonStore>()(
+  subscribeWithSelector((set) => ({
+    ...initialState,
 
-  setSelectedModel: (index: number, model: OpenRouterModel | null) => {
-    set((state) => {
-      const newSelectedModels = [...state.selectedModels];
-      newSelectedModels[index] = model;
-      return { selectedModels: newSelectedModels };
-    });
-  },
+    setSelectedModel: (index: number, model: OpenRouterModel | null) => {
+      set((state) => {
+        const newSelectedModels = [...state.selectedModels];
+        newSelectedModels[index] = model;
+        return { selectedModels: newSelectedModels };
+      });
+    },
 
-  addModel: (model: OpenRouterModel) => {
-    set((state) => {
-      const newSelectedModels = [...state.selectedModels];
-      const emptyIndex = newSelectedModels.findIndex(m => m === null);
+    addModel: (model: OpenRouterModel) => {
+      set((state) => {
+        const newSelectedModels = [...state.selectedModels];
+        const emptyIndex = newSelectedModels.findIndex(m => m === null);
 
-      if (emptyIndex !== -1 && emptyIndex < state.maxModels) {
-        newSelectedModels[emptyIndex] = model;
-      }
-
-      return { selectedModels: newSelectedModels };
-    });
-  },
-
-  removeModel: (index: number) => {
-    set((state) => {
-      const newSelectedModels = [...state.selectedModels];
-      newSelectedModels[index] = null;
-      return { selectedModels: newSelectedModels };
-    });
-  },
-
-  setSearchTerm: (term: string) => {
-    set({ searchTerm: term });
-  },
-
-  setMaxModels: (count: number) => {
-    set((state) => {
-      const newMaxModels = Math.min(Math.max(count, 2), 5);
-      const newSelectedModels = [...state.selectedModels];
-
-      // If reducing max models, clear models beyond the new limit
-      if (newMaxModels < state.maxModels) {
-        for (let i = newMaxModels; i < state.selectedModels.length; i++) {
-          newSelectedModels[i] = null;
+        if (emptyIndex !== -1 && emptyIndex < state.maxModels) {
+          newSelectedModels[emptyIndex] = model;
         }
-      }
 
-      return {
-        maxModels: newMaxModels,
-        selectedModels: newSelectedModels
-      };
-    });
-  },
-
-  fetchModels: async () => {
-    set({ isLoading: true, error: null });
-
-    try {
-      // Fetch OpenRouter models and AA intelligence scores in parallel
-      const [models] = await Promise.all([
-        openrouterAPI.getModels(),
-        initializeAAScoreCache(), // Pre-populate AA cache for sync lookups
-      ]);
-
-      set({
-        filteredModels: models,
-        isLoading: false
+        return { selectedModels: newSelectedModels };
       });
-    } catch (error) {
-      set({
-        error: error instanceof Error ? error.message : 'Failed to fetch models',
-        isLoading: false
+    },
+
+    removeModel: (index: number) => {
+      set((state) => {
+        const newSelectedModels = [...state.selectedModels];
+        newSelectedModels[index] = null;
+        return { selectedModels: newSelectedModels };
       });
-    }
-  },
+    },
 
-  searchModels: async (query: string) => {
-    set({ isLoading: true, error: null, searchTerm: query });
+    setSearchTerm: (term: string) => {
+      set({ searchTerm: term });
+    },
 
-    try {
-      if (query.trim() === '') {
-        const models = await openrouterAPI.getModels();
+    setMaxModels: (count: number) => {
+      set((state) => {
+        const newMaxModels = Math.min(Math.max(count, 2), 5);
+        const newSelectedModels = [...state.selectedModels];
+
+        // If reducing max models, clear models beyond the new limit
+        if (newMaxModels < state.maxModels) {
+          for (let i = newMaxModels; i < state.selectedModels.length; i++) {
+            newSelectedModels[i] = null;
+          }
+        }
+
+        return {
+          maxModels: newMaxModels,
+          selectedModels: newSelectedModels
+        };
+      });
+    },
+
+    fetchModels: async () => {
+      set({ isLoading: true, error: null });
+
+      try {
+        // Fetch OpenRouter models and AA intelligence scores in parallel
+        const [models] = await Promise.all([
+          openrouterAPI.getModels(),
+          initializeAAScoreCache(), // Pre-populate AA cache for sync lookups
+        ]);
+
         set({
           filteredModels: models,
           isLoading: false
         });
-      } else {
-        const models = await openrouterAPI.searchModels(query);
+      } catch (error) {
         set({
-          filteredModels: models,
+          error: error instanceof Error ? error.message : 'Failed to fetch models',
           isLoading: false
         });
       }
-    } catch (error) {
+    },
+
+    searchModels: async (query: string) => {
+      set({ isLoading: true, error: null, searchTerm: query });
+
+      try {
+        if (query.trim() === '') {
+          const models = await openrouterAPI.getModels();
+          set({
+            filteredModels: models,
+            isLoading: false
+          });
+        } else {
+          const models = await openrouterAPI.searchModels(query);
+          set({
+            filteredModels: models,
+            isLoading: false
+          });
+        }
+      } catch (error) {
+        set({
+          error: error instanceof Error ? error.message : 'Failed to search models',
+          isLoading: false
+        });
+      }
+    },
+
+    clearAll: () => {
       set({
-        error: error instanceof Error ? error.message : 'Failed to search models',
-        isLoading: false
+        selectedModels: [null, null, null, null, null],
+        searchTerm: '',
       });
+    },
+
+    resetToDefaults: () => {
+      set({
+        selectedModels: [null, null, null, null, null],
+        maxModels: 3,
+        searchTerm: '',
+        error: null,
+      });
+    },
+  })));
+
+// Subscribe to model changes and log comparisons
+if (typeof window !== 'undefined') {
+  // Log session start on first load
+  logSessionStart();
+
+  // Subscribe to selectedModels changes and log comparisons
+  useComparisonStore.subscribe(
+    (state) => state.selectedModels,
+    (selectedModels) => {
+      const activeModelIds = selectedModels
+        .filter((m): m is OpenRouterModel => m !== null)
+        .map((m) => m.id);
+
+      if (activeModelIds.length >= 2) {
+        logComparison(activeModelIds);
+      }
     }
-  },
-
-  clearAll: () => {
-    set({
-      selectedModels: [null, null, null, null, null],
-      searchTerm: '',
-    });
-  },
-
-  resetToDefaults: () => {
-    set({
-      selectedModels: [null, null, null, null, null],
-      maxModels: 3,
-      searchTerm: '',
-      error: null,
-    });
-  },
-}));
+  );
+}
 
 // Selector hooks for better performance
 export const useSelectedModels = () => useComparisonStore((state) => state.selectedModels);
