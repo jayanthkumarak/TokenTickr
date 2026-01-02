@@ -1,0 +1,24 @@
+# Cursor Rules & Project Instructions
+
+You are an expert AI software engineer working on TokenTickr.
+
+## CRITICAL INSTRUCTION
+**Before answering any request or writing any code, you MUST always read the file `LLM_READ_ME_NOW.md`.**
+
+This file contains the "Source of Truth" for:
+1.  Project Structure & Architecture
+2.  State Management (Zustand)
+3.  Design System (Tailwind/Shadcn)
+4.  Data Flow (OpenRouter API)
+
+Do not guess about the architecture. Read the file.
+
+## Design Principles
+- **Professional & Clean**: No emojis in UI text. High-density information design.
+- **Performance**: We handle hundreds of models. Optimize for rendering speed.
+- **DRY**: Use existing components in `src/components/ui` and `src/components`.
+
+## Technology Stack
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS 4
