@@ -362,16 +362,29 @@ export function calculatePriceComparison(
     // Try AA Intelligence Index first (cached sync lookup)
     aaIndex = getAAIntelligenceIndexSync(result.modelId);
 
-    if (aaIndex !== null) {
+    // CRITICAL FIX: Check if we have a manual override in the static map
+    // Sometimes AA data is preliminary or stale for brand new models (e.g. Opus 4.5 showing 1329 instead of 1460+)
+    const staticEval = getModelEval(result.modelId);
+    let useAA = true;
+
+    if (staticEval?.source === 'lmsys' || staticEval?.source === 'static-override') {
+      const aaElo = aaIndex ? intelligenceIndexToElo(aaIndex) : 0;
+      // If static Elo is significantly higher (>20 points) than AA convert, prefer static (it's likely newer/better)
+      // Or if explicitly marked as override
+      if (staticEval.elo > aaElo + 20 || staticEval.source === 'static-override') {
+        useAA = false;
+      }
+    }
+
+    if (useAA && aaIndex !== null) {
       // Convert AA Index (0-100) to Elo scale for backward compatibility
       elo = intelligenceIndexToElo(aaIndex);
       eloSource = 'artificial-analysis';
     } else {
-      // Fallback to LMSYS Elo from static map
-      const evalData = getModelEval(result.modelId);
-      if (evalData?.elo) {
-        elo = evalData.elo;
-        eloSource = evalData.source;
+      // Fallback to LMSYS Elo from static map (or override)
+      if (staticEval?.elo) {
+        elo = staticEval.elo;
+        eloSource = staticEval.source;
       }
     }
 

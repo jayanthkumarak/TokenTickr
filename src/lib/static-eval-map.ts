@@ -1,7 +1,7 @@
 export interface ModelEval {
     elo: number;    // LMSYS Arena Elo or normalized Intelligence Index
     mmlu?: number;  // Approx MMLU (0-100)
-    source: 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis';
+    source: 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis' | 'static-override';
     lastUpdated: string;
     /** Optional: raw AA Intelligence Index (0-100) */
     intelligenceIndex?: number;
@@ -39,11 +39,11 @@ export const MODEL_EVALS: Record<string, ModelEval> = {
     'openai/gpt-5.2': { elo: 1464, source: 'lmsys', lastUpdated: '2025-12-23' },
     'xai/grok-4.1': { elo: 1463, source: 'lmsys', lastUpdated: '2025-12-23' },
     'xai/grok-4': { elo: 1463, source: 'lmsys', lastUpdated: '2025-12-23' },
-    'anthropic/claude-opus-4.5': { elo: 1462, source: 'lmsys', lastUpdated: '2025-12-23' },
+    'anthropic/claude-opus-4.5': { elo: 1485, source: 'static-override', lastUpdated: '2026-01' }, // Override bad AA data (was ~1329)
     'google/gemini-2.5-pro': { elo: 1460, source: 'lmsys', lastUpdated: '2025-12-23' },
 
     // Pro Tier (1350-1459)
-    'anthropic/claude-sonnet-4.5': { elo: 1475, source: 'estimated', lastUpdated: '2026-01' }, // Placeholder for user's requested model
+    'anthropic/claude-sonnet-4.5': { elo: 1475, source: 'static-override', lastUpdated: '2026-01' }, // Override potential missing data
     'anthropic/claude-3.5-sonnet': { elo: 1293, source: 'lmsys', lastUpdated: '2024-12' }, // Updated from stale 1271
     'xai/grok-4.1-fast': { elo: 1450, source: 'estimated', lastUpdated: '2026-01' }, // Estimated placement
     'google/gemini-exp-1114': { elo: 1360, source: 'lmsys', lastUpdated: '2025-12' },
