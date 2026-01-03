@@ -1,7 +1,7 @@
 /**
  * Auto-generated OpenRouter Static Data
  * 
- * Generated: 2026-01-01
+ * Generated: 2026-01-03
  * Source: https://openrouter.ai/api/v1/models
  * Total models: 353
  * 
@@ -899,8 +899,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "A sophisticated text-based Mixture-of-Experts (MoE) model featuring 21B total parameters with 3B activated per token, delivering exceptional multimodal understanding and generation through heterogeneous MoE structures and modality-isolated routing. Supporting an extensive 131K token context lengt...",
     "context_length": 120000,
     "pricing": {
-      "prompt": "0.000000056",
-      "completion": "0.000000224"
+      "prompt": "0.00000007",
+      "completion": "0.00000028"
     },
     "architecture": {
       "input_modalities": [
@@ -922,8 +922,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "ERNIE-4.5-21B-A3B-Thinking is Baidu's upgraded lightweight MoE model, refined to boost reasoning depth and quality for top-tier performance in logical puzzles, math, science, coding, text generation, and expert-level academic benchmarks.",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000000056",
-      "completion": "0.000000224"
+      "prompt": "0.00000007",
+      "completion": "0.00000028"
     },
     "architecture": {
       "input_modalities": [
@@ -945,8 +945,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in both English and Chinese. Optimized for high-throughput inference and efficient scaling, it use...",
     "context_length": 123000,
     "pricing": {
-      "prompt": "0.000000224",
-      "completion": "0.00000088"
+      "prompt": "0.00000028",
+      "completion": "0.0000011"
     },
     "architecture": {
       "input_modalities": [
@@ -968,8 +968,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "A powerful multimodal Mixture-of-Experts chat model featuring 28B total parameters with 3B activated per token, delivering exceptional text and vision understanding through its innovative heterogeneous MoE structure with modality-isolated routing. Built with scaling-efficient infrastructure for h...",
     "context_length": 30000,
     "pricing": {
-      "prompt": "0.000000112",
-      "completion": "0.000000448"
+      "prompt": "0.00000014",
+      "completion": "0.00000056"
     },
     "architecture": {
       "input_modalities": [
@@ -992,8 +992,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data using a heterogeneous MoE architecture and modality-isolated routing to enable high-fidelity...",
     "context_length": 123000,
     "pricing": {
-      "prompt": "0.000000336",
-      "completion": "0.000001"
+      "prompt": "0.00000042",
+      "completion": "0.00000125"
     },
     "architecture": {
       "input_modalities": [
@@ -1321,8 +1321,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek-R1-0528 is a lightly upgraded release of DeepSeek R1 that taps more compute and smarter post-training tricks, pushing its reasoning and inference to the brink of flagship models like O3 and Gemini 2.5 Pro.\nIt now tops math, programming, and logic leaderboards, showcasing a step-change in...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.000000048",
-      "completion": "0.000000072"
+      "prompt": "0.00000006",
+      "completion": "0.00000009"
     },
     "architecture": {
       "input_modalities": [
@@ -1629,8 +1629,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek R1 Distill Qwen 14B is a distilled large language model based on [Qwen 2.5 14B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the...",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000012",
-      "completion": "0.00000012"
+      "prompt": "0.00000015",
+      "completion": "0.00000015"
     },
     "architecture": {
       "input_modalities": [
@@ -1651,10 +1651,10 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "deepseek/deepseek-r1-distill-qwen-32b",
     "name": "DeepSeek: R1 Distill Qwen 32B",
     "description": "DeepSeek R1 Distill Qwen 32B is a distilled large language model based on [Qwen 2.5 32B](https://huggingface.co/Qwen/Qwen2.5-32B), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the-art results for dense m...",
-    "context_length": 64000,
+    "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000024",
-      "completion": "0.00000024"
+      "prompt": "0.00000027",
+      "completion": "0.00000027"
     },
     "architecture": {
       "input_modalities": [
@@ -6911,8 +6911,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math, coding, and logical inference, and \"non-thinking\" mode for general conversation. The mod...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.000000028",
-      "completion": "0.0000001104"
+      "prompt": "0.000000035",
+      "completion": "0.000000138"
     },
     "architecture": {
       "input_modalities": [
@@ -7117,9 +7117,9 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "qwen/qwen3-next-80b-a3b-thinking",
     "name": "Qwen: Qwen3 Next 80B A3B Thinking",
     "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic planning, and reports strong results across knowledge, rea...",
-    "context_length": 131072,
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000012",
+      "prompt": "0.00000015",
       "completion": "0.0000012"
     },
     "architecture": {
@@ -7214,8 +7214,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels in perception of real-world/synthetic categories, 2D/3D spatial grounding, and l...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000016",
-      "completion": "0.0000008"
+      "prompt": "0.0000002",
+      "completion": "0.000001"
     },
     "architecture": {
       "input_modalities": [
@@ -7262,8 +7262,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon temporal reasoning, DeepStack for fine-grained vi...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000000064",
-      "completion": "0.0000004"
+      "prompt": "0.00000008",
+      "completion": "0.0000005"
     },
     "architecture": {
       "input_modalities": [
@@ -7759,8 +7759,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "GLM-4.1V-9B-Thinking is a 9B parameter vision-language model developed by THUDM, based on the GLM-4-9B foundation. It introduces a reasoning-centric \"thinking paradigm\" enhanced with reinforcement learning to improve multimodal reasoning, long-context understanding (up to 64K tokens), and complex...",
     "context_length": 65536,
     "pricing": {
-      "prompt": "0.000000028",
-      "completion": "0.0000001104"
+      "prompt": "0.000000035",
+      "completion": "0.000000138"
     },
     "architecture": {
       "input_modalities": [
@@ -8270,8 +8270,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter size. GLM-4.5-Air also supports hybrid inference modes, offering a \"th...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000000104",
-      "completion": "0.00000068"
+      "prompt": "0.00000013",
+      "completion": "0.00000085"
     },
     "architecture": {
       "input_modalities": [
@@ -8316,8 +8316,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding, image Q&A, OCR, and document parsing, with strong gain...",
     "context_length": 65536,
     "pricing": {
-      "prompt": "0.00000048",
-      "completion": "0.00000144"
+      "prompt": "0.0000006",
+      "completion": "0.0000018"
     },
     "architecture": {
       "input_modalities": [
@@ -8431,7 +8431,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
 ];
 
 export const OPENROUTER_DATA_META = {
-    generatedAt: '2026-01-01',
+    generatedAt: '2026-01-03',
     totalModels: 353,
     source: 'https://openrouter.ai',
 };
