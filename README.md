@@ -57,10 +57,12 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - Zustand state management
 - VisX visualization
 
-## v2.6.0 Release
-- **NUX Popup**: New "Frosted Glass" welcome modal for first-time visitors.
-- **Layout Polish**: Refined header to remove redundant branding and streamlined column controls.
-- **LLM Context**: Added `LLM_READ_ME_NOW.md` for efficient codebase context loading by AI agents.
+## v3.0.0 Release
+- **Model Card UI Redesign**: Fixed visual overflow issues and layout consistency for high-density comparisons (5+ models).
+- **Grid Layout Improvements**: Enhanced responsiveness for model cards using advanced CSS Grid and Flexbox techniques.
+- **NUX Popup**: "Frosted Glass" welcome modal for first-time visitors.
+- **Layout Polish**: Refined header and column controls.
+- **LLM Context**: Added `LLM_READ_ME_NOW.md` for AI agent optimization.
 
 ## For AI Agents
 If you are an LLM or AI agent trying to understand this codebase, please read [LLM_READ_ME_NOW.md](LLM_READ_ME_NOW.md) first. It contains a high-density technical summary designed to save tokens and provide immediate context.
