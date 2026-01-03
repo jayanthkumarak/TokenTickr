@@ -5,7 +5,7 @@ import { PriceCalculationResult } from "@/lib/price-calculation";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
-import { Coins, PackageOpen } from "lucide-react";
+import { Coins } from "lucide-react";
 import { CHART_COLORS } from "@/lib/colorblind-colors";
 
 interface BudgetCapacityProps {
