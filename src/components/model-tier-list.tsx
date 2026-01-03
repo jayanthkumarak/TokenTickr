@@ -6,6 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check, Sparkles, Zap, Brain } from "lucide-react";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ModelTierListProps {
     results: PriceCalculationResult[];
@@ -104,15 +110,43 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                                 <div className="w-[40%] flex flex-col gap-2 px-2 border-x border-border/10">
                                     {/* Capabilities Row */}
                                     <div className="flex items-center gap-1.5">
-                                        <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest", hasVision ? "bg-indigo-500/20 text-indigo-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                            VIS
-                                        </Badge>
-                                        <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest", hasThinking ? "bg-purple-500/20 text-purple-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                            LOG
-                                        </Badge>
-                                        <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest", hasCoding ? "bg-blue-500/20 text-blue-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                            CDE
-                                        </Badge>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasVision ? "bg-indigo-500/20 text-indigo-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
+                                                        VIS
+                                                    </Badge>
+                                                </TooltipTrigger>
+                                                <TooltipContent className="text-xs max-w-[200px]">
+                                                    <p className="font-semibold mb-1">{hasVision ? "Vision Capable" : "Text Only"}</p>
+                                                    <p className="text-muted-foreground">Can process images and visual inputs.</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasThinking ? "bg-purple-500/20 text-purple-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
+                                                        LOG
+                                                    </Badge>
+                                                </TooltipTrigger>
+                                                <TooltipContent className="text-xs max-w-[200px]">
+                                                    <p className="font-semibold mb-1">{hasThinking ? "Reasoning Optimized" : "Standard Logic"}</p>
+                                                    <p className="text-muted-foreground">Uses Chain-of-Thought or enhanced reasoning techniques.</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasCoding ? "bg-blue-500/20 text-blue-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
+                                                        CDE
+                                                    </Badge>
+                                                </TooltipTrigger>
+                                                <TooltipContent className="text-xs max-w-[200px]">
+                                                    <p className="font-semibold mb-1">{hasCoding ? "Coding Specialist" : "General Purpose"}</p>
+                                                    <p className="text-muted-foreground">High proficiency in code generation and debugging.</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
                                     </div>
 
                                     {/* Intel & Mem Row */}
