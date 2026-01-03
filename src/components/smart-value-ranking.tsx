@@ -134,7 +134,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                         {topPick.eloScore
                             ? (
                                 <>
-                                    <span>Elo: {topPick.eloScore}</span>
+                                    <span>Elo: {topPick.eloScore.toFixed(0)}</span>
                                     {topPick.eloSource === 'artificial-analysis' && (
                                         <span className="text-blue-600 dark:text-blue-400 flex items-center gap-0.5">
                                             <a href={AA_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -215,7 +215,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                         </div>
                                         {model.eloScore && (
                                             <span className="text-[10px] text-zinc-500 flex items-center gap-1.5">
-                                                <span>Elo: {model.eloScore}</span>
+                                                <span>Elo: {model.eloScore.toFixed(0)}</span>
                                                 {model.eloSource === 'artificial-analysis' && (
                                                     <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-1 rounded-[3px] text-[9px] font-medium border border-blue-200 dark:border-blue-800 flex items-center gap-0.5">
                                                         <a href={AA_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -287,7 +287,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                                 </TooltipTrigger>
                                                 <TooltipContent>
                                                     <p className="text-xs font-semibold">Intelligence Score (0-100)</p>
-                                                    <p className="text-[10px] text-zinc-400 max-w-[150px]">Weighted combo of AA Index (Benchmarks) and Elo (Human Preference).</p>
+                                                    <p className="text-[10px] text-zinc-400 max-w-[150px]">Based on MMLU-Pro benchmark performance (mapped to Elo).</p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </TooltipProvider>
