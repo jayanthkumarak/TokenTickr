@@ -57,12 +57,18 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - Zustand state management
 - VisX visualization
 
-## v3.0.0 Release
-- **Model Card UI Redesign**: Fixed visual overflow issues and layout consistency for high-density comparisons (5+ models).
-- **Grid Layout Improvements**: Enhanced responsiveness for model cards using advanced CSS Grid and Flexbox techniques.
-- **NUX Popup**: "Frosted Glass" welcome modal for first-time visitors.
-- **Layout Polish**: Refined header and column controls.
+## Release History
+
+### v3.0.0 (The "Polished" Release)
+- **Model Card UI Redesign**: Fixed visual overflow issues and layout consistency for high-density comparisons (5+ models) using advanced Grid/Flexbox.
+- **Usage Telemetry**: Added lightweight, privacy-focused session and comparison logging to understand model popularity trends.
+- **NUX Popup**: New "Frosted Glass" welcome modal for first-time visitors.
 - **LLM Context**: Added `LLM_READ_ME_NOW.md` for AI agent optimization.
+
+### v2.5.0 (The "Speed" Release)
+- **Static Data Generation**: Moved OpenRouter data fetching to build-time, eliminating 800ms+ of initial load latency.
+- **Lazy Loading**: Optimized bundle size by splitting heavy components (`ModelSelector`, `PriceComparison`) to load only on interaction.
+- **Performance**: Significant reduction in Time to Interactive (TTI).
 
 ## For AI Agents
 If you are an LLM or AI agent trying to understand this codebase, please read [LLM_READ_ME_NOW.md](LLM_READ_ME_NOW.md) first. It contains a high-density technical summary designed to save tokens and provide immediate context.
