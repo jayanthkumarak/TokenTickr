@@ -1,6 +1,7 @@
+```typescript
 // @vitest-environment jsdom
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React from "react"; /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ImpactCalculator } from "./impact-calculator";
 import { PriceCalculationResult } from "../../lib/price-calculation";
