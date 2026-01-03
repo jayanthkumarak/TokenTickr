@@ -235,7 +235,7 @@ export function ModelCard({
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-2 min-w-0 w-full">
           <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg leading-tight truncate">
+            <CardTitle className="text-lg leading-tight line-clamp-2 break-words min-h-[2.5rem] flex items-center" title={model.name}>
               {model.name}
             </CardTitle>
             <p className="text-xs text-muted-foreground mt-1 font-mono opacity-60 truncate">
