@@ -5,7 +5,7 @@ import { PriceCalculationResult } from "@/lib/price-calculation";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
-import { BookOpen, Layers, Coins, PackageOpen } from "lucide-react";
+import { Coins, PackageOpen } from "lucide-react";
 import { CHART_COLORS } from "@/lib/colorblind-colors";
 
 interface BudgetCapacityProps {
@@ -26,7 +26,6 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
     const capacityData = useMemo(() => {
         return results.map(model => {
             // Avoid division by zero
-            const costPer1k = (model.totalCost / 1000) || 0.0001;
             // model.totalCost is based on default query volume (usually 1M tokens approx? No, queryVolume=1000 by default in store?)
             // Actually `model.totalCost` = costPerQuery * queryVolume.
             // We should use `model.costPerQuery` which is cost for ~1.5k tokens (1k in + 500 out).
@@ -98,7 +97,7 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
 
             {/* Chart Visualization */}
             <div className="space-y-4">
-                {capacityData.map((item, idx) => (
+                {capacityData.map((item) => (
                     <div key={item.modelId} className="group">
                         <div className="flex items-center justify-between text-xs mb-1.5 opacity-80">
                             <div className="font-medium flex items-center gap-2">
@@ -121,7 +120,7 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
                             {/* Fill */}
                             <div
                                 className="absolute top-0 left-0 h-full transition-all duration-500 ease-out bg-gradient-to-r from-emerald-900/40 to-emerald-500/20 border-r-2 border-emerald-500/50"
-                                style={{ width: `${(item.books / maxBooks) * 100}%` }}
+                                style={{ width: `${(item.books / maxBooks) * 100}% ` }}
                             >
                                 {/* Icon Pattern Overlay */}
                                 <div

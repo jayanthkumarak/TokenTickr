@@ -11,7 +11,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Info, Layers } from "lucide-react";
 import { PriceComparisonData, formatCostDisplay, getCostDisclaimer } from "@/lib/price-calculation";
-import { CHART_COLORS, SEMANTIC_COLORS } from "@/lib/colorblind-colors";
 import { SmartValueRanking } from "@/components/smart-value-ranking";
 import { ContextComparisonChart } from "@/components/context-comparison-chart";
 import { ModelTierList } from "@/components/model-tier-list";

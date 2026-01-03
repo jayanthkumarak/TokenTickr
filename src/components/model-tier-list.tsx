@@ -5,8 +5,7 @@ import { PriceCalculationResult } from "@/lib/price-calculation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Check, Sparkles, Zap, Brain, Shield } from "lucide-react";
-import { CHART_COLORS } from "@/lib/colorblind-colors";
+import { Check, Sparkles, Zap, Brain } from "lucide-react";
 
 interface ModelTierListProps {
     results: PriceCalculationResult[];
@@ -77,7 +76,7 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                 </div>
 
                 <div className="space-y-2">
-                    {models.map((model, idx) => {
+                    {models.map((model) => {
                         const hasVision = model.capabilityFlags?.includes("Multimodal");
                         const hasThinking = model.capabilityFlags?.includes("Thinking");
                         const hasCoding = model.modelName.toLowerCase().includes("code") || model.modelName.toLowerCase().includes("sonnet") || model.perfScore > 80; // Heuristic for CDE if flag missing
