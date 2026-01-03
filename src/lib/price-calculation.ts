@@ -408,11 +408,21 @@ export function calculatePriceComparison(
 
     // Apply capability bonuses only if we have a valid base score
     let perfScore = 0;
+
+    // Normalize Elo (1000-1650 range) to 0-100 base score
+    // 1000 -> 0
+    // 1650 -> 100
+    // Formula: (Elo - 1000) / 6.5
+    if (elo > 0) {
+      perfScore = Math.max(0, Math.min(100, (elo - 1000) / 6.5));
+    }
+
     // 3b. Apply capability bonuses to perfScore (thinking, multimodal, tools)
     // Find the original model to check capabilities
     const originalModel = models.find(m => m.id === result.modelId);
     if (originalModel) {
       const capabilityBonus = calculateCapabilityBonus(originalModel);
+      // Add bonus but cap at 100
       perfScore = Math.min(100, perfScore + capabilityBonus);
       // Store capability flags for UI display
       result.capabilityFlags = getCapabilityFlags(originalModel);
