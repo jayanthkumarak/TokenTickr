@@ -180,16 +180,60 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                 to: valueChallenger,
                 impact: `Sweet Spot`,
                 description: (() => {
-                    const retention = valueChallenger.perfScore / premiumAnchor.perfScore;
-                    const savingsStr = savingsPercent + "%";
+                    // Logic: Select a template based on the "signature" of the trade-off
+                    // We use deterministic selection (hash of names) so it doesn't cause hydration mismatches,
+                    // but feels varied across different model pairs.
 
+                    const retention = valueChallenger.perfScore / premiumAnchor.perfScore;
+                    const retentionPct = Math.round(retention * 100);
+                    const perfDiff = Math.abs(valueChallenger.perfScore - premiumAnchor.perfScore);
+                    const savings = parseFloat(savingsPercent);
+
+                    // Generate a "random" but stable index based on model names
+                    const seed = (valueChallenger.modelName.length + premiumAnchor.modelName.length) % 3;
+
+                    // CASE 1: The "Unicorn" (Cheaper AND Better)
                     if (retention >= 1.05) {
-                        return `${valueChallenger.modelName} actually outperforms ${premiumAnchor.modelName} (1${Math.round((retention - 1) * 100)}% capability) while costing ${savingsStr} less. This is a massive win.`;
+                        const templates = [
+                            `${valueChallenger.modelName} actually outperforms ${premiumAnchor.modelName} (+${perfDiff}pts) while costing ${savings}% less. This is an absolute no-brainer.`,
+                            `You're usually paying for performance, but here you get more capability for less money with ${valueChallenger.modelName}. A rare efficiency win.`,
+                            `Stop paying the premium tax. ${valueChallenger.modelName} benchmarks higher than ${premiumAnchor.modelName} and saves you ${savings}% of the budget.`
+                        ];
+                        return templates[seed % templates.length];
                     }
+
+                    // CASE 2: The "Clone" (Virtual Tie)
                     if (retention >= 0.98) {
-                        return `${valueChallenger.modelName} matches ${premiumAnchor.modelName}'s intelligence almost perfectly, but for a fraction of the price (${savingsStr} cheaper).`;
+                        const templates = [
+                            `${valueChallenger.modelName} matches ${premiumAnchor.modelName}'s intelligence almost perfectly, but for a fraction of the price.`,
+                            `Ideally, you wouldn't notice a difference in quality. ${valueChallenger.modelName} offers effectively identical performance for ${savings}% less.`,
+                            `It's functionally a tie in intelligence, but a landslide victory for your wallet. ${valueChallenger.modelName} is the logical choice.`
+                        ];
+                        return templates[seed % templates.length];
                     }
-                    return `${valueChallenger.modelName} delivers ${Math.round(retention * 100)}% of the flagship experience for ${100 - parseFloat(savingsPercent)}% of the cost. A minimal drop in smarts for huge savings.`;
+
+                    // CASE 3: The "Sweet Spot" (Minimal Drop, Massive Savings)
+                    if (retention >= 0.90 && savings > 80) {
+                        const templates = [
+                            `Is that last ${100 - retentionPct}% of performance really worth a ${100 - savings}% markup? ${valueChallenger.modelName} delivers 90%+ of the value for pennies on the dollar.`,
+                            `${valueChallenger.modelName} punches way above its weight class, retaining ${retentionPct}% of flagship intelligence while slashing costs by ${savings}%.`,
+                            `Unless you're doing cutting-edge research, ${valueChallenger.modelName} is likely all you need. It keeps ${retentionPct}% of the smarts for ${100 - savings}% of the cost.`
+                        ];
+                        return templates[seed % templates.length];
+                    }
+
+                    // CASE 4: The "Reasonable Compromise" (Noticeable Drop, but Good Value)
+                    if (retention >= 0.80) {
+                        const templates = [
+                            `${valueChallenger.modelName} delivers a solid ${retentionPct}% of the flagship experience. For most production workloads, the ${savings}% savings justify the switch.`,
+                            `You sacrifice a bit of nuance (${100 - retentionPct}% drop), but ${valueChallenger.modelName} is a workhorse that fits the budget much better.`,
+                            `A classic 80/20 trade-off. ${valueChallenger.modelName} gives you the majority of the capability while freeing up significant capital.`
+                        ];
+                        return templates[seed % templates.length];
+                    }
+
+                    // CASE 5: The "Budget Constraints" (Big Drop, but Necessary)
+                    return `${valueChallenger.modelName} is a different class of model, but it retains ${retentionPct}% of the utility for a radically lower price point (${savings}% savings).`;
                 })()
             });
         }
