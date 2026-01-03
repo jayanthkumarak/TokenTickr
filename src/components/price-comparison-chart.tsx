@@ -15,7 +15,7 @@ import { SmartValueRanking } from "@/components/smart-value-ranking";
 import { ContextComparisonChart } from "@/components/context-comparison-chart";
 import { ModelTierList } from "@/components/model-tier-list";
 import { SmartTradeoffs } from "@/components/smart-tradeoffs";
-import { BudgetCapacity } from "@/components/budget-capacity";
+import { ImpactCalculator } from "@/components/budget-impact/impact-calculator";
 import { cn } from "@/lib/utils";
 
 interface PriceComparisonChartProps {
@@ -291,8 +291,8 @@ export function PriceComparisonChart({
         <ContextComparisonChart results={data.results} />
       </Card>
 
-      {/* 3. THE SCALE: Budget Capacity Simulator */}
-      <BudgetCapacity results={data.results} />
+      {/* 4. THE REAL WORLD: Impact Calculator */}
+      <ImpactCalculator results={data.results} />
 
       {/* Footer: Disclaimer */}
       <div className="p-4 bg-muted/30 rounded-lg flex items-start gap-3 text-xs text-muted-foreground">
