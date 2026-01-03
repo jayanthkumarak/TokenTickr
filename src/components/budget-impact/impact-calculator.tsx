@@ -1,15 +1,16 @@
 "use client";
 
+import * as React from "react";
 import { useState, useMemo } from "react";
-import { PriceCalculationResult } from "@/lib/price-calculation";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { PriceCalculationResult } from "../../lib/price-calculation";
+import { Card } from "../ui/card";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import { Zap } from "lucide-react";
 import { MetricSelector, ImpactMetric } from "./metric-selector";
 import { ImpactCard } from "./impact-card";
-import { cn } from "@/lib/utils";
-import { CHART_COLORS } from "@/lib/colorblind-colors";
+import { cn } from "../../lib/utils";
+import { CHART_COLORS } from "../../lib/colorblind-colors";
 
 interface ImpactCalculatorProps {
     results: PriceCalculationResult[];
@@ -62,13 +63,13 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
 
             {/* Header: Title + Controls */}
             <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
-                <div>
-                    <h3 className="text-xl font-bold flex items-center gap-2">
+                <div className="space-y-1">
+                    <h3 className="text-xl font-bold flex items-center gap-2 text-foreground">
                         <Zap className="h-5 w-5 text-amber-500 fill-amber-500" />
                         Real-World Impact
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                        Translate token costs into tangible work output.
+                    <p className="text-sm text-muted-foreground">
+                        Translate abstract token costs into tangible work output.
                     </p>
                 </div>
 
@@ -77,7 +78,7 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                     <MetricSelector value={metric} onChange={setMetric} />
 
                     {/* Budget Controls */}
-                    <div className="flex items-center gap-2 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                    <div className="flex items-center gap-2 p-1.5 bg-muted/80 rounded-lg border border-border/50 backdrop-blur-sm">
                         <div className="flex gap-1">
                             {PRESETS.map(amt => (
                                 <Button
@@ -86,24 +87,25 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                                     size="sm"
                                     onClick={() => setBudget(amt)}
                                     className={cn(
-                                        "h-8 px-2.5 text-xs font-medium min-w-[36px]",
+                                        "h-8 px-3 text-xs font-medium min-w-[36px] transition-all",
                                         budget === amt
-                                            ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                                            : "text-zinc-500"
+                                            ? "bg-primary text-primary-foreground shadow-sm"
+                                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                                     )}
                                 >
                                     ${amt}
                                 </Button>
                             ))}
                         </div>
-                        <div className="w-px h-4 bg-zinc-300 dark:bg-zinc-600 mx-1" />
-                        <div className="relative">
-                            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-500">$</span>
+                        <div className="w-px h-4 bg-border mx-2" />
+                        <div className="relative group">
+                            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground group-focus-within:text-foreground">$</span>
                             <Input
                                 type="number"
+                                data-testid="budget-input"
                                 value={budget}
                                 onChange={(e) => setBudget(Number(e.target.value))}
-                                className="h-8 w-20 pl-4 pr-1 text-xs border-0 bg-transparent focus-visible:ring-0 text-right font-medium"
+                                className="h-8 w-20 pl-5 pr-2 text-sm border-0 bg-background/50 focus-visible:ring-1 focus-visible:ring-ring focus-visible:bg-background text-right font-semibold transition-all shadow-sm"
                                 min={1}
                             />
                         </div>

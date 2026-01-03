@@ -1,7 +1,8 @@
 "use client";
 
+import React from "react";
 import { ImpactMetric } from "./metric-selector";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { BookOpen, Mail, Terminal } from "lucide-react";
 
 interface ImpactCardProps {
@@ -46,48 +47,66 @@ export function ImpactCard({ modelName, modelColor, metric, count, budget, isBes
     const type = config[metric];
     const Icon = type.icon;
 
+    // Dynamic gradient backgrounds for "Best Value" based on metric
+    const bestValueGradients = {
+        novel: "from-blue-600 to-indigo-700 shadow-blue-900/20",
+        email: "from-amber-500 to-orange-600 shadow-orange-900/20",
+        script: "from-emerald-600 to-teal-700 shadow-emerald-900/20"
+    };
+
     return (
         <div className={cn(
-            "relative flex flex-col p-4 rounded-xl border transition-all hover:shadow-md",
+            "relative flex flex-col p-5 rounded-2xl border transition-all duration-300",
             isBestValue
-                ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-transparent md:col-span-2 shadow-lg scale-[1.02]"
-                : "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-800"
+                ? cn(
+                    "bg-gradient-to-br text-primary-foreground border-transparent md:col-span-2 shadow-xl scale-[1.02] z-10",
+                    bestValueGradients[metric]
+                )
+                : "bg-card hover:bg-accent/50 text-card-foreground border-border/60 hover:border-border hover:shadow-lg"
         )}>
             {/* Best Value Badge */}
             {isBestValue && (
-                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
-                    👑 Best Value
+                <div className="absolute -top-3 -right-3 bg-white text-zinc-900 text-[10px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5 border border-zinc-100">
+                    <span className="text-sm">👑</span> Best Value
                 </div>
             )}
 
-            <div className="flex items-center gap-2 mb-3 opacity-90">
+            <div className={cn("flex items-center gap-2 mb-4", isBestValue ? "opacity-90" : "opacity-70")}>
                 <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: modelColor }}
+                    className="w-2 h-2 rounded-full ring-2 ring-current ring-opacity-20"
+                    style={{ backgroundColor: isBestValue ? 'white' : modelColor }}
                 />
-                <span className="text-xs font-semibold truncate max-w-[120px]" title={modelName}>
+                <span className="text-xs font-medium tracking-wide truncate max-w-[140px]" title={modelName}>
                     {modelName}
                 </span>
             </div>
 
-            <div className="flex-1 flex flex-col justify-end">
+            <div className="flex-1 flex flex-col justify-end space-y-3">
                 <div className="flex items-baseline gap-1.5 flex-wrap">
-                    <span className={cn("text-3xl font-bold tracking-tight", isBestValue && "text-4xl")}>
+                    <span className={cn(
+                        "font-bold tracking-tighter tabular-nums leading-none",
+                        isBestValue ? "text-5xl drop-shadow-sm" : "text-4xl"
+                    )}>
                         {count.toLocaleString()}
                     </span>
-                    <span className={cn("text-sm font-medium opacity-70", isBestValue && "ml-1")}>
+                    <span className={cn(
+                        "text-sm font-medium uppercase tracking-wider",
+                        isBestValue ? "opacity-90" : "opacity-60"
+                    )}>
                         {type.label}
                     </span>
                 </div>
 
-                <div className={cn(
-                    "mt-3 flex items-center gap-2 text-[10px] rounded px-2 py-1.5 w-fit border",
-                    isBestValue
-                        ? "bg-white/10 border-white/10 text-white/80"
-                        : "bg-zinc-50 dark:bg-zinc-800/50 text-zinc-500 border-zinc-100 dark:border-zinc-800"
-                )}>
-                    <Icon className="h-3 w-3" />
-                    <span>for ${budget}</span>
+                <div className="flex items-center justify-between">
+                    <div className={cn(
+                        "flex items-center gap-2 text-[10px] rounded-md px-2.5 py-1.5 font-medium transition-colors",
+                        isBestValue
+                            ? "bg-white/20 text-primary-foreground border border-white/20 backdrop-blur-sm"
+                            : "bg-muted/50 text-muted-foreground border border-border"
+                    )}>
+                        <Icon className={cn("h-3 w-3", !isBestValue && type.colorClass)} />
+                        <span>for ${budget}</span>
+                    </div>
                 </div>
             </div>
         </div>
