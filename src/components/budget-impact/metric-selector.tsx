@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { BookOpen, Mail, Terminal, Calculator } from "lucide-react";
+import { BookOpen, Mail, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type ImpactMetric = "novel" | "email" | "script";

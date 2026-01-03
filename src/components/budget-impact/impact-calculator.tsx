@@ -5,7 +5,7 @@ import { PriceCalculationResult } from "@/lib/price-calculation";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Coins, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { MetricSelector, ImpactMetric } from "./metric-selector";
 import { ImpactCard } from "./impact-card";
 import { cn } from "@/lib/utils";
@@ -56,8 +56,6 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
             };
         }).sort((a, b) => b.impactCount - a.impactCount); // Sort best first
     }, [results, budget, metric]);
-
-    const bestVal = impactData[0];
 
     return (
         <Card className={cn("p-6 space-y-6 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800", className)}>
