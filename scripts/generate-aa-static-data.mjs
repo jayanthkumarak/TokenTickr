@@ -170,7 +170,7 @@ ${aliasEntries.join('\n')}
 export const AA_DATA_META = {
     generatedAt: '${now}',
     totalModels: ${scoredModels.length},
-    source: 'https://artificialanalysis.ai',
+    source: 'https://artificialanalysis.ai?utm_source=tokentickr',
 };
 `;
 

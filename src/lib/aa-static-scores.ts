@@ -761,5 +761,5 @@ export const AA_ID_ALIASES: Record<string, string> = {
 export const AA_DATA_META = {
     generatedAt: '2026-01-03',
     totalModels: 367,
-    source: 'https://artificialanalysis.ai',
+    source: 'https://artificialanalysis.ai?utm_source=tokentickr',
 };

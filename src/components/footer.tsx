@@ -15,7 +15,7 @@ export function Footer() {
           <span>·</span>
           <span>Benchmarks:</span>
           <a
-            href="https://artificialanalysis.ai"
+            href="https://artificialanalysis.ai?utm_source=tokentickr"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium hover:underline"

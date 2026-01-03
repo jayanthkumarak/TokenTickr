@@ -298,7 +298,7 @@ export const artificialAnalysisAPI = ArtificialAnalysisAPI.getInstance();
 export const AA_ATTRIBUTION = {
     text: 'Intelligence data provided by ArtificialAnalysis.ai',
     shortText: 'Data: ArtificialAnalysis.ai',
-    url: 'https://artificialanalysis.ai',
+    url: 'https://artificialanalysis.ai?utm_source=tokentickr',
 };
 
 // ============================================================

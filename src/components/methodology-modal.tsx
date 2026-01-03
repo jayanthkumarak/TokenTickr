@@ -73,7 +73,7 @@ const METHODOLOGY_CONTENT = {
             "More objective than human preference (LMSYS) for measuring raw capability",
         ],
         formula: null as string | null,
-        source: "https://artificialanalysis.ai",
+        source: "https://artificialanalysis.ai?utm_source=tokentickr",
         confidence: "High",
     },
 };

@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { PriceCalculationResult } from "@/lib/price-calculation";
+import { PriceCalculationResult, AA_ATTRIBUTION } from "@/lib/price-calculation";
 import { calculateValueScore, ScoringMode, getModelTier, getTierDisplayInfo } from "@/lib/scoring-utils";
 import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
 import { MethodologyModal } from "@/components/methodology-modal";
@@ -113,7 +113,9 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                     <span>Elo: {topPick.eloScore}</span>
                                     {topPick.eloSource === 'artificial-analysis' && (
                                         <span className="text-blue-600 dark:text-blue-400 flex items-center gap-0.5">
-                                            AA Index
+                                            <a href={AA_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                AA Index
+                                            </a>
                                             <MethodologyModal type="artificial-analysis" />
                                         </span>
                                     )}
@@ -192,7 +194,9 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                                 <span>Elo: {model.eloScore}</span>
                                                 {model.eloSource === 'artificial-analysis' && (
                                                     <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-1 rounded-[3px] text-[9px] font-medium border border-blue-200 dark:border-blue-800 flex items-center gap-0.5">
-                                                        AA Index
+                                                        <a href={AA_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                            AA Index
+                                                        </a>
                                                         <MethodologyModal type="artificial-analysis" />
                                                     </span>
                                                 )}
