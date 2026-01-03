@@ -1,15 +1,11 @@
 
 
 import { OpenRouterModel } from '@/types/models';
-import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
-import { calculateHeuristicElo } from './heuristic-engine';
+import { getModelEval, CONTEXT_FALLBACKS } from './static-eval-map';
+
 import { calculateCapabilityBonus, getCapabilityFlags } from './capability-bonus';
 import {
   AA_ATTRIBUTION,
-  getAAIntelligenceIndexSync,
-  intelligenceIndexToElo,
-  initializeAAScoreCache,
-  isAACacheReady,
   getMMLUProSync
 } from './artificial-analysis-api';
 
@@ -365,7 +361,7 @@ export function calculatePriceComparison(
     // We strictly avoid "estimating" or "hallucinating" data for missing models.
 
     let elo = 0;
-    let mmluPro = getMMLUProSync(result.modelId);
+    const mmluPro = getMMLUProSync(result.modelId);
     let eloSource: 'mmlu-pro' | 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis' | 'static-override' | 'insufficient-data' = 'insufficient-data';
 
     const staticEval = getModelEval(result.modelId);

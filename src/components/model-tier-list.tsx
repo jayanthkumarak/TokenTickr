@@ -20,7 +20,7 @@ interface ModelTierListProps {
 
 type TierType = "Budget" | "Balanced" | "Premium";
 
-interface CategorizedModel extends PriceCalculationResult {
+interface CategorizedModel extends Omit<PriceCalculationResult, 'tier'> {
     tier: TierType;
     tags: string[];
 }
