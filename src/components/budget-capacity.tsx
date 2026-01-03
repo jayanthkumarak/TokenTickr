@@ -74,11 +74,11 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
                     </p>
                 </div>
 
-                {/* Budget Slider */}
-                <div className="w-full md:w-72 space-y-4 p-5 rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl">
+                {/* Budget Slider - High Contrast Dark Box */}
+                <div className="w-full md:w-72 space-y-4 p-5 rounded-xl bg-[#09090b] text-white shadow-2xl border border-white/10 relative z-10">
                     <div className="flex justify-between items-center">
                         <span className="text-zinc-400 font-medium text-sm">Monthly Budget</span>
-                        <span className="text-emerald-400 font-bold text-xl tracking-tight">${monthlyBudget[0]}</span>
+                        <span className="text-[#34d399] font-bold text-xl tracking-tight">${monthlyBudget[0]}</span>
                     </div>
                     <Slider
                         value={monthlyBudget}
@@ -86,9 +86,9 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
                         max={100}
                         step={1}
                         min={1}
-                        className="py-2"
+                        className="py-2 [&>.relative>.absolute]:bg-white [&>.relative]:bg-zinc-700 [&>span]:border-white/50"
                     />
-                    <div className="flex justify-between text-[10px] text-zinc-600 font-medium uppercase tracking-wider">
+                    <div className="flex justify-between text-[10px] text-zinc-500 font-medium pt-1">
                         <span>$1</span>
                         <span>$100</span>
                     </div>
@@ -96,55 +96,51 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
             </div>
 
             {/* Chart Visualization */}
-            <div className="space-y-6">
+            <div className="space-y-8 mt-8">
                 {capacityData.map((item) => (
                     <div key={item.modelId} className="group">
-                        <div className="flex items-center justify-between text-xs mb-2">
-                            <div className="font-semibold text-zinc-300 flex items-center gap-2.5">
+                        <div className="flex items-end justify-between text-xs mb-2">
+                            <div className="font-semibold text-zinc-600 dark:text-zinc-300 flex items-center gap-2">
                                 <div
-                                    className="w-2.5 h-2.5 rounded-full ring-2 ring-white/5"
+                                    className="w-2 h-2 rounded-full"
                                     style={{ backgroundColor: CHART_COLORS.primary[results.findIndex(r => r.modelId === item.modelId) % CHART_COLORS.primary.length] }}
                                 />
                                 {item.modelName}
                             </div>
-                            <div className="text-zinc-400 font-mono">
+                            <div className="text-right">
                                 {item.books < 1
-                                    ? <span>{Math.floor(item.pages).toLocaleString()} <span className="text-zinc-600 text-[10px] uppercase ml-1">Pages</span></span>
-                                    : <span className="text-emerald-400 font-bold text-sm">{item.books.toFixed(1)} <span className="font-medium text-emerald-500/60 text-[10px] uppercase ml-1">Books</span></span>
+                                    ? <span className="text-zinc-500 font-mono">{Math.floor(item.pages).toLocaleString()} <span className="text-[10px] uppercase">Pages</span></span>
+                                    : (
+                                        <div className="flex items-baseline gap-1">
+                                            <span className="text-[#34d399] font-bold text-lg">{item.books.toFixed(1)}</span>
+                                            <span className="text-[#34d399]/70 text-[10px] font-bold uppercase tracking-wider">Books</span>
+                                        </div>
+                                    )
                                 }
                             </div>
                         </div>
 
-                        {/* Bar */}
-                        <div className="relative h-14 w-full bg-zinc-900/50 rounded-lg overflow-hidden border border-white/5 shadow-inner">
-                            {/* Fill */}
+                        {/* Bar Container - Flat Gray Background */}
+                        <div className="relative h-14 w-full bg-zinc-200 dark:bg-zinc-800 rounded-sm overflow-hidden">
+                            {/* Fill - Muted Green with Pattern */}
                             <div
-                                className="absolute top-0 left-0 h-full transition-all duration-700 ease-out bg-emerald-500/20 border-r border-emerald-500/30"
+                                className="absolute top-0 left-0 h-full transition-all duration-700 ease-out bg-[#6ee7b7]/40 dark:bg-[#34d399]/20"
                                 style={{ width: `${(item.books / maxBooks) * 100}%` }}
                             >
-                                {/* Book Spines Pattern Overlay */}
+                                {/* Vertical Lines Pattern (Books) */}
                                 <div
-                                    className="absolute inset-0 opacity-30"
+                                    className="absolute inset-0 opacity-50 border-r-2 border-[#34d399]"
                                     style={{
-                                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' width='20' height='40' fill='none'%3E%3Crect x='2' y='2' width='6' height='36' rx='1' fill='%2310b981' fill-opacity='0.6' stroke='%2334d399' stroke-width='0.5'/%3E%3Crect x='10' y='4' width='7' height='34' rx='1' fill='%23059669' fill-opacity='0.6' stroke='%2334d399' stroke-width='0.5'/%3E%3Crect x='19' y='3' width='5' height='35' rx='1' fill='%2334d399' fill-opacity='0.4' stroke='%2334d399' stroke-width='0.5'/%3E%3Crect x='26' y='5' width='8' height='33' rx='1' fill='%23047857' fill-opacity='0.6' stroke='%2334d399' stroke-width='0.5'/%3E%3C/svg%3E")`,
-                                        backgroundSize: '20px 40px',
-                                        backgroundRepeat: 'repeat-x'
+                                        backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(16, 185, 129, 0.2) 4px, transparent 5px)`,
                                     }}
                                 />
                             </div>
 
-                            {/* Label inside bar if wide enough */}
-                            <div className="absolute inset-0 flex items-center px-3">
-                                {item.books > 5 ? (
-                                    <div className="flex items-center gap-2 text-emerald-100/50 text-[10px] font-mono animate-pulse">
-                                        <PackageOpen className="h-3 w-3" />
-                                        {Math.floor(item.totalTokens / 1000).toLocaleString()}k tokens
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center gap-2 text-zinc-500/30 text-[10px] font-mono pl-2">
-                                        {Math.floor(item.totalTokens / 1000).toLocaleString()}k
-                                    </div>
-                                )}
+                            {/* Token Count Label - Overlay */}
+                            <div className="absolute inset-0 flex items-center px-3 pointer-events-none">
+                                <span className="text-[10px] font-mono text-zinc-500/50 dark:text-zinc-400/30">
+                                    {Math.floor(item.totalTokens / 1000).toLocaleString()}k tokens
+                                </span>
                             </div>
                         </div>
                     </div>
