@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { PriceCalculationResult } from "@/lib/price-calculation";
 import { calculateValueScore, ScoringMode, getModelTier, getTierDisplayInfo } from "@/lib/scoring-utils";
 import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
 import { MethodologyModal } from "@/components/methodology-modal";
 import { cn } from "@/lib/utils";
-import { Sparkles, Trophy } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 const SCORING_MODE_KEY = "tokentickr-scoring-mode";
 
