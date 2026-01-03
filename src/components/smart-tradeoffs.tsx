@@ -197,7 +197,14 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                         const templates = [
                             `${valueChallenger.modelName} actually outperforms ${premiumAnchor.modelName} (+${perfDiff}pts) while costing ${savings}% less. This is an absolute no-brainer.`,
                             `You're usually paying for performance, but here you get more capability for less money with ${valueChallenger.modelName}. A rare efficiency win.`,
-                            `Stop paying the premium tax. ${valueChallenger.modelName} benchmarks higher than ${premiumAnchor.modelName} and saves you ${savings}% of the budget.`
+                            `Stop paying the premium tax. ${valueChallenger.modelName} benchmarks higher than ${premiumAnchor.modelName} and saves you ${savings}% of the budget.`,
+                            `It's rare to find a model that is both smarter (+${perfDiff}pts) and cheaper (-${savings}%) than the incumbent, but ${valueChallenger.modelName} delivers exactly that.`,
+                            `Why pay more for less? ${valueChallenger.modelName} beats ${premiumAnchor.modelName} on intelligence and costs ${savings}% less. The math is undeniable.`,
+                            `This is the unicorn scenario: ${valueChallenger.modelName} improves upon ${premiumAnchor.modelName}'s capabilities while slashing your bill by ${savings}%.`,
+                            `Upgrade your intelligence and downgrade your costs. ${valueChallenger.modelName} is the clear superior choice here.`,
+                            `Market inefficiency alert: ${valueChallenger.modelName} is mispriced relative to its performance, offering a +${perfDiff}pt gain over ${premiumAnchor.modelName} for less money.`,
+                            `We call this the 'Dominant Strategy': switch to ${valueChallenger.modelName} to gain performance and save ${savings}% instantly.`,
+                            `Don't overthink this one. ${valueChallenger.modelName} wins on both price (${savings}% cheaper) and performance (+${perfDiff}pts).`
                         ];
                         return templates[seed % templates.length];
                     }
@@ -207,7 +214,14 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                         const templates = [
                             `${valueChallenger.modelName} matches ${premiumAnchor.modelName}'s intelligence almost perfectly, but for a fraction of the price.`,
                             `Ideally, you wouldn't notice a difference in quality. ${valueChallenger.modelName} offers effectively identical performance for ${savings}% less.`,
-                            `It's functionally a tie in intelligence, but a landslide victory for your wallet. ${valueChallenger.modelName} is the logical choice.`
+                            `It's functionally a tie in intelligence, but a landslide victory for your wallet. ${valueChallenger.modelName} is the logical choice.`,
+                            `For 99% of prompts, these models are indistinguishable. Save the ${savings}% and switch to ${valueChallenger.modelName}.`,
+                            `Unless you have a very specific edge case, paying the premium for ${premiumAnchor.modelName} is unnecessary. ${valueChallenger.modelName} is a peer in performance.`,
+                            `Get the flagship experience without the flagship price tag. ${valueChallenger.modelName} parallels ${premiumAnchor.modelName}'s capabilities.`,
+                            `Smart move: ${valueChallenger.modelName} replicates the 'Premium' feel of ${premiumAnchor.modelName} but costs ${savings}% less.`,
+                            `The benchmark gap is negligible, but the price gap is massive. ${valueChallenger.modelName} is the efficiency winner.`,
+                            `Why pay extra for a rounding error in performance? ${valueChallenger.modelName} is effectively just as smart as ${premiumAnchor.modelName}.`,
+                            `Your CFO will love this: ${valueChallenger.modelName} delivers equivalent IQ to ${premiumAnchor.modelName} with ${savings}% lower overhead.`
                         ];
                         return templates[seed % templates.length];
                     }
@@ -217,7 +231,14 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                         const templates = [
                             `Is that last ${100 - retentionPct}% of performance really worth a ${100 - savings}% markup? ${valueChallenger.modelName} delivers 90%+ of the value for pennies on the dollar.`,
                             `${valueChallenger.modelName} punches way above its weight class, retaining ${retentionPct}% of flagship intelligence while slashing costs by ${savings}%.`,
-                            `Unless you're doing cutting-edge research, ${valueChallenger.modelName} is likely all you need. It keeps ${retentionPct}% of the smarts for ${100 - savings}% of the cost.`
+                            `Unless you're doing cutting-edge research, ${valueChallenger.modelName} is likely all you need. It keeps ${retentionPct}% of the smarts for ${100 - savings}% of the cost.`,
+                            `The 'Law of Diminishing Returns' in action: moving to ${premiumAnchor.modelName} costs ${100 - savings}% more for only a ${100 - retentionPct}% gain. Stick with ${valueChallenger.modelName}.`,
+                            `For high-volume applications, ${valueChallenger.modelName} is the golden ratio of price to performance (${retentionPct}% retention).`,
+                            `This is the sweet spot. ${valueChallenger.modelName} gets you nearly all the way there (${retentionPct}%) without destroying your margin.`,
+                            `Aggressive savings (${savings}%) with minimal compromise. ${valueChallenger.modelName} is the clear value leader.`,
+                            `Most users can't tell the difference between these tiers, but they certainly notice the bill. ${valueChallenger.modelName} is the smart play.`,
+                            `Capture ${retentionPct}% of the SOTA capability for a fraction of the SOTA price with ${valueChallenger.modelName}.`,
+                            `Optimization unlocked: ${valueChallenger.modelName} proves you don't need to break the bank for near-frontier intelligence.`
                         ];
                         return templates[seed % templates.length];
                     }
@@ -227,13 +248,32 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                         const templates = [
                             `${valueChallenger.modelName} delivers a solid ${retentionPct}% of the flagship experience. For most production workloads, the ${savings}% savings justify the switch.`,
                             `You sacrifice a bit of nuance (${100 - retentionPct}% drop), but ${valueChallenger.modelName} is a workhorse that fits the budget much better.`,
-                            `A classic 80/20 trade-off. ${valueChallenger.modelName} gives you the majority of the capability while freeing up significant capital.`
+                            `A classic 80/20 trade-off. ${valueChallenger.modelName} gives you the majority of the capability while freeing up significant capital.`,
+                            `If your task isn't mission-critical, the ${savings}% discount on ${valueChallenger.modelName} is hard to ignore.`,
+                            `Good enough is often perfect. ${valueChallenger.modelName} hits the ${retentionPct}% quality bar needed for most standard features.`,
+                            `Trade perfection for scale. ${valueChallenger.modelName} allows you to run ${Math.round(100 / (100 - savings))}x more queries for the same budget.`,
+                            `Consider a hybrid strategy: Use ${valueChallenger.modelName} (${retentionPct}% capabilities) for general tasks and save ${premiumAnchor.modelName} for the hard stuff.`,
+                            `A pragmatic choice: ${valueChallenger.modelName} offers respectable intelligence (${retentionPct}%) at a highly competitive price point.`,
+                            `Reduce your burn rate effectively. ${valueChallenger.modelName} is a capable daily driver that saves you ${savings}%.`,
+                            `The cost-benefit analysis favors ${valueChallenger.modelName} for routine workloads, retaining ${retentionPct}% of the top-tier smarts.`
                         ];
                         return templates[seed % templates.length];
                     }
 
                     // CASE 5: The "Budget Constraints" (Big Drop, but Necessary)
-                    return `${valueChallenger.modelName} is a different class of model, but it retains ${retentionPct}% of the utility for a radically lower price point (${savings}% savings).`;
+                    const templates = [
+                        `${valueChallenger.modelName} is a different class of model, but it retains ${retentionPct}% of the utility for a radically lower price point (${savings}% savings).`,
+                        `For bulk processing where cost is King, ${valueChallenger.modelName}'s ${savings}% savings make it a viable option despite the lower IQ.`,
+                        `Strictly for cost-sensitive use cases. ${valueChallenger.modelName} is much cheaper (-${savings}%) but significantly less capable.`,
+                        `If your prompt is simple, ${valueChallenger.modelName} might handle it. You assume some risk (${retentionPct}% capability) for huge rewards in cost.`,
+                        `Deep discount territory: ${valueChallenger.modelName} is not a flagship replacement, but it's ${savings}% cheaper for easier tasks.`,
+                        `Quantity over quality? ${valueChallenger.modelName} lets you scale volume massively, provided the ${retentionPct}% intelligence is sufficient.`,
+                        `A true budget option. Only switch to ${valueChallenger.modelName} if price is your absolute primary constraint.`,
+                        `Extreme efficiency: ${valueChallenger.modelName} strips away the flagship nuance to deliver raw utility at ${savings}% off.`,
+                        `Comparison caution: ${valueChallenger.modelName} is much weaker (${retentionPct}%), but the ${savings}% price drop is undeniable.`,
+                        `For simple RAG or classification, ${valueChallenger.modelName} saves you ${savings}%. Just don't ask it to write poetry.`
+                    ];
+                    return templates[seed % templates.length]; // Fixed syntax error from previous generic return
                 })()
             });
         }
