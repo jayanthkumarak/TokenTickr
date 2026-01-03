@@ -102,7 +102,7 @@ Context window sizes are sourced from:
 All pricing data comes directly from the [OpenRouter API](https://openrouter.ai) in real-time.
 
 - **Format**: USD per token (converted to per-million for display)
-- **Update Frequency**: Real-time on each page load
+- **Update Frequency**: Daily (Static build-time generation)
 
 ## Transparency Principles
 
@@ -130,4 +130,4 @@ This generates `src/lib/aa-static-scores.ts` with latest scores for all 361+ mod
 
 ---
 
-*Last updated: December 26, 2025*
+*Last updated: January 2, 2026*

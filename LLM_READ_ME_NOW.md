@@ -5,7 +5,7 @@
 ## Core Application Structure
 - **Framework**: Next.js 14+ (App Router), TypeScript, TailwindCSS.
 - **State Management**: Zustand (`src/store/comparison-store.ts`).
-- **Data Source**: OpenRouter API (`https://openrouter.ai/api/v1/models`).
+- **Data Source**: OpenRouter API (Static build-time fetch) + Artificial Analysis (Static).
 
 ## Key Directories
 - `src/app`: App router pages. `page.tsx` is the main entry point. `layout.tsx` handles global providers (Theme).
@@ -21,7 +21,7 @@
   - `utils.ts`: Class name merging (twMerge/clsx).
 
 ## Data Flow
-1. **Fetch**: `comparison-store.ts` initializes and fetches models from OpenRouter via `OpenRouterAPI.getModels()`.
+1. **Fetch**: `comparison-store.ts` initializes with STATIC data from `src/lib/openrouter-static-data.ts`. No initial API call.
 2. **Select**: User selects models in `ModelSelector`. Store updates `selectedModels`.
 3. **Render**: `ComparisonLayout` reads `selectedModels` and renders a grid of `ModelCard`s.
 4. **Compare**: Costs are calculated on the fly in `ComparisonLayout` (Prompt/Completion * tokens). charts render based on this data.
@@ -36,5 +36,6 @@
 - **Glassmorphism**: Used in Header and NUX Popup (`backdrop-blur`).
 
 ## Recent Changes
+- **v3.0**: **Telemetry** (`usage-logger.ts`) tracks model comparisons. **UI Upgrade**: Model card grid fixed for 5+ models.
+- **v2.5**: **Static Data**: Moved data fetching to build-time (`scripts/generate-*.mjs`).
 - **NUX**: Added `NUXPopup` for first-time visitors.
-- **Layout**: Consolidated header controls in `ComparisonLayout`, removed duplicate branding.
