@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TokenTickr v3.5.0 | Documentation</title>
+    <title>TokenTickr v3.5.2 | Documentation</title>
     <style>
         :root {
             --bg-dark: #09090b;
@@ -364,7 +364,7 @@
                     and intelligence.</p>
 
                 <div class="version-badge">
-                    <strong>Version 3.5.0</strong> &nbsp;|&nbsp; Status: <span class="status">● Stable</span>
+                    <strong>Version 3.5.2</strong> &nbsp;|&nbsp; Status: <span class="status">● Stable</span>
                 </div>
             </section>
 
@@ -560,15 +560,17 @@
                 <p>TokenTickr uses a cascading data quality system for performance scores, clearly labeled in the UI.
                 </p>
 
-                <h3>🔵 AA Intelligence Index (361 models)</h3>
-                <p>Primary source from <a href="https://artificialanalysis.ai" style="color: var(--accent);">Artificial
-                        Analysis</a>.
-                    A composite benchmark aggregating MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench.
+                <h3>🔵 MMLU-Pro Benchmark</h3>
+                <p>Primary source from <a href="https://artificialanalysis.ai/leaderboards/models"
+                        style="color: var(--accent);">Artificial
+                        Analysis</a> and <a href="https://github.com/TIGER-AI-Lab/MMLU-Pro"
+                        style="color: var(--accent);">TIGER-AI-Lab</a>.
+                    A rigorous benchmark measuring reasoning and knowledge across diverse domains.
                 </p>
                 <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
-                    <li><strong>Confidence:</strong> High — objective, multi-source composite</li>
-                    <li><strong>Coverage:</strong> 361 models auto-generated from API</li>
-                    <li><strong>UI Badge:</strong> Blue "AA Index"</li>
+                    <li><strong>Confidence:</strong> High — objective, verifiable academic benchmark</li>
+                    <li><strong>Method:</strong> 0-100 score mapped to 1000-1550 Elo scale via power curve</li>
+                    <li><strong>UI Badge:</strong> Blue "MMLU: XX%"</li>
                 </ul>
 
                 <h3>🟢 LMSYS Verified (Fallback)</h3>
@@ -580,12 +582,13 @@
                     <li><strong>UI Badge:</strong> Green "Verified"</li>
                 </ul>
 
-                <h3>🟣 Heuristic (Last Resort)</h3>
-                <p>Algorithmic calculation based on parameter count, model family, and context length.
-                    Conservative ceiling of 1280 Elo to avoid overestimating unknown models.</p>
+                <h3>⚪ Insufficient Data</h3>
+                <p>Models without a verified MMLU-Pro score are explicitly excluded from the Smart Value Ranking.
+                    This "Fail Fast" policy prevents misleading comparisons where unknown models might incorrectly
+                    outrank verified ones.</p>
                 <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
-                    <li><strong>Confidence:</strong> Low — rough approximation</li>
-                    <li><strong>UI Badge:</strong> Purple "Heuristic"</li>
+                    <li><strong>Confidence:</strong> N/A</li>
+                    <li><strong>UI Badge:</strong> "Insufficient Data" (Filtered from ranking)</li>
                 </ul>
 
                 <h3>Updating Data</h3>

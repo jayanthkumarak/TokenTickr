@@ -16,7 +16,13 @@
 
 // Import auto-generated static data (361 models)
 // Run 'npm run generate:aa-data' to update
-import { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
+import { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
+
+// Helper to strip all non-alphanumeric characters for "ultra-fuzzy" matching
+// e.g. "claude-3.5-sonnet" -> "claude35sonnet" matches "claude-35-sonnet"
+function simplify(str: string): string {
+    return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
 
 // Helper to tokenize model names for fuzzy matching
 function tokenize(str: string): Set<string> {
@@ -38,7 +44,7 @@ function areTokenSetsEqual(setA: Set<string>, setB: Set<string>): boolean {
 }
 
 // Re-export for use in other modules
-export { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META };
+export { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_ID_ALIASES, AA_DATA_META };
 
 // API constants
 const AA_API_BASE = 'https://artificialanalysis.ai/api/v2';
@@ -373,7 +379,6 @@ export function getAAIntelligenceIndexSync(openRouterId: string): number | null 
         }
     }
 
-
     // 4. Fall back to API cache if initialized
     if (aaScoreCache) {
         // Try exact match first
@@ -422,6 +427,76 @@ function fuzzyMatchStaticData(modelName: string): number | null {
     const modelTokens = tokenize(modelName);
 
     for (const [slug, score] of Object.entries(AA_INTELLIGENCE_INDEX)) {
+        const slugTokens = tokenize(slug);
+
+        if (areTokenSetsEqual(modelTokens, slugTokens)) {
+            return score;
+        }
+    }
+    return null;
+}
+
+/**
+ * Synchronous lookup for AA MMLU-Pro score (0-100).
+ * Uses static data first (always available), then API cache if initialized.
+ */
+export function getMMLUProSync(openRouterId: string): number | null {
+    // Normalize ID for matching
+    const normalizedId = openRouterId.toLowerCase().split(':')[0];
+    const modelName = normalizedId.split('/').pop() || '';
+
+    // 1. First check static ID aliases (OpenRouter ID → AA slug)
+    if (AA_ID_ALIASES[normalizedId]) {
+        const aaSlug = AA_ID_ALIASES[normalizedId];
+        if (AA_MMLU_PRO[aaSlug]) {
+            return AA_MMLU_PRO[aaSlug];
+        }
+    }
+
+    // 2. Check static index directly by model name
+    if (AA_MMLU_PRO[modelName]) {
+        return AA_MMLU_PRO[modelName];
+    }
+
+    // 3. Try partial matches in static data
+    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
+        if (modelName.includes(slug) || slug.includes(modelName)) {
+            return score;
+        }
+    }
+
+    // 4. Fall back to API cache if initialized
+    if (aaScoreCache) {
+        // Note: Currently aaScoreCache only stores intelligence index.
+        // If we need MMLU from API cache, we'd need to update the cache structure.
+        // For now, rely on static MMLU data as it's comprehensive.
+    }
+
+    // 5. Try token-based fuzzy matching on static data
+    const fuzzyScore = fuzzyMatchStaticMMLU(modelName);
+    if (fuzzyScore !== null) {
+        return fuzzyScore;
+    }
+
+    return null;
+}
+
+/**
+ * Fallback: Token-based fuzzy matching for MMLU
+ */
+function fuzzyMatchStaticMMLU(modelName: string): number | null {
+    // 1. Try simplified string matching (ignores dots, dashes, spaces)
+    const simpleName = simplify(modelName);
+    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
+        if (simplify(slug) === simpleName) {
+            return score;
+        }
+    }
+
+    // 2. Token-based matching
+    const modelTokens = tokenize(modelName);
+
+    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
         const slugTokens = tokenize(slug);
 
         if (areTokenSetsEqual(modelTokens, slugTokens)) {

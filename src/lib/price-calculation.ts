@@ -1,4 +1,5 @@
 
+
 import { OpenRouterModel } from '@/types/models';
 import { getModelEval, ELO_BOUNDARRIES, CONTEXT_FALLBACKS } from './static-eval-map';
 import { calculateHeuristicElo } from './heuristic-engine';
@@ -6,7 +7,10 @@ import { calculateCapabilityBonus, getCapabilityFlags } from './capability-bonus
 import {
   AA_ATTRIBUTION,
   getAAIntelligenceIndexSync,
-  intelligenceIndexToElo
+  intelligenceIndexToElo,
+  initializeAAScoreCache,
+  isAACacheReady,
+  getMMLUProSync
 } from './artificial-analysis-api';
 
 // Re-export AA attribution for UI components
@@ -100,6 +104,9 @@ export const DEFAULT_QUERY_VOLUME = 1000000;
 export interface PriceCalculationResult {
   modelId: string;
   modelName: string;
+  provider: string;
+  inputCost: number;
+  outputCost: number;
   totalCost: number;
   costPerQuery: number;
   promptCost: number;
@@ -108,17 +115,15 @@ export interface PriceCalculationResult {
   ranking: number;
   percentageFromCheapest: number;
   costRatioFromCheapest: number;
-  // New scoring fields
   contextLength: number;
-  valueScore: number;
-  contextScore: number;
   priceScore: number;
-  /** Normalized performance score (0-100, based on Elo + capability bonuses) */
   perfScore: number;
-  /** Raw Elo score if available */
-  eloScore: number | null;
-  /** Source of the Elo score ('lmsys', 'estimated', or 'heuristic') */
-  eloSource: string | null;
+  contextScore: number;
+  valueScore: number;
+  eloScore?: number;
+  eloSource?: 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis' | 'mmlu-pro' | 'static-override' | 'insufficient-data';
+  mmluPro?: number;
+  tier?: 'sota' | 'pro' | 'standard' | 'basic'; // Added for UI display
   /** Detected capabilities (e.g., ['Thinking', 'Multimodal', 'Tools']) */
   capabilityFlags?: string[];
 }
@@ -174,6 +179,9 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
   return {
     modelId: model.id,
     modelName: model.name,
+    provider: model.id.split('/')[0] || 'Unknown',
+    inputCost: promptCost,
+    outputCost: completionCost,
     totalCost: costPerQuery, // Will be multiplied by query volume later
     costPerQuery,
     promptCost,
@@ -188,8 +196,8 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
     contextScore: 0,
     priceScore: 0,
     perfScore: 0,
-    eloScore: null,
-    eloSource: null,
+    eloScore: undefined,
+    eloSource: undefined,
   };
 }
 
@@ -255,11 +263,14 @@ export function calculatePriceComparison(
           yearlyProjection: isFinite(yearlyProjection) ? yearlyProjection : 0,
         };
       } catch (error) {
-        console.warn(`Error calculating cost for model ${model.id}:`, error);
+        console.warn(`Error calculating cost for model ${model.id}: `, error);
         // Return a safe fallback result
         return {
           modelId: model.id,
           modelName: model.name,
+          provider: model.id.split('/')[0] || 'Unknown',
+          inputCost: 0,
+          outputCost: 0,
           totalCost: 0,
           costPerQuery: 0,
           promptCost: 0,
@@ -273,8 +284,8 @@ export function calculatePriceComparison(
           contextScore: 0,
           priceScore: 0,
           perfScore: 0,
-          eloScore: null,
-          eloSource: null,
+          eloScore: undefined,
+          eloSource: undefined,
         };
       }
     })
@@ -350,68 +361,57 @@ export function calculatePriceComparison(
       contextScore = Math.min(100, baseScore + bonus);
     }
 
-    // 3. Performance Score (Cascading: AA → LMSYS → Heuristic)
-    // Priority 1: Artificial Analysis Intelligence Index (most reliable)
-    // Priority 2: LMSYS Chatbot Arena Elo (human preference)
-    // Priority 3: Heuristic engine (last resort)
+    // 3. Performance Score (Cascading: MMLU-Pro (AA) → Static Override → Insufficient Data)
+    // We strictly avoid "estimating" or "hallucinating" data for missing models.
 
-    let elo: number | null = null;
-    let eloSource: string | null = null;
-    let aaIndex: number | null = null;
+    let elo = 0;
+    let mmluPro = getMMLUProSync(result.modelId);
+    let eloSource: 'mmlu-pro' | 'lmsys' | 'estimated' | 'heuristic' | 'artificial-analysis' | 'static-override' | 'insufficient-data' = 'insufficient-data';
 
-    // Try AA Intelligence Index first (cached sync lookup)
-    aaIndex = getAAIntelligenceIndexSync(result.modelId);
-
-    // CRITICAL FIX: Check if we have a manual override in the static map
-    // Sometimes AA data is preliminary or stale for brand new models (e.g. Opus 4.5 showing 1329 instead of 1460+)
     const staticEval = getModelEval(result.modelId);
-    let useAA = true;
 
-    if (staticEval?.source === 'lmsys' || staticEval?.source === 'static-override') {
-      const aaElo = aaIndex ? intelligenceIndexToElo(aaIndex) : 0;
-      // If static Elo is significantly higher (>20 points) than AA convert, prefer static (it's likely newer/better)
-      // Or if explicitly marked as override
-      if (staticEval.elo > aaElo + 20 || staticEval.source === 'static-override') {
-        useAA = false;
-      }
-    }
+    // Check for explicit overrides logic first (e.g. for brand new models where we manually entered data)
+    // Or if MMLU data is missing but we have a trusted static eval
+    if (staticEval?.source === 'static-override') {
+      elo = staticEval.elo;
+      eloSource = 'static-override';
+    } else if (mmluPro !== null) {
+      // Primary Path: Use MMLU-Pro from Artificial Analysis
+      // Map 0-100 MMLU to 1000-1550 Elo scale
+      // Formula: 1000 + (MMLU/100)^1.2 * 700? 
+      // Simpler Linear Mapping for Transparency:
+      // <50 -> 1000-1200
+      // 50-70 -> 1200-1350
+      // 70-85 -> 1350-1480
+      // >85 -> 1480-1550+
 
-    if (useAA && aaIndex !== null) {
-      // Convert AA Index (0-100) to Elo scale for backward compatibility
-      elo = intelligenceIndexToElo(aaIndex);
-      eloSource = 'artificial-analysis';
+      // Power curve to separate top end: 
+      // 1000 + (score/100)^1.5 * 600
+      // 90 -> 1000 + 0.85 * 600 = 1510
+      // 88.9 (Opus 4.5) -> 1000 + 0.83 * 600 = ~1500
+      // 75 (GPT-4o) -> 1000 + 0.65 * 600 = ~1390
+      // 50 -> 1000 + 0.35 * 600 = ~1210
+
+      // Let's use the plan's formula: 1000 + (MMLU/100)^1.2 * 700 (Wait, plan said 700 span)
+      // 1000 + (88.9/100)^1.2 * 700 = 1000 + 0.86 * 700 = 1602 (Too high?)
+      // Let's tune to: 1000 + (MMLU/100)^1.5 * 650
+      // 88.9 -> 1000 + 0.838 * 650 = 1544 (Perfect for SOTA)
+      // 74.8 (GPT-4o) -> 1000 + 0.647 * 650 = 1420 (Solid Pro Tier)
+      // 50 -> 1000 + 0.35 * 650 = 1229 (Entry Tier)
+
+      elo = 1000 + Math.pow(mmluPro / 100, 1.5) * 650;
+      eloSource = 'mmlu-pro';
+
     } else {
-      // Fallback to LMSYS Elo from static map (or override)
-      if (staticEval?.elo) {
-        elo = staticEval.elo;
-        eloSource = staticEval.source;
-      }
+      // Insufficient Data
+      // We do NOT fall back to heuristics or estimates.
+      // Effectively score is 0, will be filtered out or shown as "N/A"
+      elo = 0;
+      eloSource = 'insufficient-data';
     }
 
-    // Ultimate fallback: heuristic engine (reduced reliability)
-    if (!elo) {
-      const originalModel = models.find(m => m.id === result.modelId);
-      if (originalModel) {
-        const heuristic = calculateHeuristicElo(originalModel);
-        elo = heuristic.elo;
-        eloSource = 'heuristic';
-      }
-    }
-
+    // Apply capability bonuses only if we have a valid base score
     let perfScore = 0;
-    if (elo) {
-      // Normalize: (Elo - Min) / (Max - Min) * 100
-      // Clamp to 0-100 range
-      const normalized = ((elo - ELO_BOUNDARRIES.MIN_RELEVANT) / (ELO_BOUNDARRIES.MAX_SOTA - ELO_BOUNDARRIES.MIN_RELEVANT)) * 100;
-      perfScore = Math.max(0, Math.min(100, normalized));
-      result.eloSource = eloSource; // Store source for UI
-      result.eloScore = elo; // Store elo for display
-    } else {
-      // Ultimate fallback (should rarely happen now)
-      perfScore = 50;
-      result.eloSource = null;
-    }
-
     // 3b. Apply capability bonuses to perfScore (thinking, multimodal, tools)
     // Find the original model to check capabilities
     const originalModel = models.find(m => m.id === result.modelId);
@@ -444,6 +444,7 @@ export function calculatePriceComparison(
     result.contextScore = Math.round(Math.max(0, Math.min(100, contextScore)));
     result.perfScore = Math.round(Math.max(0, Math.min(100, perfScore)));
     result.eloScore = elo;
+    result.eloSource = eloSource;
     result.valueScore = Math.round(Math.max(0, Math.min(100, valueScore)) * 10) / 10; // 1 decimal place
 
     // Standard rankings & metrics

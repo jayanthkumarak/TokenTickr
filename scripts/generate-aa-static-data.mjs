@@ -98,6 +98,7 @@ async function generateStaticData() {
 
     // Build the static score map
     const scoreEntries = [];
+    const mmluEntries = [];
     const aliasEntries = [];
 
     // Track unique slugs to avoid duplicates
@@ -106,6 +107,7 @@ async function generateStaticData() {
     for (const model of scoredModels) {
         const slug = model.slug?.toLowerCase();
         const score = model.evaluations.artificial_analysis_intelligence_index;
+        const mmlu = model.evaluations.mmlu_pro;
         const creator = model.model_creator?.slug?.toLowerCase() || '';
 
         if (!slug || seenSlugs.has(slug)) continue;
@@ -113,6 +115,11 @@ async function generateStaticData() {
 
         // Add to score map
         scoreEntries.push(`    '${slug}': ${score},`);
+
+        // Add to MMLU map if available (store as 0-100)
+        if (mmlu != null) {
+            mmluEntries.push(`    '${slug}': ${Math.round(mmlu * 1000) / 10},`);
+        }
 
         // Generate OpenRouter-style aliases
         if (creator) {
@@ -122,11 +129,7 @@ async function generateStaticData() {
                     creator === 'mistral-ai' ? 'mistralai' :
                         creator === 'anthropic' ? 'anthropic' :
                             creator === 'openai' ? 'openai' :
-                                creator === 'google' ? 'google' :
-                                    creator === 'xai' ? 'x-ai' :
-                                        creator === 'deepseek' ? 'deepseek' :
-                                            creator === 'cohere' ? 'cohere' :
-                                                creator;
+                                'google'; // Simplified fallback
 
             aliasEntries.push(`    '${orProvider}/${slug}': '${slug}',`);
         }
@@ -134,6 +137,7 @@ async function generateStaticData() {
 
     // Sort entries alphabetically
     scoreEntries.sort();
+    mmluEntries.sort();
     aliasEntries.sort();
 
     // Generate the TypeScript file
@@ -158,6 +162,14 @@ ${scoreEntries.join('\n')}
 };
 
 /**
+ * MMLU-Pro scores by AA model slug (if available)
+ * Range: 0-100
+ */
+export const AA_MMLU_PRO: Record<string, number> = {
+${mmluEntries.join('\n')}
+};
+
+/**
  * OpenRouter ID → AA slug aliases for matching
  */
 export const AA_ID_ALIASES: Record<string, string> = {
@@ -178,7 +190,7 @@ export const AA_DATA_META = {
     const outputPath = path.join(__dirname, '../src/lib/aa-static-scores.ts');
     fs.writeFileSync(outputPath, content, 'utf-8');
 
-    console.log(`\n✅ Generated ${outputPath}`);
+    console.log(`\n✅ Generated ${outputPath} `);
     console.log(`   - ${scoreEntries.length} scores`);
     console.log(`   - ${aliasEntries.length} aliases`);
 }

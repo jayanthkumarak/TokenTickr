@@ -39,11 +39,15 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
     };
 
     // Recalculate scores based on current mode
-    const rankedModels = useMemo(() => {
-        // Calculate max perf score for dynamic tier thresholds
-        const maxPerfScore = Math.max(...results.map(r => r.perfScore), 1);
+    const { validModels, excludedCount } = useMemo(() => {
+        // Filter out models with insufficient data
+        const valid = results.filter(r => r.eloSource !== 'insufficient-data');
+        const excluded = results.length - valid.length;
 
-        const recalculated = results.map(result => {
+        // Calculate max perf score for dynamic tier thresholds
+        const maxPerfScore = Math.max(...valid.map(r => r.perfScore), 1);
+
+        const recalculated = valid.map(result => {
             const newValueScore = calculateValueScore(
                 result.priceScore,
                 result.perfScore,
@@ -60,10 +64,29 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
         });
         const sorted = recalculated.sort((a, b) => b.valueScore - a.valueScore);
         prevOrderRef.current = sorted.map(m => m.modelId);
-        return sorted;
+        return { validModels: sorted, excludedCount: excluded };
     }, [results, scoringMode]);
 
-    const topPick = rankedModels[0];
+    const topPick = validModels[0];
+
+    // If we have results but no valid models (all filtered), show empty state
+    // If we have no results at all, return null (handled by parent usually)
+    if (!topPick && results.length > 0) {
+        return (
+            <Card className={cn("overflow-hidden border border-zinc-200 dark:border-zinc-800", className)}>
+                <CardHeader className="bg-zinc-50 dark:bg-zinc-900/50 pb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <Trophy className="h-5 w-5 text-muted-foreground" />
+                        <h2 className="text-xl font-bold text-muted-foreground">Smart Value Ranking</h2>
+                    </div>
+                    <p className="text-sm text-muted-foreground">Insufficient intelligence data for selected models.</p>
+                </CardHeader>
+                <div className="p-6 text-center text-muted-foreground text-sm">
+                    {results.length} model{results.length !== 1 ? 's' : ''} excluded due to missing MMLU-Pro scores.
+                </div>
+            </Card>
+        );
+    }
 
     if (!topPick) return null;
 
@@ -146,7 +169,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
 
                 {/* Detailed Rankings */}
                 <div className="md:col-span-2 space-y-3">
-                    {rankedModels.map((model, idx) => (
+                    {validModels.map((model, idx) => (
                         <div
                             key={model.modelId}
                             className={cn(
@@ -201,10 +224,21 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                                         <MethodologyModal type="artificial-analysis" />
                                                     </span>
                                                 )}
+                                                {model.eloSource === 'mmlu-pro' && (
+                                                    <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-1 rounded-[3px] text-[9px] font-medium border border-blue-200 dark:border-blue-800 flex items-center gap-0.5">
+                                                        MMLU: {model.mmluPro}%
+                                                        <MethodologyModal type="artificial-analysis" />
+                                                    </span>
+                                                )}
                                                 {model.eloSource === 'lmsys' && (
                                                     <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1 rounded-[3px] text-[9px] font-medium border border-green-200 dark:border-green-800 flex items-center gap-0.5">
                                                         Verified
                                                         <MethodologyModal type="lmsys" />
+                                                    </span>
+                                                )}
+                                                {model.eloSource === 'static-override' && (
+                                                    <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1 rounded-[3px] text-[9px] font-medium border border-green-200 dark:border-green-800 flex items-center gap-0.5">
+                                                        Verified
                                                     </span>
                                                 )}
                                                 {model.eloSource === 'estimated' && (
@@ -308,6 +342,12 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                             </div>
                         </div>
                     ))}
+
+                    {excludedCount > 0 && (
+                        <div className="text-center p-4 bg-zinc-50 dark:bg-zinc-900/30 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800 text-sm text-muted-foreground mt-4">
+                            <span className="font-medium">{excludedCount} models</span> excluded due to insufficient intelligence data.
+                        </div>
+                    )}
                 </div>
             </CardContent>
         </Card>

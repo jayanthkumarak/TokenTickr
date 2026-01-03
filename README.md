@@ -1,9 +1,9 @@
-# TokenTickr v3.5
+# TokenTickr v3.5.2
 > **The Intelligent Model Compare Tool**
 
 TokenTickr helps developers find the "Value Sweet Spot" for LLMs by comparing:
 - **Price** (Prompt/Completion)
-- **Intelligence** (Artificial Analysis Index, Elo)
+- **Intelligence** (MMLU-Pro Benchmark)
 - **Context Window** (Throughput Capacity)
 
 ## v3.5 Highlights: "Intelligence & Robustness"
@@ -68,6 +68,11 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 
 ## Release History
 
+### v3.5.2 (Precision Scoring)
+- **MMLU-Pro Integration**: Shifted primary intelligence metric to MMLU-Pro for higher granularity and reliability.
+- **Strict Data Quality**: "Insufficient Data" models are now explicitly filtered from rankings to prevent misleading comparisons (avoiding "dumb model looks smart" anomalies).
+- **Fuzzy Matching Fixes**: Improved logic to correctly map models like `claude-3.5-sonnet` across different API naming conventions.
+
 ### v3.5.1 (Intelligent Matching)
 - **Fuzzy Model Matching**: Implemented token-based fuzzy matching to correctly link OpenRouter models (e.g., `anthropic/claude-sonnet-4.5`) with Artificial Analysis data (e.g., `claude-4-5-sonnet`) despite naming discrepancies.
 - **Robustness**: Added comprehensive unit tests for the matching logic to prevent future regressions.
@@ -121,7 +126,7 @@ npm run build
 
 ## Data Sources
 - **Models & Pricing**: [OpenRouter API](https://openrouter.ai/docs#models)
-- **Intelligence Scores**: [Artificial Analysis API](https://artificialanalysis.ai/api)
+- **Intelligence Scores**: [Artificial Analysis MMLU-Pro](https://artificialanalysis.ai/leaderboards/models) / [MMLU-Pro GitHub](https://github.com/TIGER-AI-Lab/MMLU-Pro)
 
 ### Refreshing Static Data (Static Hosting)
 For static hosting (e.g. Cloudflare Pages) where build-time secrets are restricted:
