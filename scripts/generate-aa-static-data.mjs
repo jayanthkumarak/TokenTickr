@@ -23,9 +23,9 @@ async function generateStaticData() {
     const apiKey = process.env.NEXT_PUBLIC_AA_API_KEY;
 
     if (!apiKey) {
-        console.error('❌ Error: NEXT_PUBLIC_AA_API_KEY environment variable not set');
-        console.error('   Set it with: export NEXT_PUBLIC_AA_API_KEY=your_key_here');
-        process.exit(1);
+        console.warn('⚠️  NEXT_PUBLIC_AA_API_KEY not found. Skipping Artificial Analysis data generation.');
+        console.warn('   Using existing data from src/lib/aa-static-scores.ts');
+        return; // Exit successfully, skipping generation
     }
 
     console.log('🔄 Fetching models from Artificial Analysis API...');
