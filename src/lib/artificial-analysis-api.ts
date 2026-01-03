@@ -18,6 +18,25 @@
 // Run 'npm run generate:aa-data' to update
 import { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
 
+// Helper to tokenize model names for fuzzy matching
+function tokenize(str: string): Set<string> {
+    return new Set(
+        str.toLowerCase()
+            .replace(/[^a-z0-9]/g, ' ')
+            .split(/\s+/)
+            .filter(t => t.length > 0)
+    );
+}
+
+// Helper to check if two token sets are equal
+function areTokenSetsEqual(setA: Set<string>, setB: Set<string>): boolean {
+    if (setA.size !== setB.size) return false;
+    for (const elem of setA) {
+        if (!setB.has(elem)) return false;
+    }
+    return true;
+}
+
 // Re-export for use in other modules
 export { AA_INTELLIGENCE_INDEX, AA_ID_ALIASES, AA_DATA_META };
 
@@ -200,6 +219,22 @@ export class ArtificialAnalysisAPI {
                 return true;
             }
 
+            // Token-based fuzzy matching (handles "claude-sonnet-4.5" vs "claude-4-5-sonnet")
+            const modelTokens = tokenize(modelName);
+            const aaSlugTokens = tokenize(aaSlug);
+            if (areTokenSetsEqual(modelTokens, aaSlugTokens)) return true;
+
+            const aaNameTokens = tokenize(aaName);
+            if (areTokenSetsEqual(modelTokens, aaNameTokens)) return true;
+
+            // Also try with provider in the name for loose matching
+            // e.g. "anthropic/claude-sonnet-4.5" -> tokens: anthropic, claude, sonnet, 4, 5
+            // AA name: "Anthropic Claude 3.5 Sonnet" -> tokens: anthropic, claude, 3, 5, sonnet
+            if (provider) {
+                const fullIdTokens = tokenize(normalizedId); // includes provider
+                if (areTokenSetsEqual(fullIdTokens, aaNameTokens)) return true;
+            }
+
             return false;
         });
 
@@ -338,6 +373,7 @@ export function getAAIntelligenceIndexSync(openRouterId: string): number | null 
         }
     }
 
+
     // 4. Fall back to API cache if initialized
     if (aaScoreCache) {
         // Try exact match first
@@ -357,8 +393,41 @@ export function getAAIntelligenceIndexSync(openRouterId: string): number | null 
                 return value;
             }
         }
+
+        // Try token match on keys
+        const modelTokens = tokenize(modelName);
+        for (const [key, value] of aaScoreCache.entries()) {
+            const keyTokens = tokenize(key);
+            if (areTokenSetsEqual(modelTokens, keyTokens)) {
+                return value;
+            }
+        }
     }
 
+    // 5. Try token-based fuzzy matching on static data
+    const fuzzyScore = fuzzyMatchStaticData(modelName);
+    if (fuzzyScore !== null) {
+        return fuzzyScore;
+    }
+
+    return null;
+}
+
+/**
+ * Fallback: Token-based fuzzy matching (step 5)
+ * Handles cases like "claude-sonnet-4.5" vs "claude-4-5-sonnet"
+ * This converts both strings to sets of tokens (words/numbers) and checks for equality.
+ */
+function fuzzyMatchStaticData(modelName: string): number | null {
+    const modelTokens = tokenize(modelName);
+
+    for (const [slug, score] of Object.entries(AA_INTELLIGENCE_INDEX)) {
+        const slugTokens = tokenize(slug);
+
+        if (areTokenSetsEqual(modelTokens, slugTokens)) {
+            return score;
+        }
+    }
     return null;
 }
 

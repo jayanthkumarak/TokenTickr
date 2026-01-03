@@ -36,6 +36,8 @@
 - **Glassmorphism**: Used in Header and NUX Popup (`backdrop-blur`).
 
 ## Recent Changes
+- **v3.5.1**: **Intelligent Matching**: `src/lib/artificial-analysis-api.ts` now uses token-based fuzzy matching to strictly link disparate model IDs (e.g. `sonnet-4.5` vs `4-5-sonnet`).
+
 - **v3.0**: **Telemetry** (`usage-logger.ts`) tracks model comparisons. **UI Upgrade**: Model card grid fixed for 5+ models.
 - **v2.5**: **Static Data**: Moved data fetching to build-time (`scripts/generate-*.mjs`).
 - **NUX**: Added `NUXPopup` for first-time visitors.

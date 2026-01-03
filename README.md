@@ -68,6 +68,11 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 
 ## Release History
 
+### v3.5.1 (Intelligent Matching)
+- **Fuzzy Model Matching**: Implemented token-based fuzzy matching to correctly link OpenRouter models (e.g., `anthropic/claude-sonnet-4.5`) with Artificial Analysis data (e.g., `claude-4-5-sonnet`) despite naming discrepancies.
+- **Robustness**: Added comprehensive unit tests for the matching logic to prevent future regressions.
+
+
 ### v3.0.0 (The "Polished" Release)
 - **Model Card UI Redesign**: Fixed visual overflow issues and layout consistency for high-density comparisons (5+ models) using advanced Grid/Flexbox.
 - **Usage Telemetry**: Added lightweight, privacy-focused session and comparison logging to understand model popularity trends.
