@@ -43,9 +43,11 @@ export const MODEL_EVALS: Record<string, ModelEval> = {
     'google/gemini-2.5-pro': { elo: 1460, source: 'lmsys', lastUpdated: '2025-12-23' },
 
     // Pro Tier (1350-1459)
+    'anthropic/claude-sonnet-4.5': { elo: 1475, source: 'estimated', lastUpdated: '2026-01' }, // Placeholder for user's requested model
+    'anthropic/claude-3.5-sonnet': { elo: 1293, source: 'lmsys', lastUpdated: '2024-12' }, // Updated from stale 1271
+    'xai/grok-4.1-fast': { elo: 1450, source: 'estimated', lastUpdated: '2026-01' }, // Estimated placement
     'google/gemini-exp-1114': { elo: 1360, source: 'lmsys', lastUpdated: '2025-12' },
     'openai/gpt-4o': { elo: 1287, source: 'lmsys', lastUpdated: '2024-05' },
-    'anthropic/claude-3.5-sonnet': { elo: 1271, source: 'lmsys', lastUpdated: '2024-06' },
     'openai/gpt-4o-mini': { elo: 1270, source: 'lmsys', lastUpdated: '2024-07' },
     'meta-llama/llama-3.1-405b-instruct': { elo: 1260, source: 'lmsys', lastUpdated: '2024-07' },
     'google/gemini-pro-1.5': { elo: 1260, source: 'lmsys', lastUpdated: '2025-12' },

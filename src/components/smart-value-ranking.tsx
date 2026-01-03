@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { PriceCalculationResult, AA_ATTRIBUTION } from "@/lib/price-calculation";
 import { calculateValueScore, ScoringMode, getModelTier, getTierDisplayInfo } from "@/lib/scoring-utils";
 import { ScoringModeToggle } from "@/components/scoring-mode-toggle";
@@ -227,18 +228,50 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                                 <div className="flex items-center gap-2">
                                     {/* Component scores - clearer labels with subtle styling */}
                                     <div className="hidden sm:flex items-center gap-1.5 text-[11px]">
-                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
-                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Price</span>
-                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.priceScore}</span>
-                                        </div>
-                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
-                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Intel</span>
-                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.perfScore}</span>
-                                        </div>
-                                        <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800">
-                                            <span className="text-zinc-400 text-[9px] uppercase tracking-wide">Ctx</span>
-                                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.contextScore}</span>
-                                        </div>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 cursor-help transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                                                        <span className="text-zinc-400 text-[9px] uppercase tracking-wide border-b border-dotted border-zinc-300 dark:border-zinc-600">Price</span>
+                                                        <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.priceScore}</span>
+                                                    </div>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p className="text-xs font-semibold">Price Score (0-100)</p>
+                                                    <p className="text-[10px] text-zinc-400 max-w-[150px]">Logarithmic score favoring cheaper models. Higher means more affordable.</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 cursor-help transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                                                        <span className="text-zinc-400 text-[9px] uppercase tracking-wide border-b border-dotted border-zinc-300 dark:border-zinc-600">Intel</span>
+                                                        <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.perfScore}</span>
+                                                    </div>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p className="text-xs font-semibold">Intelligence Score (0-100)</p>
+                                                    <p className="text-[10px] text-zinc-400 max-w-[150px]">Weighted combo of AA Index (Benchmarks) and Elo (Human Preference).</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <div className="flex flex-col items-center px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 cursor-help transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                                                        <span className="text-zinc-400 text-[9px] uppercase tracking-wide border-b border-dotted border-zinc-300 dark:border-zinc-600">Ctx</span>
+                                                        <span className="font-semibold text-zinc-700 dark:text-zinc-300">{model.contextScore}</span>
+                                                    </div>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p className="text-xs font-semibold">Context Score (0-100)</p>
+                                                    <p className="text-[10px] text-zinc-400 max-w-[150px]">Capacity score. &gt;64k is ideal. Penalizes models with short context windows.</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
                                     </div>
 
                                     {/* Total Score - prominent */}

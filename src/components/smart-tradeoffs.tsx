@@ -167,7 +167,6 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
         if (valueChallenger) {
             // prioritized insert (put it second, after absolute savings or first if no savings)
             const savingsPercent = ((premiumAnchor.totalCost - valueChallenger.totalCost) / premiumAnchor.totalCost * 100).toFixed(0);
-            const retentionPercent = ((valueChallenger.perfScore / premiumAnchor.perfScore) * 100).toFixed(0);
 
             // Check if we already have this pair to avoid dupes
             const duplicateIndex = items.findIndex(i => i.to.modelId === valueChallenger.modelId && i.type === 'value');
@@ -180,7 +179,18 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
                 from: premiumAnchor,
                 to: valueChallenger,
                 impact: `Sweet Spot`,
-                description: `${valueChallenger.modelName} retains ${retentionPercent}% of ${premiumAnchor.modelName}'s intelligence while reducing costs by ${savingsPercent}%. This represents a highly efficient trade-off.`
+                description: (() => {
+                    const retention = valueChallenger.perfScore / premiumAnchor.perfScore;
+                    const savingsStr = savingsPercent + "%";
+
+                    if (retention >= 1.05) {
+                        return `${valueChallenger.modelName} actually outperforms ${premiumAnchor.modelName} (1${Math.round((retention - 1) * 100)}% capability) while costing ${savingsStr} less. This is a massive win.`;
+                    }
+                    if (retention >= 0.98) {
+                        return `${valueChallenger.modelName} matches ${premiumAnchor.modelName}'s intelligence almost perfectly, but for a fraction of the price (${savingsStr} cheaper).`;
+                    }
+                    return `${valueChallenger.modelName} delivers ${Math.round(retention * 100)}% of the flagship experience for ${100 - parseFloat(savingsPercent)}% of the cost. A minimal drop in smarts for huge savings.`;
+                })()
             });
         }
 

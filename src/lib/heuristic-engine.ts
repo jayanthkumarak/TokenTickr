@@ -27,7 +27,7 @@ export interface HeuristicEloResult {
 const HEURISTIC_BOUNDS = {
     BASE: 1150,        // "Competent but unproven" starting point
     FLOOR: 1050,       // Minimum (prevents ultra-cheap from going too low)
-    CAP: 1280,         // Maximum (well below "Pro" tier threshold of ~1350)
+    CAP: 1400,         // Maximum (Raised to 1400 to allow room for unranked pro models)
 } as const;
 
 // Price thresholds - documented for reference but calculations use log scale directly
