@@ -1,4 +1,4 @@
-# TokenTickr v3.5 🚀
+# TokenTickr v3.5
 > **The Intelligent Model Compare Tool**
 
 TokenTickr helps developers find the "Value Sweet Spot" for LLMs by comparing:
