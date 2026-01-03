@@ -57,13 +57,13 @@ export function BudgetCapacity({ results, className }: BudgetCapacityProps) {
     const maxBooks = Math.max(...capacityData.map(d => d.books));
 
     return (
-        <Card className={cn("p-6 space-y-8 bg-zinc-900 text-zinc-100 border-zinc-800", className)}>
+        <Card className={cn("p-6 space-y-8 bg-white/80 dark:bg-zinc-900 text-foreground border-border/50", className)}>
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-2">
                     <div className="flex items-center gap-2 text-amber-500 mb-1">
                         <Coins className="h-5 w-5" />
-                        <h2 className="text-2xl font-bold text-white">Budget Power Simulator</h2>
+                        <h2 className="text-2xl font-bold text-foreground">Budget Power Simulator</h2>
                     </div>
                     <p className="text-zinc-400 text-sm max-w-lg">
                         How much content can you process for <strong>${monthlyBudget[0]}</strong>?

@@ -70,15 +70,11 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
         <Card className={cn("overflow-hidden border border-zinc-200 dark:border-zinc-800", className)}>
             <CardHeader className="bg-zinc-50 dark:bg-zinc-900/50 pb-4">
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                    <div className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-amber-500" />
-                        <div className="flex flex-col">
-                            <CardTitle className="text-lg">Smart Value Index</CardTitle>
-                            <CardDescription className="text-xs">
-                                Intelligence-weighted composite score
-                            </CardDescription>
-                        </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <Trophy className="h-5 w-5 text-amber-500" />
+                        <h2 className="text-xl font-bold text-foreground">Smart Value Ranking</h2>
                     </div>
+                    <p className="text-sm text-muted-foreground w-full max-w-lg">Intelligence-weighted composite score</p>
                     <ScoringModeToggle value={scoringMode} onChange={handleModeChange} />
                 </div>
                 {/* Contextual explanation */}
@@ -101,7 +97,7 @@ export function SmartValueRanking({ results, className }: SmartValueRankingProps
                 <div className="md:col-span-1 flex flex-col items-center justify-center p-4 bg-zinc-50 dark:bg-zinc-900/30 rounded-lg border border-zinc-200 dark:border-zinc-800">
                     <div className="relative mb-3">
                         <Trophy className="h-10 w-10 text-amber-500" />
-                        <div className="absolute -top-1 -right-2 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                        <div className="absolute -top-1 -right-2 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full"> {/* theme-ignore */}
                             #1
                         </div>
                     </div>

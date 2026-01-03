@@ -88,7 +88,7 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                         return (
                             <div
                                 key={model.modelId}
-                                className="group relative flex items-center justify-between p-3 rounded-md bg-muted/10 hover:bg-muted/30 border border-transparent hover:border-border/30 transition-all duration-200"
+                                className="group relative flex items-center justify-between p-3 rounded-md bg-white border border-border/40 shadow-sm hover:shadow-md hover:border-border/80 dark:bg-muted/10 dark:border-transparent dark:hover:bg-muted/30 transition-all duration-200"
                             >
                                 {/* 1. Identity (30%) */}
                                 <div className="w-[30%] min-w-[140px] pr-4">
@@ -159,9 +159,9 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
     };
 
     return (
-        <Card className={cn("p-6 space-y-8 bg-zinc-950/50 backdrop-blur-xl border-zinc-800/50 h-full", className)}>
+        <Card className={cn("p-6 space-y-8 bg-white/80 dark:bg-zinc-950/50 backdrop-blur-xl border-border/50 h-full", className)}>
             <div className="space-y-1">
-                <h2 className="text-lg font-semibold flex items-center gap-2 text-zinc-100">
+                <h2 className="text-lg font-semibold flex items-center gap-2 text-foreground">
                     <Brain className="h-5 w-5 text-indigo-500" />
                     Feature Breakdown
                 </h2>

@@ -5,9 +5,10 @@
  * Fetches all models from Artificial Analysis API and generates
  * a complete TypeScript static map for use in TokenTickr.
  * 
- * Usage: node scripts/generate-aa-static-data.mjs
+ * Usage: node scripts/generate-aa-static-data.mjs [--force]
  * 
  * Requires: NEXT_PUBLIC_AA_API_KEY environment variable
+ * Cache: Skips fetch if data is < 7 days old
  */
 
 import * as fs from 'fs';
@@ -20,12 +21,53 @@ const __dirname = path.dirname(__filename);
 const AA_API_URL = 'https://artificialanalysis.ai/api/v2/data/llms/models';
 
 async function generateStaticData() {
-    const apiKey = process.env.NEXT_PUBLIC_AA_API_KEY;
+    let apiKey = process.env.NEXT_PUBLIC_AA_API_KEY;
+
+    // Fallback: Try reading .env.local manually if not in process.env (e.g. running via node directly)
+    if (!apiKey && fs.existsSync(path.join(__dirname, '../.env.local'))) {
+        try {
+            const envContent = fs.readFileSync(path.join(__dirname, '../.env.local'), 'utf-8');
+            const match = envContent.match(/NEXT_PUBLIC_AA_API_KEY=(.+)/);
+            if (match && match[1]) {
+                apiKey = match[1].trim();
+                console.log('📖 Loaded API key from .env.local');
+            }
+        } catch (e) {
+            // ignore error
+        }
+    }
 
     if (!apiKey) {
         console.warn('⚠️  NEXT_PUBLIC_AA_API_KEY not found. Skipping Artificial Analysis data generation.');
         console.warn('   Using existing data from src/lib/aa-static-scores.ts');
         return; // Exit successfully, skipping generation
+    }
+
+    // Check for "Smart Refresh" (Skip if data is < 7 days old)
+    const existingFilePath = path.join(__dirname, '../src/lib/aa-static-scores.ts');
+    const forceUpdate = process.argv.includes('--force');
+    const CACHE_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+    if (!forceUpdate && fs.existsSync(existingFilePath)) {
+        try {
+            const content = fs.readFileSync(existingFilePath, 'utf-8');
+            const match = content.match(/generatedAt: '([^']+)'/);
+            if (match && match[1]) {
+                const generatedDate = new Date(match[1]).getTime();
+                const now = Date.now();
+                const age = now - generatedDate;
+
+                if (age < CACHE_DURATION_MS) {
+                    const daysOld = (age / (24 * 60 * 60 * 1000)).toFixed(1);
+                    console.log(`✨ Data is fresh enough (${daysOld} days old). Skipping API fetch.`);
+                    console.log('   Run with --force to override.');
+                    return;
+                }
+                console.log(`Creating new data (Cache expired: ${match[1]})`);
+            }
+        } catch (e) {
+            // If parsing fails, proceed to fetch
+        }
     }
 
     console.log('🔄 Fetching models from Artificial Analysis API...');

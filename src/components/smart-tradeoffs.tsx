@@ -205,7 +205,7 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
     return (
         <Card className={cn("bg-white/50 dark:bg-black/20 h-full flex flex-col overflow-hidden", className)}>
             <div className="p-6 pb-2 space-y-1">
-                <h2 className="text-lg font-semibold flex items-center gap-2">
+                <h2 className="text-lg font-semibold flex items-center gap-2 text-foreground">
                     <Scale className="h-5 w-5 text-amber-500" />
                     Smart Trade-offs
                 </h2>

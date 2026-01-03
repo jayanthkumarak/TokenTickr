@@ -151,16 +151,14 @@ export function ModelCard({
             <div className="flex flex-wrap gap-1 mt-1.5">
               {costRankStyle && (
                 <span
-                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white"
-                  style={{ backgroundColor: costRankStyle.bg }}
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: costRankStyle.bg }}
                 >
                   {costRankStyle.label}
                 </span>
               )}
               {contextRankStyle && (
                 <span
-                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white"
-                  style={{ backgroundColor: contextRankStyle.bg }}
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: contextRankStyle.bg }}
                 >
                   {contextRankStyle.label}
                 </span>
@@ -258,16 +256,14 @@ export function ModelCard({
           <div className="flex flex-wrap gap-1.5 mt-2">
             {costRankStyle && (
               <span
-                className="text-xs font-medium px-2 py-0.5 rounded text-white"
-                style={{ backgroundColor: costRankStyle.bg }}
+                className="text-xs font-medium px-2 py-0.5 rounded text-white" style={{ backgroundColor: costRankStyle.bg }}
               >
                 {costRankStyle.label}
               </span>
             )}
             {contextRankStyle && (
               <span
-                className="text-xs font-medium px-2 py-0.5 rounded text-white"
-                style={{ backgroundColor: contextRankStyle.bg }}
+                className="text-xs font-medium px-2 py-0.5 rounded text-white" style={{ backgroundColor: contextRankStyle.bg }}
               >
                 {contextRankStyle.label}
               </span>

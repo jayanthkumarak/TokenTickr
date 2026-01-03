@@ -1,9 +1,9 @@
 /**
  * Auto-generated AA Intelligence Index Static Data
  * 
- * Generated: 2025-12-26
+ * Generated: 2026-01-03
  * Source: https://artificialanalysis.ai/api/v2/data/llms/models
- * Total models with scores: 361
+ * Total models with scores: 367
  * 
  * DO NOT EDIT MANUALLY - Run 'npm run generate:aa-data' to regenerate
  */
@@ -75,6 +75,7 @@ export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
     'devstral-small': 27.2,
     'devstral-small-2': 31.7,
     'devstral-small-2505': 19.6,
+    'doubao-seed-1-8': 61.4,
     'doubao-seed-code': 57.1,
     'ernie-4-5-300b-a47b': 32.9,
     'ernie-5-0-thinking-preview': 53.2,
@@ -128,6 +129,8 @@ export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
     'glm-4-6-reasoning': 56,
     'glm-4-6v': 30.4,
     'glm-4-6v-reasoning': 40.8,
+    'glm-4-7': 68.4,
+    'glm-4-7-non-reasoning': 50.5,
     'glm-4.5': 51.3,
     'gpt-35-turbo': 8.3,
     'gpt-4': 21.5,
@@ -148,6 +151,7 @@ export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
     'gpt-5-1-codex-mini': 62.3,
     'gpt-5-1-non-reasoning': 42.9,
     'gpt-5-2': 72.6,
+    'gpt-5-2-medium': 67.3,
     'gpt-5-2-non-reasoning': 48,
     'gpt-5-chatgpt': 41.8,
     'gpt-5-codex': 68.5,
@@ -188,6 +192,7 @@ export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
     'hermes-4-llama-3-1-405b-reasoning': 41.6,
     'hermes-4-llama-3-1-70b': 23.8,
     'hermes-4-llama-3-1-70b-reasoning': 39.2,
+    'hyperclova-x-seed-think-32b': 44.4,
     'jamba-1-5-large': 14.8,
     'jamba-1-5-mini': 4,
     'jamba-1-6-large': 14.3,
@@ -237,6 +242,7 @@ export const AA_INTELLIGENCE_INDEX: Record<string, number> = {
     'magistral-medium-2509': 52,
     'magistral-small': 31.9,
     'magistral-small-2509': 43,
+    'midm-250-pro-rsnsft': 43.7,
     'mimo-v2-flash': 46.1,
     'mimo-v2-flash-reasoning': 66.1,
     'minimax-m1-40k': 40,
@@ -437,6 +443,7 @@ export const AA_ID_ALIASES: Record<string, string> = {
     'azure/phi-4-multimodal': 'phi-4-multimodal',
     'baidu/ernie-4-5-300b-a47b': 'ernie-4-5-300b-a47b',
     'baidu/ernie-5-0-thinking-preview': 'ernie-5-0-thinking-preview',
+    'bytedance_seed/doubao-seed-1-8': 'doubao-seed-1-8',
     'bytedance_seed/doubao-seed-code': 'doubao-seed-code',
     'bytedance_seed/seed-oss-36b-instruct': 'seed-oss-36b-instruct',
     'cohere/command-a': 'command-a',
@@ -524,6 +531,7 @@ export const AA_ID_ALIASES: Record<string, string> = {
     'kimi/kimi-k2-0905': 'kimi-k2-0905',
     'kimi/kimi-k2-thinking': 'kimi-k2-thinking',
     'kimi/kimi-linear-48b-a3b-instruct': 'kimi-linear-48b-a3b-instruct',
+    'korea-telecom/midm-250-pro-rsnsft': 'midm-250-pro-rsnsft',
     'kwaikat/kat-coder-pro-v1': 'kat-coder-pro-v1',
     'lg/exaone-4-0-1-2b': 'exaone-4-0-1-2b',
     'lg/exaone-4-0-1-2b-reasoning': 'exaone-4-0-1-2b-reasoning',
@@ -586,6 +594,7 @@ export const AA_ID_ALIASES: Record<string, string> = {
     'mistral/mixtral-8x7b-instruct': 'mixtral-8x7b-instruct',
     'mistral/pixtral-large-2411': 'pixtral-large-2411',
     'motif-technologies/motif-2-12-7b': 'motif-2-12-7b',
+    'naver/hyperclova-x-seed-think-32b': 'hyperclova-x-seed-think-32b',
     'nous-research/deephermes-3-llama-3-1-8b-preview': 'deephermes-3-llama-3-1-8b-preview',
     'nous-research/deephermes-3-mistral-24b-preview': 'deephermes-3-mistral-24b-preview',
     'nous-research/hermes-3-llama-3-1-70b': 'hermes-3-llama-3-1-70b',
@@ -625,6 +634,7 @@ export const AA_ID_ALIASES: Record<string, string> = {
     'openai/gpt-5-1-codex-mini': 'gpt-5-1-codex-mini',
     'openai/gpt-5-1-non-reasoning': 'gpt-5-1-non-reasoning',
     'openai/gpt-5-2': 'gpt-5-2',
+    'openai/gpt-5-2-medium': 'gpt-5-2-medium',
     'openai/gpt-5-2-non-reasoning': 'gpt-5-2-non-reasoning',
     'openai/gpt-5-chatgpt': 'gpt-5-chatgpt',
     'openai/gpt-5-codex': 'gpt-5-codex',
@@ -740,6 +750,8 @@ export const AA_ID_ALIASES: Record<string, string> = {
     'zai/glm-4-6-reasoning': 'glm-4-6-reasoning',
     'zai/glm-4-6v': 'glm-4-6v',
     'zai/glm-4-6v-reasoning': 'glm-4-6v-reasoning',
+    'zai/glm-4-7': 'glm-4-7',
+    'zai/glm-4-7-non-reasoning': 'glm-4-7-non-reasoning',
     'zai/glm-4.5': 'glm-4.5',
 };
 
@@ -747,7 +759,7 @@ export const AA_ID_ALIASES: Record<string, string> = {
  * Metadata about this data
  */
 export const AA_DATA_META = {
-    generatedAt: '2025-12-26',
-    totalModels: 361,
+    generatedAt: '2026-01-03',
+    totalModels: 367,
     source: 'https://artificialanalysis.ai',
 };

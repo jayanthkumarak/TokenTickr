@@ -1,10 +1,19 @@
-# TokenTickr
+# TokenTickr v3.5 🚀
+> **The Intelligent Model Compare Tool**
 
-**Find the smart model that saves you 20-30% while sacrificing minimal intelligence.**
+TokenTickr helps developers find the "Value Sweet Spot" for LLMs by comparing:
+- **Price** (Prompt/Completion)
+- **Intelligence** (Artificial Analysis Index, Elo)
+- **Context Window** (Throughput Capacity)
 
-TokenTickr is an LLM cost comparison tool with intelligence-weighted scoring. Compare models across price, performance, and context window capacity to find the best value for your needs.
+## v3.5 Highlights: "Intelligence & Robustness"
+- **Theme Compliance**: Visual regression testing ensures perfect Light/Dark mode consistency.
+- **Smart Value Ranking**: New algorithm prioritizing intelligence (50% weight) for smarter tiering.
+- **Data Robustness**: Hybrid build system supports static hosting while keeping intelligence data fresh.
+- **New Models**: Includes Grok 3, Claude 3.5 Sonnet (New), and DeepSeek V3 support.
 
-**Live:** [tokentickr.com](https://tokentickr.com)
+## Live Demo
+[tokentickr.com](https://tokentickr.com)
 
 ## The Value Proposition
 
@@ -105,11 +114,16 @@ npm run build
 # Output: ./out
 ```
 
-## Data Source
+## Data Sources
+- **Models & Pricing**: [OpenRouter API](https://openrouter.ai/docs#models)
+- **Intelligence Scores**: [Artificial Analysis API](https://artificialanalysis.ai/api)
 
-- **Model Pricing**: Statically generated (updated daily) via [OpenRouter API](https://openrouter.ai)
-- **Intelligence Index**: Composite benchmark scores from [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models) — aggregates MMLU-Pro, LiveBench, AIME 2024/2025, GPQA Diamond, and IFBench
-- **LMSYS Elo**: Human preference ratings from [LMSYS Chatbot Arena](https://chat.lmsys.org/?leaderboard)
+### Refreshing Static Data (Static Hosting)
+For static hosting (e.g. Cloudflare Pages) where build-time secrets are restricted:
+1. Ensure `.env.local` contains `NEXT_PUBLIC_AA_API_KEY`.
+2. Run `npm run generate:static-data` locally.
+3. Commit the updated `src/lib/aa-static-scores.ts`.
+4. Push to deploy.
 
 ## Research
 
