@@ -262,6 +262,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
               className="flex-1"
               variant={cardVariant}
               ranking={model ? modelRankings.get(model.id) : undefined}
+              columnCount={maxModels}
             />
           </div>
         ))}

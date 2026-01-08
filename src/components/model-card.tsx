@@ -34,6 +34,7 @@ interface ModelCardProps {
   showRemoveButton?: boolean;
   variant?: ModelCardVariant;
   ranking?: ModelRanking;
+  columnCount?: number;
 }
 
 export function ModelCard({
@@ -46,6 +47,7 @@ export function ModelCard({
   showRemoveButton = true,
   variant = "detailed",
   ranking,
+  columnCount = 3,
 }: ModelCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -228,15 +230,27 @@ export function ModelCard({
   }
 
   // Detailed mode (default)
+  const isWide = columnCount < 4;
+  const isVeryNarrow = columnCount >= 5;
+
   return (
-    <Card className={cn("w-full", className)}>
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-2 min-w-0 w-full">
-          <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg leading-tight line-clamp-2 break-words min-h-[2.5rem] flex items-center" title={model.name}>
+    <Card className={cn("w-full transition-all duration-200", className)}>
+      <CardHeader className={cn("pb-3", isVeryNarrow ? "px-3" : "px-6")}>
+        <div className="flex items-start justify-between gap-2 min-w-0 w-full relative">
+          <div className="flex-1 min-w-0 pr-6">
+            <CardTitle
+              className={cn(
+                "leading-tight line-clamp-2 break-words flex items-center",
+                isVeryNarrow ? "text-base min-h-[2.2rem]" : "text-lg min-h-[2.5rem]"
+              )}
+              title={model.name}
+            >
               {model.name}
             </CardTitle>
-            <p className="text-xs text-muted-foreground mt-1 font-mono opacity-60 truncate">
+            <p className={cn(
+              "text-muted-foreground mt-1 font-mono opacity-60 truncate",
+              isVeryNarrow ? "text-[10px]" : "text-xs"
+            )}>
               {model.id}
             </p>
           </div>
@@ -245,25 +259,36 @@ export function ModelCard({
               variant="ghost"
               size="sm"
               onClick={onRemove}
-              className="h-8 w-8 p-0 shrink-0"
+              className={cn(
+                "p-0 shrink-0 absolute right-0 top-0 text-muted-foreground hover:text-destructive transition-colors",
+                isVeryNarrow ? "h-6 w-6" : "h-8 w-8"
+              )}
             >
-              <X className="h-4 w-4" />
+              <X className={cn(isVeryNarrow ? "h-3.5 w-3.5" : "h-4 w-4")} />
             </Button>
           )}
         </div>
         {/* Ranking Badges */}
         {(costRankStyle || contextRankStyle) && (
-          <div className="flex flex-wrap gap-1.5 mt-2">
+          <div className="flex flex-wrap gap-1 mt-2">
             {costRankStyle && (
               <span
-                className="text-xs font-medium px-2 py-0.5 rounded text-white" style={{ backgroundColor: costRankStyle.bg }}
+                className={cn(
+                  "font-medium px-2 py-0.5 rounded text-white", // theme-ignore
+                  isVeryNarrow ? "text-[9px]" : "text-xs"
+                )}
+                style={{ backgroundColor: costRankStyle.bg }}
               >
                 {costRankStyle.label}
               </span>
             )}
             {contextRankStyle && (
               <span
-                className="text-xs font-medium px-2 py-0.5 rounded text-white" style={{ backgroundColor: contextRankStyle.bg }}
+                className={cn(
+                  "font-medium px-2 py-0.5 rounded text-white", // theme-ignore
+                  isVeryNarrow ? "text-[9px]" : "text-xs"
+                )}
+                style={{ backgroundColor: contextRankStyle.bg }}
               >
                 {contextRankStyle.label}
               </span>
@@ -271,12 +296,15 @@ export function ModelCard({
           </div>
         )}
         {/* Modality Badges - Always Visible */}
-        <div className="flex flex-wrap gap-1.5 mt-2">
+        <div className="flex flex-wrap gap-1 mt-2">
           {model.architecture.input_modalities.map((modality) => (
             <Badge
               key={`in-${modality}`}
               variant="outline"
-              className="text-xs px-2 py-0.5"
+              className={cn(
+                "px-2 py-0.5",
+                isVeryNarrow ? "text-[9px]" : "text-xs"
+              )}
             >
               in: {modality}
             </Badge>
@@ -285,14 +313,17 @@ export function ModelCard({
             <Badge
               key={`out-${modality}`}
               variant="secondary"
-              className="text-xs px-2 py-0.5"
+              className={cn(
+                "px-2 py-0.5",
+                isVeryNarrow ? "text-[9px]" : "text-xs"
+              )}
             >
               out: {modality}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4 pt-0">
+      <CardContent className={cn("space-y-4 pt-0", isVeryNarrow ? "px-3" : "px-6")}>
         {/* Description with truncation */}
         {model.description && (
           <div>
