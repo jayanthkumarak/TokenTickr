@@ -451,6 +451,7 @@ export function calculatePriceComparison(
     result.perfScore = Math.round(Math.max(0, Math.min(100, perfScore)));
     result.eloScore = elo;
     result.eloSource = eloSource;
+    result.mmluPro = mmluPro || undefined; // Assign MMLU score if available
     result.valueScore = Math.round(Math.max(0, Math.min(100, valueScore)) * 10) / 10; // 1 decimal place
 
     // Standard rankings & metrics

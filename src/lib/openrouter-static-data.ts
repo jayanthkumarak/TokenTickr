@@ -1,9 +1,9 @@
 /**
  * Auto-generated OpenRouter Static Data
  * 
- * Generated: 2026-01-03
+ * Generated: 2026-01-08
  * Source: https://openrouter.ai/api/v1/models
- * Total models: 353
+ * Total models: 347
  * 
  * DO NOT EDIT MANUALLY - Run 'npm run generate:static-data' to regenerate
  */
@@ -174,13 +174,13 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1741988556
   },
   {
-    "id": "allenai/olmo-3-32b-think:free",
-    "name": "AllenAI: Olmo 3 32B Think (free)",
+    "id": "allenai/olmo-3-32b-think",
+    "name": "AllenAI: Olmo 3 32B Think",
     "description": "Olmo 3 32B Think is a large-scale, 32-billion-parameter model purpose-built for deep reasoning, complex logic chains and advanced instruction-following scenarios. Its capacity enables strong performance on demanding evaluation tasks and highly nuanced conversational reasoning. Developed by Ai2 un...",
     "context_length": 65536,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000015",
+      "completion": "0.0000005"
     },
     "architecture": {
       "input_modalities": [
@@ -243,13 +243,13 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1763758270
   },
   {
-    "id": "allenai/olmo-3.1-32b-think:free",
-    "name": "AllenAI: Olmo 3.1 32B Think (free)",
+    "id": "allenai/olmo-3.1-32b-think",
+    "name": "AllenAI: Olmo 3.1 32B Think",
     "description": "Olmo 3.1 32B Think is a large-scale, 32-billion-parameter model designed for deep reasoning, complex multi-step logic, and advanced instruction following. Building on the Olmo 3 series, version 3.1 delivers refined reasoning behavior and stronger performance across demanding evaluations and nuanc...",
     "context_length": 65536,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000015",
+      "completion": "0.0000005"
     },
     "architecture": {
       "input_modalities": [
@@ -409,30 +409,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": true
     },
     "created": 1710288000
-  },
-  {
-    "id": "anthropic/claude-3-opus",
-    "name": "Anthropic: Claude 3 Opus",
-    "description": "Claude 3 Opus is Anthropic's most powerful model for highly complex tasks. It boasts top-level performance, intelligence, fluency, and understanding.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-family)\n\n#multimodal",
-    "context_length": 200000,
-    "pricing": {
-      "prompt": "0.000015",
-      "completion": "0.000075"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Claude"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1709596800
   },
   {
     "id": "anthropic/claude-3.5-haiku",
@@ -845,30 +821,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1746478885
-  },
-  {
-    "id": "arliai/qwq-32b-arliai-rpr-v1",
-    "name": "ArliAI: QwQ 32B RpR v1",
-    "description": "QwQ-32B-ArliAI-RpR-v1 is a 32B parameter model fine-tuned from Qwen/QwQ-32B using a curated creative writing and roleplay dataset originally developed for the RPMax series. It is designed to maintain coherence and reasoning across long multi-turn conversations by introducing explicit reasoning st...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000011"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744555982
   },
   {
     "id": "openrouter/auto",
@@ -1368,8 +1320,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team.\n\nIt succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well on a variety of tasks.",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.00000088"
+      "prompt": "0.00000019",
+      "completion": "0.00000087"
     },
     "architecture": {
       "input_modalities": [
@@ -1533,8 +1485,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model & [technical report](https://api-docs.deepseek.com/news/news250120).\n\nMIT licen...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000012"
+      "prompt": "0.0000007",
+      "completion": "0.0000024"
     },
     "architecture": {
       "input_modalities": [
@@ -2214,10 +2166,10 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "google/gemma-3-27b-it",
     "name": "Google: Gemma 3 27B",
     "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's...",
-    "context_length": 131072,
+    "context_length": 96000,
     "pricing": {
-      "prompt": "0.000000036",
-      "completion": "0.000000064"
+      "prompt": "0.00000004",
+      "completion": "0.00000015"
     },
     "architecture": {
       "input_modalities": [
@@ -2518,6 +2470,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1728604800
+  },
+  {
+    "id": "kwaipilot/kat-coder-pro",
+    "name": "Kwaipilot: KAT-Coder-Pro V1",
+    "description": "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. \n\nThe model has been optimized for tool...",
+    "context_length": 256000,
+    "pricing": {
+      "prompt": "0.000000207",
+      "completion": "0.000000828"
+    },
+    "architecture": {
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "tokenizer": "Other"
+    },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1762745912
   },
   {
     "id": "kwaipilot/kat-coder-pro:free",
@@ -2831,10 +2806,10 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "meta-llama/llama-3.1-8b-instruct",
     "name": "Meta: Llama 3.1 8B Instruct",
     "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model release, [click here](htt...",
-    "context_length": 131072,
+    "context_length": 16384,
     "pricing": {
       "prompt": "0.00000002",
-      "completion": "0.00000003"
+      "completion": "0.00000005"
     },
     "architecture": {
       "input_modalities": [
@@ -3188,78 +3163,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1746130961
   },
   {
-    "id": "microsoft/phi-3-medium-128k-instruct",
-    "name": "Microsoft: Phi-3 Medium 128K Instruct",
-    "description": "Phi-3 128K Medium is a powerful 14-billion parameter model designed for advanced language understanding, reasoning, and instruction following. Optimized through supervised fine-tuning and preference adjustments, it excels in tasks involving common sense, mathematics, logical reasoning, and code p...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.000001",
-      "completion": "0.000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "phi3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1716508800
-  },
-  {
-    "id": "microsoft/phi-3-mini-128k-instruct",
-    "name": "Microsoft: Phi-3 Mini 128K Instruct",
-    "description": "Phi-3 Mini is a powerful 3.8B parameter model designed for advanced language understanding, reasoning, and instruction following. Optimized through supervised fine-tuning and preference adjustments, it excels in tasks involving common sense, mathematics, logical reasoning, and code processing.\n\nA...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "phi3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1716681600
-  },
-  {
-    "id": "microsoft/phi-3.5-mini-128k-instruct",
-    "name": "Microsoft: Phi-3.5 Mini 128K Instruct",
-    "description": "Phi-3.5 models are lightweight, state-of-the-art open models. These models were trained with Phi-3 datasets that include both synthetic data and the filtered, publicly available websites data, with a focus on high quality and reasoning-dense properties. Phi-3.5 Mini uses 3.8B parameters, and is a...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "phi3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1724198400
-  },
-  {
     "id": "minimax/minimax-m1",
     "name": "MiniMax: MiniMax M1",
     "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it to process long sequences—up to 1 million tokens—whil...",
@@ -3309,9 +3212,9 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "minimax/minimax-m2.1",
     "name": "MiniMax: MiniMax M2.1",
     "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world capability while maintaining exceptional latency, scalability, and co...",
-    "context_length": 204800,
+    "context_length": 196608,
     "pricing": {
-      "prompt": "0.0000003",
+      "prompt": "0.00000028",
       "completion": "0.0000012"
     },
     "architecture": {
@@ -4206,8 +4109,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for agentic capabilities, including advanced tool use, reasoning, and code synthesis. Kimi K2 excels a...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000000456",
-      "completion": "0.00000184"
+      "prompt": "0.0000005",
+      "completion": "0.0000024"
     },
     "architecture": {
       "input_modalities": [
@@ -4557,8 +4460,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B and released by Nous Research. It introduces a hybrid reasoning mode, where the model can choose to deliberate internally with <think>...</think> traces or respond directly, offering flexibility between speed and depth. Users ...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000012"
+      "prompt": "0.000001",
+      "completion": "0.000003"
     },
     "architecture": {
       "input_modalities": [
@@ -5814,8 +5717,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized to run on a single H100 GPU with native MXFP4 quantizat...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.0000001"
+      "prompt": "0.000000039",
+      "completion": "0.00000019"
     },
     "architecture": {
       "input_modalities": [
@@ -5883,8 +5786,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for lower-latency inference and deployability on consumer or single-GPU hardware. The model is...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000000016",
-      "completion": "0.00000006"
+      "prompt": "0.00000002",
+      "completion": "0.0000001"
     },
     "architecture": {
       "input_modalities": [
@@ -5919,7 +5822,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "tokenizer": "GPT"
     },
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
     "created": 1754414229
   },
@@ -6187,7 +6090,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Other"
+      "tokenizer": "GPT"
     },
     "top_provider": {
       "is_moderated": true
@@ -6313,30 +6216,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1761854366
-  },
-  {
-    "id": "perplexity/sonar-reasoning",
-    "name": "Perplexity: Sonar Reasoning",
-    "description": "Sonar Reasoning is a reasoning model provided by Perplexity based on [DeepSeek R1](/deepseek/deepseek-r1).\n\nIt allows developers to utilize long chain of thought with built-in web search. Sonar Reasoning is uncensored and hosted in US datacenters. ",
-    "context_length": 127000,
-    "pricing": {
-      "prompt": "0.000001",
-      "completion": "0.000005"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738131107
   },
   {
     "id": "perplexity/sonar-reasoning-pro",
@@ -6626,8 +6505,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000007",
-      "completion": "0.00000026"
+      "prompt": "0.00000015",
+      "completion": "0.0000006"
     },
     "architecture": {
       "input_modalities": [
@@ -7096,8 +6975,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual use, while remaining robust on alignment and formattin...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.0000006"
+      "prompt": "0.00000009",
+      "completion": "0.0000011"
     },
     "architecture": {
       "input_modalities": [
@@ -7166,8 +7045,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math. The series emphasizes robust perception (recognition of diverse real-world and synthe...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000012"
+      "prompt": "0.00000045",
+      "completion": "0.0000035"
     },
     "architecture": {
       "input_modalities": [
@@ -7939,29 +7818,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1758210804
   },
   {
-    "id": "alibaba/tongyi-deepresearch-30b-a3b:free",
-    "name": "Tongyi DeepResearch 30B A3B (free)",
-    "description": "Tongyi DeepResearch is an agentic large language model developed by Tongyi Lab, with 30 billion total parameters activating only 3 billion per token. It's optimized for long-horizon, deep information-seeking tasks and delivers state-of-the-art performance on benchmarks like Humanity's Last Exam, ...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1758210804
-  },
-  {
     "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
     "name": "Venice: Uncensored (free)",
     "description": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM, preserving user control over alignment, system prompts, and behavior...",
@@ -8270,8 +8126,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter size. GLM-4.5-Air also supports hybrid inference modes, offering a \"th...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000013",
-      "completion": "0.00000085"
+      "prompt": "0.00000005",
+      "completion": "0.00000022"
     },
     "architecture": {
       "input_modalities": [
@@ -8431,7 +8287,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
 ];
 
 export const OPENROUTER_DATA_META = {
-    generatedAt: '2026-01-03',
-    totalModels: 353,
+    generatedAt: '2026-01-08',
+    totalModels: 347,
     source: 'https://openrouter.ai',
 };
