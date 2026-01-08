@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useState, useMemo } from "react";
-import { PriceCalculationResult } from "../../lib/price-calculation";
+import { PriceCalculationResult, TOKEN_ESTIMATES } from "../../lib/price-calculation";
 import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -40,8 +40,9 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
             const queriesForBudget = budget / costPerQuery;
 
             // 2. Convert queries to tokens
-            // Each query is 450 tokens in our standardization constant
-            const totalTokensForBudget = queriesForBudget * 450;
+            // Uses the same standard query size as the price calculation (1000 in + 500 out)
+            const tokensPerQuery = TOKEN_ESTIMATES.PROMPT_TOKENS + TOKEN_ESTIMATES.COMPLETION_TOKENS;
+            const totalTokensForBudget = queriesForBudget * tokensPerQuery;
 
             // 3. Convert tokens to "Impact Units"
             let count = 0;
@@ -69,7 +70,7 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                         Real-World Impact
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                        Translate abstract token costs into tangible work output.
+                        Translate abstract token costs into tangible work output (processing power).
                     </p>
                 </div>
 
@@ -133,7 +134,7 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
 
             {/* Footer / Context */}
             <div className="text-[10px] text-zinc-400 text-center pt-2">
-                *Estimates based on: 1 Novel ≈ 200k tokens, 1 Email ≈ 300 tokens, 1 Script ≈ 2k tokens.
+                *Estimates based on: 1 Novel ≈ 200k tokens. Represents total sequential processing potential for the budget, not single-context capacity.
                 Actual usage may vary by prompting style.
             </div>
 

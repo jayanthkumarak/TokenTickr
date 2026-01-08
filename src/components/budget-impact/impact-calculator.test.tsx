@@ -62,10 +62,10 @@ describe("ImpactCalculator", () => {
         // Header
         expect(screen.getByText("Real-World Impact")).toBeDefined();
 
-        // Look for the impact count (225 Novels)
+        // Look for the impact count (750 Novels)
         // Since "Novels" appears in the tab selector, the card, and the footer, we need to be specific
-        // The count "225" should be unique though
-        expect(screen.getByText("225")).toBeDefined();
+        // The count "750" should be unique though
+        expect(screen.getByText("750")).toBeDefined();
 
         // Check if "Novels" is present at least once (e.g. in the active tab)
         expect(screen.getAllByText("Novels").length).toBeGreaterThan(0);
@@ -79,8 +79,8 @@ describe("ImpactCalculator", () => {
         const emailTab = screen.getAllByRole("button", { name: "Emails" })[0];
         fireEvent.click(emailTab);
 
-        // Emails calculation: 150,000
-        expect(await screen.findByText("150,000")).toBeDefined();
+        // Emails calculation: 150,000,000 / 300 = 500,000
+        expect(await screen.findByText("500,000")).toBeDefined();
     });
 
     it("updates when budget input changes", async () => {

@@ -1,4 +1,4 @@
-# TokenTickr v3.5.2
+# TokenTickr v3.6.0
 > **The Intelligent Model Compare Tool**
 
 TokenTickr helps developers find the "Value Sweet Spot" for LLMs by comparing:
@@ -67,6 +67,10 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 - VisX visualization
 
 ## Release History
+
+### v3.6.0 (Real-World Precision)
+- **Impact Cost Fix**: Corrected the "Novels" calculation logic which was underestimating purchasing power by ~3.3x due to a token count mismatch.
+- **Metric Clarity**: Updated UI text to explicitly clarify that "Real-World Impact" measures *sequential processing potential* for a budget, helping users distinguish it from context window capacity.
 
 ### v3.5.2 (Precision Scoring)
 - **MMLU-Pro Integration**: Shifted primary intelligence metric to MMLU-Pro for higher granularity and reliability.
