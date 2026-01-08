@@ -18,13 +18,13 @@ interface ImpactCalculatorProps {
 }
 
 // Logic Constants
-const TOKENS_PER_NOVEL = 200000;  // 50k words * 1.33 + margin + re-prompts
-const TOKENS_PER_EMAIL = 300;     // 250 words approx
-const TOKENS_PER_SCRIPT = 2000;   // 500 lines code (~1000 tokens) + 1000 context
+const TOKENS_PER_DOC = 20000;   // ~50 pages
+const TOKENS_PER_EMAIL = 500;   // Long prof. email
+const TOKENS_PER_CODE = 2000;   // Component/Class file
 
 export function ImpactCalculator({ results, className }: ImpactCalculatorProps) {
     const [budget, setBudget] = useState(10);
-    const [metric, setMetric] = useState<ImpactMetric>("novel");
+    const [metric, setMetric] = useState<ImpactMetric>("doc");
 
     const PRESETS = [1, 5, 10, 50];
 
@@ -46,15 +46,33 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
 
             // 3. Convert tokens to "Impact Units"
             let count = 0;
+            let unitSize = 0;
+
             switch (metric) {
-                case "novel": count = totalTokensForBudget / TOKENS_PER_NOVEL; break;
-                case "email": count = totalTokensForBudget / TOKENS_PER_EMAIL; break;
-                case "script": count = totalTokensForBudget / TOKENS_PER_SCRIPT; break;
+                case "doc":
+                    unitSize = TOKENS_PER_DOC;
+                    count = totalTokensForBudget / TOKENS_PER_DOC;
+                    break;
+                case "email":
+                    unitSize = TOKENS_PER_EMAIL;
+                    count = totalTokensForBudget / TOKENS_PER_EMAIL;
+                    break;
+                case "code":
+                    unitSize = TOKENS_PER_CODE;
+                    count = totalTokensForBudget / TOKENS_PER_CODE;
+                    break;
             }
+
+            // Check if the UNIT itself fits in the context window
+            // If the unit is 20k tokens and context is 8k, it physically cannot fit at once.
+            // Fallback for missing contextLength is 0, so we handle that.
+            const ctx = model.contextLength || 4096;
+            const exceedsContext = unitSize > ctx;
 
             return {
                 ...model,
-                impactCount: Math.floor(count * 10) / 10 // Round to 1 decimal
+                impactCount: Math.floor(count * 10) / 10, // Round to 1 decimal
+                exceedsContext
             };
         }).sort((a, b) => b.impactCount - a.impactCount); // Sort best first
     }, [results, budget, metric]);
@@ -128,14 +146,16 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                         count={model.impactCount}
                         budget={budget}
                         isBestValue={idx === 0}
+                        exceedsContext={model.exceedsContext}
                     />
                 ))}
             </div>
 
             {/* Footer / Context */}
-            <div className="text-[10px] text-zinc-400 text-center pt-2">
-                *Estimates based on: 1 Novel ≈ 200k tokens. Represents total sequential processing potential for the budget, not single-context capacity.
-                Actual usage may vary by prompting style.
+            <div className="text-[10px] text-zinc-400 text-center pt-2 max-w-2xl mx-auto leading-relaxed">
+                *Represents <strong>Total Processing Potential</strong> for your budget.
+                Values based on: 1 Doc ≈ 20k tokens, 1 Email ≈ 500 tokens.
+                For models with smaller context windows (marked ⚠️), this volume assumes processing across multiple sessions.
             </div>
 
         </Card>

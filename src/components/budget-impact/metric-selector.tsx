@@ -2,10 +2,10 @@
 
 import React from "react";
 import { Button } from "../ui/button";
-import { BookOpen, Mail, Terminal } from "lucide-react";
+import { FileText, Mail, FileCode } from "lucide-react";
 import { cn } from "../../lib/utils";
 
-export type ImpactMetric = "novel" | "email" | "script";
+export type ImpactMetric = "doc" | "email" | "code";
 
 interface MetricSelectorProps {
     value: ImpactMetric;
@@ -18,16 +18,16 @@ export function MetricSelector({ value, onChange }: MetricSelectorProps) {
             <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onChange("novel")}
+                onClick={() => onChange("doc")}
                 className={cn(
                     "flex-1 gap-2 rounded-md transition-all duration-200 text-xs font-medium",
-                    value === "novel"
+                    value === "doc"
                         ? "bg-background text-blue-600 dark:text-blue-400 shadow-sm ring-1 ring-black/5"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
             >
-                <BookOpen className={cn("h-3.5 w-3.5 transition-colors", value === "novel" ? "text-blue-500" : "text-muted-foreground")} />
-                Novels
+                <FileText className={cn("h-3.5 w-3.5 transition-colors", value === "doc" ? "text-blue-500" : "text-muted-foreground")} />
+                Documents
             </Button>
             <Button
                 variant="ghost"
@@ -46,16 +46,16 @@ export function MetricSelector({ value, onChange }: MetricSelectorProps) {
             <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onChange("script")}
+                onClick={() => onChange("code")}
                 className={cn(
                     "flex-1 gap-2 rounded-md transition-all duration-200 text-xs font-medium",
-                    value === "script"
-                        ? "bg-background text-emerald-600 dark:text-emerald-400 shadow-sm ring-1 ring-black/5"
+                    value === "code"
+                        ? "bg-background text-indigo-600 dark:text-indigo-400 shadow-sm ring-1 ring-black/5"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
             >
-                <Terminal className={cn("h-3.5 w-3.5 transition-colors", value === "script" ? "text-emerald-500" : "text-muted-foreground")} />
-                Scripts
+                <FileCode className={cn("h-3.5 w-3.5 transition-colors", value === "code" ? "text-indigo-500" : "text-muted-foreground")} />
+                Code
             </Button>
         </div>
     );

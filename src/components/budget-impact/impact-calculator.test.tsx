@@ -62,13 +62,16 @@ describe("ImpactCalculator", () => {
         // Header
         expect(screen.getByText("Real-World Impact")).toBeDefined();
 
-        // Look for the impact count (750 Novels)
-        // Since "Novels" appears in the tab selector, the card, and the footer, we need to be specific
-        // The count "750" should be unique though
-        expect(screen.getByText("750")).toBeDefined();
+        // Look for the impact count
+        // Old Novel = 200k. New Doc = 20k. So 10x more.
+        // Mock cost = 10 queries per $. 1 query = 1500 tokens.
+        // 10,000 queries per $1 = 15,000,000 tokens per $1.
+        // Budget $10 -> 150,000,000 tokens.
+        // Docs = 150m / 20k = 7,500
+        expect(screen.getByText("7,500")).toBeDefined();
 
-        // Check if "Novels" is present at least once (e.g. in the active tab)
-        expect(screen.getAllByText("Novels").length).toBeGreaterThan(0);
+        // Check if "Documents" is present at least once (e.g. in the active tab)
+        expect(screen.getAllByText("Documents").length).toBeGreaterThan(0);
     });
 
     it("changes metric when tab clicked", async () => {
@@ -79,8 +82,9 @@ describe("ImpactCalculator", () => {
         const emailTab = screen.getAllByRole("button", { name: "Emails" })[0];
         fireEvent.click(emailTab);
 
-        // Emails calculation: 150,000,000 / 300 = 500,000
-        expect(await screen.findByText("500,000")).toBeDefined();
+        // Emails calculation: 150,000,000 / 500 = 300,000
+        // (Old email was 300 tokens, now 500)
+        expect(await screen.findByText("300,000")).toBeDefined();
     });
 
     it("updates when budget input changes", async () => {
@@ -90,11 +94,26 @@ describe("ImpactCalculator", () => {
         const input = screen.getAllByTestId("budget-input")[0];
         fireEvent.change(input, { target: { value: "50" } });
 
-        // Budget = $50 (5x default)
-        // Novels = 225 * 5 = 1125
-        // FIXME: JSDOM/Vitest mock not reflecting update in DOM for findByText
-        // expect(await screen.findByText(/1.*125/)).toBeDefined();
         // Verify input change reflection instead to ensure handler fired
         expect(input.getAttribute("value")).toBe("50");
+    });
+
+    it("shows warning when unit size exceeds context length", () => {
+        // Mock a model with small context (1000 tokens) vs Document (20k tokens)
+        const smallContextResults = [
+            {
+                ...mockResults[0],
+                contextLength: 1000,
+                // Ensure cost is low enough to get > 0 docs
+                costPerQuery: 0.000001,
+                totalCost: 1
+            }
+        ];
+
+        render(<ImpactCalculator results={smallContextResults} />);
+
+        // Should show "Split Req." with emoji
+        // Using getAllByText in case multiple cards are rendered (though expecting 1)
+        expect(screen.getAllByText(/Split Req\./).length).toBeGreaterThan(0);
     });
 });
