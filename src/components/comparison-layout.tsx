@@ -245,7 +245,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
       )}>
         {activeModels.map((model, index) => (
           <div key={index} className="flex flex-col h-full">
-            <div className="mb-2">
+            <div className="mb-2 text-center">
               <h3 className={cn(
                 "font-semibold",
                 cardVariant === "compact" ? "text-base" : "text-lg"
