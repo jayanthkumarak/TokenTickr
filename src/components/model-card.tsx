@@ -230,7 +230,7 @@ export function ModelCard({
   }
 
   // Detailed mode (default)
-  const isWide = columnCount < 4;
+
   const isVeryNarrow = columnCount >= 5;
 
   return (

@@ -1,9 +1,9 @@
 /**
  * Auto-generated OpenRouter Static Data
  * 
- * Generated: 2026-01-08
+ * Generated: 2026-01-09
  * Source: https://openrouter.ai/api/v1/models
- * Total models: 347
+ * Total models: 348
  * 
  * DO NOT EDIT MANUALLY - Run 'npm run generate:static-data' to regenerate
  */
@@ -241,6 +241,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1763758270
+  },
+  {
+    "id": "allenai/olmo-3.1-32b-instruct",
+    "name": "AllenAI: Olmo 3.1 32B Instruct",
+    "description": "Olmo 3.1 32B Instruct is a large-scale, 32-billion-parameter instruction-tuned language model engineered for high-performance conversational AI, multi-turn dialogue, and practical instruction following. As part of the Olmo 3.1 family, this variant emphasizes responsiveness to complex user directi...",
+    "context_length": 65536,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000006"
+    },
+    "architecture": {
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "tokenizer": "Other"
+    },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1767728554
   },
   {
     "id": "allenai/olmo-3.1-32b-think",
@@ -2523,8 +2546,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "LFM2 is a new generation of hybrid models developed by Liquid AI, specifically designed for edge AI and on-device deployment. It sets a new standard in terms of quality, speed, and memory efficiency.",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.0000001"
+      "prompt": "0.00000001",
+      "completion": "0.00000002"
     },
     "architecture": {
       "input_modalities": [
@@ -2546,8 +2569,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Model created via inbox interface",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.0000001"
+      "prompt": "0.00000001",
+      "completion": "0.00000002"
     },
     "architecture": {
       "input_modalities": [
@@ -4313,13 +4336,13 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1726358400
   },
   {
-    "id": "nex-agi/deepseek-v3.1-nex-n1:free",
-    "name": "Nex AGI: DeepSeek V3.1 Nex N1 (free)",
+    "id": "nex-agi/deepseek-v3.1-nex-n1",
+    "name": "Nex AGI: DeepSeek V3.1 Nex N1",
     "description": "DeepSeek V3.1 Nex-N1 is the flagship release of the Nex-N1 series — a post-trained model designed to highlight agent autonomy, tool use, and real-world productivity. \n\nNex-N1 demonstrates competitive performance across all evaluation scenarios, showing particularly strong results in practical cod...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000027",
+      "completion": "0.000001"
     },
     "architecture": {
       "input_modalities": [
@@ -8287,7 +8310,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
 ];
 
 export const OPENROUTER_DATA_META = {
-    generatedAt: '2026-01-08',
-    totalModels: 347,
+    generatedAt: '2026-01-09',
+    totalModels: 348,
     source: 'https://openrouter.ai',
 };
