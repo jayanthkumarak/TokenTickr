@@ -18,7 +18,9 @@ export function HeroInsight({ data }: HeroInsightProps) {
   }
 
   const costDifference = mostExpensiveModel.totalCost - cheapestModel.totalCost;
-  const percentageDifference = ((costDifference / cheapestModel.totalCost) * 100).toFixed(1);
+  const percentageDifference = cheapestModel.totalCost > 0
+    ? ((costDifference / cheapestModel.totalCost) * 100).toFixed(1)
+    : null;
   const yearlySavings = costDifference * 12;
   
   // Get volume context
@@ -105,7 +107,7 @@ export function HeroInsight({ data }: HeroInsightProps) {
                   />
                   <span>
                     <strong style={{ color: SEMANTIC_COLORS.highlight }}>
-                      {percentageDifference}%
+                      {percentageDifference ? `${percentageDifference}%` : "N/A"}
                     </strong> cost difference
                   </span>
                 </div>

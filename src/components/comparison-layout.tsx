@@ -17,6 +17,7 @@ import { ModelCard, ModelCardVariant, ModelRanking } from "@/components/model-ca
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
 import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
+import { TOKEN_ESTIMATES } from "@/lib/token-estimates";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
@@ -30,10 +31,6 @@ const PriceComparisonSection = dynamic(() => import("@/components/price-comparis
   loading: () => <div className="h-64 animate-pulse bg-muted/20 rounded-lg" />,
   ssr: true // Can be SSR'd but better split for hydration
 });
-
-// Constants for cost calculation (matching price-calculation.ts)
-const PROMPT_TOKENS_PER_QUERY = 150;
-const COMPLETION_TOKENS_PER_QUERY = 300;
 
 interface ComparisonLayoutProps {
   className?: string;
@@ -86,7 +83,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
   const calculateCombinedCost = (model: OpenRouterModel): number => {
     const promptPrice = parseFloat(model.pricing.prompt) || 0;
     const completionPrice = parseFloat(model.pricing.completion) || 0;
-    return (promptPrice * PROMPT_TOKENS_PER_QUERY) + (completionPrice * COMPLETION_TOKENS_PER_QUERY);
+    return (promptPrice * TOKEN_ESTIMATES.PROMPT_TOKENS) + (completionPrice * TOKEN_ESTIMATES.COMPLETION_TOKENS);
   };
 
   // Calculate rankings for all valid models

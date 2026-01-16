@@ -12,6 +12,7 @@ import {
   calculatePriceComparison,
   DEFAULT_QUERY_VOLUME
 } from "@/lib/price-calculation";
+import { TOKEN_ESTIMATES } from "@/lib/token-estimates";
 import { cn } from "@/lib/utils";
 
 interface PriceComparisonSectionProps {
@@ -24,15 +25,12 @@ export function PriceComparisonSection({
   className
 }: PriceComparisonSectionProps) {
   const [queryVolume, setQueryVolume] = useState(DEFAULT_QUERY_VOLUME);
-
-  // Debug: Track state changes
-  console.log(`🔄 PriceComparisonSection render: queryVolume = ${queryVolume.toLocaleString()}`);
-
-  // Custom setter with logging
   const handleQueryVolumeChange = (newVolume: number) => {
-    console.log(`🎯 State update: ${queryVolume.toLocaleString()} → ${newVolume.toLocaleString()}`);
     setQueryVolume(newVolume);
   };
+  const promptTokens = TOKEN_ESTIMATES.PROMPT_TOKENS;
+  const completionTokens = TOKEN_ESTIMATES.COMPLETION_TOKENS;
+  const totalTokens = promptTokens + completionTokens;
 
   // Filter out null models and ensure we have at least 2 models
   const validModels = useMemo(() => {
@@ -42,9 +40,7 @@ export function PriceComparisonSection({
   // Calculate price comparison data
   const comparisonData = useMemo(() => {
     if (validModels.length < 2) return null;
-    console.log(`🧮 Calculating costs for ${validModels.length} models at ${queryVolume.toLocaleString()} queries`);
     const data = calculatePriceComparison(validModels, queryVolume);
-    console.log(`📊 Results: ${data.results[0]?.modelName || 'No Data'} = $${data.results[0]?.totalCost?.toFixed(2) || '0.00'} total`);
     return data;
   }, [validModels, queryVolume]);
 
@@ -102,9 +98,9 @@ export function PriceComparisonSection({
               <div>
                 <p className="font-medium text-foreground mb-1">Cost Calculation Details</p>
                 <ul className="space-y-1 text-xs">
-                  <li>• Based on 150 prompt tokens + 300 completion tokens per query (450 total tokens)</li>
+                  <li>• Based on {promptTokens.toLocaleString()} prompt tokens + {completionTokens.toLocaleString()} completion tokens per query ({totalTokens.toLocaleString()} total tokens)</li>
                   <li>• OpenRouter API provides prices per token, converted to per-million display</li>
-                  <li>• Formula: (prompt price per token × 150 + completion price per token × 300) × query volume</li>
+                  <li>• Formula: (prompt price per token × {promptTokens.toLocaleString()} + completion price per token × {completionTokens.toLocaleString()}) × query volume</li>
                   <li>• Actual costs may vary based on your specific prompts and model responses</li>
                   <li>• Prices are current as of the latest API data and may change</li>
                 </ul>

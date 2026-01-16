@@ -32,9 +32,6 @@ export function PriceComparisonChart({
 }: PriceComparisonChartProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
 
-  // Debug: Track when chart receives new data
-  console.log(`📊 Chart updated: ${data.queryVolume.toLocaleString()} queries, ${data.results[0]?.modelName || 'No Data'} = $${data.results[0]?.totalCost?.toFixed(2) || '0.00'}`);
-
   // Single-hue teal gradient: light (cheapest) to dark (most expensive)
   const getCostGradientColor = (rank: number, total: number) => {
     // Teal gradient from light (#4db6ac) to dark (#00695c)

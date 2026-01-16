@@ -8,9 +8,11 @@ import {
   AA_ATTRIBUTION,
   getMMLUProSync
 } from './artificial-analysis-api';
+import { TOKEN_ESTIMATES } from './token-estimates';
 
 // Re-export AA attribution for UI components
 export { AA_ATTRIBUTION };
+export { TOKEN_ESTIMATES };
 
 
 /**
@@ -51,15 +53,6 @@ export function formatCostDisplay(cost: number): string {
 export function getCostDisclaimer(): string {
   return "Cost estimates based on public API pricing. Actual costs may vary due to provider differences, volume discounts, or pricing updates.";
 }
-
-// Default constants for calculations
-export const TOKEN_ESTIMATES = {
-  // Average tokens per "query" (prompt + completion)
-  // Assumes a mix of short/long tasks. 
-  // 1k input + 500 output is a reasonable average for complex tasks
-  PROMPT_TOKENS: 1000,
-  COMPLETION_TOKENS: 500
-} as const;
 
 export const USAGE_SCENARIOS = [
   {

@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { useState, useMemo } from "react";
-import { PriceCalculationResult, TOKEN_ESTIMATES } from "../../lib/price-calculation";
+import { PriceCalculationResult } from "../../lib/price-calculation";
+import { TOKEN_ESTIMATES } from "../../lib/token-estimates";
 import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -30,10 +31,8 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
 
     const impactData = useMemo(() => {
         return results.map((model) => {
-            // Cost per 1M tokens (blended approx)
-            // model.costPerQuery is for ~450 tokens (150 in + 300 out)
-            // We need pure cost efficiency.
-            // Let's rely on model.costPerQuery for consistency.
+            // model.costPerQuery uses the shared per-query token estimates.
+            // Rely on it to stay consistent with the price comparison view.
 
             // 1. How many queries can we buy?
             const costPerQuery = model.costPerQuery || 0.000001;

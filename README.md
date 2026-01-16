@@ -68,6 +68,11 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 
 ## Release History
 
+### v3.6.1 (Consistency & Cleanup)
+- **Token Assumptions Unified**: Rankings, pricing math, and impact projections now share a single token-estimate source.
+- **Free-Model Edge Case**: Guarded percentage math to avoid `Infinity%` when the cheapest model is free.
+- **Noise Reduction**: Removed debug logging from interactive pricing components.
+
 ### v3.6.0 (Real-World Precision)
 - **Impact Cost Fix**: Corrected the "Novels" calculation logic which was underestimating purchasing power by ~3.3x due to a token count mismatch.
 - **Metric Clarity**: Updated UI text to explicitly clarify that "Real-World Impact" measures *sequential processing potential* for a budget, helping users distinguish it from context window capacity.
