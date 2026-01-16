@@ -2,7 +2,6 @@ import { OpenRouterResponse, OpenRouterModel } from '@/types/models';
 
 
 const OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1';
-const OPENROUTER_PROXY_BASE = '/api/openrouter';
 const DEFAULT_TIMEOUT_MS = 15000; // 15 seconds
 
 export class ApiError extends Error {
@@ -19,8 +18,8 @@ export class OpenRouterAPI {
 
   private constructor() {
     this.baseURL = OPENROUTER_API_BASE;
-    // Server-side key (do not expose in client bundle)
-    this.apiKey = process.env.OPENROUTER_API_KEY;
+    // API key optional since we use static data by default
+    this.apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
   }
 
   public static getInstance(): OpenRouterAPI {
@@ -30,11 +29,7 @@ export class OpenRouterAPI {
     return OpenRouterAPI.instance;
   }
 
-  private async makeRequest<T>(
-    endpoint: string,
-    options: RequestInit = {},
-    baseURL: string = this.baseURL
-  ): Promise<T> {
+  private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
 
@@ -48,7 +43,7 @@ export class OpenRouterAPI {
     }
 
     try {
-      const response = await fetch(`${baseURL}${endpoint}`, {
+      const response = await fetch(`${this.baseURL}${endpoint}`, {
         method: 'GET',
         headers,
         signal: controller.signal,
@@ -115,8 +110,8 @@ export class OpenRouterAPI {
         return OPENROUTER_STATIC_DATA;
       }
 
-      // Prefer same-origin proxy to avoid exposing API keys in the client
-      const response = await this.makeRequest<OpenRouterResponse>('/models', {}, OPENROUTER_PROXY_BASE);
+      // Original fetch logic as fallback/forced refresh
+      const response = await this.makeRequest<OpenRouterResponse>('/models');
       return this.validateModels(response);
     } catch (error) {
       console.error('Error fetching models:', error);

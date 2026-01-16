@@ -48,7 +48,6 @@ export { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_ID_ALIASES, AA_DATA_META };
 
 // API constants
 const AA_API_BASE = 'https://artificialanalysis.ai/api/v2';
-const AA_PROXY_ENDPOINT = '/api/aa/models';
 const DEFAULT_TIMEOUT_MS = 10000;
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -102,8 +101,8 @@ export class ArtificialAnalysisAPI {
     private apiKey: string | undefined;
 
     private constructor() {
-        // Server-side key (do not expose in client bundle)
-        this.apiKey = process.env.AA_API_KEY;
+        // API key from environment variable (set at build time for static export)
+        this.apiKey = process.env.NEXT_PUBLIC_AA_API_KEY;
     }
 
     public static getInstance(): ArtificialAnalysisAPI {
@@ -124,20 +123,21 @@ export class ArtificialAnalysisAPI {
      * Fetch all model data from AA API
      */
     private async fetchModels(): Promise<AAModelData[]> {
+        if (!this.apiKey) {
+            console.warn('[AA API] No API key configured, falling back to static data');
+            return [];
+        }
+
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
 
         try {
-            const { url, headers } = this.getRequestConfig();
-
-            if (!url) {
-                console.warn('[AA API] No API key configured, falling back to static data');
-                return [];
-            }
-
-            const response = await fetch(url, {
+            const response = await fetch(`${AA_API_BASE}/data/llms/models`, {
                 method: 'GET',
-                headers,
+                headers: {
+                    'x-api-key': this.apiKey,
+                    'Content-Type': 'application/json',
+                },
                 signal: controller.signal,
             });
 
@@ -165,30 +165,6 @@ export class ArtificialAnalysisAPI {
             }
             return [];
         }
-    }
-
-    private getRequestConfig(): { url: string | null; headers: Record<string, string> } {
-        const isBrowser = typeof window !== 'undefined';
-        if (isBrowser) {
-            return {
-                url: AA_PROXY_ENDPOINT,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-        }
-
-        if (!this.apiKey) {
-            return { url: null, headers: {} };
-        }
-
-        return {
-            url: `${AA_API_BASE}/data/llms/models`,
-            headers: {
-                'x-api-key': this.apiKey,
-                'Content-Type': 'application/json',
-            },
-        };
     }
 
     /**
