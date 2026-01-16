@@ -122,6 +122,16 @@ npm run generate:aa-data
 
 This generates `src/lib/aa-static-scores.ts` with latest scores for all 361+ models.
 
+## Runtime API Proxy (Cloudflare Functions)
+
+For runtime refreshes without exposing secrets in the client bundle, the Cloudflare
+Functions proxy uses server-only environment variables:
+
+- `OPENROUTER_API_KEY` for `/api/openrouter/models`
+- `AA_API_KEY` for `/api/aa/models`
+
+If these keys are not set, the app safely falls back to static data.
+
 ## Attribution
 
 - **Intelligence Index**: Data provided by [ArtificialAnalysis.ai](https://artificialanalysis.ai)

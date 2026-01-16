@@ -68,6 +68,10 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 
 ## Release History
 
+### v3.6.3 (Server-Side API Keys)
+- **Key Proxy Endpoints**: Added Cloudflare Functions proxies for OpenRouter and AA to avoid shipping secrets in the client bundle.
+- **Safer Runtime Refresh**: Client refreshes now go through same-origin `/api` endpoints with server-only env vars.
+
 ### v3.6.2 (Security Hardening)
 - **Same-Origin API Guardrails**: Telemetry, stats, and pricing-history endpoints now reject cross-origin requests and validate input.
 - **Static Security Headers**: Added baseline headers for exported pages (HSTS, anti-sniff, clickjacking, referrer, permissions).
@@ -147,6 +151,11 @@ For static hosting (e.g. Cloudflare Pages) where build-time secrets are restrict
 2. Run `npm run generate:static-data` locally.
 3. Commit the updated `src/lib/aa-static-scores.ts`.
 4. Push to deploy.
+
+### Runtime Proxy Keys (Cloudflare Functions)
+If you enable runtime refresh via the `/api/*` proxies, set these server-side env vars:
+- `OPENROUTER_API_KEY`
+- `AA_API_KEY`
 
 ## Research
 
