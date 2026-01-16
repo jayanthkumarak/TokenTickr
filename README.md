@@ -68,6 +68,10 @@ See [docs/research/model-card-ui-redesign.md](docs/research/model-card-ui-redesi
 
 ## Release History
 
+### v3.6.2 (Security Hardening)
+- **Same-Origin API Guardrails**: Telemetry, stats, and pricing-history endpoints now reject cross-origin requests and validate input.
+- **Static Security Headers**: Added baseline headers for exported pages (HSTS, anti-sniff, clickjacking, referrer, permissions).
+
 ### v3.6.1 (Consistency & Cleanup)
 - **Token Assumptions Unified**: Rankings, pricing math, and impact projections now share a single token-estimate source.
 - **Free-Model Edge Case**: Guarded percentage math to avoid `Infinity%` when the cheapest model is free.
