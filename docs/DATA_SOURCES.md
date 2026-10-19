@@ -6,7 +6,7 @@ This document explains how TokenTickr obtains and validates model performance da
 
 TokenTickr uses three tiers of data quality, clearly labeled in the UI:
 
-### 🔵 AA Intelligence Index (Highest Priority)
+### 🔵 AA Intelligence Index (Composite Fallback)
 
 **Source**: [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models)
 
@@ -32,7 +32,7 @@ A composite benchmark aggregating multiple independent evaluations:
 
 ---
 
-### 🟢 LMSYS Verified (Fallback #1)
+### 🟢 LMSYS Verified (Curated Fallback)
 
 **Source**: [LMSYS Chatbot Arena](https://chat.lmsys.org)
 
@@ -45,38 +45,9 @@ The standard for human preference evaluation. LMSYS Arena uses anonymous pairwis
 
 ---
 
-### 🟣 Heuristic (Last Resort)
+### ⚪ Insufficient Data (No Guessing)
 
-**Source**: Algorithmic calculation from observable characteristics
-
-Used when we have no benchmark data. The heuristic formula considers:
-
-```
-baseElo = 1100  // GPT-3.5 level baseline
-
-// Parameter count bonus
-paramBonus = log10(parameters) * 20
-
-// Model family bonuses
-familyBonus = {
-  'gpt-4': +100,
-  'claude-3': +80,
-  'gemini': +60,
-  'llama-3': +40,
-  ...
-}
-
-// Context length bonus
-contextBonus = min(40, log10(contextLength) * 8)
-
-heuristicElo = baseElo + paramBonus + familyBonus + contextBonus
-```
-
-**Ceiling**: Maximum 1280 Elo (conservative to avoid overestimating)
-
-- **Confidence**: Low — should be treated as rough approximation
-- **Flag in UI**: Purple "Heuristic" badge
-- **When used**: Brand new models, obscure providers
+Models with no benchmark coverage are **excluded from the Smart Value Ranking** and labeled "Insufficient Data". TokenTickr does not estimate, interpolate, or heuristically invent intelligence scores — a missing score is shown as missing. (The former heuristic Elo engine was removed in the 2026-10 redesign.)
 
 ---
 
@@ -85,21 +56,23 @@ heuristicElo = baseElo + paramBonus + familyBonus + contextBonus
 When calculating performance scores, we check sources in order:
 
 ```
-1. AA Intelligence Index (best) — 367 models
-2. LMSYS Chatbot Arena Elo    — fallback
-3. Heuristic engine           — last resort (ceiling: 1280)
+1. Curated static overrides   — hand-verified frontier models
+2. MMLU-Pro (Artificial Analysis)
+3. AA Intelligence Index      — mapped to Elo scale (367 scored models)
+4. LMSYS / estimated evals    — curated fallback map
+5. Insufficient Data          — excluded from ranking (never guessed)
 ```
 
 ## Context Window Data
 
 Context window sizes are sourced from:
 
-1. **OpenRouter API** — Primary source (real-time from providers)
+1. **OpenRouter API** — Primary source, fetched at build time into committed static data
 2. **Fallback Map** — Manual overrides for known incorrect values
 
 ## Price Data
 
-All pricing data comes directly from the [OpenRouter API](https://openrouter.ai) in real-time.
+All pricing data comes from the [OpenRouter API](https://openrouter.ai), fetched at build time (not live at runtime).
 
 - **Format**: USD per token (converted to per-million for display)
 - **Update Frequency**: Refreshed manually via `npm run generate:static-data`, committed, then rebuilt
@@ -107,7 +80,7 @@ All pricing data comes directly from the [OpenRouter API](https://openrouter.ai)
 ## Transparency Principles
 
 1. **Always show the source** — Every score is labeled with its provenance
-2. **Prefer objective data** — AA Index > LMSYS > Heuristic
+2. **Prefer objective data** — Benchmarks > human preference > curated estimates; never guessed
 3. **Document uncertainty** — Low-confidence scores are flagged
 4. **Keep data fresh** — Auto-generate from APIs
 
@@ -130,4 +103,4 @@ This generates `src/lib/aa-static-scores.ts` with latest scores for all 367+ mod
 
 ---
 
-*Last updated: January 2, 2026*
+*Last updated: October 19, 2026*
