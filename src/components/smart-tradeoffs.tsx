@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { PriceCalculationResult } from "@/lib/price-calculation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, TrendingDown, TrendingUp, Scale, Eye, Brain, Zap, Coins } from "lucide-react";
+import { ArrowRight, TrendingUp, Scale, Eye, Brain, Zap, Coins } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SmartTradeoffsProps {
@@ -24,33 +24,13 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
         const visionModel = results.find(m => m.capabilityFlags?.includes('Multimodal'));
         const thinkingModel = results.find(m => m.capabilityFlags?.includes('Thinking'));
 
-        // Find best value (highest score)
-        const bestValue = results.reduce((prev, current) =>
-            (current.valueScore || 0) > (prev.valueScore || 0) ? current : prev
-            , results[0]);
-
         // Find best raw performance (ignoring price)
+
         const bestPerf = results.reduce((prev, current) =>
             (current.perfScore || 0) > (prev.perfScore || 0) ? current : prev
             , results[0]);
 
         const items = [];
-
-        // 1. Efficiency/Savings Scenario
-        // Trigger if there is meaningful absolute savings OR significant relative difference
-        // Changed from 5x to > 20% diff (1.2x) OR > $10 absolute savings
-        const savings = expensive.totalCost - cheapest.totalCost;
-        if (savings > 10 || expensive.totalCost > cheapest.totalCost * 1.2) {
-            items.push({
-                type: "savings",
-                title: "Efficiency Swap",
-                icon: <TrendingDown className="h-4 w-4 text-emerald-500" />,
-                from: expensive,
-                to: cheapest,
-                impact: `Save $${savings.toFixed(2)}/mo`,
-                description: `Switching from the most expensive to the most efficient model creates adequate budget headroom.`
-            });
-        }
 
         // 2. The Logic Upgrade (Thinking)
         // If a thinking model exists, is affordable (not the most expensive), and users are on a basic model
@@ -85,27 +65,53 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
             }
         }
 
-        // 4. "Smart Value" (Best Bang for Buck)
-        // If the best value model isn't simply the cheapest one, recommend it
-        if (bestValue.modelId !== cheapest.modelId && bestValue.modelId !== thinkingModel?.modelId) {
-            const scoreDiff = (bestValue.perfScore - cheapest.perfScore);
-
-            // Relaxed threshold: show if any positive score gain > 5
-            if (scoreDiff > 5) {
-                items.push({
-                    type: "value",
-                    title: "Smart Performance Value",
-                    icon: <Zap className="h-4 w-4 text-amber-500" />,
-                    from: cheapest,
-                    to: bestValue,
-                    impact: `+${scoreDiff.toFixed(0)}% Intel`,
-                    description: `Get higher intelligence per dollar. The math says this is your best trade-off.`
-                });
-            }
+        // 4. Output-Heavy Warning
+        // Flag models priced steeply for output tokens vs the lowest-ratio alternative
+        const lowestRatio = results.reduce((prev, curr) =>
+            (curr.outputPremiumRatio || 0) < (prev.outputPremiumRatio || 0) ? curr : prev
+            , results[0]);
+        const heavyOutput = results.find(m =>
+            (m.outputPremiumRatio || 0) >= 5 && m.modelId !== lowestRatio.modelId);
+        if (heavyOutput) {
+            items.push({
+                type: "warning",
+                title: "Output-Heavy Warning",
+                icon: <Coins className="h-4 w-4 text-rose-500" />,
+                from: heavyOutput,
+                to: lowestRatio,
+                impact: `${(heavyOutput.outputPremiumRatio || 0).toFixed(1)}x output premium`,
+                description: `${heavyOutput.modelName} charges a steep premium on output tokens. For generation-heavy workloads, ${lowestRatio.modelName} keeps output costs in check.`
+            });
         }
 
-        // 5. "Maximum Octane" (Pure Performance Fallback)
-        // If "Smart Value" didn't pick the absolute best performance model, show it here
+        // 5. Tool/Reasoning Unlock
+        // Surface a model with Tools/Thinking flags the cheapest lacks, with cost delta
+        const unlockCandidate = results.find(m => {
+            if (m.modelId === cheapest.modelId) return false;
+            const mine = m.capabilityFlags ?? [];
+            const base = cheapest.capabilityFlags ?? [];
+            const unlocks = mine.filter(f =>
+                (f === "Tools" || f === "Thinking") && !base.includes(f));
+            return unlocks.length > 0;
+        });
+        if (unlockCandidate) {
+            const mine = unlockCandidate.capabilityFlags ?? [];
+            const base = cheapest.capabilityFlags ?? [];
+            const unlocked = mine.filter(f =>
+                (f === "Tools" || f === "Thinking") && !base.includes(f));
+            const costDiff = unlockCandidate.totalCost - cheapest.totalCost;
+            items.push({
+                type: "upgrade",
+                title: "Tool/Reasoning Unlock",
+                icon: <Zap className="h-4 w-4 text-amber-500" />,
+                from: cheapest,
+                to: unlockCandidate,
+                impact: costDiff >= 0 ? `+$${costDiff.toFixed(2)}/mo` : `-$${Math.abs(costDiff).toFixed(2)}/mo`,
+                description: `${unlockCandidate.modelName} unlocks ${unlocked.join(" + ")} the baseline lacks.`
+            });
+        }
+        // 6. "Maximum Octane" (Pure Performance Fallback)
+        // If no earlier scenario picked the absolute best performance model, show it here
         const topItemIds = items.map(i => i.to.modelId);
         if (bestPerf.modelId !== cheapest.modelId && !topItemIds.includes(bestPerf.modelId)) {
             const scoreDiff = (bestPerf.perfScore - cheapest.perfScore);
@@ -122,33 +128,10 @@ export function SmartTradeoffs({ results, className }: SmartTradeoffsProps) {
             }
         }
 
-        // 6. Context Value King
-        const bestContextValue = results
-            .filter(r => r.totalCost > 0)
-            .reduce((prev, curr) => {
-                const prevRatio = prev.contextScore / prev.totalCost;
-                const currRatio = curr.contextScore / curr.totalCost;
-                return currRatio > prevRatio ? curr : prev;
-            }, results[0]);
-
-        if (bestContextValue.modelId !== cheapest.modelId && items.length < 4) {
-            const alreadyListed = items.some(i => i.to.modelId === bestContextValue.modelId);
-            if (!alreadyListed) {
-                items.push({
-                    type: "context",
-                    title: "Context Value King",
-                    icon: <Coins className="h-4 w-4 text-indigo-500" />,
-                    from: null, // Single model highlight
-                    to: bestContextValue,
-                    impact: `Best Scalability`,
-                    description: `${bestContextValue.modelName} offers the most context window capacity per dollar spent.`
-                });
-            }
-        }
 
         // 7. STRATEGIC VALUE (The "Sweet Spot" Logic)
         // Look for High Performance (>85% of Max) at Massive Savings (>40% off Max)
-        // This replaces the generic "Smart Performance Value" if it finds a strong candidate against the anchor.
+        // Surface the challenger near the top so it reads as the recommended sweet spot.
         const premiumAnchor = expensive; // The most expensive is usually the anchor
         const valueChallenger = sortedByPrice.find(m => {
             if (m.modelId === premiumAnchor.modelId) return false;

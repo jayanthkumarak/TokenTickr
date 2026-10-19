@@ -15,6 +15,28 @@ interface QueryVolumeSelectorProps {
   className?: string;
 }
 
+// Display layer only: ids/values come from QUERY_VOLUMES unchanged.
+const VOLUME_LABELS: Record<string, string> = {
+  light: "10k tasks/mo",
+  moderate: "100k tasks/mo",
+  heavy: "1M tasks/mo",
+  enterprise: "10M tasks/mo",
+};
+
+const VOLUME_DESCRIPTIONS: Record<string, string> = {
+  light: "Side projects, evals",
+  moderate: "Production agents, small teams",
+  heavy: "High-traffic agent services",
+  enterprise: "Enterprise agent fleets",
+};
+
+const VOLUME_CONTEXTS: Record<string, string> = {
+  light: "Occasional agent tasks",
+  moderate: "Regular daily agent runs",
+  heavy: "SaaS platforms, data pipelines",
+  enterprise: "High-volume agent fleets with millions of users",
+};
+
 export function QueryVolumeSelector({
   value,
   onValueChange,
@@ -22,9 +44,9 @@ export function QueryVolumeSelector({
   className,
 }: QueryVolumeSelectorProps) {
   const [open, setOpen] = useState(false);
-  
+
   const selectedVolume = QUERY_VOLUMES.find(volume => volume.value === value);
-  
+
   return (
     <div className={cn("w-full space-y-2", className)}>
       <div className="text-sm text-muted-foreground">
@@ -41,14 +63,14 @@ export function QueryVolumeSelector({
           >
             <div className="flex flex-col items-start gap-1">
               <span className="font-medium text-base">
-                {selectedVolume?.label || `${value.toLocaleString()} Queries`}
+                {selectedVolume ? (VOLUME_LABELS[selectedVolume.id] ?? selectedVolume.label) : `${value.toLocaleString()} Tasks`}
               </span>
               <span className="text-sm text-muted-foreground">
-                {selectedVolume?.description || 'Custom volume'}
+                {selectedVolume ? (VOLUME_DESCRIPTIONS[selectedVolume.id] ?? selectedVolume.description) : 'Custom volume'}
               </span>
               {selectedVolume?.context && (
                 <span className="text-xs text-muted-foreground/80">
-                  {selectedVolume.context}
+                  {VOLUME_CONTEXTS[selectedVolume.id] ?? selectedVolume.context}
                 </span>
               )}
             </div>
@@ -58,7 +80,7 @@ export function QueryVolumeSelector({
         <PopoverContent className="w-full p-0" align="start">
           <Command>
             <CommandList>
-              <CommandEmpty>No query volumes found.</CommandEmpty>
+              <CommandEmpty>No task volumes found.</CommandEmpty>
               <CommandGroup>
                 {QUERY_VOLUMES.map((volume) => (
                   <CommandItem
@@ -77,12 +99,12 @@ export function QueryVolumeSelector({
                       )}
                     />
                     <div className="flex flex-col gap-1">
-                      <span className="font-medium">{volume.label}</span>
+                      <span className="font-medium">{VOLUME_LABELS[volume.id] ?? volume.label}</span>
                       <span className="text-sm text-muted-foreground">
-                        {volume.description}
+                        {VOLUME_DESCRIPTIONS[volume.id] ?? volume.description}
                       </span>
                       <span className="text-xs text-muted-foreground/70">
-                        {volume.context}
+                        {VOLUME_CONTEXTS[volume.id] ?? volume.context}
                       </span>
                     </div>
                   </CommandItem>
@@ -96,4 +118,4 @@ export function QueryVolumeSelector({
   );
 }
 
-export default QueryVolumeSelector; 
+export default QueryVolumeSelector;

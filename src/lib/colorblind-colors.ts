@@ -102,18 +102,28 @@ export const ACCESSIBLE_COLORS = {
   }
 } as const;
 
-// Chart-specific color palette (optimized for data visualization)
+// Chart-specific color palette (theme-token backed; resolves in CSS/SVG contexts)
+//
+// NOTE on var() vs hex: every current consumer passes these strings to SVG
+// `fill` attributes or inline `style={{ ... }}` (visx charts, ImpactCard),
+// both of which resolve CSS var() in modern browsers. There are no
+// `<canvas>` 2D consumers — canvas `fillStyle` cannot resolve var(), so any
+// future canvas consumer MUST resolve via
+// `getComputedStyle(document.documentElement).getPropertyValue('--chart-N')`
+// before drawing instead of using these strings raw.
+// Twin mapping: primary[0..4] === chart-1..5, primary[5..7] are
+// translucent reuses of chart-1..3 for 6th+ series.
 export const CHART_COLORS = {
-  // Primary data series (5 vibrant colors for model comparison)
+  // Primary data series (5 theme chart tokens for model comparison)
   primary: [
-    ACCESSIBLE_COLORS.blue[600],    // #1e88e5 - Primary blue
-    ACCESSIBLE_COLORS.orange[500],  // #ff9800 - Primary orange
-    ACCESSIBLE_COLORS.success[600], // #009688 - Teal/Blue-green
-    ACCESSIBLE_COLORS.warning[600], // #fb8c00 - Amber
-    '#9c27b0',                      // Purple - Vibrant 5th color (instead of gray)
-    ACCESSIBLE_COLORS.blue[400],    // Light blue
-    ACCESSIBLE_COLORS.orange[700],  // Dark orange
-    ACCESSIBLE_COLORS.success[400], // Light blue-green
+    'var(--chart-1)', // twin: chart-1 — Primary teal/blue
+    'var(--chart-2)', // twin: chart-2 — Indigo
+    'var(--chart-3)', // twin: chart-3 — Blue-green
+    'var(--chart-4)', // twin: chart-4 — Amber
+    'var(--chart-5)', // twin: chart-5 — 5th series
+    'color-mix(in oklch, var(--chart-1) 65%, transparent)', // twin: chart-1 — Light reuse
+    'color-mix(in oklch, var(--chart-2) 65%, transparent)', // twin: chart-2 — Dark reuse
+    'color-mix(in oklch, var(--chart-3) 65%, transparent)', // twin: chart-3 — Light reuse
   ],
 
   // Secondary data series (for contrast and comparison)

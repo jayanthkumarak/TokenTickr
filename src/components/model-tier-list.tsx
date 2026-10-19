@@ -7,60 +7,100 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check, Sparkles, Zap, Brain } from "lucide-react";
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+    isThinkingModel,
+    supportsToolCalling,
+    getAgentCapabilitySummary,
+    type AgentCapabilitySummary,
+} from "@/lib/capability-bonus";
+import type { OpenRouterModel } from "@/types/models";
 
 interface ModelTierListProps {
     results: PriceCalculationResult[];
     className?: string;
 }
 
-type TierType = "Budget" | "Balanced" | "Premium";
+type TierType = "Reasoning" | "Coding" | "LongContext" | "Routing";
 
 interface CategorizedModel extends Omit<PriceCalculationResult, 'tier'> {
     tier: TierType;
     tags: string[];
+    summary: AgentCapabilitySummary;
+}
+
+type FlagCarrier = Pick<
+  PriceCalculationResult,
+  'modelId' | 'modelName' | 'capabilityFlags' | 'structuredOutputSupported' | 'outputPremiumRatio'
+>;
+
+function toShim(m: FlagCarrier): OpenRouterModel {
+    return { id: m.modelId, name: m.modelName } as OpenRouterModel;
+}
+
+function hasThinking(m: FlagCarrier): boolean {
+    return (
+        m.capabilityFlags?.includes("Thinking") === true ||
+        isThinkingModel(toShim(m))
+    );
+}
+
+function hasTools(m: FlagCarrier): boolean {
+    return (
+        m.capabilityFlags?.includes("Tools") === true ||
+        supportsToolCalling(toShim(m))
+    );
+}
+
+function summaryFor(m: FlagCarrier): AgentCapabilitySummary {
+    const base = getAgentCapabilitySummary(toShim(m));
+    const flags = m.capabilityFlags ?? [];
+    return {
+        thinking: base.thinking || hasThinking(m),
+        tools: base.tools || hasTools(m),
+        structuredOutputs:
+            base.structuredOutputs ||
+            m.structuredOutputSupported === true ||
+            flags.includes("JSON Schema"),
+        promptCaching: base.promptCaching || flags.includes("Cache"),
+        multimodal: base.multimodal || flags.includes("Multimodal"),
+        outputPremiumRatio: m.outputPremiumRatio,
+    };
 }
 
 export function ModelTierList({ results, className }: ModelTierListProps) {
-    // Categorize models into tiers based on price and performance
-    const categorizedModels = useMemo(() => {
-        // Find price ranges
+    // Deterministic role tiers based on capabilities + scores. A model may
+    // appear in multiple tiers.
+    const tiers = useMemo(() => {
         const costs = results.map(r => r.totalCost);
         const minCost = Math.min(...costs);
         const maxCost = Math.max(...costs);
-        const costRange = maxCost - minCost;
+        const range = maxCost - minCost || 1;
 
-        // Find perf ranges if available (using heuristic or null)
-        // For now, we'll infer tier mainly from price correlation, 
-        // but ideally this comes from the Smart Score "Tier" logic if available in results.
-        // Since PriceCalculationResult doesn't strictly have "tier" field yet, we compute it.
+        const withSummary: CategorizedModel[] = results.map((model) => ({
+            ...model,
+            tier: "Routing" as TierType,
+            tags: [],
+            summary: summaryFor(model),
+        }));
 
-        return results.map(model => {
-            let tier: TierType = "Balanced";
-            const pricePosition = (model.totalCost - minCost) / (costRange || 1);
+        const reasoning = withSummary
+            .filter((m) => hasThinking(m) || m.perfScore >= 85)
+            .map((m) => ({ ...m, tier: "Reasoning" as TierType }))
+            .sort((a, b) => b.perfScore - a.perfScore);
+        const coding = withSummary
+            .filter((m) => hasTools(m) && m.perfScore >= 65)
+            .map((m) => ({ ...m, tier: "Coding" as TierType }))
+            .sort((a, b) => b.perfScore - a.perfScore);
+        const longContext = withSummary
+            .filter((m) => m.contextLength >= 500000)
+            .map((m) => ({ ...m, tier: "LongContext" as TierType }))
+            .sort((a, b) => b.contextLength - a.contextLength);
+        const routing = withSummary
+            .filter((m) => (m.totalCost - minCost) / range <= 0.35)
+            .map((m) => ({ ...m, tier: "Routing" as TierType }))
+            .sort((a, b) => a.totalCost - b.totalCost);
 
-            if (pricePosition < 0.2) tier = "Budget";
-            else if (pricePosition > 0.7) tier = "Premium";
-
-            // Assign tags based on specs
-            const tags: string[] = [];
-            if (model.modelName.toLowerCase().includes("flash") || model.modelName.toLowerCase().includes("haiku")) tags.push("Fast");
-            if (model.contextScore > 80) tags.push("High Context");
-            if (model.perfScore > 80) tags.push("Smart");
-
-            return { ...model, tier, tags } as CategorizedModel;
-        }).sort((a, b) => a.totalCost - b.totalCost);
+        return { reasoning, coding, longContext, routing };
     }, [results]);
-
-    const tiers = {
-        Budget: categorizedModels.filter(m => m.tier === "Budget"),
-        Balanced: categorizedModels.filter(m => m.tier === "Balanced"),
-        Premium: categorizedModels.filter(m => m.tier === "Premium"),
-    };
 
     const formatContext = (length: number) => {
         if (length >= 1000000) return `${(length / 1000000).toFixed(0)}M`;
@@ -83,9 +123,14 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
 
                 <div className="space-y-2">
                     {models.map((model) => {
-                        const hasVision = model.capabilityFlags?.includes("Multimodal");
-                        const hasThinking = model.capabilityFlags?.includes("Thinking");
-                        const hasCoding = model.modelName.toLowerCase().includes("code") || model.modelName.toLowerCase().includes("sonnet") || model.perfScore > 80; // Heuristic for CDE if flag missing
+                        const s = model.summary;
+                        const badges = [
+                            { label: "THINK", on: s.thinking, onClass: "bg-purple-500/20 text-purple-400", tip: s.thinking ? "Reasoning optimized" : "Standard logic" },
+                            { label: "TOOLS", on: s.tools, onClass: "bg-blue-500/20 text-blue-400", tip: s.tools ? "Tool calling supported" : "No tool calling" },
+                            { label: "JSON", on: s.structuredOutputs, onClass: "bg-emerald-500/20 text-emerald-400", tip: s.structuredOutputs ? "Structured outputs supported" : "No structured outputs" },
+                            { label: "VISION", on: s.multimodal, onClass: "bg-indigo-500/20 text-indigo-400", tip: s.multimodal ? "Vision capable" : "Text only" },
+                            { label: "CACHE", on: s.promptCaching, onClass: "bg-amber-500/20 text-amber-400", tip: s.promptCaching ? "Prompt caching supported" : "No prompt caching" },
+                        ];
 
                         // Extract provider (simple heuristic: first word usually)
                         const provider = model.modelName.split(":")[0]?.trim() || "AI";
@@ -93,11 +138,11 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
 
                         return (
                             <div
-                                key={model.modelId}
-                                className="group relative flex items-center justify-between p-3 rounded-md bg-white border border-border/40 shadow-sm hover:shadow-md hover:border-border/80 dark:bg-muted/10 dark:border-transparent dark:hover:bg-muted/30 transition-all duration-200"
+                                key={`${title}-${model.modelId}`}
+                                className="group relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 sm:justify-between p-3 rounded-md bg-white border border-border/40 shadow-sm hover:shadow-md hover:border-border/80 dark:bg-muted/10 dark:border-transparent dark:hover:bg-muted/30 transition-all duration-200"
                             >
-                                {/* 1. Identity (30%) */}
-                                <div className="w-[30%] min-w-[140px] pr-4">
+                                {/* 1. Identity */}
+                                <div className="w-full sm:flex-1 sm:min-w-0 sm:pr-4">
                                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold mb-0.5 truncate">
                                         {provider}
                                     </div>
@@ -106,47 +151,23 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                                     </div>
                                 </div>
 
-                                {/* 2. Specs (40%) - The Matrix */}
-                                <div className="w-[40%] flex flex-col gap-2 px-2 border-x border-border/10">
+                                {/* 2. Specs - The Matrix */}
+                                <div className="w-full sm:flex-1 flex flex-col gap-2 sm:px-2 sm:border-x border-border/10">
                                     {/* Capabilities Row */}
-                                    <div className="flex items-center gap-1.5">
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasVision ? "bg-indigo-500/20 text-indigo-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                                        VIS
-                                                    </Badge>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="text-xs max-w-[200px]">
-                                                    <p className="font-semibold mb-1">{hasVision ? "Vision Capable" : "Text Only"}</p>
-                                                    <p className="text-muted-foreground">Can process images and visual inputs.</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasThinking ? "bg-purple-500/20 text-purple-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                                        LOG
-                                                    </Badge>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="text-xs max-w-[200px]">
-                                                    <p className="font-semibold mb-1">{hasThinking ? "Reasoning Optimized" : "Standard Logic"}</p>
-                                                    <p className="text-muted-foreground">Uses Chain-of-Thought or enhanced reasoning techniques.</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Badge variant="outline" className={cn("text-[9px] px-1 h-4 rounded-sm border-0 font-mono tracking-widest cursor-help", hasCoding ? "bg-blue-500/20 text-blue-400 font-bold" : "bg-muted/20 text-muted-foreground/30")}>
-                                                        CDE
-                                                    </Badge>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="text-xs max-w-[200px]">
-                                                    <p className="font-semibold mb-1">{hasCoding ? "Coding Specialist" : "General Purpose"}</p>
-                                                    <p className="text-muted-foreground">High proficiency in code generation and debugging.</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
+                                    <div className="flex flex-wrap items-center gap-1.5">
+                                        {badges.map((b) => (
+                                            <Badge
+                                                key={b.label}
+                                                variant="outline"
+                                                title={b.tip}
+                                                className={cn(
+                                                    "text-xs px-1.5 h-5 rounded-sm border-0 font-mono tracking-widest",
+                                                    b.on ? b.onClass + " font-bold" : "bg-muted/20 text-muted-foreground/30"
+                                                )}
+                                            >
+                                                {b.label}
+                                            </Badge>
+                                        ))}
                                     </div>
 
                                     {/* Intel & Mem Row */}
@@ -159,7 +180,7 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                                             </div>
                                             <div className="h-1.5 w-full bg-muted/20 rounded-full overflow-hidden">
                                                 <div
-                                                    className="h-full bg-gradient-to-r from-emerald-500/50 to-emerald-400 rounded-full"
+                                                    className="h-full bg-gradient-to-br from-chart-1/60 to-chart-1 rounded-full"
                                                     style={{ width: `${model.perfScore}%` }}
                                                 />
                                             </div>
@@ -175,9 +196,9 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                                     </div>
                                 </div>
 
-                                {/* 3. Economics (30%) */}
-                                <div className="w-[30%] flex flex-col items-end pl-4">
-                                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold mb-0.5">
+                                {/* 3. Economics */}
+                                <div className="w-full sm:w-auto flex sm:flex-col flex-row items-center sm:items-end justify-between sm:justify-start gap-1 sm:pl-4">
+                                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold sm:mb-0.5">
                                         Est. Cost
                                     </div>
                                     <div className="font-mono text-sm font-medium">
@@ -206,24 +227,31 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
 
             <div className="space-y-8">
                 {renderTierGroup(
-                    "Efficiency Tier",
-                    tiers.Budget,
-                    <Zap className="h-4 w-4 text-emerald-500" />,
-                    "High throughput, low latency"
+                    "Reasoning & Planning",
+                    tiers.reasoning,
+                    <Brain className="h-4 w-4 text-purple-500" />,
+                    "Deep reasoning and complex planning"
                 )}
 
                 {renderTierGroup(
-                    "Balanced Tier",
-                    tiers.Balanced,
+                    "Coding & Tool Execution",
+                    tiers.coding,
                     <Check className="h-4 w-4 text-blue-500" />,
-                    "General purpose reasoning"
+                    "Tool calling with strong intelligence"
                 )}
 
                 {renderTierGroup(
-                    "Premium Tier",
-                    tiers.Premium,
-                    <Sparkles className="h-4 w-4 text-purple-500" />,
-                    "Advanced cognitive tasks"
+                    "Long-Context Synthesis",
+                    tiers.longContext,
+                    <Sparkles className="h-4 w-4 text-indigo-500" />,
+                    "500k+ token context windows"
+                )}
+
+                {renderTierGroup(
+                    "High-Speed Routing",
+                    tiers.routing,
+                    <Zap className="h-4 w-4 text-emerald-500" />,
+                    "Cheapest third for bulk throughput"
                 )}
             </div>
         </Card>

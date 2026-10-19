@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -18,6 +19,7 @@ import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
 import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
 import { TOKEN_ESTIMATES } from "@/lib/token-estimates";
+import { getAgentCapabilitySummary } from "@/lib/capability-bonus";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
@@ -50,7 +52,89 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
     clearAll,
     isLoading,
     error,
+    filteredModels,
+    fetchModels,
   } = useComparisonStore();
+  const [presetDismissed, setPresetDismissed] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("tokentickr-presets-dismissed") === "true") {
+        setPresetDismissed(true);
+      }
+    } catch {
+      // storage unavailable; keep bar visible
+    }
+    fetchModels();
+  }, [fetchModels]);
+
+  const dismissPresets = () => {
+    setPresetDismissed(true);
+    try {
+      localStorage.setItem("tokentickr-presets-dismissed", "true");
+    } catch {
+      // ignore persistence failure
+    }
+  };
+
+  const combinedCostOf = (model: OpenRouterModel): number => {
+    const prompt = parseFloat(model.pricing.prompt) || 0;
+    const completion = parseFloat(model.pricing.completion) || 0;
+    return prompt + completion;
+  };
+
+  const applyPreset = (kind: "coding" | "reasoning" | "routers") => {
+    const taken = new Set(
+      selectedModels.filter((m): m is OpenRouterModel => m !== null).map((m) => m.id)
+    );
+    const pool = filteredModels
+      .filter((m) => !taken.has(m.id))
+      .filter((m) => combinedCostOf(m) > 0);
+    const scored = pool.map((model) => {
+      const caps = getAgentCapabilitySummary(model);
+      const cost = combinedCostOf(model);
+      return { model, caps, cost };
+    });
+    let picks: OpenRouterModel[] = [];
+    if (kind === "coding") {
+      picks = scored
+        .filter((s) => s.caps.tools && s.caps.structuredOutputs)
+        .sort((a, b) => b.model.context_length - a.model.context_length || a.cost - b.cost)
+        .slice(0, maxModels)
+        .map((s) => s.model);
+    } else if (kind === "reasoning") {
+      const thinkers = scored
+        .filter((s) => s.caps.thinking)
+        .sort((a, b) => a.cost - b.cost);
+      const speeds = scored
+        .filter((s) => !s.caps.thinking)
+        .sort((a, b) => a.cost - b.cost);
+      const ordered = [...thinkers, ...speeds];
+      for (const entry of ordered) {
+        if (picks.length >= maxModels) break;
+        picks.push(entry.model);
+      }
+    } else {
+      picks = scored
+        .filter((s) => s.caps.tools)
+        .sort((a, b) => a.cost - b.cost)
+        .slice(0, maxModels)
+        .map((s) => s.model);
+    }
+    if (picks.length === 0) {
+      picks = [...scored].sort((a, b) => a.cost - b.cost).slice(0, maxModels).map((s) => s.model);
+    }
+    // Fill only empty slots; existing picks are preserved.
+    const next = selectedModels.slice(0, maxModels);
+    let pi = 0;
+    for (let i = 0; i < next.length && pi < picks.length; i++) {
+      if (next[i] === null) {
+        taken.add(picks[pi].id);
+        setSelectedModel(i, picks[pi]);
+        pi++;
+      }
+    }
+  };
 
   const handleModelSelect = (index: number, model: OpenRouterModel) => {
     setSelectedModel(index, model);
@@ -62,7 +146,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
   };
 
   const handleAddColumn = () => {
-    if (maxModels < 5) {
+    if (maxModels < 4) {
       setMaxModels(maxModels + 1);
     }
   };
@@ -147,6 +231,7 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
             onClick={handleRemoveColumn}
             disabled={maxModels <= 2}
             className="h-8 w-8 p-0"
+            aria-label="Remove comparison column"
           >
             <Minus className="h-4 w-4" />
           </Button>
@@ -155,8 +240,9 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
             variant="outline"
             size="sm"
             onClick={handleAddColumn}
-            disabled={maxModels >= 5}
+            disabled={maxModels >= 4}
             className="h-8 w-8 p-0"
+            aria-label="Add comparison column"
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -170,6 +256,8 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
                 onClick={() => setDetailedViewFor4Columns(false)}
                 className="h-8 w-8 p-0"
                 title="Compact View"
+                aria-label="Compact view"
+                aria-pressed={!detailedViewFor4Columns}
               >
                 <LayoutGrid className="h-3.5 w-3.5" />
               </Button>
@@ -179,6 +267,8 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
                 onClick={() => setDetailedViewFor4Columns(true)}
                 className="h-8 w-8 p-0"
                 title="Detailed View"
+                aria-label="Detailed view"
+                aria-pressed={detailedViewFor4Columns}
               >
                 <List className="h-3.5 w-3.5" />
               </Button>
@@ -217,6 +307,33 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
 
 
       {/* Model Selector Modal (Spotlight) */}
+
+      {/* Preset bar: 1-click fills for empty slots; dismissible, never blocking */}
+      {!presetDismissed && (
+        <div className="mb-6 flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card p-3">
+          <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+            Presets
+          </span>
+          <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => applyPreset("coding")}>
+            Frontier Coding Agents
+          </Button>
+          <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => applyPreset("reasoning")}>
+            Reasoning vs Speed
+          </Button>
+          <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => applyPreset("routers")}>
+            Low-Cost Tool Routers
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="ml-auto h-7 w-7 p-0"
+            onClick={dismissPresets}
+            aria-label="Dismiss presets"
+          >
+            <X className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      )}
       {/* Conditionally render to ensure it's not even mounted until needed */}
       {showingSelector !== null && (
         <ModelSelector
@@ -238,17 +355,14 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         maxModels === 2 && "grid-cols-1 md:grid-cols-2",
         maxModels === 3 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
         maxModels === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
-        maxModels === 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
+        maxModels === 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
       )}>
         {activeModels.map((model, index) => (
           <div key={index} className="flex flex-col h-full">
             <div className="mb-2 text-center">
-              <h3 className={cn(
-                "font-semibold",
-                cardVariant === "compact" ? "text-base" : "text-lg"
-              )}>
-                Model {index + 1}
-              </h3>
+              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                Slot {index + 1}
+              </p>
             </div>
             <ModelCard
               model={model}

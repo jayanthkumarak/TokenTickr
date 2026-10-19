@@ -66,7 +66,7 @@ export const useComparisonStore = create<ComparisonStore>()(
 
     setMaxModels: (count: number) => {
       set((state) => {
-        const newMaxModels = Math.min(Math.max(count, 2), 5);
+        const newMaxModels = Math.min(Math.max(count, 2), 4);
         const newSelectedModels = [...state.selectedModels];
 
         // If reducing max models, clear models beyond the new limit

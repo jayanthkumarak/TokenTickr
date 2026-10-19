@@ -24,7 +24,7 @@ A composite benchmark aggregating multiple independent evaluations:
 - More objective than human preference voting
 - Measures raw capability rather than "vibes"
 
-**Coverage**: 361 models (auto-generated from API)
+**Coverage**: 367 models (auto-generated from API)
 
 - **Confidence**: High — objective, multi-source composite
 - **Flag in UI**: Blue "AA Index" badge
@@ -85,7 +85,7 @@ heuristicElo = baseElo + paramBonus + familyBonus + contextBonus
 When calculating performance scores, we check sources in order:
 
 ```
-1. AA Intelligence Index (best) — 361 models
+1. AA Intelligence Index (best) — 367 models
 2. LMSYS Chatbot Arena Elo    — fallback
 3. Heuristic engine           — last resort (ceiling: 1280)
 ```
@@ -102,7 +102,7 @@ Context window sizes are sourced from:
 All pricing data comes directly from the [OpenRouter API](https://openrouter.ai) in real-time.
 
 - **Format**: USD per token (converted to per-million for display)
-- **Update Frequency**: Daily (Static build-time generation)
+- **Update Frequency**: Refreshed manually via `npm run generate:static-data`, committed, then rebuilt
 
 ## Transparency Principles
 
@@ -120,7 +120,7 @@ To refresh the Intelligence Index data from Artificial Analysis:
 npm run generate:aa-data
 ```
 
-This generates `src/lib/aa-static-scores.ts` with latest scores for all 361+ models.
+This generates `src/lib/aa-static-scores.ts` with latest scores for all 367+ models.
 
 ## Attribution
 

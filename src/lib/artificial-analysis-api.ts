@@ -16,7 +16,7 @@
 
 // Import auto-generated static data (361 models)
 // Run 'npm run generate:aa-data' to update
-import { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
+import { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_CODING_INDEX, AA_IFBENCH, AA_ID_ALIASES, AA_DATA_META } from './aa-static-scores';
 
 // Helper to strip all non-alphanumeric characters for "ultra-fuzzy" matching
 // e.g. "claude-3.5-sonnet" -> "claude35sonnet" matches "claude-35-sonnet"
@@ -44,7 +44,7 @@ function areTokenSetsEqual(setA: Set<string>, setB: Set<string>): boolean {
 }
 
 // Re-export for use in other modules
-export { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_ID_ALIASES, AA_DATA_META };
+export { AA_INTELLIGENCE_INDEX, AA_MMLU_PRO, AA_CODING_INDEX, AA_IFBENCH, AA_ID_ALIASES, AA_DATA_META };
 
 // API constants
 const AA_API_BASE = 'https://artificialanalysis.ai/api/v2';
@@ -147,11 +147,12 @@ export class ArtificialAnalysisAPI {
                 throw new Error(`AA API Error: ${response.status} ${response.statusText}`);
             }
 
-            const data = await response.json();
+            const payload = await response.json();
+            const data = Array.isArray(payload) ? payload : payload.data ?? [];
 
             // Validate response structure
             if (!Array.isArray(data)) {
-                console.warn('[AA API] Unexpected response format, expected array');
+                console.warn('[AA API] Unexpected response format, expected array or { data: [] }');
                 return [];
             }
 
@@ -372,13 +373,6 @@ export function getAAIntelligenceIndexSync(openRouterId: string): number | null 
         return AA_INTELLIGENCE_INDEX[modelName];
     }
 
-    // 3. Try partial matches in static data
-    for (const [slug, score] of Object.entries(AA_INTELLIGENCE_INDEX)) {
-        if (modelName.includes(slug) || slug.includes(modelName)) {
-            return score;
-        }
-    }
-
     // 4. Fall back to API cache if initialized
     if (aaScoreCache) {
         // Try exact match first
@@ -389,14 +383,6 @@ export function getAAIntelligenceIndexSync(openRouterId: string): number | null 
         // Try model name only
         if (aaScoreCache.has(modelName)) {
             return aaScoreCache.get(modelName) || null;
-        }
-
-        // Try fuzzy match on keys
-        for (const [key, value] of aaScoreCache.entries()) {
-            const keyLower = key.toLowerCase();
-            if (keyLower.includes(modelName) || modelName.includes(keyLower)) {
-                return value;
-            }
         }
 
         // Try token match on keys
@@ -433,6 +419,14 @@ function fuzzyMatchStaticData(modelName: string): number | null {
             return score;
         }
     }
+
+    // Simplified string comparison (ignores dots, dashes, spaces)
+    const simpleName = simplify(modelName);
+    for (const [slug, score] of Object.entries(AA_INTELLIGENCE_INDEX)) {
+        if (simplify(slug) === simpleName) {
+            return score;
+        }
+    }
     return null;
 }
 
@@ -458,13 +452,6 @@ export function getMMLUProSync(openRouterId: string): number | null {
         return AA_MMLU_PRO[modelName];
     }
 
-    // 3. Try partial matches in static data
-    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
-        if (modelName.includes(slug) || slug.includes(modelName)) {
-            return score;
-        }
-    }
-
     // 4. Fall back to API cache if initialized
     if (aaScoreCache) {
         // Note: Currently aaScoreCache only stores intelligence index.
@@ -485,21 +472,21 @@ export function getMMLUProSync(openRouterId: string): number | null {
  * Fallback: Token-based fuzzy matching for MMLU
  */
 function fuzzyMatchStaticMMLU(modelName: string): number | null {
-    // 1. Try simplified string matching (ignores dots, dashes, spaces)
-    const simpleName = simplify(modelName);
-    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
-        if (simplify(slug) === simpleName) {
-            return score;
-        }
-    }
-
-    // 2. Token-based matching
+    // 1. Token-based matching
     const modelTokens = tokenize(modelName);
 
     for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
         const slugTokens = tokenize(slug);
 
         if (areTokenSetsEqual(modelTokens, slugTokens)) {
+            return score;
+        }
+    }
+
+    // 2. Simplified string matching (ignores dots, dashes, spaces)
+    const simpleName = simplify(modelName);
+    for (const [slug, score] of Object.entries(AA_MMLU_PRO)) {
+        if (simplify(slug) === simpleName) {
             return score;
         }
     }

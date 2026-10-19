@@ -116,7 +116,7 @@ npm install
 npm run dev
 ```
 
-Opens at `http://localhost:3000`
+Opens at `http://localhost:3000` (`npm run dev`). E2E uses port 3002 via `playwright.config.ts` webServer.
 
 ## Testing
 
@@ -130,7 +130,7 @@ npx playwright test
 
 ## Deployment
 
-Static export to Cloudflare Pages.
+Static export to Cloudflare Workers Static Assets, CLI-deployed via `npm run deploy`.
 
 ```bash
 npm run build
@@ -142,7 +142,7 @@ npm run build
 - **Intelligence Scores**: [Artificial Analysis MMLU-Pro](https://artificialanalysis.ai/leaderboards/models) / [MMLU-Pro GitHub](https://github.com/TIGER-AI-Lab/MMLU-Pro)
 
 ### Refreshing Static Data (Static Hosting)
-For static hosting (e.g. Cloudflare Pages) where build-time secrets are restricted:
+For static hosting on Workers Static Assets (build-time secrets restricted):
 1. Ensure `.env.local` contains `NEXT_PUBLIC_AA_API_KEY`.
 2. Run `npm run generate:static-data` locally.
 3. Commit the updated `src/lib/aa-static-scores.ts`.

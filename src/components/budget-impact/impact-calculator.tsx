@@ -8,7 +8,7 @@ import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Zap } from "lucide-react";
-import { MetricSelector, ImpactMetric } from "./metric-selector";
+import { MetricSelector, ImpactMetric, IMPACT_ARCHETYPES } from "./metric-selector";
 import { ImpactCard } from "./impact-card";
 import { cn } from "../../lib/utils";
 import { CHART_COLORS } from "../../lib/colorblind-colors";
@@ -18,59 +18,50 @@ interface ImpactCalculatorProps {
     className?: string;
 }
 
-// Logic Constants
-const TOKENS_PER_DOC = 20000;   // ~50 pages
-const TOKENS_PER_EMAIL = 500;   // Long prof. email
-const TOKENS_PER_CODE = 2000;   // Component/Class file
-
 export function ImpactCalculator({ results, className }: ImpactCalculatorProps) {
     const [budget, setBudget] = useState(10);
-    const [metric, setMetric] = useState<ImpactMetric>("doc");
+    const [metric, setMetric] = useState<ImpactMetric>("coding");
 
     const PRESETS = [1, 5, 10, 50];
 
     const impactData = useMemo(() => {
+        const arch = IMPACT_ARCHETYPES[metric];
+        const standardTokens = TOKEN_ESTIMATES.PROMPT_TOKENS + TOKEN_ESTIMATES.COMPLETION_TOKENS;
         return results.map((model) => {
-            // model.costPerQuery uses the shared per-query token estimates.
-            // Rely on it to stay consistent with the price comparison view.
+            // Per-token prices recovered from the standard-query cost split so the
+            // task cost stays consistent with the price comparison view.
+            const promptPrice = (model.promptCost || 0) / TOKEN_ESTIMATES.PROMPT_TOKENS;
+            const completionPrice = (model.completionCost || 0) / TOKEN_ESTIMATES.COMPLETION_TOKENS;
 
-            // 1. How many queries can we buy?
-            const costPerQuery = model.costPerQuery || 0.000001;
-            const queriesForBudget = budget / costPerQuery;
-
-            // 2. Convert queries to tokens
-            // Uses the same standard query size as the price calculation (1000 in + 500 out)
-            const tokensPerQuery = TOKEN_ESTIMATES.PROMPT_TOKENS + TOKEN_ESTIMATES.COMPLETION_TOKENS;
-            const totalTokensForBudget = queriesForBudget * tokensPerQuery;
-
-            // 3. Convert tokens to "Impact Units"
-            let count = 0;
-            let unitSize = 0;
-
-            switch (metric) {
-                case "doc":
-                    unitSize = TOKENS_PER_DOC;
-                    count = totalTokensForBudget / TOKENS_PER_DOC;
-                    break;
-                case "email":
-                    unitSize = TOKENS_PER_EMAIL;
-                    count = totalTokensForBudget / TOKENS_PER_EMAIL;
-                    break;
-                case "code":
-                    unitSize = TOKENS_PER_CODE;
-                    count = totalTokensForBudget / TOKENS_PER_CODE;
-                    break;
+            // Per-model task cost for the selected agent archetype.
+            let taskCost = arch.promptTokens * promptPrice + arch.completionTokens * completionPrice;
+            if (!(taskCost > 0)) {
+                const costPerQuery = model.costPerQuery || 0;
+                taskCost = costPerQuery > 0
+                    ? costPerQuery * (arch.totalTokens / standardTokens)
+                    : 0.000001;
             }
 
-            // Check if the UNIT itself fits in the context window
-            // If the unit is 20k tokens and context is 8k, it physically cannot fit at once.
-            // Fallback for missing contextLength is 0, so we handle that.
-            const ctx = model.contextLength || 4096;
-            const exceedsContext = unitSize > ctx;
+            // Tasks purchasable with the budget; guard against zero/negative cost.
+            const safeTaskCost = taskCost > 0 ? taskCost : 0.000001;
+            const tasksForBudget = budget / safeTaskCost;
+
+            // Reasoning tax: completion-to-prompt price ratio from the result,
+            // falling back to the prompt/completion cost split.
+            const reasoningTax = model.outputPremiumRatio > 0
+                ? model.outputPremiumRatio
+                : (promptPrice > 0 ? completionPrice / promptPrice : 0);
+
+            // Context fit: warn when the task peak working set exceeds 80% of
+            // the model's context window (single-session fit is unlikely).
+            const ctx = model.contextLength || 0;
+            const exceedsContext = ctx > 0 && arch.totalTokens > 0.8 * ctx;
 
             return {
                 ...model,
-                impactCount: Math.floor(count * 10) / 10, // Round to 1 decimal
+                taskCost: safeTaskCost,
+                reasoningTax,
+                impactCount: Math.floor(tasksForBudget * 10) / 10, // Round to 1 decimal
                 exceedsContext
             };
         }).sort((a, b) => b.impactCount - a.impactCount); // Sort best first
@@ -87,7 +78,7 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                         Real-World Impact
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                        Translate abstract token costs into tangible work output (processing power).
+                        Translate abstract token costs into agent tasks per budget.
                     </p>
                 </div>
 
@@ -144,6 +135,9 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                         metric={metric}
                         count={model.impactCount}
                         budget={budget}
+                        taskCost={model.taskCost}
+                        reasoningTax={model.reasoningTax}
+                        contextLength={model.contextLength}
                         isBestValue={idx === 0}
                         exceedsContext={model.exceedsContext}
                     />
@@ -151,10 +145,10 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
             </div>
 
             {/* Footer / Context */}
-            <div className="text-[10px] text-zinc-400 text-center pt-2 max-w-2xl mx-auto leading-relaxed">
-                *Represents <strong>Total Processing Potential</strong> for your budget.
-                Values based on: 1 Doc ≈ 20k tokens, 1 Email ≈ 500 tokens.
-                For models with smaller context windows (marked ⚠️), this volume assumes processing across multiple sessions.
+            <div className="text-xs text-muted-foreground text-center pt-2 max-w-2xl mx-auto leading-relaxed">
+                *Tasks per budget = budget ÷ per-task agent cost (prompt tokens × input price + completion tokens × output price).
+                Reasoning tax is the output/input price ratio. Cards marked Tight context fit exceed 80% of the model&apos;s
+                context window, so those agent runs need multi-session chunking or a larger window.
             </div>
 
         </Card>

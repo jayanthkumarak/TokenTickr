@@ -542,8 +542,8 @@
                     </div>
                     <div class="arch-box">
                         <h3>Deployment</h3>
-                        <p>Cloudflare Pages</p>
-                        <p>Cloudflare Pages</p>
+                        <p>Cloudflare Workers Static Assets</p>
+                        <p>CLI-deployed via `npm run deploy`</p>
                         <p>Edge Network</p>
                     </div>
                     <div class="arch-box">
@@ -605,11 +605,10 @@ npm run generate:aa-data</code></pre>
                 <pre><code>npm run test</code></pre>
 
                 <h3>Deploying to Production</h3>
-                <p>The project is deployed via Cloudflare Pages. Deployment is triggered automatically via Git.</p>
+                <p>The project is deployed as Cloudflare Workers Static Assets, CLI-deployed via <code>npm run deploy</code> (<code>npx wrangler deploy</code> from <code>out/</code>).</p>
 
                 <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
-                    <li>Commit changes to <code>main</code> branch.</li>
-                    <li><strong>Cloudflare</strong> detects the push and builds automatically.</li>
+                    <li>Run <code>npm run build</code>, then <code>npm run deploy</code>.</li>
                     <li>Live at <a href="https://tokentickr.com" style="color: var(--accent);">tokentickr.com</a></li>
                 </ol>
 

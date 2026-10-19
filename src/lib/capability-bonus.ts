@@ -55,6 +55,54 @@ export function supportsToolCalling(model: OpenRouterModel): boolean {
 }
 
 /**
+ * Detect if model supports structured outputs.
+ */
+export function supportsStructuredOutputs(model: OpenRouterModel): boolean {
+    const params = model.supported_parameters || [];
+    return params.includes("response_format") || params.includes("structured_outputs");
+}
+
+/**
+ * Detect if model supports prompt caching.
+ */
+export function supportsPromptCaching(model: OpenRouterModel): boolean {
+    return Boolean(model.pricing?.input_cache_reads);
+}
+
+/**
+ * Ratio of completion to prompt price. Returns 0 when prompt is 0/NaN.
+ */
+export function getOutputPremiumRatio(model: OpenRouterModel): number {
+    const prompt = Number(model.pricing?.prompt);
+    const completion = Number(model.pricing?.completion);
+    if (!prompt || Number.isNaN(prompt) || Number.isNaN(completion)) return 0;
+    return completion / prompt;
+}
+
+export interface AgentCapabilitySummary {
+    thinking: boolean;
+    tools: boolean;
+    structuredOutputs: boolean;
+    promptCaching: boolean;
+    multimodal: boolean;
+    outputPremiumRatio: number;
+}
+
+/**
+ * Summarize agent-relevant capabilities for a model.
+ */
+export function getAgentCapabilitySummary(model: OpenRouterModel): AgentCapabilitySummary {
+    return {
+        thinking: isThinkingModel(model),
+        tools: supportsToolCalling(model),
+        structuredOutputs: supportsStructuredOutputs(model),
+        promptCaching: supportsPromptCaching(model),
+        multimodal: isMultimodalModel(model),
+        outputPremiumRatio: getOutputPremiumRatio(model),
+    };
+}
+
+/**
  * Calculate total capability bonus for a model.
  * Returns a value to add to the base intelligence/performance score.
  */
@@ -85,6 +133,8 @@ export function getCapabilityFlags(model: OpenRouterModel): string[] {
     if (isThinkingModel(model)) flags.push("Thinking");
     if (isMultimodalModel(model)) flags.push("Multimodal");
     if (supportsToolCalling(model)) flags.push("Tools");
+    if (supportsStructuredOutputs(model)) flags.push("JSON Schema");
+    if (supportsPromptCaching(model)) flags.push("Cache");
 
     return flags;
 }

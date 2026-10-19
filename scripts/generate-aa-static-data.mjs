@@ -32,7 +32,7 @@ async function generateStaticData() {
                 apiKey = match[1].trim();
                 console.log('📖 Loaded API key from .env.local');
             }
-        } catch (e) {
+        } catch {
             // ignore error
         }
     }
@@ -51,7 +51,7 @@ async function generateStaticData() {
     if (!forceUpdate && fs.existsSync(existingFilePath)) {
         try {
             const content = fs.readFileSync(existingFilePath, 'utf-8');
-            const match = content.match(/generatedAt: '([^']+)'/);
+            const match = content.match(/Generated: ([0-9]{4}-[0-9]{2}-[0-9]{2})/);
             if (match && match[1]) {
                 const generatedDate = new Date(match[1]).getTime();
                 const now = Date.now();
@@ -65,7 +65,7 @@ async function generateStaticData() {
                 }
                 console.log(`Creating new data (Cache expired: ${match[1]})`);
             }
-        } catch (e) {
+        } catch {
             // If parsing fails, proceed to fetch
         }
     }
@@ -80,8 +80,8 @@ async function generateStaticData() {
     });
 
     if (!response.ok) {
-        console.error(`❌ API Error: ${response.status} ${response.statusText}`);
-        process.exit(1);
+        console.warn(`⚠️  AA API error: ${response.status} ${response.statusText}. Reusing existing src/lib/aa-static-scores.ts`);
+        return; // Offline/transient-failure build must succeed on committed data
     }
 
     const json = await response.json();
@@ -96,9 +96,10 @@ async function generateStaticData() {
 
     console.log(`✅ ${scoredModels.length} models have Intelligence Index scores`);
 
-    // Build the static score map
     const scoreEntries = [];
     const mmluEntries = [];
+    const codingEntries = [];
+    const ifbenchEntries = [];
     const aliasEntries = [];
 
     // Track unique slugs to avoid duplicates
@@ -108,6 +109,8 @@ async function generateStaticData() {
         const slug = model.slug?.toLowerCase();
         const score = model.evaluations.artificial_analysis_intelligence_index;
         const mmlu = model.evaluations.mmlu_pro;
+        const coding = model.evaluations.livecodebench ?? model.evaluations.scicode;
+        const ifbench = model.evaluations.ifbench;
         const creator = model.model_creator?.slug?.toLowerCase() || '';
 
         if (!slug || seenSlugs.has(slug)) continue;
@@ -121,15 +124,23 @@ async function generateStaticData() {
             mmluEntries.push(`    '${slug}': ${Math.round(mmlu * 1000) / 10},`);
         }
 
-        // Generate OpenRouter-style aliases
+        // Add to Coding Index map if available (LiveCodeBench preferred, SciCode fallback; store as 0-100)
+        if (coding != null) {
+            codingEntries.push(`    '${slug}': ${Math.round(coding * 1000) / 10},`);
+        }
+
+        // Add to IFBench map if available (store as 0-100)
+        if (ifbench != null) {
+            ifbenchEntries.push(`    '${slug}': ${Math.round(ifbench * 1000) / 10},`);
+        }
+
+        // Generate OpenRouter-style aliases (raw AA creator slug, no bogus fallback)
         if (creator) {
-            // Map AA creator slugs to OpenRouter provider names
+            // Map known AA creator slugs to OpenRouter provider names; otherwise use raw slug
             const orProvider = creator === 'meta' ? 'meta-llama' :
                 creator === 'alibaba' ? 'qwen' :
                     creator === 'mistral-ai' ? 'mistralai' :
-                        creator === 'anthropic' ? 'anthropic' :
-                            creator === 'openai' ? 'openai' :
-                                'google'; // Simplified fallback
+                        creator || 'unknown';
 
             aliasEntries.push(`    '${orProvider}/${slug}': '${slug}',`);
         }
@@ -138,6 +149,8 @@ async function generateStaticData() {
     // Sort entries alphabetically
     scoreEntries.sort();
     mmluEntries.sort();
+    codingEntries.sort();
+    ifbenchEntries.sort();
     aliasEntries.sort();
 
     // Generate the TypeScript file
@@ -170,6 +183,22 @@ ${mmluEntries.join('\n')}
 };
 
 /**
+ * Coding Index scores by AA model slug (LiveCodeBench preferred, SciCode fallback; if available)
+ * Range: 0-100
+ */
+export const AA_CODING_INDEX: Record<string, number> = {
+${codingEntries.join('\n')}
+};
+
+/**
+ * IFBench scores by AA model slug (if available)
+ * Range: 0-100
+ */
+export const AA_IFBENCH: Record<string, number> = {
+${ifbenchEntries.join('\n')}
+};
+
+/**
  * OpenRouter ID → AA slug aliases for matching
  */
 export const AA_ID_ALIASES: Record<string, string> = {
@@ -192,10 +221,13 @@ export const AA_DATA_META = {
 
     console.log(`\n✅ Generated ${outputPath} `);
     console.log(`   - ${scoreEntries.length} scores`);
+    console.log(`   - ${mmluEntries.length} mmlu`);
+    console.log(`   - ${codingEntries.length} coding`);
+    console.log(`   - ${ifbenchEntries.length} ifbench`);
     console.log(`   - ${aliasEntries.length} aliases`);
 }
 
 generateStaticData().catch(err => {
-    console.error('❌ Failed:', err);
-    process.exit(1);
+    console.warn('⚠️  AA fetch failed, reusing existing src/lib/aa-static-scores.ts:', err.message);
+    return; // Offline build must succeed on committed data
 });

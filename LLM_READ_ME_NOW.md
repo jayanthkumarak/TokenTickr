@@ -17,13 +17,12 @@ TokenTickr is a **comparative intelligence engine** for Large Language Models (L
 
 ## 2. Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript 5.x
+- **Framework**: Next.js 16 (App Router, static export to `out/`)
+- **Language**: TypeScript 5.x (target ES2020)
 - **Styling**: Tailwind CSS 4 + Shadcn/UI (Radix Primitives)
 - **State**: Zustand (with specialized selectors)
-- **Charts**: VisX (Airbnb's visualization library)
-- **Testing**: Vitest (Unit), Playwright (E2E)
-- **Deployment**: Static Export (`output: 'export'`) -> Cloudflare Pages
+- **Charts**: VisX v4 (Airbnb's visualization library)
+- **Testing**: Vitest 4.0.16 (Unit, `vitest run src tests`), Playwright (E2E, port 3002)
 
 ---
 

@@ -1,13 +1,9 @@
 name = "tokentickr"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-10-01"
 compatibility_flags = ["nodejs_compat"]
 
 # Static assets from Next.js export
 [assets]
 directory = "./out"
 
-# D1 Database for pricing history and usage logs
-[[d1_databases]]
-binding = "DB"
-database_name = "tokentickr"
-database_id = "ec60c702-e95d-4f25-9223-ed83e552ed8d"
+# NOTE: D1 removed 2026-10 — analytics/pricing-history endpoints deleted (offline-only scripts in scripts/, migrations/ kept for reference).

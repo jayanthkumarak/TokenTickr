@@ -32,20 +32,14 @@ export function PriceComparisonChart({
 }: PriceComparisonChartProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
 
-  // Single-hue teal gradient: light (cheapest) to dark (most expensive)
+  // Cost rank mapped to chart tokens: cheapest (chart-1 teal) to priciest (chart-5)
   const getCostGradientColor = (rank: number, total: number) => {
-    // Teal gradient from light (#4db6ac) to dark (#00695c)
-    const lightTeal = { r: 77, g: 182, b: 172 };
-    const darkTeal = { r: 0, g: 105, b: 92 };
-
+    const tokens = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
     // t = 0 for cheapest (rank 1), t = 1 for most expensive
     const t = total > 1 ? (rank - 1) / (total - 1) : 0;
+    const idx = Math.min(tokens.length - 1, Math.round(t * (tokens.length - 1)));
 
-    const r = Math.round(lightTeal.r + t * (darkTeal.r - lightTeal.r));
-    const g = Math.round(lightTeal.g + t * (darkTeal.g - lightTeal.g));
-    const b = Math.round(lightTeal.b + t * (darkTeal.b - lightTeal.b));
-
-    return `rgb(${r}, ${g}, ${b})`;
+    return tokens[idx];
   };
 
   // Prepare chart data with gradient colors based on cost ranking
@@ -63,17 +57,6 @@ export function PriceComparisonChart({
 
   // Chart component
   const Chart = ({ width, height }: { width: number; height: number }) => {
-    // Ensure minimum dimensions to prevent negative values
-    const minWidth = CHART_MARGIN.left + CHART_MARGIN.right + 100; // Minimum 100px for chart area
-    const minHeight = CHART_MARGIN.top + CHART_MARGIN.bottom + 200; // Minimum 200px for chart area
-
-    if (width < minWidth || height < minHeight) {
-      return (
-        <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-          Chart area too small. Please resize or expand the window.
-        </div>
-      );
-    }
 
     const xMax = width - CHART_MARGIN.left - CHART_MARGIN.right;
     const yMax = height - CHART_MARGIN.top - CHART_MARGIN.bottom;
@@ -94,9 +77,9 @@ export function PriceComparisonChart({
     });
 
     return (
-      <svg width={width} height={height}>
+      <svg width={width} height={height} role="img" aria-label={`Monthly cost comparison for ${chartData.length} models`}>
+        <title>{`Monthly cost comparison for ${chartData.length} models`}</title>
         <defs>
-          {/* Pattern definitions for accessibility */}
           <pattern id="pattern-0" patternUnits="userSpaceOnUse" width="4" height="4">
             <rect width="4" height="4" fill={chartData[0]?.color} />
           </pattern>
@@ -111,7 +94,7 @@ export function PriceComparisonChart({
           <GridRows
             scale={yScale}
             width={xMax}
-            stroke="#e5e7eb"
+            stroke="var(--border)"
             strokeOpacity={0.5}
           />
 
@@ -122,7 +105,7 @@ export function PriceComparisonChart({
             const barY = yScale(d.displayName) || 0;
 
             return (
-              <Group key={`bar-${i}`}>
+              <Group key={`bar-${i}`} tabIndex={0} role="button" aria-label={`${d.modelName}: ${formatCostDisplay(d.totalCost)} per month`} onFocus={() => setHoveredBar(d.modelName)} onBlur={() => setHoveredBar(null)}>
                 <Bar
                   x={0}
                   y={barY}
@@ -157,7 +140,7 @@ export function PriceComparisonChart({
                       cx={barWidth - 20}
                       cy={barY + barHeight / 2}
                       r={10}
-                      fill="white" // Keep white for contrast against colored bar
+                      fill="var(--background)"
                       stroke={d.color}
                       strokeWidth={2}
                     />
@@ -246,7 +229,7 @@ export function PriceComparisonChart({
           <div className="p-6 pt-0 space-y-4">
             <div className="flex flex-col space-y-1">
               <h3 className="flex items-center justify-between text-lg font-semibold">
-                <span>Cost breakdown for {data.queryVolume.toLocaleString()} queries/month</span>
+                <span>Cost breakdown for {data.queryVolume.toLocaleString()} tasks/month</span>
                 <Badge variant="secondary">
                   {data.results.length} models
                 </Badge>
@@ -256,12 +239,14 @@ export function PriceComparisonChart({
               </p>
             </div>
 
-            <div className="h-[400px] w-full min-h-[300px]">
-              <ParentSize>
-                {({ width, height }) => (
-                  <Chart width={width} height={height} />
-                )}
-              </ParentSize>
+            <div className="h-[400px] w-full min-h-[300px] overflow-x-auto">
+              <div className="min-w-[560px] h-full">
+                <ParentSize>
+                  {({ width, height }) => (
+                    <Chart width={width} height={height} />
+                  )}
+                </ParentSize>
+              </div>
             </div>
           </div>
         </CardContent>
@@ -282,7 +267,7 @@ export function PriceComparisonChart({
           <Layers className="h-5 w-5 text-indigo-500" />
           <div>
             <h3 className="font-semibold text-lg">Context Window Capacity</h3>
-            <p className="text-sm text-muted-foreground">How much information each model can hold in memory at once.</p>
+            <p className="text-sm text-muted-foreground">Working set each model can fit per agent turn without compaction.</p>
           </div>
         </div>
         <ContextComparisonChart results={data.results} />

@@ -1,8 +1,7 @@
 import React from "react";
-import { ImpactMetric } from "./metric-selector";
+import { ImpactMetric, IMPACT_ARCHETYPES } from "./metric-selector";
 import { cn } from "../../lib/utils";
-import { FileText, Mail, FileCode } from "lucide-react";
-import { IsotypeGrid } from "./isotype-grid";
+import { Badge } from "@/components/ui/badge";
 
 interface ImpactCardProps {
     modelName: string;
@@ -10,68 +9,44 @@ interface ImpactCardProps {
     metric: ImpactMetric;
     count: number;
     budget: number;
+    taskCost: number;
+    reasoningTax: number;
+    contextLength?: number;
     isBestValue?: boolean;
     exceedsContext?: boolean;
 }
 
-export function ImpactCard({ modelName, modelColor, metric, count, budget, isBestValue, exceedsContext }: ImpactCardProps) {
+function formatMoney(n: number): string {
+    if (!isFinite(n) || n <= 0) return "$0.00";
+    if (n < 0.01) return "<$0.01";
+    if (n < 1000) {
+        return `$${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+    return `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+}
 
-    // Config for each metric type
-    const config = {
-        doc: {
-            label: "Documents",
-            subtext: "20k tokens",
-            icon: FileText,
-            colorClass: "text-blue-500",
-            bgClass: "bg-blue-500/10",
-            borderClass: "border-blue-500/20"
-        },
-        email: {
-            label: "Emails",
-            subtext: "500 tokens",
-            icon: Mail,
-            colorClass: "text-amber-500",
-            bgClass: "bg-amber-500/10",
-            borderClass: "border-amber-500/20"
-        },
-        code: {
-            label: "Code Files",
-            subtext: "2000 tokens",
-            icon: FileCode,
-            colorClass: "text-indigo-500",
-            bgClass: "bg-indigo-500/10",
-            borderClass: "border-indigo-500/20"
-        }
-    };
+export function ImpactCard({ modelName, modelColor, metric, count, budget, taskCost, reasoningTax, contextLength, isBestValue, exceedsContext }: ImpactCardProps) {
+    const arch = IMPACT_ARCHETYPES[metric];
 
-    const type = config[metric];
-    // const Icon = type.icon; // Used in grid now
-
-    // Dynamic gradient backgrounds for "Best Value" based on metric
-    const bestValueGradients = {
-        doc: "from-blue-600 to-indigo-700 shadow-blue-900/20",
-        email: "from-amber-500 to-orange-600 shadow-orange-900/20",
-        code: "from-indigo-600 to-purple-700 shadow-indigo-900/20"
-    };
+    // Single signature gradient for "Best Value" (chart tokens, one direction)
+    const bestValueGradient = "bg-gradient-to-br from-chart-1 to-chart-2 shadow-xl";
 
     return (
         <div className={cn(
             "relative flex flex-col p-5 rounded-2xl border transition-all duration-300 min-h-[220px]",
             isBestValue
                 ? cn(
-                    "bg-gradient-to-br text-primary-foreground border-transparent md:col-span-2 shadow-xl scale-[1.02] z-10",
-                    bestValueGradients[metric]
+                    "text-primary-foreground border-transparent md:col-span-2 z-10",
+                    bestValueGradient
                 )
                 : "bg-card hover:bg-accent/50 text-card-foreground border-border/60 hover:border-border hover:shadow-lg"
         )}>
             {/* Best Value Badge */}
             {isBestValue && (
-                <div className="absolute -top-3 -right-3 bg-white text-zinc-900 text-[10px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5 border border-zinc-100">
-                    <span className="text-sm">👑</span> Best Value
-                </div>
+                <Badge className="absolute -top-3 -right-3 shadow-lg">Best Value</Badge>
             )}
 
-            {/* Header: Model Name */}
+            {/* Header: Model Name + Context Fit */}
             <div className={cn("flex items-center gap-2 mb-3", isBestValue ? "opacity-90" : "opacity-70")}>
                 <div
                     className="w-2 h-2 rounded-full ring-2 ring-current ring-opacity-20"
@@ -80,46 +55,78 @@ export function ImpactCard({ modelName, modelColor, metric, count, budget, isBes
                 <span className="text-xs font-medium tracking-wide truncate max-w-[140px]" title={modelName}>
                     {modelName}
                 </span>
+                <span className="ml-auto">
+                    {exceedsContext ? (
+                        <Badge variant="destructive" className="text-[10px]">Tight context fit</Badge>
+                    ) : (
+                        <Badge variant="outline" className="text-[10px]">Fits context</Badge>
+                    )}
+                </span>
             </div>
 
-            {/* Content: Isotype Grid */}
+            {/* Content: Tasks per budget */}
             <div className="flex-1 w-full relative z-0">
-                <IsotypeGrid
-                    count={count}
-                    icon={type.icon}
-                    colorClass={isBestValue ? "text-primary-foreground/90" : type.colorClass}
-                    exceedsContext={exceedsContext}
-                    label={type.label.slice(0, -1)} // remove plural 's'
-                    className={isBestValue ? "text-primary-foreground" : ""}
-                />
+                <div className="flex items-baseline gap-1.5">
+                    <span className={cn(
+                        "font-bold tracking-tighter tabular-nums leading-none",
+                        isBestValue ? "text-3xl drop-shadow-sm" : "text-2xl"
+                    )}>
+                        {count.toLocaleString()}
+                    </span>
+                    <span className={cn(
+                        "text-xs font-medium uppercase tracking-wider",
+                        isBestValue ? "opacity-90" : "opacity-60"
+                    )}>
+                        {arch.label}
+                    </span>
+                </div>
+                <div className={cn(
+                    "mt-1 text-xs",
+                    isBestValue ? "opacity-90" : "text-muted-foreground"
+                )}>
+                    Tasks per ${budget} budget
+                </div>
+
+                <dl className={cn(
+                    "mt-4 grid grid-cols-2 gap-3 text-xs",
+                    isBestValue ? "opacity-95" : ""
+                )}>
+                    <div>
+                        <dt className={cn("uppercase tracking-wider text-[10px]", isBestValue ? "opacity-80" : "text-muted-foreground")}>
+                            Cost per 1k tasks
+                        </dt>
+                        <dd className="font-semibold tabular-nums mt-0.5">
+                            {formatMoney(taskCost * 1000)}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className={cn("uppercase tracking-wider text-[10px]", isBestValue ? "opacity-80" : "text-muted-foreground")}>
+                            Reasoning tax
+                        </dt>
+                        <dd className="font-semibold tabular-nums mt-0.5">
+                            {reasoningTax > 0 ? `${reasoningTax.toFixed(1)}x` : "—"}
+                        </dd>
+                    </div>
+                </dl>
             </div>
 
             {/* Footer layout */}
             <div className="flex-none flex flex-col justify-end space-y-2 mt-4 pt-4 border-t border-dashed border-opacity-20 border-current">
                 <div className="flex items-baseline justify-between gap-1.5 flex-wrap">
-
-                    {/* Big Number Summary */}
-                    <div className="flex items-baseline gap-1.5">
-                        <span className={cn(
-                            "font-bold tracking-tighter tabular-nums leading-none",
-                            isBestValue ? "text-3xl drop-shadow-sm" : "text-2xl"
-                        )}>
-                            {count.toLocaleString()}
-                        </span>
-                        <span className={cn(
-                            "text-xs font-medium uppercase tracking-wider",
-                            isBestValue ? "opacity-90" : "opacity-60"
-                        )}>
-                            {type.label}
-                        </span>
-                    </div>
-
                     <div className={cn(
                         "text-[10px] opacity-60 font-medium",
                         isBestValue ? "text-primary-foreground" : "text-muted-foreground"
                     )}>
-                        for ${budget}
+                        {arch.description} · {formatMoney(taskCost)}/task
                     </div>
+                    {typeof contextLength === "number" && contextLength > 0 && (
+                        <div className={cn(
+                            "text-[10px] opacity-60 font-medium tabular-nums",
+                            isBestValue ? "text-primary-foreground" : "text-muted-foreground"
+                        )}>
+                            {(contextLength / 1000).toLocaleString()}k ctx
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -728,6 +728,20 @@ export const AA_MMLU_PRO: Record<string, number> = {
 };
 
 /**
+ * Coding Index scores by AA model slug (LiveCodeBench preferred, SciCode fallback; if available)
+ * Range: 0-100
+ * Real data arrives on keyed regen; empty default keeps parses safe offline.
+ */
+export const AA_CODING_INDEX: Record<string, number> = {};
+
+/**
+ * IFBench scores by AA model slug (if available)
+ * Range: 0-100
+ * Real data arrives on keyed regen; empty default keeps parses safe offline.
+ */
+export const AA_IFBENCH: Record<string, number> = {};
+
+/**
  * OpenRouter ID → AA slug aliases for matching
  */
 export const AA_ID_ALIASES: Record<string, string> = {

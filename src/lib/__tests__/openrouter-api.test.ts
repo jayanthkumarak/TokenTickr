@@ -49,6 +49,10 @@ describe('OpenRouterAPI', () => {
         it('should handle invalid inputs gracefully', () => {
             expect(OpenRouterAPI.formatPrice('invalid')).toBe('Free');
         });
+
+        it('should label unpublished (negative) prices as Varies', () => {
+            expect(OpenRouterAPI.formatPrice('-1')).toBe('Varies');
+        });
     });
 
     describe('formatContextLength', () => {

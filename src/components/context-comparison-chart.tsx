@@ -7,8 +7,7 @@ import { scaleLinear, scaleBand } from "@visx/scale";
 import { AxisLeft } from "@visx/axis";
 import { GridRows } from "@visx/grid";
 import { ParentSize } from "@visx/responsive";
-import { PriceCalculationResult } from "@/lib/price-calculation";
-import { getWittyAnalogy } from "@/lib/witty-context";
+import { PriceCalculationResult, formatCostDisplay } from "@/lib/price-calculation";
 import { cn } from "@/lib/utils";
 
 interface ContextComparisonChartProps {
@@ -16,11 +15,19 @@ interface ContextComparisonChartProps {
     className?: string;
 }
 
-// Helper to get real world stats
-function getContextStats(tokens: number) {
-    const books = (tokens / 100000).toFixed(1); // 100k tokens per book
-    const pages = Math.floor(tokens / 500).toLocaleString(); // 500 tokens per page
-    return { books, pages };
+function formatShortContext(tokens: number): string {
+    if (tokens >= 1000000) return `${(tokens / 1000000).toFixed(1)}M`;
+    return `${(tokens / 1000).toFixed(0)}k`;
+}
+
+const CHART_TOKENS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
+
+// Rank color: largest context (rank 0) -> chart-1, smallest -> chart-5.
+// Same interpolation as the price chart (cheapest -> chart-1).
+function getRankColor(rank: number, total: number): string {
+    const t = total > 1 ? rank / (total - 1) : 0;
+    const idx = Math.min(CHART_TOKENS.length - 1, Math.round(t * (CHART_TOKENS.length - 1)));
+    return CHART_TOKENS[idx];
 }
 
 const CHART_MARGIN = { top: 20, right: 60, bottom: 40, left: 220 };
@@ -32,10 +39,12 @@ export function ContextComparisonChart({ results, className }: ContextComparison
     const sortedData = useMemo(() => {
         return [...results]
             .sort((a, b) => b.contextLength - a.contextLength)
-            .map(item => ({
+            .map((item, rank) => ({
                 ...item,
                 displayName: item.modelName.length > 35 ? item.modelName.substring(0, 35) + "..." : item.modelName,
-                stats: getContextStats(item.contextLength)
+                turns: item.agentTurnsCapacity ?? Math.max(0, Math.floor((item.contextLength - 4096) / 4000)),
+                fillCost: formatCostDisplay(item.contextFillCost ?? 0),
+                color: getRankColor(rank, results.length),
             }));
     }, [results]);
 
@@ -59,7 +68,8 @@ export function ContextComparisonChart({ results, className }: ContextComparison
         });
 
         return (
-            <svg width={width} height={height}>
+            <svg width={width} height={height} role="img" aria-label={`Context window comparison for ${sortedData.length} models`}>
+                <title>{`Context window comparison for ${sortedData.length} models`}</title>
                 <Group left={CHART_MARGIN.left} top={CHART_MARGIN.top}>
                     <GridRows scale={yScale} width={xMax} stroke="var(--border)" strokeDasharray="3,3" />
 
@@ -68,23 +78,14 @@ export function ContextComparisonChart({ results, className }: ContextComparison
                         const barHeight = yScale.bandwidth();
                         const barY = yScale(d.displayName);
 
-                        // Use Indigo/Purple for context
-                        const color = "#6366f1"; // Indigo 500
-
-                        // Conditional Text Positioning
-                        const isBarWideEnough = barWidth > 450; // Threshold for text inside (increased for long strings)
-                        const textX = isBarWideEnough ? barWidth - 10 : barWidth + 50; // Move outside if small
-                        const textAnchor = isBarWideEnough ? "end" : "start";
-                        const textColor = isBarWideEnough ? "fill-white opacity-90" : "fill-muted-foreground";
-
                         return (
-                            <Group key={`bar-${d.modelId}`}>
+                            <Group key={`bar-${d.modelId}`} tabIndex={0} role="button" aria-label={`${d.modelName}: ${d.contextLength.toLocaleString()} tokens context`} onFocus={() => setHoveredBar(d.modelId)} onBlur={() => setHoveredBar(null)}>
                                 <Bar
                                     x={0}
                                     y={barY}
                                     width={barWidth}
                                     height={barHeight}
-                                    fill={color}
+                                    fill={d.color}
                                     rx={4}
                                     opacity={hoveredBar && hoveredBar !== d.modelId ? 0.5 : 1}
                                     onMouseEnter={() => setHoveredBar(d.modelId)}
@@ -92,7 +93,7 @@ export function ContextComparisonChart({ results, className }: ContextComparison
                                     className="transition-all duration-200 cursor-pointer"
                                 />
 
-                                {/* Value Label (Always outside, shifted if analogy is outside) */}
+                                {/* Single outside label per bar */}
                                 <text
                                     x={barWidth + 8}
                                     y={(barY || 0) + (barHeight || 0) / 2}
@@ -100,22 +101,7 @@ export function ContextComparisonChart({ results, className }: ContextComparison
                                     fontSize={12}
                                     className="fill-foreground font-medium"
                                 >
-                                    {d.contextLength >= 1000000
-                                        ? `${(d.contextLength / 1000000).toFixed(1)}M`
-                                        : `${(d.contextLength / 1000).toFixed(0)}k`}
-                                </text>
-
-                                {/* Witty Analogy (Conditional Position) */}
-                                <text
-                                    x={textX} // Used calculated position
-                                    y={(barY || 0) + (barHeight || 0) / 2}
-                                    dy="0.35em"
-                                    fontSize={11}
-                                    textAnchor={textAnchor}
-                                    className={cn("font-medium italic", textColor)}
-                                    style={{ pointerEvents: 'none' }}
-                                >
-                                    &quot;{getWittyAnalogy(d.contextLength)}&quot;
+                                    {`${formatShortContext(d.contextLength)} · ~${d.turns} agent turns · ${d.fillCost}`}
                                 </text>
                             </Group>
                         );
@@ -125,7 +111,7 @@ export function ContextComparisonChart({ results, className }: ContextComparison
                         scale={yScale}
                         tickLabelProps={() => ({
                             fill: "var(--muted-foreground)",
-                            fontSize: 11,
+                            fontSize: 12,
                             textAnchor: "end",
                             dy: "0.33em"
                         })}
@@ -136,8 +122,8 @@ export function ContextComparisonChart({ results, className }: ContextComparison
     };
 
     return (
-        <div className={cn("w-full", className)}>
-            <div className="h-[300px] w-full">
+        <div className={cn("w-full overflow-x-auto", className)}>
+            <div className="h-[300px] w-full min-w-[560px]">
                 <ParentSize>{({ width, height }) => <Chart width={width} height={height} />}</ParentSize>
             </div>
         </div>

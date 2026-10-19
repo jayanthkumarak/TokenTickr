@@ -30,61 +30,67 @@ vi.mock("../../lib/utils", () => ({
     cn: (...inputs: any[]) => inputs.join(" ")
 }));
 
-// Flawed mock data but sufficient for structure testing
+// Per-token prices: $1/M prompt, $3/M completion (reasoning tax 3.0x).
+// Standard query (1000 in + 500 out) -> promptCost 0.001, completionCost 0.0015.
 const mockResults: PriceCalculationResult[] = [
     {
         modelId: "test/model-a",
         modelName: "Test Model A",
         provider: "TestProvider",
-        totalCost: 10,
-        costPerQuery: 0.0001, // 10 queries per $0.001 -> 10,000 queries per $1
+        totalCost: 0.0025,
+        costPerQuery: 0.0025,
+        promptCost: 0.001,
+        completionCost: 0.0015,
+        outputPremiumRatio: 3,
+        contextLength: 200000,
         ranking: 1,
-        // Mock data to satisfy type (irrelevant for this test)
-        pricing: { prompt: "0", completion: "0" },
-        context: 1000
     },
     {
         modelId: "test/model-b",
         modelName: "Test Model B",
         provider: "TestProvider",
-        totalCost: 20,
-        costPerQuery: 0.0005, // 5x more expensive
+        totalCost: 0.0125,
+        costPerQuery: 0.0125,
+        promptCost: 0.005,
+        completionCost: 0.0075,
+        outputPremiumRatio: 3,
+        contextLength: 200000,
         ranking: 2,
-        pricing: { prompt: "0", completion: "0" },
-        context: 1000
     }
 ] as unknown as PriceCalculationResult[];
 
 describe("ImpactCalculator", () => {
-    it("renders correctly with default values", () => {
+    it("renders tasks-per-budget math for the coding archetype", () => {
         render(<ImpactCalculator results={mockResults} />);
 
         // Header
         expect(screen.getByText("Real-World Impact")).toBeDefined();
 
-        // Look for the impact count
-        // Old Novel = 200k. New Doc = 20k. So 10x more.
-        // Mock cost = 10 queries per $. 1 query = 1500 tokens.
-        // 10,000 queries per $1 = 15,000,000 tokens per $1.
-        // Budget $10 -> 150,000,000 tokens.
-        // Docs = 150m / 20k = 7,500
-        expect(screen.getByText("7,500")).toBeDefined();
+        // Coding archetype: 48k prompt + 12k completion per task.
+        // Model A task cost = 48000e-6 + 12000*3e-6 = 0.084.
+        // Budget $10 -> 10 / 0.084 = 119.04 -> floored to 119.
+        expect(screen.getByText("119")).toBeDefined();
 
-        // Check if "Documents" is present at least once (e.g. in the active tab)
-        expect(screen.getAllByText("Documents").length).toBeGreaterThan(0);
+        // Cost per 1k tasks = 0.084 * 1000 = $84.00
+        expect(screen.getAllByText("$84.00").length).toBeGreaterThan(0);
+
+        // Reasoning tax from outputPremiumRatio
+        expect(screen.getAllByText("3.0x").length).toBeGreaterThan(0);
+
+        // Archetype labels with token counts
+        expect(screen.getAllByText("Autonomous PRs").length).toBeGreaterThan(0);
     });
 
-    it("changes metric when tab clicked", async () => {
+    it("switches archetype metrics and recomputes tasks", async () => {
         render(<ImpactCalculator results={mockResults} />);
 
-        // Find the "Emails" tab button
-        // Icons might make exact text match tricky, but button with "Emails" text should work
-        const emailTab = screen.getAllByRole("button", { name: "Emails" })[0];
-        fireEvent.click(emailTab);
+        // Research archetype: 72k prompt + 12k completion per task.
+        // Model A task cost = 72000e-6 + 12000*3e-6 = 0.108.
+        // Budget $10 -> 10 / 0.108 = 92.59 -> floored to 92.5.
+        const researchTab = screen.getAllByRole("button", { name: /Deep Research Runs/ })[0];
+        fireEvent.click(researchTab);
 
-        // Emails calculation: 150,000,000 / 500 = 300,000
-        // (Old email was 300 tokens, now 500)
-        expect(await screen.findByText("300,000")).toBeDefined();
+        expect(await screen.findByText("92.5")).toBeDefined();
     });
 
     it("updates when budget input changes", async () => {
@@ -98,22 +104,24 @@ describe("ImpactCalculator", () => {
         expect(input.getAttribute("value")).toBe("50");
     });
 
-    it("shows warning when unit size exceeds context length", () => {
-        // Mock a model with small context (1000 tokens) vs Document (20k tokens)
+    it("warns when the task working set exceeds 80% of context", () => {
+        // Coding archetype working set is 60k tokens; 80% of 16k is 12.8k -> warn.
         const smallContextResults = [
             {
                 ...mockResults[0],
-                contextLength: 1000,
-                // Ensure cost is low enough to get > 0 docs
-                costPerQuery: 0.000001,
-                totalCost: 1
+                contextLength: 16000,
             }
         ];
 
         render(<ImpactCalculator results={smallContextResults} />);
 
-        // Should show "Split Req." with emoji
-        // Using getAllByText in case multiple cards are rendered (though expecting 1)
-        expect(screen.getAllByText(/Split Req\./).length).toBeGreaterThan(0);
+        expect(screen.getAllByText(/Tight context fit/).length).toBeGreaterThan(0);
+    });
+
+    it("shows fits-context badge when the working set fits", () => {
+        render(<ImpactCalculator results={mockResults} />);
+
+        // 60k working set vs 80% of 200k (160k) -> fits.
+        expect(screen.getAllByText(/Fits context/).length).toBeGreaterThan(0);
     });
 });

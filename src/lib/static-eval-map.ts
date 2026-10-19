@@ -40,7 +40,20 @@ export const MODEL_EVALS: Record<string, ModelEval> = {
     'xai/grok-4.1': { elo: 1463, source: 'lmsys', lastUpdated: '2025-12-23' },
     'xai/grok-4': { elo: 1463, source: 'lmsys', lastUpdated: '2025-12-23' },
     'anthropic/claude-opus-4.5': { elo: 1485, source: 'static-override', lastUpdated: '2026-01' }, // Override bad AA data (was ~1329)
-    'google/gemini-2.5-pro': { elo: 1460, source: 'lmsys', lastUpdated: '2025-12-23' },
+    // === 2026 FRONTIER (static-override, conservative; AA coverage pending, 2026-10) ===
+    'anthropic/claude-opus-4.6': { elo: 1488, source: 'static-override', lastUpdated: '2026-10' },
+    'anthropic/claude-opus-4.7': { elo: 1490, source: 'static-override', lastUpdated: '2026-10' },
+    'anthropic/claude-opus-4.8': { elo: 1491, source: 'static-override', lastUpdated: '2026-10' },
+    'anthropic/claude-sonnet-4.6': { elo: 1478, source: 'static-override', lastUpdated: '2026-10' },
+    'openai/gpt-5.4': { elo: 1468, source: 'static-override', lastUpdated: '2026-10' },
+    'openai/gpt-5.5': { elo: 1470, source: 'static-override', lastUpdated: '2026-10' },
+    'x-ai/grok-4.5': { elo: 1465, source: 'static-override', lastUpdated: '2026-10' },
+    'x-ai/grok-4.6': { elo: 1467, source: 'static-override', lastUpdated: '2026-10' },
+    'google/gemini-3.5-flash': { elo: 1455, source: 'static-override', lastUpdated: '2026-10' },
+    'deepseek/deepseek-v4-pro': { elo: 1425, source: 'static-override', lastUpdated: '2026-10' },
+    'moonshotai/kimi-k2.5': { elo: 1415, source: 'static-override', lastUpdated: '2026-10' },
+    'qwen/qwen3-coder': { elo: 1400, source: 'static-override', lastUpdated: '2026-10' },
+    'z-ai/glm-4.6': { elo: 1405, source: 'static-override', lastUpdated: '2026-10' },
 
     // Pro Tier (1350-1459)
     'anthropic/claude-sonnet-4.5': { elo: 1475, source: 'static-override', lastUpdated: '2026-01' }, // Override potential missing data

@@ -16,7 +16,7 @@ if (!apiKey) {
         const envContent = fs.readFileSync(envPath, 'utf-8');
         const match = envContent.match(/NEXT_PUBLIC_AA_API_KEY=(.+)/);
         if (match) apiKey = match[1].trim();
-    } catch (e) {
+    } catch {
         console.error("Could not read .env.local");
     }
 }

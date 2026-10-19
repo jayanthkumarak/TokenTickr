@@ -1,9 +1,9 @@
 /**
  * Auto-generated OpenRouter Static Data
  * 
- * Generated: 2026-01-09
+ * Generated: 2026-10-19
  * Source: https://openrouter.ai/api/v1/models
- * Total models: 348
+ * Total models: 471
  * 
  * DO NOT EDIT MANUALLY - Run 'npm run generate:static-data' to regenerate
  */
@@ -12,114 +12,172 @@ import { OpenRouterModel } from '@/types/models';
 
 export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
-    "id": "ai21/jamba-large-1.7",
-    "name": "AI21: Jamba Large 1.7",
-    "description": "Jamba Large 1.7 is the latest model in the Jamba open family, offering improvements in grounding, instruction-following, and overall efficiency. Built on a hybrid SSM-Transformer architecture with a 256K context window, it delivers more accurate, contextually grounded responses and better steerab...",
-    "context_length": 256000,
+    "id": "aion-labs/aion-3.5",
+    "name": "AionLabs: Aion 3.5",
+    "description": "Aion 3.5 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.000002",
-      "completion": "0.000008"
+      "prompt": "0.000003",
+      "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1754669020
+    "created": 1790170961
   },
   {
-    "id": "ai21/jamba-mini-1.7",
-    "name": "AI21: Jamba Mini 1.7",
-    "description": "Jamba Mini 1.7 is a compact and efficient member of the Jamba open model family, incorporating key improvements in grounding and instruction-following while maintaining the benefits of the SSM-Transformer hybrid architecture and 256K context window. Despite its compact size, it delivers accurate,...",
-    "context_length": 256000,
+    "id": "aion-labs/aion-3.5-mini",
+    "name": "AionLabs: Aion 3.5 Mini",
+    "description": "Aion 3.5 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It is the smaller, lower-cost sibling of Aion 3.5 and uses...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000004"
+      "prompt": "0.0000007",
+      "completion": "0.0000014"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1754670601
+    "created": 1790170962
   },
   {
-    "id": "aion-labs/aion-1.0",
-    "name": "AionLabs: Aion-1.0",
-    "description": "Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree of Thoughts (ToT) and Mixture of Experts (MoE). It is Aion Lab's most powerful reasoning mo...",
+    "id": "aion-labs/aion-2.0",
+    "name": "AionLabs: Aion-2.0",
+    "description": "Aion-2.0 is a variant of DeepSeek V3.2 optimized for immersive roleplaying and storytelling. It is particularly strong at introducing tension, crises, and conflict into stories, making narratives feel more engaging....",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.000004",
-      "completion": "0.000008"
+      "prompt": "0.0000008",
+      "completion": "0.0000016"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1738697557
+    "created": 1771881306
   },
   {
-    "id": "aion-labs/aion-1.0-mini",
-    "name": "AionLabs: Aion-1.0-Mini",
-    "description": "Aion-1.0-Mini 32B parameter model is a distilled version of the DeepSeek-R1 model, designed for strong performance in reasoning domains such as mathematics, coding, and logic. It is a modified variant of a FuseAI model that outperforms R1-Distill-Qwen-32B and R1-Distill-Llama-70B, with benchmark ...",
+    "id": "aion-labs/aion-3.0",
+    "name": "AionLabs: Aion-3.0",
+    "description": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.000003",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1783443095
+  },
+  {
+    "id": "aion-labs/aion-3.0-mini",
+    "name": "AionLabs: Aion-3.0-Mini",
+    "description": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000007",
       "completion": "0.0000014"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1738697107
+    "created": 1783443096
   },
   {
     "id": "aion-labs/aion-rp-llama-3.1-8b",
     "name": "AionLabs: Aion-RP 1.0 (8B)",
-    "description": "Aion-RP-Llama-3.1-8B ranks the highest in the character evaluation portion of the RPBench-Auto benchmark, a roleplaying-specific variant of Arena-Hard-Auto, where LLMs evaluate each other’s responses. It is a fine-tuned base model rather than an instruct model, designed to produce more natural an...",
+    "description": "Aion-RP-Llama-3.1-8B ranks the highest in the character evaluation portion of the RPBench-Auto benchmark, a roleplaying-specific variant of Arena-Hard-Auto, where LLMs evaluate each other’s responses. It is a fine-tuned base model...",
     "context_length": 32768,
     "pricing": {
       "prompt": "0.0000008",
       "completion": "0.0000016"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -127,177 +185,16 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1738696718
   },
   {
-    "id": "alfredpros/codellama-7b-instruct-solidity",
-    "name": "AlfredPros: CodeLLaMa 7B Instruct Solidity",
-    "description": "A finetuned 7 billion parameters Code LLaMA - Instruct model to generate Solidity smart contract using 4-bit QLoRA finetuning provided by PEFT library.",
-    "context_length": 4096,
-    "pricing": {
-      "prompt": "0.0000008",
-      "completion": "0.0000012"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other",
-      "instruct_type": "alpaca"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744641874
-  },
-  {
-    "id": "allenai/olmo-2-0325-32b-instruct",
-    "name": "AllenAI: Olmo 2 32B Instruct",
-    "description": "OLMo-2 32B Instruct is a supervised instruction-finetuned variant of the OLMo-2 32B March 2025 base model. It excels in complex reasoning and instruction-following tasks across diverse benchmarks such as GSM8K, MATH, IFEval, and general NLP evaluation. Developed by AI2, OLMo-2 32B is part of an o...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1741988556
-  },
-  {
-    "id": "allenai/olmo-3-32b-think",
-    "name": "AllenAI: Olmo 3 32B Think",
-    "description": "Olmo 3 32B Think is a large-scale, 32-billion-parameter model purpose-built for deep reasoning, complex logic chains and advanced instruction-following scenarios. Its capacity enables strong performance on demanding evaluation tasks and highly nuanced conversational reasoning. Developed by Ai2 un...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000005"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1763758276
-  },
-  {
-    "id": "allenai/olmo-3-7b-instruct",
-    "name": "AllenAI: Olmo 3 7B Instruct",
-    "description": "Olmo 3 7B Instruct is a supervised instruction-fine-tuned variant of the Olmo 3 7B base model, optimized for instruction-following, question-answering, and natural conversational dialogue. By leveraging high-quality instruction data and an open training pipeline, it delivers strong performance ac...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1763758273
-  },
-  {
-    "id": "allenai/olmo-3-7b-think",
-    "name": "AllenAI: Olmo 3 7B Think",
-    "description": "Olmo 3 7B Think is a research-oriented language model in the Olmo family designed for advanced reasoning and instruction-driven tasks. It excels at multi-step problem solving, logical inference, and maintaining coherent conversational context. Developed by Ai2 under the Apache 2.0 license, Olmo 3...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.00000012",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1763758270
-  },
-  {
-    "id": "allenai/olmo-3.1-32b-instruct",
-    "name": "AllenAI: Olmo 3.1 32B Instruct",
-    "description": "Olmo 3.1 32B Instruct is a large-scale, 32-billion-parameter instruction-tuned language model engineered for high-performance conversational AI, multi-turn dialogue, and practical instruction following. As part of the Olmo 3.1 family, this variant emphasizes responsiveness to complex user directi...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1767728554
-  },
-  {
-    "id": "allenai/olmo-3.1-32b-think",
-    "name": "AllenAI: Olmo 3.1 32B Think",
-    "description": "Olmo 3.1 32B Think is a large-scale, 32-billion-parameter model designed for deep reasoning, complex multi-step logic, and advanced instruction following. Building on the Olmo 3 series, version 3.1 delivers refined reasoning behavior and stronger performance across demanding evaluations and nuanc...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000005"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1765907719
-  },
-  {
     "id": "amazon/nova-2-lite-v1",
     "name": "Amazon: Nova 2 Lite",
-    "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text. \n\nNova 2 Lite demonstrates standout capabilities in processing documents, extracting information from videos, generating code, providing accurate grounded answe...",
+    "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text. Nova 2 Lite demonstrates standout capabilities in processing...",
     "context_length": 1000000,
     "pricing": {
       "prompt": "0.0000003",
       "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Nova",
       "input_modalities": [
         "text",
         "image",
@@ -306,9 +203,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Nova"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -317,22 +219,25 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "amazon/nova-lite-v1",
     "name": "Amazon: Nova Lite 1.0",
-    "description": "Amazon Nova Lite 1.0 is a very low-cost multimodal model from Amazon that focused on fast processing of image, video, and text inputs to generate text output. Amazon Nova Lite can handle real-time customer interactions, document analysis, and visual question-answering tasks with high accuracy.\n\nW...",
+    "description": "Amazon Nova Lite 1.0 is a very low-cost multimodal model from Amazon that focused on fast processing of image, video, and text inputs to generate text output. Amazon Nova Lite...",
     "context_length": 300000,
     "pricing": {
       "prompt": "0.00000006",
       "completion": "0.00000024"
     },
     "architecture": {
+      "tokenizer": "Nova",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Nova"
+      ]
     },
+    "supported_parameters": [
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -341,21 +246,24 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "amazon/nova-micro-v1",
     "name": "Amazon: Nova Micro 1.0",
-    "description": "Amazon Nova Micro 1.0 is a text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost. With a context length of 128K tokens and optimized for speed and cost, Amazon Nova Micro excels at tasks such as text summarization, translation, content c...",
+    "description": "Amazon Nova Micro 1.0 is a text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost. With a context length...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.000000035",
       "completion": "0.00000014"
     },
     "architecture": {
+      "tokenizer": "Nova",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Nova"
+      ]
     },
+    "supported_parameters": [
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -371,15 +279,18 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000125"
     },
     "architecture": {
+      "tokenizer": "Nova",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Nova"
+      ]
     },
+    "supported_parameters": [
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -388,85 +299,107 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "amazon/nova-pro-v1",
     "name": "Amazon: Nova Pro 1.0",
-    "description": "Amazon Nova Pro 1.0 is a capable multimodal model from Amazon focused on providing a combination of accuracy, speed, and cost for a wide range of tasks. As of December 2024, it achieves state-of-the-art performance on key benchmarks including visual question answering (TextVQA) and video understa...",
+    "description": "Amazon Nova Pro 1.0 is a capable multimodal model from Amazon focused on providing a combination of accuracy, speed, and cost for a wide range of tasks. As of December...",
     "context_length": 300000,
     "pricing": {
       "prompt": "0.0000008",
       "completion": "0.0000032"
     },
     "architecture": {
+      "tokenizer": "Nova",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Nova"
+      ]
     },
+    "supported_parameters": [
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1733436303
   },
   {
-    "id": "anthropic/claude-3-haiku",
-    "name": "Anthropic: Claude 3 Haiku",
-    "description": "Claude 3 Haiku is Anthropic's fastest and most compact model for\nnear-instant responsiveness. Quick and accurate targeted performance.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-haiku)\n\n#multimodal",
-    "context_length": 200000,
+    "id": "anthropic/claude-fable-5",
+    "name": "Anthropic: Claude Fable 5",
+    "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.00000125"
+      "prompt": "0.00001",
+      "completion": "0.00005"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1710288000
+    "created": 1781007515
   },
   {
-    "id": "anthropic/claude-3.5-haiku",
-    "name": "Anthropic: Claude 3.5 Haiku",
-    "description": "Claude 3.5 Haiku features offers enhanced capabilities in speed, coding accuracy, and tool use. Engineered to excel in real-time applications, it delivers quick response times that are essential for dynamic tasks such as chat interactions and immediate coding suggestions.\n\nThis makes it highly su...",
-    "context_length": 200000,
+    "id": "anthropic/claude-fable-5:batch",
+    "name": "Anthropic: Claude Fable 5 (batch)",
+    "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000008",
-      "completion": "0.000004"
+      "prompt": "0.000005",
+      "completion": "0.000025"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1730678400
+    "created": 1781007515
   },
   {
-    "id": "anthropic/claude-3.5-haiku-20241022",
-    "name": "Anthropic: Claude 3.5 Haiku (2024-10-22)",
-    "description": "Claude 3.5 Haiku features enhancements across all skill sets including coding, tool use, and reasoning. As the fastest model in the Anthropic lineup, it offers rapid response times suitable for applications that require high interactivity and low latency, such as user-facing chatbots and on-the-f...",
-    "context_length": 200000,
+    "id": "anthropic/claude-fable-5.1",
+    "name": "Anthropic: Claude Fable 5.1",
+    "description": "Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000008",
-      "completion": "0.000004"
+      "prompt": "0.00001",
+      "completion": "0.00005"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "text",
         "image",
@@ -474,49 +407,32 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1730678400
-  },
-  {
-    "id": "anthropic/claude-3.5-sonnet",
-    "name": "Anthropic: Claude 3.5 Sonnet",
-    "description": "New Claude 3.5 Sonnet delivers better-than-Opus capabilities, faster-than-Sonnet speeds, at the same Sonnet prices. Sonnet is particularly good at:\n\n- Coding: Scores ~49% on SWE-Bench Verified, higher than the last best score, and without any fancy prompt scaffolding\n- Data science: Augments huma...",
-    "context_length": 200000,
-    "pricing": {
-      "prompt": "0.000006",
-      "completion": "0.00003"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image",
-        "file"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Claude"
-    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1729555200
+    "created": 1788285838
   },
   {
-    "id": "anthropic/claude-3.7-sonnet",
-    "name": "Anthropic: Claude 3.7 Sonnet",
-    "description": "Claude 3.7 Sonnet is an advanced large language model with improved reasoning, coding, and problem-solving capabilities. It introduces a hybrid reasoning approach, allowing users to choose between rapid responses and extended, step-by-step processing for complex tasks. The model demonstrates nota...",
-    "context_length": 200000,
+    "id": "anthropic/claude-fable-5.1:batch",
+    "name": "Anthropic: Claude Fable 5.1 (batch)",
+    "description": "Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
+      "prompt": "0.000005",
+      "completion": "0.000025"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "text",
         "image",
@@ -524,24 +440,32 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
-    "created": 1740422110
+    "created": 1788285838
   },
   {
-    "id": "anthropic/claude-3.7-sonnet:thinking",
-    "name": "Anthropic: Claude 3.7 Sonnet (thinking)",
-    "description": "Claude 3.7 Sonnet is an advanced large language model with improved reasoning, coding, and problem-solving capabilities. It introduces a hybrid reasoning approach, allowing users to choose between rapid responses and extended, step-by-step processing for complex tasks. The model demonstrates nota...",
-    "context_length": 200000,
+    "id": "~anthropic/claude-fable-latest",
+    "name": "Anthropic: Claude Fable Latest",
+    "description": "This model always redirects to the latest model in the Claude Fable family.",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
+      "prompt": "0.00001",
+      "completion": "0.00005"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
         "text",
         "image",
@@ -549,73 +473,197 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1740422110
+    "created": 1781029944
   },
   {
     "id": "anthropic/claude-haiku-4.5",
     "name": "Anthropic: Claude Haiku 4.5",
-    "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance across reasoning, coding, and computer-use tasks, Haiku 4.5 brings frontier-level capabilit...",
+    "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000001",
       "completion": "0.000005"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
+        "text",
         "image",
-        "text"
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1760547638
   },
   {
-    "id": "anthropic/claude-opus-4",
-    "name": "Anthropic: Claude Opus 4",
-    "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in software engineering, achieving leading results on SWE-bench (72.5%) and Terminal-bench (43.2%). Opus 4 s...",
+    "id": "anthropic/claude-haiku-4.5:batch",
+    "name": "Anthropic: Claude Haiku 4.5 (batch)",
+    "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
     "context_length": 200000,
     "pricing": {
-      "prompt": "0.000015",
-      "completion": "0.000075"
+      "prompt": "0.0000005",
+      "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
-        "image",
         "text",
+        "image",
         "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1747931245
+    "created": 1760547638
+  },
+  {
+    "id": "anthropic/claude-haiku-5.5",
+    "name": "Anthropic: Claude Haiku 5.5",
+    "description": "Claude Haiku 5.5 is Anthropic's small, fast model for high-volume, cost-sensitive work such as summarization, subagents, and browser use. It succeeds Claude Haiku 4.5 with stronger coding, computer use, and...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1791397883
+  },
+  {
+    "id": "anthropic/claude-haiku-5.5:batch",
+    "name": "Anthropic: Claude Haiku 5.5 (batch)",
+    "description": "Claude Haiku 5.5 is Anthropic's small, fast model for high-volume, cost-sensitive work such as summarization, subagents, and browser use. It succeeds Claude Haiku 4.5 with stronger coding, computer use, and...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.00000025"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1791397883
+  },
+  {
+    "id": "~anthropic/claude-haiku-latest",
+    "name": "Anthropic: Claude Haiku Latest",
+    "description": "This model always redirects to the latest model in the Claude Haiku family.",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318492
   },
   {
     "id": "anthropic/claude-opus-4.1",
     "name": "Anthropic: Claude Opus 4.1",
-    "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains in multi-file code refactoring, debugging precision, and detail-oriented reasoning. The model...",
+    "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000015",
       "completion": "0.000075"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "image",
         "text",
@@ -623,9 +671,47 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1754411591
+  },
+  {
+    "id": "anthropic/claude-opus-4.1:batch",
+    "name": "Anthropic: Claude Opus 4.1 (batch)",
+    "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
+    "context_length": 200000,
+    "pricing": {
+      "prompt": "0.0000075",
+      "completion": "0.0000375"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -634,13 +720,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "anthropic/claude-opus-4.5",
     "name": "Anthropic: Claude Opus 4.5",
-    "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and reasoning benchmarks, and improved robustness to pro...",
+    "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000005",
       "completion": "0.000025"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "file",
         "image",
@@ -648,49 +735,428 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1764010580
   },
   {
-    "id": "anthropic/claude-sonnet-4",
-    "name": "Anthropic: Claude Sonnet 4",
-    "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%), Sonnet 4 balances capability and computational efficiency,...",
-    "context_length": 1000000,
+    "id": "anthropic/claude-opus-4.5:batch",
+    "name": "Anthropic: Claude Opus 4.5 (batch)",
+    "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
+    "context_length": 200000,
     "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
+      "prompt": "0.0000025",
+      "completion": "0.0000125"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
+        "file",
         "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1764010580
+  },
+  {
+    "id": "anthropic/claude-opus-4.6",
+    "name": "Anthropic: Claude Opus 4.6",
+    "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
         "text",
+        "image",
         "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
-    "created": 1747930371
+    "created": 1770219050
+  },
+  {
+    "id": "anthropic/claude-opus-4.6:batch",
+    "name": "Anthropic: Claude Opus 4.6 (batch)",
+    "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.0000125"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1770219050
+  },
+  {
+    "id": "anthropic/claude-opus-4.7",
+    "name": "Anthropic: Claude Opus 4.7",
+    "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1776351100
+  },
+  {
+    "id": "anthropic/claude-opus-4.7:batch",
+    "name": "Anthropic: Claude Opus 4.7 (batch)",
+    "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.0000125"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1776351100
+  },
+  {
+    "id": "anthropic/claude-opus-4.8",
+    "name": "Anthropic: Claude Opus 4.8",
+    "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1779905091
+  },
+  {
+    "id": "anthropic/claude-opus-4.8:batch",
+    "name": "Anthropic: Claude Opus 4.8 (batch)",
+    "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.0000125"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1779905091
+  },
+  {
+    "id": "anthropic/claude-opus-5",
+    "name": "Anthropic: Claude Opus 5",
+    "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1784912544
+  },
+  {
+    "id": "anthropic/claude-opus-5:batch",
+    "name": "Anthropic: Claude Opus 5 (batch)",
+    "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.0000125"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1784912544
+  },
+  {
+    "id": "anthropic/claude-opus-5.5",
+    "name": "Anthropic: Claude Opus 5.5",
+    "description": "Claude Opus 5.5 is Anthropic's flagship model for demanding reasoning, coding, and long-horizon agentic work, succeeding Claude Opus 5. It is particularly strong at multi-step changes in large codebases, code...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.00002"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790094732
+  },
+  {
+    "id": "anthropic/claude-opus-5.5:batch",
+    "name": "Anthropic: Claude Opus 5.5 (batch)",
+    "description": "Claude Opus 5.5 is Anthropic's flagship model for demanding reasoning, coding, and long-horizon agentic work, succeeding Claude Opus 5. It is particularly strong at multi-step changes in large codebases, code...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790094732
+  },
+  {
+    "id": "~anthropic/claude-opus-latest",
+    "name": "Anthropic: Claude Opus Latest",
+    "description": "This model always redirects to the latest model in the Claude Opus family.",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.00002"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1776795361
   },
   {
     "id": "anthropic/claude-sonnet-4.5",
     "name": "Anthropic: Claude Sonnet 4.5",
-    "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with improvements across system design, code security, and specification adherence. ...",
+    "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
     "context_length": 1000000,
     "pricing": {
       "prompt": "0.000003",
       "completion": "0.000015"
     },
     "architecture": {
+      "tokenizer": "Claude",
       "input_modalities": [
         "text",
         "image",
@@ -698,310 +1164,403 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Claude"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
     "created": 1759161676
   },
   {
-    "id": "arcee-ai/coder-large",
-    "name": "Arcee AI: Coder Large",
-    "description": "Coder‑Large is a 32 B‑parameter offspring of Qwen 2.5‑Instruct that has been further trained on permissively‑licensed GitHub, CodeSearchNet and synthetic bug‑fix corpora. It supports a 32k context window, enabling multi‑file refactoring or long diff review in a single call, and understands 30‑plu...",
-    "context_length": 32768,
+    "id": "anthropic/claude-sonnet-4.5:batch",
+    "name": "Anthropic: Claude Sonnet 4.5 (batch)",
+    "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000005",
+      "prompt": "0.0000015",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1759161676
+  },
+  {
+    "id": "anthropic/claude-sonnet-4.6",
+    "name": "Anthropic: Claude Sonnet 4.6",
+    "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000003",
+      "completion": "0.000015"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1771342990
+  },
+  {
+    "id": "anthropic/claude-sonnet-4.6:batch",
+    "name": "Anthropic: Claude Sonnet 4.6 (batch)",
+    "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000015",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1771342990
+  },
+  {
+    "id": "anthropic/claude-sonnet-5",
+    "name": "Anthropic: Claude Sonnet 5",
+    "description": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1782843083
+  },
+  {
+    "id": "anthropic/claude-sonnet-5:batch",
+    "name": "Anthropic: Claude Sonnet 5 (batch)",
+    "description": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1782843083
+  },
+  {
+    "id": "anthropic/claude-sonnet-5.5",
+    "name": "Anthropic: Claude Sonnet 5.5",
+    "description": "Claude Sonnet 5.5 is Anthropic's Sonnet-class model for well-scoped everyday work, succeeding Claude Sonnet 5 as a direct upgrade. It is especially strong at building features, fixing bugs, and producing...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790618686
+  },
+  {
+    "id": "anthropic/claude-sonnet-5.5:batch",
+    "name": "Anthropic: Claude Sonnet 5.5 (batch)",
+    "description": "Claude Sonnet 5.5 is Anthropic's Sonnet-class model for well-scoped everyday work, succeeding Claude Sonnet 5 as a direct upgrade. It is especially strong at building features, fixing bugs, and producing...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "Claude",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790618686
+  },
+  {
+    "id": "~anthropic/claude-sonnet-latest",
+    "name": "Anthropic: Claude Sonnet Latest",
+    "description": "This model always redirects to the latest model in the Claude Sonnet family.",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318368
+  },
+  {
+    "id": "arcee-ai/trinity-large-thinking",
+    "name": "Arcee AI: Trinity Large Thinking",
+    "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000025",
       "completion": "0.0000008"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1746478663
-  },
-  {
-    "id": "arcee-ai/maestro-reasoning",
-    "name": "Arcee AI: Maestro Reasoning",
-    "description": "Maestro Reasoning is Arcee's flagship analysis model: a 32 B‑parameter derivative of Qwen 2.5‑32 B tuned with DPO and chain‑of‑thought RL for step‑by‑step logic. Compared to the earlier 7 B preview, the production 32 B release widens the context window to 128 k tokens and doubles pass‑rate on MAT...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000009",
-      "completion": "0.0000033"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1746481269
-  },
-  {
-    "id": "arcee-ai/spotlight",
-    "name": "Arcee AI: Spotlight",
-    "description": "Spotlight is a 7‑billion‑parameter vision‑language model derived from Qwen 2.5‑VL and fine‑tuned by Arcee AI for tight image‑text grounding tasks. It offers a 32 k‑token context window, enabling rich multimodal conversations that combine lengthy documents with one or more images. Training emphasi...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000018",
-      "completion": "0.00000018"
-    },
-    "architecture": {
-      "input_modalities": [
-        "image",
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1746481552
-  },
-  {
-    "id": "arcee-ai/trinity-mini",
-    "name": "Arcee AI: Trinity Mini",
-    "description": "Trinity Mini is a 26B-parameter (3B active) sparse mixture-of-experts language model featuring 128 experts with 8 active per token. Engineered for efficient reasoning over long contexts (131k) with robust function calling and multi-step agent workflows.",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.000000045",
-      "completion": "0.00000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1764601720
-  },
-  {
-    "id": "arcee-ai/trinity-mini:free",
-    "name": "Arcee AI: Trinity Mini (free)",
-    "description": "Trinity Mini is a 26B-parameter (3B active) sparse mixture-of-experts language model featuring 128 experts with 8 active per token. Engineered for efficient reasoning over long contexts (131k) with robust function calling and multi-step agent workflows.",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1764601720
-  },
-  {
-    "id": "arcee-ai/virtuoso-large",
-    "name": "Arcee AI: Virtuoso Large",
-    "description": "Virtuoso‑Large is Arcee's top‑tier general‑purpose LLM at 72 B parameters, tuned to tackle cross‑domain reasoning, creative writing and enterprise QA. Unlike many 70 B peers, it retains the 128 k context inherited from Qwen 2.5, letting it ingest books, codebases or financial filings wholesale. T...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000075",
-      "completion": "0.0000012"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1746478885
+    "created": 1775058318
   },
   {
     "id": "openrouter/auto",
     "name": "Auto Router",
-    "description": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\n\nTo see which model was used, visit [Activity](/activity), or read the `model` attribute of the response. Your response will be priced at the same rate as the ...",
+    "description": "The Auto Router automatically selects the best model for your prompt, powered by the wisdom of the market. It routes you based on what the OpenRouter community collectively spends on...",
     "context_length": 2000000,
     "pricing": {
       "prompt": "-1",
       "completion": "-1"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
-        "text"
+        "text",
+        "image",
+        "audio",
+        "file",
+        "video"
       ],
       "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Router"
+        "text",
+        "image"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1699401600
   },
   {
-    "id": "baidu/ernie-4.5-21b-a3b",
-    "name": "Baidu: ERNIE 4.5 21B A3B",
-    "description": "A sophisticated text-based Mixture-of-Experts (MoE) model featuring 21B total parameters with 3B activated per token, delivering exceptional multimodal understanding and generation through heterogeneous MoE structures and modality-isolated routing. Supporting an extensive 131K token context lengt...",
-    "context_length": 120000,
+    "id": "openrouter/auto-beta",
+    "name": "Auto Router (Beta)",
+    "description": "The experimental version of our Auto Router where we test new improvements. Use it to get the latest and greatest version of our general purpose auto router, but expect beta...",
+    "context_length": 2000000,
     "pricing": {
-      "prompt": "0.00000007",
-      "completion": "0.00000028"
+      "prompt": "-1",
+      "completion": "-1"
     },
     "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1755034167
-  },
-  {
-    "id": "baidu/ernie-4.5-21b-a3b-thinking",
-    "name": "Baidu: ERNIE 4.5 21B A3B Thinking",
-    "description": "ERNIE-4.5-21B-A3B-Thinking is Baidu's upgraded lightweight MoE model, refined to boost reasoning depth and quality for top-tier performance in logical puzzles, math, science, coding, text generation, and expert-level academic benchmarks.",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000007",
-      "completion": "0.00000028"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1760048887
-  },
-  {
-    "id": "baidu/ernie-4.5-300b-a47b",
-    "name": "Baidu: ERNIE 4.5 300B A47B ",
-    "description": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in both English and Chinese. Optimized for high-throughput inference and efficient scaling, it use...",
-    "context_length": 123000,
-    "pricing": {
-      "prompt": "0.00000028",
-      "completion": "0.0000011"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1751300139
-  },
-  {
-    "id": "baidu/ernie-4.5-vl-28b-a3b",
-    "name": "Baidu: ERNIE 4.5 VL 28B A3B",
-    "description": "A powerful multimodal Mixture-of-Experts chat model featuring 28B total parameters with 3B activated per token, delivering exceptional text and vision understanding through its innovative heterogeneous MoE structure with modality-isolated routing. Built with scaling-efficient infrastructure for h...",
-    "context_length": 30000,
-    "pricing": {
-      "prompt": "0.00000014",
-      "completion": "0.00000056"
-    },
-    "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
         "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1755032836
-  },
-  {
-    "id": "baidu/ernie-4.5-vl-424b-a47b",
-    "name": "Baidu: ERNIE 4.5 VL 424B A47B ",
-    "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data using a heterogeneous MoE architecture and modality-isolated routing to enable high-fidelity...",
-    "context_length": 123000,
-    "pricing": {
-      "prompt": "0.00000042",
-      "completion": "0.00000125"
-    },
-    "architecture": {
-      "input_modalities": [
         "image",
-        "text"
+        "audio",
+        "file",
+        "video"
       ],
       "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
+        "text",
+        "image"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1751300903
+    "created": 1784311165
   },
   {
     "id": "openrouter/bodybuilder",
     "name": "Body Builder (beta)",
-    "description": "Transform your natural language requests into structured OpenRouter API request objects. Describe what you want to accomplish with AI models, and Body Builder will construct the appropriate API calls. Example: \"count to 10 using gemini and opus.\"\n\nThis is useful for creating multi-model requests,...",
+    "description": "Transform your natural language requests into structured OpenRouter API request objects. Describe what you want to accomplish with AI models, and Body Builder will construct the appropriate API calls. Example:...",
     "context_length": 128000,
     "pricing": {
       "prompt": "-1",
       "completion": "-1"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Router"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -1018,6 +1577,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "image",
         "text",
@@ -1025,9 +1585,16 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1036,13 +1603,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "bytedance-seed/seed-1.6-flash",
     "name": "ByteDance Seed: Seed 1.6 Flash",
-    "description": "Seed 1.6 Flash is an ultra-fast multimodal deep thinking model by ByteDance Seed, supporting both text and visual understanding. It features a 256k context window and can generate outputs of up to 16k tokens.",
+    "description": "Seed 1.6 Flash is an ultra-fast multimodal deep thinking model by ByteDance Seed, supporting both text and visual understanding. It features a 256k context window and can generate outputs of...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.000000075",
       "completion": "0.0000003"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "image",
         "text",
@@ -1050,103 +1618,262 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1766505011
   },
   {
+    "id": "bytedance-seed/seed-2-1-turbo",
+    "name": "ByteDance Seed: Seed 2.1 Turbo",
+    "description": "Seed 2.1 Turbo is a multimodal model from ByteDance Seed for coding and long-horizon agent workflows. It is suited for end-to-end software delivery, multi-step task execution, and understanding visual and...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000005",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786552176
+  },
+  {
+    "id": "bytedance-seed/seed-2.0-code",
+    "name": "ByteDance Seed: Seed-2.0-Code",
+    "description": "Seed 2.0 Code is a model from ByteDance Seed optimized for agentic coding. It is suited for frontend development, multilingual programming tasks, and coding-agent workflows in tools such as Claude...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000005",
+      "completion": "0.000003"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786550701
+  },
+  {
+    "id": "bytedance-seed/seed-2.0-lite",
+    "name": "ByteDance Seed: Seed-2.0-Lite",
+    "description": "Seed-2.0-Lite is a versatile, cost‑efficient enterprise workhorse that delivers strong multimodal and agent capabilities while offering noticeably lower latency, making it a practical default choice for most production workloads across...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773157231
+  },
+  {
+    "id": "bytedance-seed/seed-2.0-mini",
+    "name": "ByteDance Seed: Seed-2.0-Mini",
+    "description": "Seed-2.0-mini targets latency-sensitive, high-concurrency, and cost-sensitive scenarios, emphasizing fast response and flexible inference deployment. It delivers performance comparable to ByteDance-Seed-1.6, supports 256k context, four reasoning effort modes (minimal/low/medium/high), multimodal ...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772131107
+  },
+  {
     "id": "bytedance/ui-tars-1.5-7b",
     "name": "ByteDance: UI-TARS 7B ",
-    "description": "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and ...",
+    "description": "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000001",
       "completion": "0.0000002"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1753205056
   },
   {
-    "id": "deepcogito/cogito-v2-preview-llama-109b-moe",
-    "name": "Cogito V2 Preview Llama 109B",
-    "description": "An instruction-tuned, hybrid-reasoning Mixture-of-Experts model built on Llama-4-Scout-17B-16E. Cogito v2 can answer directly or engage an extended “thinking” phase, with alignment guided by Iterated Distillation & Amplification (IDA). It targets coding, STEM, instruction following, and general h...",
-    "context_length": 32767,
-    "pricing": {
-      "prompt": "0.00000018",
-      "completion": "0.00000059"
-    },
-    "architecture": {
-      "input_modalities": [
-        "image",
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama4"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1756831568
-  },
-  {
     "id": "cohere/command-a",
     "name": "Cohere: Command A",
-    "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases.\nCompared to other leading proprietary and open-weights models Command A delivers maximum performance with minimum hardware costs...",
+    "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary...",
     "context_length": 256000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1741894342
   },
   {
+    "id": "cohere/command-a-plus",
+    "name": "Cohere: Command A+",
+    "description": "Command A+ is Cohere's flagship model for enterprise agentic workflows. It accepts text and image inputs with a 192K context window, supports native tool calling with strict tool schemas, structured...",
+    "context_length": 192000,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Cohere",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790102896
+  },
+  {
     "id": "cohere/command-r-08-2024",
     "name": "Cohere: Command R (08-2024)",
-    "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and is competitive with the previous version of the larger Command R+ mo...",
+    "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.00000015",
       "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "Cohere",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Cohere"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -1155,21 +1882,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "cohere/command-r-plus-08-2024",
     "name": "Cohere: Command R+ (08-2024)",
-    "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint the same.\n\nRead the launch post [here](https://docs.cohere.com/cha...",
+    "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "Cohere",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Cohere"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -1178,160 +1911,146 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "cohere/command-r7b-12-2024",
     "name": "Cohere: Command R7B (12-2024)",
-    "description": "Command R7B (12-2024) is a small, fast update of the Command R+ model, delivered in December 2024. It excels at RAG, tool use, agents, and similar tasks requiring complex reasoning and multiple steps.\n\nUse of this model is subject to Cohere's [Usage Policy](https://docs.cohere.com/docs/usage-poli...",
+    "description": "Command R7B (12-2024) is a small, fast update of the Command R+ model, delivered in December 2024. It excels at RAG, tool use, agents, and similar tasks requiring complex reasoning...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000000375",
       "completion": "0.00000015"
     },
     "architecture": {
+      "tokenizer": "Cohere",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Cohere"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1734158152
   },
   {
-    "id": "deepcogito/cogito-v2-preview-llama-405b",
-    "name": "Deep Cogito: Cogito V2 Preview Llama 405B",
-    "description": "Cogito v2 405B is a dense hybrid reasoning model that combines direct answering capabilities with advanced self-reflection. It represents a significant step toward frontier intelligence with dense architecture delivering performance competitive with leading closed models. This advanced reasoning ...",
-    "context_length": 32768,
+    "id": "cohere/north-mini-code:free",
+    "name": "Cohere: North Mini Code (free)",
+    "description": "North Mini Code is Cohere's first agentic coding model and the debut of its North family. A sparse mixture-of-experts model with 30B total parameters and 3B active, it is optimized...",
+    "context_length": 256000,
     "pricing": {
-      "prompt": "0.0000035",
-      "completion": "0.0000035"
+      "prompt": "0",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Cohere",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Llama3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
-    "created": 1760709933
+    "created": 1781723748
   },
   {
-    "id": "deepcogito/cogito-v2-preview-llama-70b",
-    "name": "Deep Cogito: Cogito V2 Preview Llama 70B",
-    "description": "Cogito v2 70B is a dense hybrid reasoning model that combines direct answering capabilities with advanced self-reflection. Built with iterative policy improvement, it delivers strong performance across reasoning tasks while maintaining efficiency through shorter reasoning chains and improved intu...",
-    "context_length": 32768,
+    "id": "~deepseek/deepseek-flash-latest",
+    "name": "DeepSeek: DeepSeek Flash Latest",
+    "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000088",
-      "completion": "0.00000088"
+      "prompt": "0.00000005",
+      "completion": "0.00000015"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Llama3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1756831784
+    "created": 1789399150
   },
   {
-    "id": "deepcogito/cogito-v2.1-671b",
-    "name": "Deep Cogito: Cogito v2.1 671B",
-    "description": "Cogito v2.1 671B MoE represents one of the strongest open models globally, matching performance of frontier closed and open models. This model is trained using self play with reinforcement learning to reach state-of-the-art performance on multiple categories (instruction following, coding, longer...",
-    "context_length": 128000,
+    "id": "~deepseek/deepseek-pro-latest",
+    "name": "DeepSeek: DeepSeek Pro Latest",
+    "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00000125"
+      "prompt": "0.000000225",
+      "completion": "0.000008"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1763071233
-  },
-  {
-    "id": "deepseek/deepseek-prover-v2",
-    "name": "DeepSeek: DeepSeek Prover V2",
-    "description": "DeepSeek Prover V2 is a 671B parameter model, speculated to be geared towards logic and mathematics. Likely an upgrade from [DeepSeek-Prover-V1.5](https://huggingface.co/deepseek-ai/DeepSeek-Prover-V1.5-RL) Not much is known about the model yet, as DeepSeek released it on Hugging Face without an ...",
-    "context_length": 163840,
-    "pricing": {
-      "prompt": "0.0000005",
-      "completion": "0.00000218"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "DeepSeek"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1746013094
-  },
-  {
-    "id": "deepseek/deepseek-r1-0528-qwen3-8b",
-    "name": "DeepSeek: DeepSeek R1 0528 Qwen3 8B",
-    "description": "DeepSeek-R1-0528 is a lightly upgraded release of DeepSeek R1 that taps more compute and smarter post-training tricks, pushing its reasoning and inference to the brink of flagship models like O3 and Gemini 2.5 Pro.\nIt now tops math, programming, and logic leaderboards, showcasing a step-change in...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000009"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1748538543
+    "created": 1789399174
   },
   {
     "id": "deepseek/deepseek-chat",
     "name": "DeepSeek: DeepSeek V3",
-    "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations reveal that the model outperforms other open-source models and rivals leading closed-so...",
+    "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000012"
+      "prompt": "0.00000032",
+      "completion": "0.00000089"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1340,21 +2059,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-chat-v3-0324",
     "name": "DeepSeek: DeepSeek V3 0324",
-    "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team.\n\nIt succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well on a variety of tasks.",
+    "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.00000019",
-      "completion": "0.00000087"
+      "prompt": "0.00000029",
+      "completion": "0.00000114"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1363,22 +2088,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-chat-v3.1",
     "name": "DeepSeek: DeepSeek V3.1",
-    "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context training process, reaching up to 128K tokens, and uses FP8 microscaling for efficien...",
-    "context_length": 32768,
+    "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
+    "context_length": 163840,
     "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.00000075"
+      "prompt": "0.00000025",
+      "completion": "0.00000095"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "DeepSeek",
       "instruct_type": "deepseek-v3.1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1387,46 +2120,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-v3.1-terminus",
     "name": "DeepSeek: DeepSeek V3.1 Terminus",
-    "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's performance in coding and search a...",
+    "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.00000021",
-      "completion": "0.00000079"
+      "prompt": "0.00000027",
+      "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "DeepSeek",
       "instruct_type": "deepseek-v3.1"
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1758548275
-  },
-  {
-    "id": "deepseek/deepseek-v3.1-terminus:exacto",
-    "name": "DeepSeek: DeepSeek V3.1 Terminus (exacto)",
-    "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's performance in coding and search a...",
-    "context_length": 163840,
-    "pricing": {
-      "prompt": "0.00000021",
-      "completion": "0.00000079"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "DeepSeek",
-      "instruct_type": "deepseek-v3.1"
-    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1435,21 +2152,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-v3.2",
     "name": "DeepSeek: DeepSeek V3.2",
-    "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism that reduces training and inference cost while preserving qu...",
+    "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.00000038"
+      "prompt": "0.00000028",
+      "completion": "0.00000042"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1458,69 +2183,344 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-v3.2-exp",
     "name": "DeepSeek: DeepSeek V3.2 Exp",
-    "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism designed to improve training and inference efficiency in long-cont...",
-    "context_length": 163840,
-    "pricing": {
-      "prompt": "0.00000021",
-      "completion": "0.00000032"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "DeepSeek",
-      "instruct_type": "deepseek-v3.1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1759150481
-  },
-  {
-    "id": "deepseek/deepseek-v3.2-speciale",
-    "name": "DeepSeek: DeepSeek V3.2 Speciale",
-    "description": "DeepSeek-V3.2-Speciale is a high-compute variant of DeepSeek-V3.2 optimized for maximum reasoning and agentic performance. It builds on DeepSeek Sparse Attention (DSA) for efficient long-context processing, then scales post-training reinforcement learning to push capability beyond the base model....",
+    "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
     "context_length": 163840,
     "pricing": {
       "prompt": "0.00000027",
       "completion": "0.00000041"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "DeepSeek"
+      "instruct_type": "deepseek-v3.1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1764594837
+    "created": 1759150481
+  },
+  {
+    "id": "deepseek/deepseek-v4-flash",
+    "name": "DeepSeek: DeepSeek V4 Flash 0423",
+    "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000091",
+      "completion": "0.000000182"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777000666
+  },
+  {
+    "id": "deepseek/deepseek-v4-flash-0731",
+    "name": "DeepSeek: DeepSeek V4 Flash 0731",
+    "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.00000015"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1785478908
+  },
+  {
+    "id": "~deepseek/deepseek-v4-flash-latest",
+    "name": "DeepSeek: DeepSeek V4 Flash Latest",
+    "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000001208",
+      "completion": "0.00000012"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1785606009
+  },
+  {
+    "id": "deepseek/deepseek-v4-flash-vision-exp",
+    "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+    "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000002156",
+      "completion": "0.0000006468"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787311563
+  },
+  {
+    "id": "deepseek/deepseek-v4-pro",
+    "name": "DeepSeek: DeepSeek V4 Pro 0423",
+    "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000095526",
+      "completion": "0.00000191052"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777000679
+  },
+  {
+    "id": "deepseek/deepseek-v4-pro-0813",
+    "name": "DeepSeek: DeepSeek V4 Pro 0813",
+    "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000066",
+      "completion": "0.00000198"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786549364
+  },
+  {
+    "id": "deepseek/deepseek-v4.1-flash",
+    "name": "DeepSeek: DeepSeek V4.1 Flash",
+    "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000000456",
+      "completion": "0.00000008"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789021285
+  },
+  {
+    "id": "deepseek/deepseek-v4.1-flash:batch",
+    "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
+    "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.00000015"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789021285
+  },
+  {
+    "id": "deepseek/deepseek-v4.1-flash-1017",
+    "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
+    "description": "DeepSeek V4.1 Flash 1017 is the October 17, 2026 snapshot of DeepSeek V4.1 Flash, served by DeepSeek under the `deepseek-flash` API model name. V4.1 Flash is a sparse mixture-of-experts model...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "DeepSeek",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792225624
   },
   {
     "id": "deepseek/deepseek-r1",
     "name": "DeepSeek: R1",
-    "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model & [technical report](https://api-docs.deepseek.com/news/news250120).\n\nMIT licen...",
-    "context_length": 163840,
+    "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
+    "context_length": 64000,
     "pricing": {
       "prompt": "0.0000007",
-      "completion": "0.0000024"
+      "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "DeepSeek",
       "instruct_type": "deepseek-r1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -1529,282 +2529,176 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "deepseek/deepseek-r1-0528",
     "name": "DeepSeek: R1 0528",
-    "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model.",
+    "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active...",
     "context_length": 163840,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.00000175"
+      "prompt": "0.0000005",
+      "completion": "0.00000215"
     },
     "architecture": {
+      "tokenizer": "DeepSeek",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "DeepSeek",
       "instruct_type": "deepseek-r1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1748455170
   },
   {
-    "id": "deepseek/deepseek-r1-0528:free",
-    "name": "DeepSeek: R1 0528 (free)",
-    "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.\n\nFully open-source model.",
-    "context_length": 163840,
+    "id": "dots-studio/dots-3-note-preview:free",
+    "name": "Dots Studio: Dots3-Note Preview (free)",
+    "description": "Dots3-Note Preview is an open-weight mixture-of-experts model from Dots Studio, with 16B active parameters out of 280B total. It is the lightest model in the Dots 3 family and is...",
+    "context_length": 512000,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "DeepSeek",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1748455170
-  },
-  {
-    "id": "deepseek/deepseek-r1-distill-llama-70b",
-    "name": "DeepSeek: R1 Distill Llama 70B",
-    "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across multiple benchma...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000011"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1737663169
-  },
-  {
-    "id": "deepseek/deepseek-r1-distill-qwen-14b",
-    "name": "DeepSeek: R1 Distill Qwen 14B",
-    "description": "DeepSeek R1 Distill Qwen 14B is a distilled large language model based on [Qwen 2.5 14B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.00000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738193940
-  },
-  {
-    "id": "deepseek/deepseek-r1-distill-qwen-32b",
-    "name": "DeepSeek: R1 Distill Qwen 32B",
-    "description": "DeepSeek R1 Distill Qwen 32B is a distilled large language model based on [Qwen 2.5 32B](https://huggingface.co/Qwen/Qwen2.5-32B), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the-art results for dense m...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000027",
-      "completion": "0.00000027"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen",
-      "instruct_type": "deepseek-r1"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738194830
-  },
-  {
-    "id": "eleutherai/llemma_7b",
-    "name": "EleutherAI: Llemma 7b",
-    "description": "Llemma 7B is a language model for mathematics. It was initialized with Code Llama 7B weights, and trained on the Proof-Pile-2 for 200B tokens. Llemma models are particularly strong at chain-of-thought mathematical reasoning and using computational tools for mathematics, such as Python and formal ...",
-    "context_length": 4096,
-    "pricing": {
-      "prompt": "0.0000008",
-      "completion": "0.0000012"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
       "tokenizer": "Other",
-      "instruct_type": "code-llama"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744643225
-  },
-  {
-    "id": "essentialai/rnj-1-instruct",
-    "name": "EssentialAI: Rnj 1 Instruct",
-    "description": "Rnj-1 is an 8B-parameter, dense, open-weight model family developed by Essential AI and trained from scratch with a focus on programming, math, and scientific reasoning. The model demonstrates strong performance across multiple programming languages, tool-use workflows, and agentic execution envi...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.00000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1765094847
-  },
-  {
-    "id": "alpindale/goliath-120b",
-    "name": "Goliath 120B",
-    "description": "A large LLM created by combining two fine-tuned Llama 70B models into one 120B model. Combines Xwin and Euryale.\n\nCredits to\n- [@chargoddard](https://huggingface.co/chargoddard) for developing the framework used to merge the model - [mergekit](https://github.com/cg123/mergekit).\n- [@Undi95](https...",
-    "context_length": 6144,
-    "pricing": {
-      "prompt": "0.000006",
-      "completion": "0.000008"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama2",
-      "instruct_type": "airoboros"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1699574400
-  },
-  {
-    "id": "google/gemini-2.0-flash-001",
-    "name": "Google: Gemini 2.0 Flash",
-    "description": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It introduces notable enhancements in multimodal understanding, co...",
-    "context_length": 1048576,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000004"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image",
-        "file",
-        "audio",
-        "video"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738769413
-  },
-  {
-    "id": "google/gemini-2.0-flash-exp:free",
-    "name": "Google: Gemini 2.0 Flash Experimental (free)",
-    "description": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It introduces notable enhancements in multimodal understanding, co...",
-    "context_length": 1048576,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1733937523
+    "created": 1786680361
   },
   {
-    "id": "google/gemini-2.0-flash-lite-001",
-    "name": "Google: Gemini 2.0 Flash Lite",
-    "description": "Gemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5), all at extremely economical token prices.",
-    "context_length": 1048576,
+    "id": "elorian/glimpse",
+    "name": "Elorian: Glimpse",
+    "description": "Glimpse is a multimodal visual reasoning model from Elorian, built for visual understanding and complex visual reasoning in the physical world. It reasons directly over images and video rather than...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.000000075",
-      "completion": "0.0000003"
+      "prompt": "0.0000006",
+      "completion": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image",
-        "file",
-        "audio",
         "video"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1740506212
+    "created": 1792206629
+  },
+  {
+    "id": "fireworks/ember-1",
+    "name": "Fireworks: Ember-1",
+    "description": "Ember-1 is a specialized reasoning model from Fireworks Research, built on [Kimi K3](https://openrouter.ai/moonshotai/kimi-k3). It is designed to make every token go further: it produces shorter reasoning traces, using roughly 40%...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000003",
+      "completion": "0.000015"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790208461
+  },
+  {
+    "id": "openrouter/free",
+    "name": "Free Models Router",
+    "description": "The simplest way to get free inference. openrouter/free is a router that selects free models at random from the models available on OpenRouter. The router smartly filters for models that...",
+    "context_length": 200000,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1769917427
   },
   {
     "id": "google/gemini-2.5-flash",
     "name": "Google: Gemini 2.5 Flash",
-    "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nAdditionally...",
+    "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
     "context_length": 1048576,
     "pricing": {
       "prompt": "0.0000003",
-      "completion": "0.0000025"
+      "completion": "0.0000025",
+      "internal_reasoning": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "file",
         "image",
@@ -1814,74 +2708,69 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1750172488
   },
   {
-    "id": "google/gemini-2.5-flash-image",
-    "name": "Google: Gemini 2.5 Flash Image (Nano Banana)",
-    "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation, edits, and multi-turn conversations. Aspect ratios can be controlled with the [image_config API Parameter](ht...",
-    "context_length": 32768,
+    "id": "google/gemini-2.5-flash:batch",
+    "name": "Google: Gemini 2.5 Flash (batch)",
+    "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000025"
+      "prompt": "0.00000015",
+      "completion": "0.00000125",
+      "internal_reasoning": "0.00000125"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
+        "file",
         "image",
-        "text"
+        "text",
+        "audio",
+        "video"
       ],
       "output_modalities": [
-        "image",
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1759870431
-  },
-  {
-    "id": "google/gemini-2.5-flash-image-preview",
-    "name": "Google: Gemini 2.5 Flash Image Preview (Nano Banana)",
-    "description": "Gemini 2.5 Flash Image Preview, a.k.a. \"Nano Banana,\" is a state of the art image generation model with contextual understanding. It is capable of image generation, edits, and multi-turn conversations.",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000025"
-    },
-    "architecture": {
-      "input_modalities": [
-        "image",
-        "text"
-      ],
-      "output_modalities": [
-        "image",
-        "text"
-      ],
-      "tokenizer": "Gemini"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1756218977
+    "created": 1750172488
   },
   {
     "id": "google/gemini-2.5-flash-lite",
     "name": "Google: Gemini 2.5 Flash Lite",
-    "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance across common benchmarks compared to earlier Flash models. By default, \"thinking\" (i...",
+    "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
     "context_length": 1048576,
     "pricing": {
       "prompt": "0.0000001",
-      "completion": "0.0000004"
+      "completion": "0.0000004",
+      "internal_reasoning": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -1891,24 +2780,33 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1753200276
   },
   {
-    "id": "google/gemini-2.5-flash-lite-preview-09-2025",
-    "name": "Google: Gemini 2.5 Flash Lite Preview 09-2025",
-    "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance across common benchmarks compared to earlier Flash models. By default, \"thinking\" (i...",
+    "id": "google/gemini-2.5-flash-lite:batch",
+    "name": "Google: Gemini 2.5 Flash Lite (batch)",
+    "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000004"
+      "prompt": "0.00000005",
+      "completion": "0.0000002",
+      "internal_reasoning": "0.0000002"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -1918,51 +2816,33 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1758819686
-  },
-  {
-    "id": "google/gemini-2.5-flash-preview-09-2025",
-    "name": "Google: Gemini 2.5 Flash Preview 09-2025",
-    "description": "Gemini 2.5 Flash Preview September 2025 Checkpoint is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuance...",
-    "context_length": 1048576,
-    "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000025"
-    },
-    "architecture": {
-      "input_modalities": [
-        "image",
-        "file",
-        "text",
-        "audio",
-        "video"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1758820178
+    "created": 1753200276
   },
   {
     "id": "google/gemini-2.5-pro",
     "name": "Google: Gemini 2.5 Pro",
-    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier perfor...",
+    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
     "context_length": 1048576,
     "pricing": {
       "prompt": "0.00000125",
-      "completion": "0.00001"
+      "completion": "0.00001",
+      "internal_reasoning": "0.00001"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -1972,24 +2852,33 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1750169544
   },
   {
-    "id": "google/gemini-2.5-pro-preview-05-06",
-    "name": "Google: Gemini 2.5 Pro Preview 05-06",
-    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier perfor...",
+    "id": "google/gemini-2.5-pro:batch",
+    "name": "Google: Gemini 2.5 Pro (batch)",
+    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00001"
+      "prompt": "0.000000625",
+      "completion": "0.000005",
+      "internal_reasoning": "0.000005"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -1999,24 +2888,33 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1746578513
+    "created": 1750169544
   },
   {
     "id": "google/gemini-2.5-pro-preview",
     "name": "Google: Gemini 2.5 Pro Preview 06-05",
-    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier perfor...",
+    "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
     "context_length": 1048576,
     "pricing": {
       "prompt": "0.00000125",
-      "completion": "0.00001"
+      "completion": "0.00001",
+      "internal_reasoning": "0.00001"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "file",
         "image",
@@ -2025,9 +2923,16 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2036,13 +2941,15 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "google/gemini-3-flash-preview",
     "name": "Google: Gemini 3 Flash Preview",
-    "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool use performance with substantially lower latency than larger Gemini variants, making it well suited for interacti...",
+    "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
     "context_length": 1048576,
     "pricing": {
       "prompt": "0.0000005",
-      "completion": "0.000003"
+      "completion": "0.000003",
+      "internal_reasoning": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -2052,24 +2959,33 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1765987078
   },
   {
-    "id": "google/gemini-3-pro-preview",
-    "name": "Google: Gemini 3 Pro Preview",
-    "description": "Gemini 3 Pro is Google’s flagship frontier model for high-precision multimodal reasoning, combining strong performance across text, image, video, audio, and code with a 1M-token context window. Reasoning Details must be preserved when using multi-turn tool calling, see our docs here: https://open...",
+    "id": "google/gemini-3-flash-preview:batch",
+    "name": "Google: Gemini 3 Flash Preview (batch)",
+    "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.000002",
-      "completion": "0.000012"
+      "prompt": "0.00000025",
+      "completion": "0.0000015",
+      "internal_reasoning": "0.0000015"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image",
@@ -2079,72 +2995,780 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1763474668
+    "created": 1765987078
+  },
+  {
+    "id": "google/gemini-3.1-flash-lite",
+    "name": "Google: Gemini 3.1 Flash Lite",
+    "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.0000015",
+      "internal_reasoning": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1778168828
+  },
+  {
+    "id": "google/gemini-3.1-flash-lite:batch",
+    "name": "Google: Gemini 3.1 Flash Lite (batch)",
+    "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000125",
+      "completion": "0.00000075",
+      "internal_reasoning": "0.00000075"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1778168828
+  },
+  {
+    "id": "google/gemini-3.1-flash-lite-preview",
+    "name": "Google: Gemini 3.1 Flash Lite Preview",
+    "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.0000015",
+      "internal_reasoning": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772512673
+  },
+  {
+    "id": "google/gemini-3.1-pro-preview",
+    "name": "Google: Gemini 3.1 Pro Preview",
+    "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012",
+      "internal_reasoning": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1771509627
+  },
+  {
+    "id": "google/gemini-3.1-pro-preview:batch",
+    "name": "Google: Gemini 3.1 Pro Preview (batch)",
+    "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000006",
+      "internal_reasoning": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1771509627
+  },
+  {
+    "id": "google/gemini-3.1-pro-preview-customtools",
+    "name": "Google: Gemini 3.1 Pro Preview Custom Tools",
+    "description": "Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that improves tool selection behavior by preventing overuse of a general bash tool when more efficient third-party...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012",
+      "internal_reasoning": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "audio",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772045923
+  },
+  {
+    "id": "google/gemini-3.5-flash",
+    "name": "Google: Gemini 3.5 Flash",
+    "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000015",
+      "completion": "0.000009",
+      "internal_reasoning": "0.000009"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1779193800
+  },
+  {
+    "id": "google/gemini-3.5-flash:batch",
+    "name": "Google: Gemini 3.5 Flash (batch)",
+    "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.0000045",
+      "internal_reasoning": "0.0000045"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1779193800
+  },
+  {
+    "id": "google/gemini-3.5-flash-lite",
+    "name": "Google: Gemini 3.5 Flash Lite",
+    "description": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000025",
+      "internal_reasoning": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784646726
+  },
+  {
+    "id": "google/gemini-3.5-flash-lite:batch",
+    "name": "Google: Gemini 3.5 Flash Lite (batch)",
+    "description": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.00000125",
+      "internal_reasoning": "0.00000125"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784646726
+  },
+  {
+    "id": "google/gemini-3.6-flash",
+    "name": "Google: Gemini 3.6 Flash",
+    "description": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.00000375",
+      "internal_reasoning": "0.00000375"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784646733
+  },
+  {
+    "id": "google/gemini-3.6-flash:batch",
+    "name": "Google: Gemini 3.6 Flash (batch)",
+    "description": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000375",
+      "completion": "0.000001875",
+      "internal_reasoning": "0.000001875"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784646733
+  },
+  {
+    "id": "google/gemini-3.7-flash",
+    "name": "Google: Gemini 3.7 Flash",
+    "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.00000375",
+      "internal_reasoning": "0.00000375"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786640581
+  },
+  {
+    "id": "google/gemini-3.7-flash:batch",
+    "name": "Google: Gemini 3.7 Flash (batch)",
+    "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000375",
+      "completion": "0.000001875",
+      "internal_reasoning": "0.000001875"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786640581
+  },
+  {
+    "id": "google/gemini-3.8-flash",
+    "name": "Google: Gemini 3.8 Flash",
+    "description": "Gemini 3.8 Flash is Google's most intelligent Flash model with significant gains from 3.7 Flash across software engineering, agentic tasks, and multi-step reasoning.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000825",
+      "completion": "0.000004125",
+      "internal_reasoning": "0.000004125"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788362056
+  },
+  {
+    "id": "google/gemini-3.8-flash:batch",
+    "name": "Google: Gemini 3.8 Flash (batch)",
+    "description": "Gemini 3.8 Flash is Google's most intelligent Flash model with significant gains from 3.7 Flash across software engineering, agentic tasks, and multi-step reasoning.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000375",
+      "completion": "0.000001875",
+      "internal_reasoning": "0.000001875"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788362056
+  },
+  {
+    "id": "google/gemini-4-argon",
+    "name": "Google: Gemini 4 Argon",
+    "description": "Gemini 4 Argon is Google's flagship reasoning model, built for complex software engineering, deep mathematical and scientific problem solving, and autonomous multi-step agents. Google trained it to keep context across...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001",
+      "internal_reasoning": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791907477
+  },
+  {
+    "id": "google/gemini-4-argon:batch",
+    "name": "Google: Gemini 4 Argon (batch)",
+    "description": "Gemini 4 Argon is Google's flagship reasoning model, built for complex software engineering, deep mathematical and scientific problem solving, and autonomous multi-step agents. Google trained it to keep context across...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005",
+      "internal_reasoning": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791907477
+  },
+  {
+    "id": "~google/gemini-flash-latest",
+    "name": "Google: Gemini Flash Latest",
+    "description": "This model always redirects to the latest model in the Gemini Flash family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.00000375",
+      "internal_reasoning": "0.00000375"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318398
+  },
+  {
+    "id": "~google/gemini-pro-latest",
+    "name": "Google: Gemini Pro Latest",
+    "description": "This model always redirects to the latest model in the Gemini Pro family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001",
+      "internal_reasoning": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318451
   },
   {
     "id": "google/gemma-2-27b-it",
     "name": "Google: Gemma 2 27B",
-    "description": "Gemma 2 27B by Google is an open model built from the same research and technology used to create the [Gemini models](/models?q=gemini).\n\nGemma models are well-suited for a variety of text generation tasks, including question answering, summarization, and reasoning.\n\nSee the [launch announcement]...",
+    "description": "Gemma 2 27B by Google is an open model built from the same research and technology used to create the [Gemini models](/models?q=gemini). Gemma models are well-suited for a variety of...",
     "context_length": 8192,
     "pricing": {
       "prompt": "0.00000065",
       "completion": "0.00000065"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Gemini",
       "instruct_type": "gemma"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1720828800
   },
   {
-    "id": "google/gemma-2-9b-it",
-    "name": "Google: Gemma 2 9B",
-    "description": "Gemma 2 9B by Google is an advanced, open-source language model that sets a new standard for efficiency and performance in its size class.\n\nDesigned for a wide variety of tasks, it empowers developers and researchers to build innovative applications, while maintaining accessibility, safety, and c...",
-    "context_length": 8192,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000009"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini",
-      "instruct_type": "gemma"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1719532800
-  },
-  {
     "id": "google/gemma-3-12b-it",
     "name": "Google: Gemma 3 12B",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 12B is the seco...",
+    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.0000001"
+      "prompt": "0.00000005",
+      "completion": "0.00000015"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image"
@@ -2152,34 +3776,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Gemini",
       "instruct_type": "gemma"
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1741902625
-  },
-  {
-    "id": "google/gemma-3-12b-it:free",
-    "name": "Google: Gemma 3 12B (free)",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 12B is the seco...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini",
-      "instruct_type": "gemma"
-    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2188,38 +3792,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "google/gemma-3-27b-it",
     "name": "Google: Gemma 3 27B",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's...",
-    "context_length": 96000,
-    "pricing": {
-      "prompt": "0.00000004",
-      "completion": "0.00000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini",
-      "instruct_type": "gemma"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1741756359
-  },
-  {
-    "id": "google/gemma-3-27b-it:free",
-    "name": "Google: Gemma 3 27B (free)",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's...",
+    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000008",
+      "completion": "0.00000035"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image"
@@ -2227,9 +3807,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Gemini",
       "instruct_type": "gemma"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2238,13 +3823,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "google/gemma-3-4b-it",
     "name": "Google: Gemma 3 4B",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling.",
-    "context_length": 96000,
+    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
+    "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000001703012",
-      "completion": "0.0000000681536"
+      "prompt": "0.00000005",
+      "completion": "0.0000001"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "text",
         "image"
@@ -2252,118 +3838,370 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Gemini",
       "instruct_type": "gemma"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1741905510
   },
   {
-    "id": "google/gemma-3-4b-it:free",
-    "name": "Google: Gemma 3 4B (free)",
-    "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling.",
-    "context_length": 32768,
+    "id": "google/gemma-4-26b-a4b-it",
+    "name": "Google: Gemma 4 26B A4B ",
+    "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000009",
+      "completion": "0.0000003"
+    },
+    "architecture": {
+      "tokenizer": "Gemma",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775227989
+  },
+  {
+    "id": "google/gemma-4-26b-a4b-it:free",
+    "name": "Google: Gemma 4 26B A4B  (free)",
+    "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
+    "context_length": 262144,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Gemma",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775227989
+  },
+  {
+    "id": "google/gemma-4-31b-it",
+    "name": "Google: Gemma 4 31B",
+    "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000004"
+    },
+    "architecture": {
+      "tokenizer": "Gemma",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775148486
+  },
+  {
+    "id": "google/gemma-4-31b-it:free",
+    "name": "Google: Gemma 4 31B (free)",
+    "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Gemma",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775148486
+  },
+  {
+    "id": "google/lyria-3-clip-preview",
+    "name": "Google: Lyria 3 Clip Preview",
+    "description": "30 second duration clips are priced at $0.04 per clip. Lyria 3 is Google's family of music generation models, available through the Gemini API. With Lyria 3, you can generate...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Gemini",
-      "instruct_type": "gemma"
+        "text",
+        "audio"
+      ]
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1741905510
+    "created": 1774907255
   },
   {
-    "id": "google/gemma-3n-e2b-it:free",
-    "name": "Google: Gemma 3n 2B (free)",
-    "description": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based on the MatFormer architecture, it supports nested submodels and modular composition via the Mix-and...",
-    "context_length": 8192,
+    "id": "google/lyria-3-pro-preview",
+    "name": "Google: Lyria 3 Pro Preview",
+    "description": "Full-length songs are priced at $0.08 per song. Lyria 3 is Google's family of music generation models, available through the Gemini API. With Lyria 3, you can generate high-quality, 48kHz...",
+    "context_length": 1048576,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
+        "text",
+        "audio"
+      ]
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1752074904
+    "created": 1774907286
   },
   {
-    "id": "google/gemma-3n-e4b-it",
-    "name": "Google: Gemma 3n 4B",
-    "description": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks such as text generation, speech recognition, translation, and image analysis. ...",
+    "id": "google/gemini-2.5-flash-image",
+    "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
+    "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.00000004"
+      "prompt": "0.0000003",
+      "completion": "0.0000025",
+      "internal_reasoning": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
+        "image",
         "text"
       ],
       "output_modalities": [
+        "image",
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1747776824
+    "created": 1759870431
   },
   {
-    "id": "google/gemma-3n-e4b-it:free",
-    "name": "Google: Gemma 3n 4B (free)",
-    "description": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks such as text generation, speech recognition, translation, and image analysis. ...",
-    "context_length": 8192,
+    "id": "google/gemini-3.1-flash-image-preview",
+    "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
+    "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
+    "context_length": 65536,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.0000005",
+      "completion": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
+        "image",
         "text"
       ],
       "output_modalities": [
+        "image",
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1747776824
+    "created": 1772119558
+  },
+  {
+    "id": "google/gemini-3.1-flash-image",
+    "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.0000005",
+      "completion": "0.000003"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "image",
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1781754065
+  },
+  {
+    "id": "google/gemini-3.1-flash-lite-image",
+    "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
+    "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
+    "context_length": 65536,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "image",
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1782837225
+  },
+  {
+    "id": "google/gemini-nano-banana-2.1",
+    "name": "Google: Nano Banana 2.1",
+    "description": "Nano Banana 2.1 (Gemini Nano Banana 2.1) is Google's image generation and editing model on the Flash tier, succeeding Nano Banana 2 and Nano Banana Pro. It improves product recontextualization,...",
+    "context_length": 65536,
+    "pricing": {
+      "prompt": "0.0000015",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "image",
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791300825
   },
   {
     "id": "google/gemini-3-pro-image-preview",
     "name": "Google: Nano Banana Pro (Gemini 3 Pro Image Preview)",
-    "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and high-fidelity visual synthesis. The model generates context-rich graphics, from info...",
+    "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
     "context_length": 65536,
     "pricing": {
       "prompt": "0.000002",
-      "completion": "0.000012"
+      "completion": "0.000012",
+      "internal_reasoning": "0.000012"
     },
     "architecture": {
+      "tokenizer": "Gemini",
       "input_modalities": [
         "image",
         "text"
@@ -2371,264 +4209,405 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "image",
         "text"
-      ],
-      "tokenizer": "Gemini"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1763653797
   },
   {
+    "id": "google/gemini-3-pro-image",
+    "name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
+    "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012",
+      "internal_reasoning": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "Gemini",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "image",
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1781754054
+  },
+  {
     "id": "ibm-granite/granite-4.0-h-micro",
     "name": "IBM: Granite 4.0 Micro",
-    "description": "Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models. These models are the latest in a series of models released by IBM. They are fine-tuned for long context tool calling. ",
+    "description": "Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models. These models are the latest in a series of models released by IBM. They are fine-tuned for long...",
     "context_length": 131000,
     "pricing": {
       "prompt": "0.000000017",
-      "completion": "0.00000011"
+      "completion": "0.000000112"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1760927695
   },
   {
-    "id": "inception/mercury",
-    "name": "Inception: Mercury",
-    "description": "Mercury is the first diffusion large language model (dLLM). Applying a breakthrough discrete diffusion approach, the model runs 5-10x faster than even speed optimized models like GPT-4.1 Nano and Claude 3.5 Haiku while matching their performance. Mercury's speed enables developers to provide resp...",
+    "id": "ibm-granite/granite-4.2-8b",
+    "name": "IBM: Granite 4.2 8B",
+    "description": "Granite 4.2 8B is a dense reasoning model from IBM. It is suited for mathematics, code generation, multilingual dialogue, and agentic workflows that need multi-step reasoning. It supports full, low-effort,...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.00000006",
+      "completion": "0.00000025"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788206780
+  },
+  {
+    "id": "inception/mercury-2",
+    "name": "Inception: Mercury 2",
+    "description": "Mercury 2 is an extremely fast reasoning LLM, and the first reasoning diffusion LLM (dLLM). Instead of generating tokens sequentially, Mercury 2 produces and refines multiple tokens in parallel, achieving...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.00000025",
-      "completion": "0.000001"
+      "completion": "0.00000075"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1750973026
+    "created": 1772636275
   },
   {
-    "id": "inception/mercury-coder",
-    "name": "Inception: Mercury Coder",
-    "description": "Mercury Coder is the first diffusion large language model (dLLM). Applying a breakthrough discrete diffusion approach, the model runs 5-10x faster than even speed optimized models like Claude 3.5 Haiku and GPT-4o Mini while matching their performance. Mercury Coder's speed means that developers c...",
+    "id": "inception/mercury-2.5",
+    "name": "Inception: Mercury 2.5",
+    "description": "Mercury 2.5 is the fastest reasoning LLM, and the latest diffusion LLM (dLLM) from Inception. Instead of generating tokens sequentially, Mercury 2.5 produces and refines multiple tokens in parallel, achieving...",
+    "context_length": 260000,
+    "pricing": {
+      "prompt": "0.00000004",
+      "completion": "0.00000015"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788892137
+  },
+  {
+    "id": "inclusionai/ling-3.0-flash",
+    "name": "inclusionAI: Ling 3.0 Flash",
+    "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000021",
+      "completion": "0.000000063"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784818580
+  },
+  {
+    "id": "inclusionai/ling-3.0-flash-vl",
+    "name": "inclusionAI: Ling 3.0 Flash VL",
+    "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.00000006",
+      "completion": "0.00000018"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789056114
+  },
+  {
+    "id": "inclusionai/ling-3.1-flash",
+    "name": "inclusionAI: Ling 3.1 Flash",
+    "description": "Ling 3.1 Flash is a hybrid reasoning mixture-of-experts model from inclusionAI, with 25B active parameters out of 560B total.",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000075",
+      "completion": "0.000000225"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790950024
+  },
+  {
+    "id": "inference-net/schematron-v2-small",
+    "name": "Inference.net: Schematron V2 Small",
+    "description": "Schematron V2 Small is a 3B-parameter HTML-to-JSON extraction model from Inference.net. It prioritizes extraction quality for complex schemas and long pages. Extraction instructions must be supplied through a JSON schema...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.000001"
+      "prompt": "0.00000005",
+      "completion": "0.00000023"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1746033880
+    "created": 1789176933
   },
   {
-    "id": "inflection/inflection-3-pi",
-    "name": "Inflection: Inflection 3 Pi",
-    "description": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay.\n\nPi has been trained to mirror your tone and style, if you use more emo...",
-    "context_length": 8000,
+    "id": "inference-net/schematron-v2-turbo",
+    "name": "Inference.net: Schematron V2 Turbo",
+    "description": "Schematron V2 Turbo is a 3B-parameter HTML-to-JSON extraction model from Inference.net. It prioritizes throughput for high-volume extraction workloads. Extraction instructions must be supplied through a JSON schema in response_format rather...",
+    "context_length": 128000,
     "pricing": {
-      "prompt": "0.0000025",
-      "completion": "0.00001"
+      "prompt": "0.00000003",
+      "completion": "0.00000015"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1728604800
+    "created": 1789176949
   },
   {
-    "id": "inflection/inflection-3-productivity",
-    "name": "Inflection: Inflection 3 Productivity",
-    "description": "Inflection 3 Productivity is optimized for following instructions. It is better for tasks requiring JSON output or precise adherence to provided guidelines. It has access to recent news.\n\nFor emotional intelligence similar to Pi, see [Inflect 3 Pi](/inflection/inflection-3-pi)\n\nSee [Inflection's ...",
-    "context_length": 8000,
-    "pricing": {
-      "prompt": "0.0000025",
-      "completion": "0.00001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1728604800
-  },
-  {
-    "id": "kwaipilot/kat-coder-pro",
-    "name": "Kwaipilot: KAT-Coder-Pro V1",
-    "description": "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. \n\nThe model has been optimized for tool...",
-    "context_length": 256000,
-    "pricing": {
-      "prompt": "0.000000207",
-      "completion": "0.000000828"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1762745912
-  },
-  {
-    "id": "kwaipilot/kat-coder-pro:free",
-    "name": "Kwaipilot: KAT-Coder-Pro V1 (free)",
-    "description": "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. \n\nThe model has been optimized for tool...",
-    "context_length": 256000,
+    "id": "liquid/lfm-2.5-2.6b:free",
+    "name": "LiquidAI: LFM2.5-2.6B (free)",
+    "description": "LFM2.5-2.6B is a compact reasoning model from Liquid AI. It is suited for agent workflows, data extraction, RAG, and long-context processing. Liquid advises against using it for agentic coding or...",
+    "context_length": 65536,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1762745912
+    "created": 1786470519
   },
   {
-    "id": "liquid/lfm-2.2-6b",
-    "name": "LiquidAI/LFM2-2.6B",
-    "description": "LFM2 is a new generation of hybrid models developed by Liquid AI, specifically designed for edge AI and on-device deployment. It sets a new standard in terms of quality, speed, and memory efficiency.",
-    "context_length": 32768,
+    "id": "liquid/lfm-2.5-24b-a2b",
+    "name": "LiquidAI: LFM2.5-24B-A2B",
+    "description": "LFM2.5-24B-A2B is a mixture-of-experts reasoning model from Liquid AI with 24B total and 2.45B active parameters. It always reasons before answering and is built for agents that call tools. Liquid...",
+    "context_length": 128000,
     "pricing": {
-      "prompt": "0.00000001",
-      "completion": "0.00000002"
+      "prompt": "0.00000005",
+      "completion": "0.0000007"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1760970889
-  },
-  {
-    "id": "liquid/lfm2-8b-a1b",
-    "name": "LiquidAI/LFM2-8B-A1B",
-    "description": "Model created via inbox interface",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000001",
-      "completion": "0.00000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1760970984
-  },
-  {
-    "id": "meta-llama/llama-guard-3-8b",
-    "name": "Llama Guard 3 8B",
-    "description": "Llama Guard 3 is a Llama-3.1-8B pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM inputs (prompt classification) and in LLM responses (response classification). It acts as an LLM – it generates text in its ...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.00000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "none"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1739401318
+    "created": 1791912025
   },
   {
     "id": "anthracite-org/magnum-v4-72b",
     "name": "Magnum v4 72B",
     "description": "This is a series of models designed to replicate the prose quality of the Claude 3 models, specifically Sonnet(https://openrouter.ai/anthropic/claude-3.5-sonnet) and Opus(https://openrouter.ai/anthropic/claude-3-opus).\n\nThe model is fine-tuned on top of [Qwen2.5 72B](https://openrouter.ai/qwen/qw...",
-    "context_length": 16384,
+    "context_length": 32768,
     "pricing": {
-      "prompt": "0.000003",
+      "prompt": "0.0000025",
       "completion": "0.000005"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen",
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2640,186 +4619,81 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations.",
     "context_length": 8000,
     "pricing": {
-      "prompt": "0.00000075",
-      "completion": "0.000001"
+      "prompt": "0.0000004",
+      "completion": "0.00000075"
     },
     "architecture": {
+      "tokenizer": "Llama2",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama2",
       "instruct_type": "alpaca"
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1690934400
   },
   {
-    "id": "meituan/longcat-flash-chat",
-    "name": "Meituan: LongCat Flash Chat",
-    "description": "LongCat-Flash-Chat is a large-scale Mixture-of-Experts (MoE) model with 560B total parameters, of which 18.6B–31.3B (≈27B on average) are dynamically activated per input. It introduces a shortcut-connected MoE design to reduce communication overhead and achieve high throughput while maintaining t...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000008"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1757427658
-  },
-  {
-    "id": "meta-llama/llama-3-70b-instruct",
-    "name": "Meta: Llama 3 70B Instruct",
-    "description": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 70B instruct-tuned version was optimized for high quality dialogue usecases.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model...",
-    "context_length": 8192,
+    "id": "meituan/longcat-2.0",
+    "name": "Meituan: LongCat 2.0",
+    "description": "LongCat 2.0 is a sparse mixture-of-experts language model from Meituan, with 48B active parameters out of 1.6T total. It is suited for coding, repository-level changes, long-horizon problem solving, and agentic...",
+    "context_length": 1048756,
     "pricing": {
       "prompt": "0.0000003",
-      "completion": "0.0000004"
+      "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1713398400
-  },
-  {
-    "id": "meta-llama/llama-3-8b-instruct",
-    "name": "Meta: Llama 3 8B Instruct",
-    "description": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model ...",
-    "context_length": 8192,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1713398400
-  },
-  {
-    "id": "meta-llama/llama-3.1-405b",
-    "name": "Meta: Llama 3.1 405B (base)",
-    "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This is the base 405B pre-trained version.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model release, [click here](https://ai.met...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.000004",
-      "completion": "0.000004"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "none"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1722556800
-  },
-  {
-    "id": "meta-llama/llama-3.1-405b-instruct",
-    "name": "Meta: Llama 3.1 405B Instruct",
-    "description": "The highly anticipated 400B class of Llama3 is here! Clocking in at 128k context with impressive eval scores, the Meta AI team continues to push the frontier of open-source LLMs.\n\nMeta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 405B instruct-tuned version...",
-    "context_length": 10000,
-    "pricing": {
-      "prompt": "0.0000035",
-      "completion": "0.0000035"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1721692800
-  },
-  {
-    "id": "meta-llama/llama-3.1-405b-instruct:free",
-    "name": "Meta: Llama 3.1 405B Instruct (free)",
-    "description": "The highly anticipated 400B class of Llama3 is here! Clocking in at 128k context with impressive eval scores, the Meta AI team continues to push the frontier of open-source LLMs.\n\nMeta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 405B instruct-tuned version...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1721692800
+    "created": 1784554658
   },
   {
     "id": "meta-llama/llama-3.1-70b-instruct",
     "name": "Meta: Llama 3.1 70B Instruct",
-    "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the mode...",
+    "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000004",
       "completion": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2828,69 +4702,50 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-3.1-8b-instruct",
     "name": "Meta: Llama 3.1 8B Instruct",
-    "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient.\n\nIt has demonstrated strong performance compared to leading closed-source models in human evaluations.\n\nTo read more about the model release, [click here](htt...",
-    "context_length": 16384,
+    "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to...",
+    "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.00000005"
+      "prompt": "0.00000005",
+      "completion": "0.00000008"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1721692800
   },
   {
-    "id": "meta-llama/llama-3.2-11b-vision-instruct",
-    "name": "Meta: Llama 3.2 11B Vision Instruct",
-    "description": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and visual question answering, bridging the gap between language generation and visual reasoning. Pre-trained on a massive...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.000000049",
-      "completion": "0.000000049"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1727222400
-  },
-  {
     "id": "meta-llama/llama-3.2-1b-instruct",
     "name": "Meta: Llama 3.2 1B Instruct",
-    "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate efficiently in low-resource environments while maintaining strong task performance....",
+    "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
     "context_length": 60000,
     "pricing": {
       "prompt": "0.000000027",
-      "completion": "0.0000002"
+      "completion": "0.000000201"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
     "top_provider": {
@@ -2901,71 +4756,25 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-3.2-3b-instruct",
     "name": "Meta: Llama 3.2 3B Instruct",
-    "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it supports eight languages, including English, Spanish, and...",
+    "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.00000002"
+      "prompt": "0.0000000509",
+      "completion": "0.000000335"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1727222400
-  },
-  {
-    "id": "meta-llama/llama-3.2-3b-instruct:free",
-    "name": "Meta: Llama 3.2 3B Instruct (free)",
-    "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it supports eight languages, including English, Spanish, and...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1727222400
-  },
-  {
-    "id": "meta-llama/llama-3.2-90b-vision-instruct",
-    "name": "Meta: Llama 3.2 90B Vision Instruct",
-    "description": "The Llama 90B Vision model is a top-tier, 90-billion-parameter multimodal model designed for the most challenging visual reasoning and language tasks. It offers unparalleled accuracy in image captioning, visual question answering, and advanced image-text comprehension. Pre-trained on vast multimo...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000035",
-      "completion": "0.0000004"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
+    "supported_parameters": [
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -2974,46 +4783,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-3.3-70b-instruct",
     "name": "Meta: Llama 3.3 70B Instruct",
-    "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model is optimized for multilingual dialogue use cases and outperforms many of the available open source and close...",
+    "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000001",
       "completion": "0.00000032"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1733506137
-  },
-  {
-    "id": "meta-llama/llama-3.3-70b-instruct:free",
-    "name": "Meta: Llama 3.3 70B Instruct (free)",
-    "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model is optimized for multilingual dialogue use cases and outperforms many of the available open source and close...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3022,22 +4813,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-4-maverick",
     "name": "Meta: Llama 4 Maverick",
-    "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward pass (400B total). It supports multilingual text and image input, and produces multilingual t...",
+    "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000006"
+      "prompt": "0.0000001875",
+      "completion": "0.0000006525"
     },
     "architecture": {
+      "tokenizer": "Llama4",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Llama4"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3046,22 +4843,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-4-scout",
     "name": "Meta: Llama 4 Scout",
-    "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input (text and image) and multilingual output (text and code) across 12 supported languages. Designed for assist...",
-    "context_length": 327680,
+    "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
+    "context_length": 1310720,
     "pricing": {
-      "prompt": "0.00000008",
+      "prompt": "0.0000001",
       "completion": "0.0000003"
     },
     "architecture": {
+      "tokenizer": "Llama4",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Llama4"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3070,21 +4873,21 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "meta-llama/llama-guard-4-12b",
     "name": "Meta: Llama Guard 4 12B",
-    "description": "Llama Guard 4 is a Llama 4 Scout-derived multimodal pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM inputs (prompt classification) and in LLM responses (response classification). It acts as an LLM—generat...",
+    "description": "Llama Guard 4 is a Llama 4 Scout-derived multimodal pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM...",
     "context_length": 163840,
     "pricing": {
       "prompt": "0.00000018",
       "completion": "0.00000018"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -3092,117 +4895,328 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1745975193
   },
   {
-    "id": "meta-llama/llama-guard-2-8b",
-    "name": "Meta: LlamaGuard 2 8B",
-    "description": "This safeguard model has 8B parameters and is based on the Llama 3 family. Just like is predecessor, [LlamaGuard 1](https://huggingface.co/meta-llama/LlamaGuard-7b), it can do both prompt and response classification.\n\nLlamaGuard 2 acts as a normal LLM would, generating text that indicates whether...",
-    "context_length": 8192,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "none"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1715558400
-  },
-  {
-    "id": "microsoft/phi-4",
-    "name": "Microsoft: Phi 4",
-    "description": "[Microsoft Research](/microsoft) Phi-4 is designed to perform well in complex reasoning tasks and can operate efficiently in situations with limited memory or where quick responses are needed. \n\nAt 14 billion parameters, it was trained on a mix of high-quality synthetic datasets, data from curate...",
-    "context_length": 16384,
-    "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000014"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1736489872
-  },
-  {
-    "id": "microsoft/phi-4-multimodal-instruct",
-    "name": "Microsoft: Phi 4 Multimodal Instruct",
-    "description": "Phi-4 Multimodal Instruct is a versatile 5.6B parameter foundation model that combines advanced reasoning and instruction-following capabilities across both text and visual inputs, providing accurate text outputs. The unified architecture enables efficient, low-latency inference, suitable for edg...",
+    "id": "meta/muse-glimmer-30b",
+    "name": "Meta: Muse Glimmer 30B",
+    "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.0000001"
+      "prompt": "0.0000003",
+      "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1741396284
+    "created": 1786302394
   },
   {
-    "id": "microsoft/phi-4-reasoning-plus",
-    "name": "Microsoft: Phi 4 Reasoning Plus",
-    "description": "Phi-4-reasoning-plus is an enhanced 14B parameter model from Microsoft, fine-tuned from Phi-4 with additional reinforcement learning to boost accuracy on math, science, and code reasoning tasks. It uses the same dense decoder-only transformer architecture as Phi-4, but generates longer, more comp...",
-    "context_length": 32768,
+    "id": "meta/muse-spark-1.1",
+    "name": "Meta: Muse Spark 1.1",
+    "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, and PDF documents and returns text, with a 1M-token context window....",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000007",
-      "completion": "0.00000035"
+      "prompt": "0.00000125",
+      "completion": "0.00000425"
     },
     "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1784215741
+  },
+  {
+    "id": "meta/muse-spark-1.2",
+    "name": "Meta: Muse Spark 1.2",
+    "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, and PDF documents, returns text, and offers a 1M-token context window....",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.00000425"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1785959287
+  },
+  {
+    "id": "meta/muse-spark-1.2-contributor",
+    "name": "Meta: Muse Spark 1.2 Contributor",
+    "description": "Muse Spark 1.2 contributor tier is a reasoning model from Meta designed for developers who want to start building at an even lower cost. It’s meaningfully cheaper than Muse Spark...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1787336476
+  },
+  {
+    "id": "meta/muse-spark-1.3",
+    "name": "Meta: Muse Spark 1.3",
+    "description": "Muse Spark 1.3 is a multimodal reasoning model from Meta for long-running agentic, multi-agent, and coding workflows. It is designed to keep track of information across extended tasks, work through...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.00000425"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788378359
+  },
+  {
+    "id": "meta/muse-spark-1.3-contributor",
+    "name": "Meta: Muse Spark 1.3 Contributor",
+    "description": "Muse Spark 1.3 Contributor is the cost-efficient contributor tier of Meta’s multimodal reasoning model for experimentation, learning, and early-stage agentic, multi-agent, and coding workflows. It is designed to track information...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788381519
+  },
+  {
+    "id": "meta/muse-spark-open",
+    "name": "Meta: Muse Spark Open",
+    "description": "Muse Spark Open is a coding-optimized open-weight model. Trained specifically for agentic coding workflows, it delivers higher first-attempt accuracy, reliable tool calling, and deep codebase understanding across the repos developers...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.00000425"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792087069
+  },
+  {
+    "id": "meta/muse-wonder",
+    "name": "Meta: Muse Wonder",
+    "description": "Muse Wonder is a frontier reasoning model from Meta, designed for complex personal and professional agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.00002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1791807945
+  },
+  {
+    "id": "microsoft/phi-4",
+    "name": "Microsoft: Phi 4",
+    "description": "[Microsoft Research](/microsoft) Phi-4 is designed to perform well in complex reasoning tasks and can operate efficiently in situations with limited memory or where quick responses are needed. At 14 billion...",
+    "context_length": 16384,
+    "pricing": {
+      "prompt": "0.00000007",
+      "completion": "0.00000014"
+    },
+    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1746130961
+    "created": 1736489872
   },
   {
     "id": "minimax/minimax-m1",
     "name": "MiniMax: MiniMax M1",
-    "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it to process long sequences—up to 1 million tokens—whil...",
+    "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it...",
     "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000004",
+      "prompt": "0.00000055",
       "completion": "0.0000022"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3211,67 +5225,199 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "minimax/minimax-m2",
     "name": "MiniMax: MiniMax M2",
-    "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning, tool use, and multi-step task execution while maintaining...",
-    "context_length": 196608,
+    "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
+    "context_length": 204800,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.000001"
+      "prompt": "0.000000255",
+      "completion": "0.00000102"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1761252093
   },
   {
-    "id": "minimax/minimax-m2.1",
-    "name": "MiniMax: MiniMax M2.1",
-    "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world capability while maintaining exceptional latency, scalability, and co...",
-    "context_length": 196608,
+    "id": "minimax/minimax-m2-her",
+    "name": "MiniMax: MiniMax M2-her",
+    "description": "MiniMax M2-her is a dialogue-first large language model built for immersive roleplay, character-driven chat, and expressive multi-turn conversations. Designed to stay consistent in tone and personality, it supports rich message...",
+    "context_length": 65536,
     "pricing": {
-      "prompt": "0.00000028",
+      "prompt": "0.0000003",
       "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1769177239
+  },
+  {
+    "id": "minimax/minimax-m2.1",
+    "name": "MiniMax: MiniMax M2.1",
+    "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world...",
+    "context_length": 204800,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1766454997
   },
   {
+    "id": "minimax/minimax-m2.5",
+    "name": "MiniMax: MiniMax M2.5",
+    "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
+    "context_length": 204800,
+    "pricing": {
+      "prompt": "0.00000027",
+      "completion": "0.00000095"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1770908502
+  },
+  {
+    "id": "minimax/minimax-m2.7",
+    "name": "MiniMax: MiniMax M2.7",
+    "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
+    "context_length": 204800,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773836697
+  },
+  {
+    "id": "minimax/minimax-m3",
+    "name": "MiniMax: MiniMax M3",
+    "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780245374
+  },
+  {
     "id": "minimax/minimax-01",
     "name": "MiniMax: MiniMax-01",
-    "description": "MiniMax-01 is a combines MiniMax-Text-01 for text generation and MiniMax-VL-01 for image understanding. It has 456 billion parameters, with 45.9 billion parameters activated per inference, and can handle a context of up to 4 million tokens.\n\nThe text model adopts a hybrid architecture that combin...",
+    "description": "MiniMax-01 is a combines MiniMax-Text-01 for text generation and MiniMax-VL-01 for image understanding. It has 456 billion parameters, with 45.9 billion parameters activated per inference, and can handle a context...",
     "context_length": 1000192,
     "pricing": {
       "prompt": "0.0000002",
       "completion": "0.0000011"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -3281,21 +5427,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-large",
     "name": "Mistral Large",
-    "description": "This is Mistral AI's flagship model, Mistral Large 2 (version `mistral-large-2407`). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/).\n\nIt supports dozens of languages i...",
+    "description": "This is Mistral AI's flagship model, Mistral Large 2 (version `mistral-large-2407`). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3304,71 +5457,32 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-large-2407",
     "name": "Mistral Large 2407",
-    "description": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/).\n\nIt supports dozens of languages inc...",
+    "description": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1731978415
-  },
-  {
-    "id": "mistralai/mistral-large-2411",
-    "name": "Mistral Large 2411",
-    "description": "Mistral Large 2 2411 is an update of [Mistral Large 2](/mistralai/mistral-large) released together with [Pixtral Large 2411](/mistralai/pixtral-large-2411)\n\nIt provides a significant upgrade on the previous [Mistral Large 24.07](/mistralai/mistral-large-2407), with notable improvements in long co...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.000002",
-      "completion": "0.000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1731978685
-  },
-  {
-    "id": "mistralai/mistral-tiny",
-    "name": "Mistral Tiny",
-    "description": "Note: This model is being deprecated. Recommended replacement is the newer [Ministral 8B](/mistral/ministral-8b)\n\nThis model is currently powered by Mistral-7B-v0.2, and incorporates a \"better\" fine-tuning than [Mistral 7B](/models/mistralai/mistral-7b-instruct-v0.1), inspired by community work. ...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.00000025"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1704844800
   },
   {
     "id": "mistralai/codestral-2508",
@@ -3380,14 +5494,51 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000009"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1754079630
+  },
+  {
+    "id": "mistralai/codestral-2508:batch",
+    "name": "Mistral: Codestral 2508 (batch)",
+    "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
+    "context_length": 256000,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.00000045"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3396,137 +5547,58 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/devstral-2512",
     "name": "Mistral: Devstral 2 2512",
-    "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window.\n\nDevstral 2 supports exploring codebases and orchestrating changes across multiple files while maintaining architecture...",
+    "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
     "context_length": 262144,
-    "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.00000022"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1765285419
-  },
-  {
-    "id": "mistralai/devstral-2512:free",
-    "name": "Mistral: Devstral 2 2512 (free)",
-    "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window.\n\nDevstral 2 supports exploring codebases and orchestrating changes across multiple files while maintaining architecture...",
-    "context_length": 262144,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1765285419
-  },
-  {
-    "id": "mistralai/devstral-medium",
-    "name": "Mistral: Devstral Medium",
-    "description": "Devstral Medium is a high-performance code generation and agentic reasoning model developed jointly by Mistral AI and All Hands AI. Positioned as a step up from Devstral Small, it achieves 61.6% on SWE-Bench Verified, placing it ahead of Gemini 2.5 Pro and GPT-4.1 in code-related tasks, at a frac...",
-    "context_length": 131072,
     "pricing": {
       "prompt": "0.0000004",
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1752161321
-  },
-  {
-    "id": "mistralai/devstral-small",
-    "name": "Mistral: Devstral Small 1.1",
-    "description": "Devstral Small 1.1 is a 24B parameter open-weight language model for software engineering agents, developed by Mistral AI in collaboration with All Hands AI. Finetuned from Mistral Small 3.1 and released under the Apache 2.0 license, it features a 128k token context window and supports both Mistr...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00000007",
-      "completion": "0.00000028"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1752160751
-  },
-  {
-    "id": "mistralai/devstral-small-2505",
-    "name": "Mistral: Devstral Small 2505",
-    "description": "Devstral-Small-2505 is a 24B parameter agentic LLM fine-tuned from Mistral-Small-3.1, jointly developed by Mistral AI and All Hands AI for advanced software engineering tasks. It is optimized for codebase exploration, multi-file editing, and integration into coding agents, achieving state-of-the-...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000012"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1747837379
+    "created": 1765285419
   },
   {
     "id": "mistralai/ministral-14b-2512",
     "name": "Mistral: Ministral 3 14B 2512",
-    "description": "The largest model in the Ministral 3 family, Ministral 3 14B offers frontier capabilities and performance comparable to its larger Mistral Small 3.2 24B counterpart. A powerful and efficient language model with vision capabilities.",
+    "description": "The largest model in the Ministral 3 family, Ministral 3 14B offers frontier capabilities and performance comparable to its larger Mistral Small 3.2 24B counterpart. A powerful and efficient language...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.0000002",
       "completion": "0.0000002"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3542,15 +5614,21 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000001"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3566,185 +5644,55 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.00000015"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1764681654
   },
   {
-    "id": "mistralai/ministral-3b",
-    "name": "Mistral: Ministral 3B",
-    "description": "Ministral 3B is a 3B parameter model optimized for on-device and edge computing. It excels in knowledge, commonsense reasoning, and function-calling, outperforming larger models like Mistral 7B on most benchmarks. Supporting up to 128k context length, it’s ideal for orchestrating agentic workflow...",
-    "context_length": 131072,
+    "id": "mistralai/ministral-8b-2512:batch",
+    "name": "Mistral: Ministral 3 8B 2512 (batch)",
+    "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000004",
-      "completion": "0.00000004"
+      "prompt": "0.000000075",
+      "completion": "0.000000075"
     },
     "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1729123200
-  },
-  {
-    "id": "mistralai/ministral-8b",
-    "name": "Mistral: Ministral 8B",
-    "description": "Ministral 8B is an 8B parameter model featuring a unique interleaved sliding-window attention pattern for faster, memory-efficient inference. Designed for edge use cases, it supports up to 128k context length and excels in knowledge and reasoning tasks. It outperforms peers in the sub-10B categor...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1729123200
-  },
-  {
-    "id": "mistralai/mistral-7b-instruct",
-    "name": "Mistral: Mistral 7B Instruct",
-    "description": "A high-performing, industry-standard 7.3B parameter model, with optimizations for speed and context length.\n\n*Mistral 7B Instruct has multiple version variants, and this is intended to be the latest version.*",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.000000028",
-      "completion": "0.000000054"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
       "tokenizer": "Mistral",
-      "instruct_type": "mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1716768000
-  },
-  {
-    "id": "mistralai/mistral-7b-instruct:free",
-    "name": "Mistral: Mistral 7B Instruct (free)",
-    "description": "A high-performing, industry-standard 7.3B parameter model, with optimizations for speed and context length.\n\n*Mistral 7B Instruct has multiple version variants, and this is intended to be the latest version.*",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1716768000
-  },
-  {
-    "id": "mistralai/mistral-7b-instruct-v0.1",
-    "name": "Mistral: Mistral 7B Instruct v0.1",
-    "description": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length.",
-    "context_length": 2824,
-    "pricing": {
-      "prompt": "0.00000011",
-      "completion": "0.00000019"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1695859200
-  },
-  {
-    "id": "mistralai/mistral-7b-instruct-v0.2",
-    "name": "Mistral: Mistral 7B Instruct v0.2",
-    "description": "A high-performing, industry-standard 7.3B parameter model, with optimizations for speed and context length.\n\nAn improved version of [Mistral 7B Instruct](/modelsmistralai/mistral-7b-instruct-v0.1), with the following changes:\n\n- 32k context window (vs 8k context in v0.1)\n- Rope-theta = 1e6\n- No S...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1703721600
-  },
-  {
-    "id": "mistralai/mistral-7b-instruct-v0.3",
-    "name": "Mistral: Mistral 7B Instruct v0.3",
-    "description": "A high-performing, industry-standard 7.3B parameter model, with optimizations for speed and context length.\n\nAn improved version of [Mistral 7B Instruct v0.2](/models/mistralai/mistral-7b-instruct-v0.2), with the following changes:\n\n- Extended vocabulary to 32768\n- Supports v3 Tokenizer\n- Support...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1716768000
+    "created": 1764681654
   },
   {
     "id": "mistralai/mistral-large-2512",
@@ -3756,39 +5704,116 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000015"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1764624472
   },
   {
-    "id": "mistralai/mistral-medium-3",
-    "name": "Mistral: Mistral Medium 3",
-    "description": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8× lower cost compared to traditional large models, making it su...",
-    "context_length": 131072,
+    "id": "mistralai/mistral-large-2512:batch",
+    "name": "Mistral: Mistral Large 3 2512 (batch)",
+    "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.000002"
+      "prompt": "0.00000025",
+      "completion": "0.00000075"
     },
     "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1764624472
+  },
+  {
+    "id": "mistralai/mistral-large-4-0",
+    "name": "Mistral: Mistral Large 4",
+    "description": "Mistral Large 4 is a frontier multimodal (text and image input) model from Mistral AI built for reasoning, coding, and agentic workloads. It offers a 1M-token context window with up...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000068",
+      "completion": "0.00000209"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791294122
+  },
+  {
+    "id": "mistralai/mistral-medium-3",
+    "name": "Mistral: Mistral Medium 3",
+    "description": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8× lower cost...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.0000004",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3797,46 +5822,155 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-medium-3.1",
     "name": "Mistral: Mistral Medium 3.1",
-    "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8× lower cost...",
+    "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000004",
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1755095639
   },
   {
-    "id": "mistralai/mistral-nemo",
-    "name": "Mistral: Mistral Nemo",
-    "description": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA.\n\nThe model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, and Hindi.\n\nIt supports function calling and is released under the...",
+    "id": "mistralai/mistral-medium-3.1:batch",
+    "name": "Mistral: Mistral Medium 3.1 (batch)",
+    "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.00000004"
+      "prompt": "0.0000002",
+      "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1755095639
+  },
+  {
+    "id": "mistralai/mistral-medium-3-5",
+    "name": "Mistral: Mistral Medium 3.5",
+    "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000015",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777570439
+  },
+  {
+    "id": "mistralai/mistral-medium-3-5:batch",
+    "name": "Mistral: Mistral Medium 3.5 (batch)",
+    "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.00000375"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777570439
+  },
+  {
+    "id": "mistralai/mistral-nemo",
+    "name": "Mistral: Mistral Nemo",
+    "description": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.000000029",
+      "completion": "0.00000003"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3845,21 +5979,25 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-small-24b-instruct-2501",
     "name": "Mistral: Mistral Small 3",
-    "description": "Mistral Small 3 is a 24B-parameter language model optimized for low-latency performance across common AI tasks. Released under the Apache 2.0 license, it features both pre-trained and instruction-tuned versions designed for efficient local deployment.\n\nThe model achieves 81% accuracy on the MMLU ...",
+    "description": "Mistral Small 3 is a 24B-parameter language model optimized for low-latency performance across common AI tasks. Released under the Apache 2.0 license, it features both pre-trained and instruction-tuned versions designed...",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000011"
+      "prompt": "0.00000005",
+      "completion": "0.00000008"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3868,46 +6006,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-small-3.1-24b-instruct",
     "name": "Mistral: Mistral Small 3.1 24B",
-    "description": "Mistral Small 3.1 24B Instruct is an upgraded variant of Mistral Small 3 (2501), featuring 24 billion parameters with advanced multimodal capabilities. It provides state-of-the-art performance in text-based reasoning and vision tasks, including image analysis, programming, mathematical reasoning,...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000011"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1742238937
-  },
-  {
-    "id": "mistralai/mistral-small-3.1-24b-instruct:free",
-    "name": "Mistral: Mistral Small 3.1 24B (free)",
-    "description": "Mistral Small 3.1 24B Instruct is an upgraded variant of Mistral Small 3 (2501), featuring 24 billion parameters with advanced multimodal capabilities. It provides state-of-the-art performance in text-based reasoning and vision tasks, including image analysis, programming, mathematical reasoning,...",
+    "description": "Mistral Small 3.1 24B Instruct is an upgraded variant of Mistral Small 3 (2501), featuring 24 billion parameters with advanced multimodal capabilities. It provides state-of-the-art performance in text-based reasoning and...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.000000351",
+      "completion": "0.000000555"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -3916,164 +6035,153 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/mistral-small-3.2-24b-instruct",
     "name": "Mistral: Mistral Small 3.2 24B",
-    "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on WildBench and Arena Hard, reduces infinite gener...",
-    "context_length": 131072,
+    "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on...",
+    "context_length": 256000,
     "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000018"
+      "prompt": "0.00000009375",
+      "completion": "0.00000025"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1750443016
   },
   {
-    "id": "mistralai/mistral-small-creative",
-    "name": "Mistral: Mistral Small Creative",
-    "description": "Mistral Small Creative is an experimental small model designed for creative writing, narrative generation, roleplay and character-driven dialogue, general-purpose instruction following, and conversational agents.",
-    "context_length": 32768,
+    "id": "mistralai/mistral-small-2603",
+    "name": "Mistral: Mistral Small 4",
+    "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000003"
+      "prompt": "0.00000015",
+      "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1765908653
+    "created": 1773695685
+  },
+  {
+    "id": "mistralai/mistral-small-2603:batch",
+    "name": "Mistral: Mistral Small 4 (batch)",
+    "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000075",
+      "completion": "0.0000003"
+    },
+    "architecture": {
+      "tokenizer": "Mistral",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773695685
   },
   {
     "id": "mistralai/mixtral-8x22b-instruct",
     "name": "Mistral: Mixtral 8x22B Instruct",
-    "description": "Mistral's official instruct fine-tuned version of [Mixtral 8x22B](/models/mistralai/mixtral-8x22b). It uses 39B active parameters out of 141B, offering unparalleled cost efficiency for its size. Its strengths include:\n- strong math, coding, and reasoning\n- large context length (64k)\n- fluency in ...",
+    "description": "Mistral's official instruct fine-tuned version of [Mixtral 8x22B](/models/mistralai/mixtral-8x22b). It uses 39B active parameters out of 141B, offering unparalleled cost efficiency for its size. Its strengths include: - strong math, coding,...",
     "context_length": 65536,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Mistral",
       "instruct_type": "mistral"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1713312000
   },
   {
-    "id": "mistralai/mixtral-8x7b-instruct",
-    "name": "Mistral: Mixtral 8x7B Instruct",
-    "description": "Mixtral 8x7B Instruct is a pretrained generative Sparse Mixture of Experts, by Mistral AI, for chat and instruction use. Incorporates 8 experts (feed-forward networks) for a total of 47 billion parameters.\n\nInstruct model fine-tuned by Mistral. #moe",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000054",
-      "completion": "0.00000054"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1702166400
-  },
-  {
-    "id": "mistralai/pixtral-12b",
-    "name": "Mistral: Pixtral 12B",
-    "description": "The first multi-modal, text+image-to-text model from Mistral AI. Its weights were launched via torrent: https://x.com/mistralai/status/1833758285167722836.",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1725926400
-  },
-  {
-    "id": "mistralai/pixtral-large-2411",
-    "name": "Mistral: Pixtral Large 2411",
-    "description": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images.\n\nThe model is available under the Mistral Research License (MRL) for research and educational us...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.000002",
-      "completion": "0.000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1731977388
-  },
-  {
     "id": "mistralai/mistral-saba",
     "name": "Mistral: Saba",
-    "description": "Mistral Saba is a 24B-parameter language model specifically designed for the Middle East and South Asia, delivering accurate and contextually relevant responses while maintaining efficient performance. Trained on curated regional datasets, it supports multiple Indian-origin languages—including Ta...",
+    "description": "Mistral Saba is a 24B-parameter language model specifically designed for the Middle East and South Asia, delivering accurate and contextually relevant responses while maintaining efficient performance. Trained on curated regional...",
     "context_length": 32768,
     "pricing": {
       "prompt": "0.0000002",
       "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4082,137 +6190,141 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "mistralai/voxtral-small-24b-2507",
     "name": "Mistral: Voxtral Small 24B 2507",
-    "description": "Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art audio input capabilities while retaining best-in-class text performance. It excels at speech transcription, translation and audio understanding. Input audio is priced at $100 per million seconds.",
-    "context_length": 32000,
+    "description": "Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art audio input capabilities while retaining best-in-class text performance. It excels at speech transcription, translation and audio understanding. Input audio...",
+    "context_length": 32768,
     "pricing": {
       "prompt": "0.0000001",
       "completion": "0.0000003"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text",
-        "audio"
+        "audio",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Mistral"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1761835144
   },
   {
-    "id": "moonshotai/kimi-dev-72b",
-    "name": "MoonshotAI: Kimi Dev 72B",
-    "description": "Kimi-Dev-72B is an open-source large language model fine-tuned for software engineering and issue resolution tasks. Based on Qwen2.5-72B, it is optimized using large-scale reinforcement learning that applies code patches in real repositories and validates them via full test suite execution—reward...",
-    "context_length": 131072,
+    "id": "moondream/moondream3-preview",
+    "name": "Moondream: Moondream 3 Preview",
+    "description": "Moondream 3 Preview is a vision-language model from Moondream with 9B total parameters and 2B active (mixture-of-experts). It handles visual question answering, captioning, OCR, and visual reasoning over images, with...",
+    "context_length": 32000,
     "pricing": {
-      "prompt": "0.00000029",
-      "completion": "0.00000115"
+      "prompt": "0.0000003",
+      "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1750115909
+    "created": 1792102385
+  },
+  {
+    "id": "moondream/moondream3.1-9b-a2b",
+    "name": "Moondream: Moondream 3.1",
+    "description": "Moondream 3.1 is a vision-language model from Moondream, the successor to Moondream 3 Preview, with 9B total parameters and 2B active (mixture-of-experts). It handles visual question answering, captioning, OCR, and...",
+    "context_length": 32000,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792102373
   },
   {
     "id": "moonshotai/kimi-k2",
     "name": "MoonshotAI: Kimi K2 0711",
-    "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for agentic capabilities, including advanced tool use, reasoning, and code synthesis. Kimi K2 excels a...",
+    "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.0000005",
-      "completion": "0.0000024"
+      "prompt": "0.00000057",
+      "completion": "0.0000023"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
-    },
-    "created": 1752263252
-  },
-  {
-    "id": "moonshotai/kimi-k2:free",
-    "name": "MoonshotAI: Kimi K2 0711 (free)",
-    "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for agentic capabilities, including advanced tool use, reasoning, and code synthesis. Kimi K2 excels a...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": true
     },
     "created": 1752263252
   },
   {
     "id": "moonshotai/kimi-k2-0905",
     "name": "MoonshotAI: Kimi K2 0905",
-    "description": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It supports long-context inference up to 256k tokens, ex...",
-    "context_length": 262144,
-    "pricing": {
-      "prompt": "0.00000039",
-      "completion": "0.0000019"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1757021147
-  },
-  {
-    "id": "moonshotai/kimi-k2-0905:exacto",
-    "name": "MoonshotAI: Kimi K2 0905 (exacto)",
-    "description": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It supports long-context inference up to 256k tokens, ex...",
+    "description": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.0000006",
       "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4221,44 +6333,251 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "moonshotai/kimi-k2-thinking",
     "name": "MoonshotAI: Kimi K2 Thinking",
-    "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in Kimi K2, it activates 32 billion parameters per forward pass and supports...",
+    "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.00000175"
+      "prompt": "0.0000006",
+      "completion": "0.0000025"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1762440622
   },
   {
+    "id": "moonshotai/kimi-k2.5",
+    "name": "MoonshotAI: Kimi K2.5",
+    "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000005",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1769487076
+  },
+  {
+    "id": "moonshotai/kimi-k2.6",
+    "name": "MoonshotAI: Kimi K2.6",
+    "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000065",
+      "completion": "0.00000341"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1776699402
+  },
+  {
+    "id": "moonshotai/kimi-k2.7-code",
+    "name": "MoonshotAI: Kimi K2.7 Code",
+    "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000006712",
+      "completion": "0.00000335"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1781266361
+  },
+  {
+    "id": "moonshotai/kimi-k3",
+    "name": "MoonshotAI: Kimi K3",
+    "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000239",
+      "completion": "0.000011936"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784215858
+  },
+  {
+    "id": "moonshotai/kimi-k3:batch",
+    "name": "MoonshotAI: Kimi K3 (batch)",
+    "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000228",
+      "completion": "0.0000114"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784215858
+  },
+  {
+    "id": "~moonshotai/kimi-latest",
+    "name": "MoonshotAI: Kimi Latest",
+    "description": "This model always redirects to the latest model in the Kimi family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000238",
+      "completion": "0.000016"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318428
+  },
+  {
     "id": "morph/morph-v3-fast",
     "name": "Morph: Morph V3 Fast",
-    "description": "Morph's fastest apply model for code edits. ~10,500 tokens/sec with 96% accuracy for rapid code transformations.\n\nThe model requires the prompt to be in the following format: \n<instruction>{instruction}</instruction>\n<code>{initial_code}</code>\n<update>{edit_snippet}</update>\n\nZero Data Retention...",
-    "context_length": 81920,
+    "description": "Morph's fastest apply model for code edits. ~10,500 tokens/sec with 96% accuracy for rapid code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code> <update>{edit_snippet}</update>...",
+    "context_length": 262144,
     "pricing": {
       "prompt": "0.0000008",
       "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4267,21 +6586,25 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "morph/morph-v3-large",
     "name": "Morph: Morph V3 Large",
-    "description": "Morph's high-accuracy apply model for complex code edits. ~4,500 tokens/sec with 98% accuracy for precise code transformations.\n\nThe model requires the prompt to be in the following format: \n<instruction>{instruction}</instruction>\n<code>{initial_code}</code>\n<update>{edit_snippet}</update>\n\nZero...",
+    "description": "Morph's high-accuracy apply model for complex code edits. ~4,500 tokens/sec with 98% accuracy for precise code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code>...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.0000009",
       "completion": "0.0000019"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4291,163 +6614,113 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "gryphe/mythomax-l2-13b",
     "name": "MythoMax 13B",
     "description": "One of the highest performing and most popular fine-tunes of Llama 2 13B, with rich descriptions and roleplay. #merge",
-    "context_length": 4096,
+    "context_length": 8192,
     "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000006"
+      "prompt": "0.00000008",
+      "completion": "0.00000011"
     },
     "architecture": {
+      "tokenizer": "Llama2",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama2",
       "instruct_type": "alpaca"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1688256000
   },
   {
-    "id": "neversleep/llama-3.1-lumimaid-8b",
-    "name": "NeverSleep: Lumimaid v0.2 8B",
-    "description": "Lumimaid v0.2 8B is a finetune of [Llama 3.1 8B](/models/meta-llama/llama-3.1-8b-instruct) with a \"HUGE step up dataset wise\" compared to Lumimaid v0.1. Sloppy chats output were purged.\n\nUsage of this model is subject to [Meta's Acceptable Use Policy](https://llama.meta.com/llama3/use-policy/).",
-    "context_length": 32768,
+    "id": "nex-agi/nex-n2.5-mini",
+    "name": "Nex AGI: Nex-N2.5-Mini",
+    "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000009",
-      "completion": "0.0000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1726358400
-  },
-  {
-    "id": "nex-agi/deepseek-v3.1-nex-n1",
-    "name": "Nex AGI: DeepSeek V3.1 Nex N1",
-    "description": "DeepSeek V3.1 Nex-N1 is the flagship release of the Nex-N1 series — a post-trained model designed to highlight agent autonomy, tool use, and real-world productivity. \n\nNex-N1 demonstrates competitive performance across all evaluation scenarios, showing particularly strong results in practical cod...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000027",
-      "completion": "0.000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "DeepSeek"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1765204393
-  },
-  {
-    "id": "neversleep/noromaid-20b",
-    "name": "Noromaid 20B",
-    "description": "A collab between IkariDev and Undi. This merge is suitable for RP, ERP, and general knowledge.\n\n#merge #uncensored",
-    "context_length": 4096,
-    "pricing": {
-      "prompt": "0.000001",
-      "completion": "0.00000175"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama2",
-      "instruct_type": "alpaca"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1700956800
-  },
-  {
-    "id": "nousresearch/deephermes-3-mistral-24b-preview",
-    "name": "Nous: DeepHermes 3 Mistral 24B Preview",
-    "description": "DeepHermes 3 (Mistral 24B Preview) is an instruction-tuned language model by Nous Research based on Mistral-Small-24B, designed for chat, function calling, and advanced multi-turn reasoning. It introduces a dual-mode system that toggles between intuitive chat responses and structured “deep reason...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000002",
+      "prompt": "0.000000025",
       "completion": "0.0000001"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1746830904
+    "created": 1788890061
+  },
+  {
+    "id": "nex-agi/nex-n2.5-pro",
+    "name": "Nex AGI: Nex-N2.5-Pro",
+    "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000075",
+      "completion": "0.00000025"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788890050
   },
   {
     "id": "nousresearch/hermes-3-llama-3.1-405b",
     "name": "Nous: Hermes 3 405B Instruct",
-    "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the board.\n\nHermes 3 405B is a frontier-level, full-parameter finetun...",
+    "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.000001",
       "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "chatml"
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1723766400
-  },
-  {
-    "id": "nousresearch/hermes-3-llama-3.1-405b:free",
-    "name": "Nous: Hermes 3 405B Instruct (free)",
-    "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the board.\n\nHermes 3 405B is a frontier-level, full-parameter finetun...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "chatml"
-    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4456,22 +6729,25 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "nousresearch/hermes-3-llama-3.1-70b",
     "name": "Nous: Hermes 3 70B Instruct",
-    "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the board.\n\nHerm...",
-    "context_length": 65536,
+    "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
+    "context_length": 131072,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000003"
+      "prompt": "0.0000007",
+      "completion": "0.0000007"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4480,332 +6756,679 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "nousresearch/hermes-4-405b",
     "name": "Nous: Hermes 4 405B",
-    "description": "Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B and released by Nous Research. It introduces a hybrid reasoning mode, where the model can choose to deliberate internally with <think>...</think> traces or respond directly, offering flexibility between speed and depth. Users ...",
+    "description": "Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B and released by Nous Research. It introduces a hybrid reasoning mode, where the model can choose to deliberate internally with...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.000001",
       "completion": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1756235463
   },
   {
-    "id": "nousresearch/hermes-4-70b",
-    "name": "Nous: Hermes 4 70B",
-    "description": "Hermes 4 70B is a hybrid reasoning model from Nous Research, built on Meta-Llama-3.1-70B. It introduces the same hybrid mode as the larger 405B release, allowing the model to either respond directly or generate explicit <think>...</think> reasoning traces before answering. Users can control the r...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000011",
-      "completion": "0.00000038"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1756236182
-  },
-  {
-    "id": "nousresearch/hermes-2-pro-llama-3-8b",
-    "name": "NousResearch: Hermes 2 Pro - Llama-3 8B",
-    "description": "Hermes 2 Pro is an upgraded, retrained version of Nous Hermes 2, consisting of an updated and cleaned version of the OpenHermes 2.5 Dataset, as well as a newly introduced Function Calling and JSON Mode dataset developed in-house.",
-    "context_length": 8192,
-    "pricing": {
-      "prompt": "0.000000025",
-      "completion": "0.00000008"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "chatml"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1716768000
-  },
-  {
-    "id": "nvidia/llama-3.1-nemotron-70b-instruct",
-    "name": "NVIDIA: Llama 3.1 Nemotron 70B Instruct",
-    "description": "NVIDIA's Llama 3.1 Nemotron 70B is a language model designed for generating precise and useful responses. Leveraging [Llama 3.1 70B](/models/meta-llama/llama-3.1-70b-instruct) architecture and Reinforcement Learning from Human Feedback (RLHF), it excels in automatic alignment benchmarks. This mod...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000012",
-      "completion": "0.0000012"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1728950400
-  },
-  {
-    "id": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
-    "name": "NVIDIA: Llama 3.1 Nemotron Ultra 253B v1",
-    "description": "Llama-3.1-Nemotron-Ultra-253B-v1 is a large language model (LLM) optimized for advanced reasoning, human-interactive chat, retrieval-augmented generation (RAG), and tool-calling tasks. Derived from Meta’s Llama-3.1-405B-Instruct, it has been significantly customized using Neural Architecture Sear...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000006",
-      "completion": "0.0000018"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744115059
-  },
-  {
-    "id": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
-    "name": "NVIDIA: Llama 3.3 Nemotron Super 49B V1.5",
-    "description": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta’s Llama-3.3-70B-Instruct with a 128K context. It’s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and multi-turn chat, followed by multiple RL s...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000004"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1760101395
-  },
-  {
     "id": "nvidia/nemotron-3-nano-30b-a3b",
     "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
-    "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems.\n\nThe model is fully open with open-weights, datasets and recipes so developers can easily\ncustomize, optimize, and deploy the model on ...",
+    "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.00000006",
       "completion": "0.00000024"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1765731275
   },
   {
-    "id": "nvidia/nemotron-3-nano-30b-a3b:free",
-    "name": "NVIDIA: Nemotron 3 Nano 30B A3B (free)",
-    "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems.\n\nThe model is fully open with open-weights, datasets and recipes so developers can easily\ncustomize, optimize, and deploy the model on ...",
+    "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
+    "description": "NVIDIA Nemotron™ 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and...",
     "context_length": 256000,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "audio",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777393095
+  },
+  {
+    "id": "nvidia/nemotron-3-super-120b-a12b",
+    "name": "NVIDIA: Nemotron 3 Super",
+    "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000008",
+      "completion": "0.00000045"
+    },
+    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1765731275
+    "created": 1773245239
   },
   {
-    "id": "nvidia/nemotron-nano-12b-v2-vl",
-    "name": "NVIDIA: Nemotron Nano 12B 2 VL",
-    "description": "NVIDIA Nemotron Nano 2 VL is a 12-billion-parameter open multimodal reasoning model designed for video understanding and document intelligence. It introduces a hybrid Transformer-Mamba architecture, combining transformer-level accuracy with Mamba’s memory-efficient sequence modeling for significa...",
+    "id": "nvidia/nemotron-3-super-120b-a12b:free",
+    "name": "NVIDIA: Nemotron 3 Super (free)",
+    "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773245239
+  },
+  {
+    "id": "nvidia/nemotron-3-ultra-550b-a55b",
+    "name": "NVIDIA: Nemotron 3 Ultra",
+    "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000006",
+      "completion": "0.0000024"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780551208
+  },
+  {
+    "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "name": "NVIDIA: Nemotron 3 Ultra (free)",
+    "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780551208
+  },
+  {
+    "id": "nvidia/nemotron-3.5-content-safety",
+    "name": "NVIDIA: Nemotron 3.5 Content Safety",
+    "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000002",
-      "completion": "0.0000006"
+      "completion": "0.0000002"
     },
     "architecture": {
-      "input_modalities": [
-        "image",
-        "text",
-        "video"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1761675565
-  },
-  {
-    "id": "nvidia/nemotron-nano-12b-v2-vl:free",
-    "name": "NVIDIA: Nemotron Nano 12B 2 VL (free)",
-    "description": "NVIDIA Nemotron Nano 2 VL is a 12-billion-parameter open multimodal reasoning model designed for video understanding and document intelligence. It introduces a hybrid Transformer-Mamba architecture, combining transformer-level accuracy with Mamba’s memory-efficient sequence modeling for significa...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "image",
-        "text",
-        "video"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1761675565
-  },
-  {
-    "id": "nvidia/nemotron-nano-9b-v2",
-    "name": "NVIDIA: Nemotron Nano 9B V2",
-    "description": "NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from scratch by NVIDIA, and designed as a unified model for both reasoning and non-reasoning tasks. It responds to user queries and tasks by first generating a reasoning trace and then concluding with a final response. \n\nThe model...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000004",
-      "completion": "0.00000016"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1757106807
-  },
-  {
-    "id": "nvidia/nemotron-nano-9b-v2:free",
-    "name": "NVIDIA: Nemotron Nano 9B V2 (free)",
-    "description": "NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from scratch by NVIDIA, and designed as a unified model for both reasoning and non-reasoning tasks. It responds to user queries and tasks by first generating a reasoning trace and then concluding with a final response. \n\nThe model...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1757106807
-  },
-  {
-    "id": "openai/chatgpt-4o-latest",
-    "name": "OpenAI: ChatGPT-4o",
-    "description": "OpenAI ChatGPT 4o is continually updated by OpenAI to point to the current version of GPT-4o used by ChatGPT. It therefore differs slightly from the API version of [GPT-4o](/models/openai/gpt-4o) in that it has additional RLHF. It is intended for research and evaluation.\n\nOpenAI notes that this m...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.000005",
-      "completion": "0.000015"
-    },
-    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
-    "created": 1723593600
+    "created": 1780581864
   },
   {
-    "id": "openai/codex-mini",
-    "name": "OpenAI: Codex Mini",
-    "description": "codex-mini-latest is a fine-tuned version of o4-mini specifically for use in Codex CLI. For direct use in the API, we recommend starting with gpt-4.1.",
-    "context_length": 200000,
+    "id": "nvidia/nemotron-3.5-content-safety:free",
+    "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+    "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
+    "context_length": 128000,
     "pricing": {
-      "prompt": "0.0000015",
-      "completion": "0.000006"
+      "prompt": "0",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780581864
+  },
+  {
+    "id": "nvidia/nemotron-3.5-lightning",
+    "name": "NVIDIA: Nemotron 3.5 Lightning",
+    "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000007",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786452751
+  },
+  {
+    "id": "nvidia/nemotron-3.5-lightning:free",
+    "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
+    "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786452751
+  },
+  {
+    "id": "nvidia/nemotron-3.5-super-vl",
+    "name": "NVIDIA: Nemotron 3.5 Super VL",
+    "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792076662
+  },
+  {
+    "id": "nvidia/nemotron-3.5-super-vl:free",
+    "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+    "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792076662
+  },
+  {
+    "id": "nvidia/switchyard",
+    "name": "NVIDIA: Switchyard",
+    "description": "Switchyard is an open-source model router that switches between multiple models to optimize the cost of requests. By default it will use OpenRouter market data to select the most popular...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "-1",
+      "completion": "-1"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790025947
+  },
+  {
+    "id": "~openai/gpt-astra-latest",
+    "name": "OpenAI: GPT Astra Latest",
+    "description": "This model always redirects to the latest model in the GPT Astra family.",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00001",
+      "completion": "0.00005"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "file",
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789130932
+  },
+  {
+    "id": "openai/gpt-audio",
+    "name": "OpenAI: GPT Audio",
+    "description": "The gpt-audio model is OpenAI's first generally available audio model. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Audio is priced...",
+    "context_length": 128000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "audio"
+      ],
+      "output_modalities": [
+        "text",
+        "audio"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1747409761
+    "created": 1768862569
+  },
+  {
+    "id": "openai/gpt-audio-mini",
+    "name": "OpenAI: GPT Audio Mini",
+    "description": "A cost-efficient version of GPT Audio. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Input is priced at $0.60 per million...",
+    "context_length": 128000,
+    "pricing": {
+      "prompt": "0.0000006",
+      "completion": "0.0000024"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "audio"
+      ],
+      "output_modalities": [
+        "text",
+        "audio"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1768859419
+  },
+  {
+    "id": "openai/gpt-chat-latest",
+    "name": "OpenAI: GPT Chat Latest",
+    "description": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.00003"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1778000212
+  },
+  {
+    "id": "~openai/gpt-luna-latest",
+    "name": "OpenAI: GPT Luna Latest",
+    "description": "This model always redirects to the latest model in the GPT Luna family.",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1789130922
+  },
+  {
+    "id": "~openai/gpt-mini-latest",
+    "name": "OpenAI: GPT Mini Latest",
+    "description": "This model always redirects to the latest model in the GPT Mini family.",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.0000045"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777318471
+  },
+  {
+    "id": "~openai/gpt-sol-latest",
+    "name": "OpenAI: GPT Sol Latest",
+    "description": "This model always redirects to the latest model in the GPT Sol family.",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789130928
+  },
+  {
+    "id": "~openai/gpt-terra-latest",
+    "name": "OpenAI: GPT Terra Latest",
+    "description": "This model always redirects to the latest model in the GPT Terra family.",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789130925
   },
   {
     "id": "openai/gpt-3.5-turbo",
@@ -4817,14 +7440,49 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000015"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1685232000
+  },
+  {
+    "id": "openai/gpt-3.5-turbo:batch",
+    "name": "OpenAI: GPT-3.5 Turbo (batch)",
+    "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
+    "context_length": 16385,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.00000075"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -4840,14 +7498,20 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -4856,23 +7520,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-3.5-turbo-16k",
     "name": "OpenAI: GPT-3.5 Turbo 16k",
-    "description": "This model offers four times the context length of gpt-3.5-turbo, allowing it to support approximately 20 pages of text in a single request at a higher cost. Training data: up to Sep 2021.",
+    "description": "This model offers four times the context length of gpt-3.5-turbo, allowing it to support approximately 20 pages of text in a single request at a higher cost. Training data: up...",
     "context_length": 16385,
     "pricing": {
       "prompt": "0.000003",
       "completion": "0.000004"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1693180800
   },
@@ -4886,15 +7556,19 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "GPT",
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -4903,46 +7577,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4",
     "name": "OpenAI: GPT-4",
-    "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning capabilities. Training data: up to Sep 2021.",
+    "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
     "context_length": 8191,
     "pricing": {
       "prompt": "0.00003",
       "completion": "0.00006"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1685232000
-  },
-  {
-    "id": "openai/gpt-4-0314",
-    "name": "OpenAI: GPT-4 (older v0314)",
-    "description": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021.",
-    "context_length": 8191,
-    "pricing": {
-      "prompt": "0.00003",
-      "completion": "0.00006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1685232000
   },
@@ -4956,76 +7613,67 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.00003"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1712620800
   },
   {
-    "id": "openai/gpt-4-1106-preview",
-    "name": "OpenAI: GPT-4 Turbo (older v1106)",
-    "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to April 2023.",
+    "id": "openai/gpt-4-turbo:batch",
+    "name": "OpenAI: GPT-4 Turbo (batch)",
+    "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.00001",
-      "completion": "0.00003"
+      "prompt": "0.000005",
+      "completion": "0.000015"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1699228800
-  },
-  {
-    "id": "openai/gpt-4-turbo-preview",
-    "name": "OpenAI: GPT-4 Turbo Preview",
-    "description": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023.\n\n**Note:** heavily rate limited by OpenAI while in preview.",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00001",
-      "completion": "0.00003"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1706140800
+    "created": 1712620800
   },
   {
     "id": "openai/gpt-4.1",
     "name": "OpenAI: GPT-4.1",
-    "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and GPT-4.5 across coding (54.6% SWE-bench Verified), instruction compliance (8...",
+    "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
     "context_length": 1047576,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000008"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5033,9 +7681,45 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1744651385
+  },
+  {
+    "id": "openai/gpt-4.1:batch",
+    "name": "OpenAI: GPT-4.1 (batch)",
+    "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
+    "context_length": 1047576,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000004"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5044,13 +7728,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4.1-mini",
     "name": "OpenAI: GPT-4.1 Mini",
-    "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard instruction evals, 35.8% on MultiChallenge, and 84.1% on IFEval. Mini also shows strong coding ability (e....",
+    "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard...",
     "context_length": 1047576,
     "pricing": {
       "prompt": "0.0000004",
       "completion": "0.0000016"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5058,9 +7743,45 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1744651381
+  },
+  {
+    "id": "openai/gpt-4.1-mini:batch",
+    "name": "OpenAI: GPT-4.1 Mini (batch)",
+    "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard...",
+    "context_length": 1047576,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000008"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5069,13 +7790,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4.1-nano",
     "name": "OpenAI: GPT-4.1 Nano",
-    "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million token context window, and scores 80.1% on MMLU, 50.3% on GPQA, and 9.8% on Aider polyglot coding – even higher than GPT‑4...",
+    "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
     "context_length": 1047576,
     "pricing": {
       "prompt": "0.0000001",
       "completion": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5083,9 +7805,45 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1744651369
+  },
+  {
+    "id": "openai/gpt-4.1-nano:batch",
+    "name": "OpenAI: GPT-4.1 Nano (batch)",
+    "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
+    "context_length": 1047576,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5094,13 +7852,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4o",
     "name": "OpenAI: GPT-4o",
-    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as fast and 50% more cost-effective. GPT-4o also offers improved performance in processi...",
+    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5108,9 +7867,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5119,13 +7883,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4o-2024-05-13",
     "name": "OpenAI: GPT-4o (2024-05-13)",
-    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as fast and 50% more cost-effective. GPT-4o also offers improved performance in processi...",
+    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.000005",
       "completion": "0.000015"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5133,24 +7898,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1715558400
   },
   {
     "id": "openai/gpt-4o-2024-08-06",
     "name": "OpenAI: GPT-4o (2024-08-06)",
-    "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/).\n\nGPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporti...",
+    "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/). GPT-4o (\"o\" for \"omni\") is...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5158,24 +7929,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
     "created": 1722902400
   },
   {
     "id": "openai/gpt-4o-2024-11-20",
     "name": "OpenAI: GPT-4o (2024-11-20)",
-    "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded files, providing deeper insights & more thorough responses.\n\nGPT-4o (\"o\" for \"omni\") is Ope...",
+    "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5183,24 +7960,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1732127594
   },
   {
-    "id": "openai/gpt-4o:extended",
-    "name": "OpenAI: GPT-4o (extended)",
-    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as fast and 50% more cost-effective. GPT-4o also offers improved performance in processi...",
+    "id": "openai/gpt-4o:batch",
+    "name": "OpenAI: GPT-4o (batch)",
+    "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.000006",
-      "completion": "0.000018"
+      "prompt": "0.00000125",
+      "completion": "0.000005"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5208,71 +7991,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1715558400
   },
   {
-    "id": "openai/gpt-4o-audio-preview",
-    "name": "OpenAI: GPT-4o Audio",
-    "description": "The gpt-4o-audio-preview model adds support for audio inputs as prompts. This enhancement allows the model to detect nuances within audio recordings and add depth to generated user experiences. Audio outputs are currently not supported. Audio tokens are priced at $40 per million input audio tokens.",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.0000025",
-      "completion": "0.00001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "audio",
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1755233061
-  },
-  {
-    "id": "openai/gpt-4o-search-preview",
-    "name": "OpenAI: GPT-4o Search Preview",
-    "description": "GPT-4o Search Previewis a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.0000025",
-      "completion": "0.00001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1741817949
-  },
-  {
     "id": "openai/gpt-4o-mini",
     "name": "OpenAI: GPT-4o-mini",
-    "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs.\n\nAs their most advanced small model, it is many multiples more affordable than other recent frontier models, and more than 60% cheaper than [GPT-3.5 Turbo](/mod...",
+    "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.00000015",
       "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5280,9 +8022,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5291,13 +8038,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-4o-mini-2024-07-18",
     "name": "OpenAI: GPT-4o-mini (2024-07-18)",
-    "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs.\n\nAs their most advanced small model, it is many multiples more affordable than other recent frontier models, and more than 60% cheaper than [GPT-3.5 Turbo](/mod...",
+    "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.00000015",
       "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5305,47 +8053,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1721260800
   },
   {
-    "id": "openai/gpt-4o-mini-search-preview",
-    "name": "OpenAI: GPT-4o-mini Search Preview",
-    "description": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
+    "id": "openai/gpt-4o-mini:batch",
+    "name": "OpenAI: GPT-4o-mini (batch)",
+    "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
     "context_length": 128000,
     "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000006"
+      "prompt": "0.000000075",
+      "completion": "0.0000003"
     },
     "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1741818122
-  },
-  {
-    "id": "openai/gpt-5",
-    "name": "OpenAI: GPT-5",
-    "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy in high-stakes use cases. It supports test-time routing features and advan...",
-    "context_length": 400000,
-    "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00001"
-    },
-    "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5353,73 +8084,96 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1721260800
+  },
+  {
+    "id": "openai/gpt-5",
+    "name": "OpenAI: GPT-5",
+    "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1754587413
   },
   {
-    "id": "openai/gpt-5-chat",
-    "name": "OpenAI: GPT-5 Chat",
-    "description": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications.",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "file",
-        "image",
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1754587837
-  },
-  {
-    "id": "openai/gpt-5-codex",
-    "name": "OpenAI: GPT-5 Codex",
-    "description": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks. The model supports building projects from scratch, feature development, deb...",
+    "id": "openai/gpt-5:batch",
+    "name": "OpenAI: GPT-5 (batch)",
+    "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
     "context_length": 400000,
     "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00001"
+      "prompt": "0.000000625",
+      "completion": "0.000005"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1758643403
+    "created": 1754587413
   },
   {
     "id": "openai/gpt-5-image",
     "name": "OpenAI: GPT-5 Image",
-    "description": "[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI's GPT-5 model with state-of-the-art image generation capabilities. It offers major improvements in reasoning, code quality, and user experience while incorporating GPT Image 1's superior instruction following, text rendering, and d...",
+    "description": "[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI's GPT-5 model with state-of-the-art image generation capabilities. It offers major improvements in reasoning, code quality, and user experience while incorporating GPT Image 1's superior instruction following,...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00001",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5428,9 +8182,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "image",
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5439,13 +8198,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5-image-mini",
     "name": "OpenAI: GPT-5 Image Mini",
-    "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text rendering, and detailed image edi...",
+    "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.0000025",
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "file",
         "image",
@@ -5454,9 +8214,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "image",
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5465,13 +8230,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5-mini",
     "name": "OpenAI: GPT-5 Mini",
-    "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost. GPT-5 Mini is the successor to OpenAI's o4-mini model.",
+    "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost....",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000025",
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5479,9 +8245,49 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1754587407
+  },
+  {
+    "id": "openai/gpt-5-mini:batch",
+    "name": "OpenAI: GPT-5 Mini (batch)",
+    "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost....",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.000000125",
+      "completion": "0.000001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5490,13 +8296,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5-nano",
     "name": "OpenAI: GPT-5 Nano",
-    "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger counterparts, it retains key instruction-following and safety features. It is the succ...",
+    "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000005",
       "completion": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5504,9 +8311,49 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1754587402
+  },
+  {
+    "id": "openai/gpt-5-nano:batch",
+    "name": "OpenAI: GPT-5 Nano (batch)",
+    "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.000000025",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5515,13 +8362,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5-pro",
     "name": "OpenAI: GPT-5 Pro",
-    "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy in high-stakes use cases. It supports test-time routing features and a...",
+    "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.000015",
       "completion": "0.00012"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5529,9 +8377,49 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1759776663
+  },
+  {
+    "id": "openai/gpt-5-pro:batch",
+    "name": "OpenAI: GPT-5 Pro (batch)",
+    "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.0000075",
+      "completion": "0.00006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5540,13 +8428,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5.1",
     "name": "OpenAI: GPT-5.1",
-    "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning to allocate computation dynamically, responding quickly to simple quer...",
+    "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000125",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5554,84 +8443,115 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1763060305
   },
   {
-    "id": "openai/gpt-5.1-chat",
-    "name": "OpenAI: GPT-5.1 Chat",
-    "description": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on harder queries, improving accuracy on math, coding, and multi-step tasks without slowing do...",
-    "context_length": 128000,
+    "id": "openai/gpt-5.1:batch",
+    "name": "OpenAI: GPT-5.1 (batch)",
+    "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
+    "context_length": 400000,
     "pricing": {
-      "prompt": "0.00000125",
-      "completion": "0.00001"
+      "prompt": "0.000000625",
+      "completion": "0.000005"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
-        "file",
         "image",
-        "text"
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1763060302
+    "created": 1763060305
   },
   {
     "id": "openai/gpt-5.1-codex",
     "name": "OpenAI: GPT-5.1-Codex",
-    "description": "GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks. The model supports building projects from scratch, feature development,...",
+    "description": "GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000125",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1763060298
   },
   {
     "id": "openai/gpt-5.1-codex-max",
     "name": "OpenAI: GPT-5.1-Codex-Max",
-    "description": "GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks. It is based on an updated version of the 5.1 reasoning stack and trained on agentic workflows spanning software engineering, mathematics, and research. \nGPT-5.1-Codex-Max...",
+    "description": "GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks. It is based on an updated version of the 5.1 reasoning stack and trained on agentic...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000125",
       "completion": "0.00001"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1764878934
   },
@@ -5645,30 +8565,39 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.000002"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1763057820
   },
   {
     "id": "openai/gpt-5.2",
     "name": "OpenAI: GPT-5.2",
-    "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly to simple queries while spending more depth on complex tasks.\n\nBuilt for br...",
+    "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.00000175",
       "completion": "0.000014"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "file",
         "image",
@@ -5676,9 +8605,49 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1765389775
+  },
+  {
+    "id": "openai/gpt-5.2:batch",
+    "name": "OpenAI: GPT-5.2 (batch)",
+    "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.000000875",
+      "completion": "0.000007"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5687,13 +8656,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/gpt-5.2-chat",
     "name": "OpenAI: GPT-5.2 Chat",
-    "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on harder queries, improving accuracy on math, coding, and multi-step tasks without slowing d...",
+    "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.00000175",
       "completion": "0.000014"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "file",
         "image",
@@ -5701,24 +8671,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1765389783
   },
   {
     "id": "openai/gpt-5.2-pro",
     "name": "OpenAI: GPT-5.2 Pro",
-    "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy in high-stakes use cases. It supports test-time routin...",
+    "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
     "context_length": 400000,
     "pricing": {
       "prompt": "0.000021",
       "completion": "0.000168"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5726,147 +8702,1621 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1765389780
   },
   {
-    "id": "openai/gpt-oss-120b",
-    "name": "OpenAI: gpt-oss-120b",
-    "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized to run on a single H100 GPU with native MXFP4 quantizat...",
-    "context_length": 131072,
+    "id": "openai/gpt-5.2-pro:batch",
+    "name": "OpenAI: GPT-5.2 Pro (batch)",
+    "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
+    "context_length": 400000,
     "pricing": {
-      "prompt": "0.000000039",
-      "completion": "0.00000019"
+      "prompt": "0.0000105",
+      "completion": "0.000084"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
-        "text"
+        "image",
+        "text",
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1754414231
-  },
-  {
-    "id": "openai/gpt-oss-120b:exacto",
-    "name": "OpenAI: gpt-oss-120b (exacto)",
-    "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized to run on a single H100 GPU with native MXFP4 quantizat...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.000000039",
-      "completion": "0.00000019"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1754414231
-  },
-  {
-    "id": "openai/gpt-oss-120b:free",
-    "name": "OpenAI: gpt-oss-120b (free)",
-    "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized to run on a single H100 GPU with native MXFP4 quantizat...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
+    },
+    "created": 1765389780
+  },
+  {
+    "id": "openai/gpt-5.2-codex",
+    "name": "OpenAI: GPT-5.2-Codex",
+    "description": "GPT-5.2-Codex is an upgraded version of GPT-5.1-Codex optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.00000175",
+      "completion": "0.000014"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1768409315
+  },
+  {
+    "id": "openai/gpt-5.3-codex",
+    "name": "OpenAI: GPT-5.3-Codex",
+    "description": "GPT-5.3-Codex is OpenAI’s most advanced agentic coding model, combining the frontier software engineering performance of GPT-5.2-Codex with the broader reasoning and professional knowledge capabilities of GPT-5.2. It achieves state-of-the-art results...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.00000175",
+      "completion": "0.000014"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1771959164
+  },
+  {
+    "id": "openai/gpt-5.4",
+    "name": "OpenAI: GPT-5.4",
+    "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.000015"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1772734352
+  },
+  {
+    "id": "openai/gpt-5.4:batch",
+    "name": "OpenAI: GPT-5.4 (batch)",
+    "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1772734352
+  },
+  {
+    "id": "openai/gpt-5.4-image-2",
+    "name": "OpenAI: GPT-5.4 Image 2",
+    "description": "[GPT-5.4](https://openrouter.ai/openai/gpt-5.4) Image 2 combines OpenAI's GPT-5.4 model with state-of-the-art image generation capabilities from GPT Image 2. It enables rich multimodal workflows, allowing users to seamlessly move between reasoning, coding, and...",
+    "context_length": 272000,
+    "pricing": {
+      "prompt": "0.000008",
+      "completion": "0.000015"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "image",
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1776797528
+  },
+  {
+    "id": "openai/gpt-5.4-mini",
+    "name": "OpenAI: GPT-5.4 Mini",
+    "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.00000075",
+      "completion": "0.0000045"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1773748178
+  },
+  {
+    "id": "openai/gpt-5.4-mini:batch",
+    "name": "OpenAI: GPT-5.4 Mini (batch)",
+    "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.000000375",
+      "completion": "0.00000225"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1773748178
+  },
+  {
+    "id": "openai/gpt-5.4-nano",
+    "name": "OpenAI: GPT-5.4 Nano",
+    "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.00000125"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1773748187
+  },
+  {
+    "id": "openai/gpt-5.4-nano:batch",
+    "name": "OpenAI: GPT-5.4 Nano (batch)",
+    "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
+    "context_length": 400000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.000000625"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1773748187
+  },
+  {
+    "id": "openai/gpt-5.4-pro",
+    "name": "OpenAI: GPT-5.4 Pro",
+    "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00003",
+      "completion": "0.00018"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1772734366
+  },
+  {
+    "id": "openai/gpt-5.4-pro:batch",
+    "name": "OpenAI: GPT-5.4 Pro (batch)",
+    "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000015",
+      "completion": "0.00009"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1772734366
+  },
+  {
+    "id": "openai/gpt-5.5",
+    "name": "OpenAI: GPT-5.5",
+    "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.00003"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1777051893
+  },
+  {
+    "id": "openai/gpt-5.5:batch",
+    "name": "OpenAI: GPT-5.5 (batch)",
+    "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.000015"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1777051893
+  },
+  {
+    "id": "openai/gpt-5.5-pro",
+    "name": "OpenAI: GPT-5.5 Pro",
+    "description": "GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00003",
+      "completion": "0.00018"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1777051896
+  },
+  {
+    "id": "openai/gpt-5.5-pro:batch",
+    "name": "OpenAI: GPT-5.5 Pro (batch)",
+    "description": "GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000015",
+      "completion": "0.00009"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1777051896
+  },
+  {
+    "id": "openai/gpt-5.6-luna",
+    "name": "OpenAI: GPT-5.6 Luna",
+    "description": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590864
+  },
+  {
+    "id": "openai/gpt-5.6-luna:batch",
+    "name": "OpenAI: GPT-5.6 Luna (batch)",
+    "description": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590864
+  },
+  {
+    "id": "openai/gpt-5.6-luna-pro",
+    "name": "OpenAI: GPT-5.6 Luna Pro",
+    "description": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000012"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590867
+  },
+  {
+    "id": "openai/gpt-5.6-luna-pro:batch",
+    "name": "OpenAI: GPT-5.6 Luna Pro (batch)",
+    "description": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590867
+  },
+  {
+    "id": "openai/gpt-5.6-sol",
+    "name": "OpenAI: GPT-5.6 Sol",
+    "description": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.00002"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590850
+  },
+  {
+    "id": "openai/gpt-5.6-sol:batch",
+    "name": "OpenAI: GPT-5.6 Sol (batch)",
+    "description": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590850
+  },
+  {
+    "id": "openai/gpt-5.6-sol-pro",
+    "name": "OpenAI: GPT-5.6 Sol Pro",
+    "description": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.00002"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590854
+  },
+  {
+    "id": "openai/gpt-5.6-sol-pro:batch",
+    "name": "OpenAI: GPT-5.6 Sol Pro (batch)",
+    "description": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590854
+  },
+  {
+    "id": "openai/gpt-5.6-terra",
+    "name": "OpenAI: GPT-5.6 Terra",
+    "description": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590857
+  },
+  {
+    "id": "openai/gpt-5.6-terra:batch",
+    "name": "OpenAI: GPT-5.6 Terra (batch)",
+    "description": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590857
+  },
+  {
+    "id": "openai/gpt-5.6-terra-pro",
+    "name": "OpenAI: GPT-5.6 Terra Pro",
+    "description": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590861
+  },
+  {
+    "id": "openai/gpt-5.6-terra-pro:batch",
+    "name": "OpenAI: GPT-5.6 Terra Pro (batch)",
+    "description": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1783590861
+  },
+  {
+    "id": "openai/gpt-6-astra",
+    "name": "OpenAI: GPT-6 Astra",
+    "description": "GPT-6 Astra is OpenAI's flagship model for demanding end-to-end work. It is suited for advanced analysis, software engineering, deep research, scientific work, and document creation, with particular strengths in long-horizon...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00001",
+      "completion": "0.00005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788552838
+  },
+  {
+    "id": "openai/gpt-6-astra:batch",
+    "name": "OpenAI: GPT-6 Astra (batch)",
+    "description": "GPT-6 Astra is OpenAI's flagship model for demanding end-to-end work. It is suited for advanced analysis, software engineering, deep research, scientific work, and document creation, with particular strengths in long-horizon...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788552838
+  },
+  {
+    "id": "openai/gpt-6-astra-pro",
+    "name": "OpenAI: GPT-6 Astra Pro",
+    "description": "GPT-6 Astra Pro is the same underlying model as [GPT-6 Astra](https://openrouter.ai/openai/gpt-6-astra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00001",
+      "completion": "0.00005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788552835
+  },
+  {
+    "id": "openai/gpt-6-astra-pro:batch",
+    "name": "OpenAI: GPT-6 Astra Pro (batch)",
+    "description": "GPT-6 Astra Pro is the same underlying model as [GPT-6 Astra](https://openrouter.ai/openai/gpt-6-astra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.000025"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1788552835
+  },
+  {
+    "id": "openai/gpt-6-luna",
+    "name": "OpenAI: GPT-6 Luna",
+    "description": "GPT-6 Luna is the fast, cost-efficient model in OpenAI's GPT-6 series, positioned below GPT-6 Sol. It is suited for high-volume and latency-sensitive workloads such as chat, classification, and lightweight agentic...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100786
+  },
+  {
+    "id": "openai/gpt-6-luna:batch",
+    "name": "OpenAI: GPT-6 Luna (batch)",
+    "description": "GPT-6 Luna is the fast, cost-efficient model in OpenAI's GPT-6 series, positioned below GPT-6 Sol. It is suited for high-volume and latency-sensitive workloads such as chat, classification, and lightweight agentic...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.00000025"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100786
+  },
+  {
+    "id": "openai/gpt-6-luna-pro",
+    "name": "OpenAI: GPT-6 Luna Pro",
+    "description": "GPT-6 Luna Pro is the same underlying model as [GPT-6 Luna](https://openrouter.ai/openai/gpt-6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100791
+  },
+  {
+    "id": "openai/gpt-6-luna-pro:batch",
+    "name": "OpenAI: GPT-6 Luna Pro (batch)",
+    "description": "GPT-6 Luna Pro is the same underlying model as [GPT-6 Luna](https://openrouter.ai/openai/gpt-6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.00000025"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100791
+  },
+  {
+    "id": "openai/gpt-6-sol",
+    "name": "OpenAI: GPT-6 Sol",
+    "description": "GPT-6 Sol is the cost-efficient high-end model in OpenAI's GPT-6 series, positioned below the flagship GPT-6 Astra and above the fast GPT-6 Luna tier. It is suited for demanding professional...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100775
+  },
+  {
+    "id": "openai/gpt-6-sol:batch",
+    "name": "OpenAI: GPT-6 Sol (batch)",
+    "description": "GPT-6 Sol is the cost-efficient high-end model in OpenAI's GPT-6 series, positioned below the flagship GPT-6 Astra and above the fast GPT-6 Luna tier. It is suited for demanding professional...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100775
+  },
+  {
+    "id": "openai/gpt-6-sol-pro",
+    "name": "OpenAI: GPT-6 Sol Pro",
+    "description": "GPT-6 Sol Pro is the same underlying model as [GPT-6 Sol](https://openrouter.ai/openai/gpt-6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100781
+  },
+  {
+    "id": "openai/gpt-6-sol-pro:batch",
+    "name": "OpenAI: GPT-6 Sol Pro (batch)",
+    "description": "GPT-6 Sol Pro is the same underlying model as [GPT-6 Sol](https://openrouter.ai/openai/gpt-6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790100781
+  },
+  {
+    "id": "openai/gpt-6.1-sol",
+    "name": "OpenAI: GPT-6.1 Sol",
+    "description": "GPT-6.1 Sol is an upgrade to GPT-6 Sol from OpenAI, positioned below the flagship GPT-6 Astra in the GPT-6 series. It is suited for agentic coding, computer use, document-heavy professional...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790702882
+  },
+  {
+    "id": "openai/gpt-6.1-sol:batch",
+    "name": "OpenAI: GPT-6.1 Sol (batch)",
+    "description": "GPT-6.1 Sol is an upgrade to GPT-6 Sol from OpenAI, positioned below the flagship GPT-6 Astra in the GPT-6 series. It is suited for agentic coding, computer use, document-heavy professional...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790702882
+  },
+  {
+    "id": "openai/gpt-6.1-sol-pro",
+    "name": "OpenAI: GPT-6.1 Sol Pro",
+    "description": "GPT-6.1 Sol Pro is the same underlying model as [GPT-6.1 Sol](https://openrouter.ai/openai/gpt-6.1-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.00001"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790702886
+  },
+  {
+    "id": "openai/gpt-6.1-sol-pro:batch",
+    "name": "OpenAI: GPT-6.1 Sol Pro (batch)",
+    "description": "GPT-6.1 Sol Pro is the same underlying model as [GPT-6.1 Sol](https://openrouter.ai/openai/gpt-6.1-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1790702886
+  },
+  {
+    "id": "openai/gpt-oss-120b",
+    "name": "OpenAI: gpt-oss-120b",
+    "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.0000006"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1754414231
+  },
+  {
+    "id": "openai/gpt-oss-120b:batch",
+    "name": "OpenAI: gpt-oss-120b (batch)",
+    "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
+    "context_length": 131072,
+    "pricing": {
+      "prompt": "0.0000000296",
+      "completion": "0.000000136"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
     },
     "created": 1754414231
   },
   {
     "id": "openai/gpt-oss-20b",
     "name": "OpenAI: gpt-oss-20b",
-    "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for lower-latency inference and deployability on consumer or single-GPU hardware. The model is...",
+    "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000002",
-      "completion": "0.0000001"
+      "prompt": "0.000000018",
+      "completion": "0.00000009"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1754414229
   },
   {
-    "id": "openai/gpt-oss-20b:free",
-    "name": "OpenAI: gpt-oss-20b (free)",
-    "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for lower-latency inference and deployability on consumer or single-GPU hardware. The model is...",
+    "id": "openai/gpt-oss-20b:batch",
+    "name": "OpenAI: gpt-oss-20b (batch)",
+    "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.000000024",
+      "completion": "0.000000112"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
-      "is_moderated": true
+      "is_moderated": false
     },
     "created": 1754414229
   },
   {
     "id": "openai/gpt-oss-safeguard-20b",
     "name": "OpenAI: gpt-oss-safeguard-20b",
-    "description": "gpt-oss-safeguard-20b is a safety reasoning model from OpenAI built upon gpt-oss-20b. This open-weight, 21B-parameter Mixture-of-Experts (MoE) model offers lower latency for safety tasks like content classification, LLM filtering, and trust & safety labeling.\n\nLearn more about this model in OpenA...",
+    "description": "gpt-oss-safeguard-20b is a safety reasoning model from OpenAI built upon gpt-oss-20b. This open-weight, 21B-parameter Mixture-of-Experts (MoE) model offers lower latency for safety tasks like content classification, LLM filtering, and trust...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.000000075",
       "completion": "0.0000003"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -5875,13 +10325,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o1",
     "name": "OpenAI: o1",
-    "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason using chain of thought. \n\nThe o1 models are optimized for math, science, programming, and other STEM-re...",
+    "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000015",
       "completion": "0.00006"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5889,9 +10340,16 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5900,13 +10358,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o1-pro",
     "name": "OpenAI: o1-pro",
-    "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide consistently better answers.",
+    "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.00015",
       "completion": "0.0006"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "image",
@@ -5914,9 +10373,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5925,13 +10389,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o3",
     "name": "OpenAI: o3",
-    "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following. Use it to think through multi-step problems that involve analysis across text, code, and images. ",
+    "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000008"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5939,24 +10404,32 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1744823457
   },
   {
-    "id": "openai/o3-deep-research",
-    "name": "OpenAI: o3 Deep Research",
-    "description": "o3-deep-research is OpenAI's advanced model for deep research, designed to tackle complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost.",
+    "id": "openai/o3:batch",
+    "name": "OpenAI: o3 (batch)",
+    "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
     "context_length": 200000,
     "pricing": {
-      "prompt": "0.00001",
-      "completion": "0.00004"
+      "prompt": "0.000001",
+      "completion": "0.000004"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -5964,33 +10437,80 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
-    "created": 1760129661
+    "created": 1744823457
   },
   {
     "id": "openai/o3-mini",
     "name": "OpenAI: o3 Mini",
-    "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding.\n\nThis model supports the `reasoning_effort` parameter, which can be set to \"high\", \"medium\", or \"low\" to control the thinking time of the model. The de...",
+    "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.0000011",
       "completion": "0.0000044"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1738351721
+  },
+  {
+    "id": "openai/o3-mini:batch",
+    "name": "OpenAI: o3 Mini (batch)",
+    "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
+    "context_length": 200000,
+    "pricing": {
+      "prompt": "0.00000055",
+      "completion": "0.0000022"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -5999,22 +10519,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o3-mini-high",
     "name": "OpenAI: o3 Mini High",
-    "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. \n\no3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. The model features three adjustable reasoning effort ...",
+    "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.0000011",
       "completion": "0.0000044"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -6023,13 +10551,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o3-pro",
     "name": "OpenAI: o3 Pro",
-    "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently better answers.\n\nNote that BYOK is required for this model. Set up here: https://openrouter.ai/sett...",
+    "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.00002",
       "completion": "0.00008"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "text",
         "file",
@@ -6037,9 +10566,16 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
@@ -6048,13 +10584,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "openai/o4-mini",
     "name": "OpenAI: o4 Mini",
-    "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning and coding performance across benchmarks like AIME (99.5% with Python...",
+    "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.0000011",
       "completion": "0.0000044"
     },
     "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -6062,49 +10599,32 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1744820942
   },
   {
-    "id": "openai/o4-mini-deep-research",
-    "name": "OpenAI: o4 Mini Deep Research",
-    "description": "o4-mini-deep-research is OpenAI's faster, more affordable deep research model—ideal for tackling complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost.",
+    "id": "openai/o4-mini:batch",
+    "name": "OpenAI: o4 Mini (batch)",
+    "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
     "context_length": 200000,
     "pricing": {
-      "prompt": "0.000002",
-      "completion": "0.000008"
+      "prompt": "0.00000055",
+      "completion": "0.0000022"
     },
     "architecture": {
-      "input_modalities": [
-        "file",
-        "image",
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "GPT"
-    },
-    "top_provider": {
-      "is_moderated": true
-    },
-    "created": 1760129642
-  },
-  {
-    "id": "openai/o4-mini-high",
-    "name": "OpenAI: o4 Mini High",
-    "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. \n\nOpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and...",
-    "context_length": 200000,
-    "pricing": {
-      "prompt": "0.0000011",
-      "completion": "0.0000044"
-    },
-    "architecture": {
+      "tokenizer": "GPT",
       "input_modalities": [
         "image",
         "text",
@@ -6112,56 +10632,274 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "GPT"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": true
+    },
+    "created": 1744820942
+  },
+  {
+    "id": "openai/o4-mini-high",
+    "name": "OpenAI: o4 Mini High",
+    "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
+    "context_length": 200000,
+    "pricing": {
+      "prompt": "0.0000011",
+      "completion": "0.0000044"
+    },
+    "architecture": {
+      "tokenizer": "GPT",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": true
     },
     "created": 1744824212
   },
   {
-    "id": "opengvlab/internvl3-78b",
-    "name": "OpenGVLab: InternVL3 78B",
-    "description": "The InternVL3 series is an advanced multimodal large language model (MLLM). Compared to InternVL 2.5, InternVL3 demonstrates stronger multimodal perception and reasoning capabilities. \n\nIn addition, InternVL3 is benchmarked against the Qwen2.5 Chat models, whose pre-trained base models serve as t...",
-    "context_length": 32768,
+    "id": "openrouter/fusion",
+    "name": "OpenRouter: Fusion",
+    "description": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.00000039"
+      "prompt": "-1",
+      "completion": "-1"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
-        "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1757962555
+    "created": 1781371647
   },
   {
-    "id": "perplexity/sonar",
-    "name": "Perplexity: Sonar",
-    "description": "Sonar is lightweight, affordable, fast, and simple to use — now featuring citations and the ability to customize sources. It is designed for companies seeking to integrate lightweight question-and-answer features optimized for speed.",
-    "context_length": 127072,
+    "id": "unbiased/pareto-26.10",
+    "name": "Pareto 26.10",
+    "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks.",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.000001",
-      "completion": "0.000001"
+      "prompt": "0.0000008",
+      "completion": "0.0000032"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
+      ]
+    },
+    "supported_parameters": [
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792073620
+  },
+  {
+    "id": "unbiased/pareto-26.9",
+    "name": "Pareto 26.9",
+    "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks.",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000025",
+      "completion": "0.0000075"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
       ],
-      "tokenizer": "Other"
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791930537
+  },
+  {
+    "id": "openrouter/pareto-code",
+    "name": "Pareto Code Router",
+    "description": "The Pareto Router maintains a tiered shortlist of strong coding models, ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles. Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_co...",
+    "context_length": 2000000,
+    "pricing": {
+      "prompt": "-1",
+      "completion": "-1"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1776747900
+  },
+  {
+    "id": "~unbiased/pareto-latest",
+    "name": "Pareto Latest",
+    "description": "This model always redirects to the latest model in the Pareto family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000008",
+      "completion": "0.0000032"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791933050
+  },
+  {
+    "id": "perceptron/perceptron-mk1",
+    "name": "Perceptron: Perceptron Mk1",
+    "description": "Perceptron Mk1 (Mark One) is Perceptron's highest-quality vision-language model for video and embodied reasoning.** It accepts image and video inputs paired with natural language queries, and produces detailed visual understanding...",
+    "context_length": 32768,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1778597029
+  },
+  {
+    "id": "perceptron/perceptron-mk1.5",
+    "name": "Perceptron: Perceptron Mk1.5",
+    "description": "Perceptron Mk1.5 is Perceptron's embodied reasoning model for physical agents. It accepts text, image, video, and audio input, and answers with text plus optional structured annotations: points, boxes, polygons, tracks,...",
+    "context_length": 36864,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.0000015"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790352661
+  },
+  {
+    "id": "perplexity/sonar",
+    "name": "Perplexity: Sonar",
+    "description": "Sonar is lightweight, affordable, fast, and simple to use — now featuring citations and the ability to customize sources. It is designed for companies seeking to integrate lightweight question-and-answer features...",
+    "context_length": 127072,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000001"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -6171,22 +10909,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "perplexity/sonar-deep-research",
     "name": "Perplexity: Sonar Deep Research",
-    "description": "Sonar Deep Research is a research-focused model designed for multi-step retrieval, synthesis, and reasoning across complex topics. It autonomously searches, reads, and evaluates sources, refining its approach as it gathers information. This enables comprehensive report generation across domains l...",
+    "description": "Sonar Deep Research is a research-focused model designed for multi-step retrieval, synthesis, and reasoning across complex topics. It autonomously searches, reads, and evaluates sources, refining its approach as it gathers...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.000002",
-      "completion": "0.000008"
+      "completion": "0.000008",
+      "internal_reasoning": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Other",
       "instruct_type": "deepseek-r1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6195,21 +10938,21 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "perplexity/sonar-pro",
     "name": "Perplexity: Sonar Pro",
-    "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro)\n\nFor enterprises seeking more advanced capabilities, the Sonar Pro API can handle in-depth, multi-step queries...",
+    "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro) For enterprises seeking more advanced capabilities, the Sonar Pro API can handle in-depth, multi-step queries ...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000003",
       "completion": "0.000015"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -6219,22 +10962,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "perplexity/sonar-pro-search",
     "name": "Perplexity: Sonar Pro Search",
-    "description": "Exclusively available on the OpenRouter API, Sonar Pro's new Pro Search mode is Perplexity's most advanced agentic search system. It is designed for deeper reasoning and analysis. Pricing is based on tokens plus $18 per thousand requests. This model powers the Pro Search mode on the Perplexity pl...",
+    "description": "Exclusively available on the OpenRouter API, Sonar Pro's new Pro Search mode is Perplexity's most advanced agentic search system. It is designed for deeper reasoning and analysis. Pricing is based...",
     "context_length": 200000,
     "pricing": {
       "prompt": "0.000003",
       "completion": "0.000015"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6243,13 +10991,14 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "perplexity/sonar-reasoning-pro",
     "name": "Perplexity: Sonar Reasoning Pro",
-    "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro)\n\nSonar Reasoning Pro is a premier reasoning model powered by DeepSeek R1 with Chain of Thought (CoT). Designed...",
+    "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro) Sonar Reasoning Pro is a premier reasoning model powered by DeepSeek R1 with Chain of Thought (CoT). Designed ...",
     "context_length": 128000,
     "pricing": {
       "prompt": "0.000002",
       "completion": "0.000008"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
@@ -6257,409 +11006,308 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Other",
       "instruct_type": "deepseek-r1"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1741313308
   },
   {
-    "id": "prime-intellect/intellect-3",
-    "name": "Prime Intellect: INTELLECT-3",
-    "description": "INTELLECT-3 is a 106B-parameter Mixture-of-Experts model (12B active) post-trained from GLM-4.5-Air-Base using supervised fine-tuning (SFT) followed by large-scale reinforcement learning (RL). It offers state-of-the-art performance for its size across math, code, science, and general reasoning, c...",
-    "context_length": 131072,
+    "id": "poolside/laguna-s-2.1",
+    "name": "Poolside: Laguna S 2.1",
+    "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000011"
+      "prompt": "0.00000009",
+      "completion": "0.00000018"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1764212534
+    "created": 1784652683
   },
   {
-    "id": "qwen/qwen-plus-2025-07-28",
-    "name": "Qwen: Qwen Plus 0728",
-    "description": "Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context hybrid reasoning model with a balanced performance, speed, and cost combination.",
-    "context_length": 1000000,
+    "id": "poolside/laguna-s-2.1:free",
+    "name": "Poolside: Laguna S 2.1 (free)",
+    "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.0000012"
+      "prompt": "0",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1757347599
+    "created": 1784652683
   },
   {
-    "id": "qwen/qwen-plus-2025-07-28:thinking",
-    "name": "Qwen: Qwen Plus 0728 (thinking)",
-    "description": "Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context hybrid reasoning model with a balanced performance, speed, and cost combination.",
-    "context_length": 1000000,
+    "id": "poolside/laguna-xs-2.1",
+    "name": "Poolside: Laguna XS 2.1",
+    "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.000004"
+      "prompt": "0.00000006",
+      "completion": "0.00000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1757347599
+    "created": 1783002429
   },
   {
-    "id": "qwen/qwen-vl-max",
-    "name": "Qwen: Qwen VL Max",
-    "description": "Qwen VL Max is a visual understanding model with 7500 tokens context length. It excels in delivering optimal performance for a broader spectrum of complex tasks.\n",
-    "context_length": 131072,
+    "id": "poolside/laguna-xs-2.1:free",
+    "name": "Poolside: Laguna XS 2.1 (free)",
+    "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000008",
-      "completion": "0.0000032"
+      "prompt": "0",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1783002429
+  },
+  {
+    "id": "prism-ml/ternary-bonsai-2-27b",
+    "name": "PrismML: Ternary Bonsai 2 27B",
+    "description": "Bonsai 2 27B is a 27B-parameter reasoning model from PrismML derived from Qwen3.8-27B. It supports coding, mathematics, tool calling, and image understanding with a 262K-token context window. Ternary compression shrinks...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000075",
+      "completion": "0.0000005"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1738434304
-  },
-  {
-    "id": "qwen/qwen-vl-plus",
-    "name": "Qwen: Qwen VL Plus",
-    "description": "Qwen's Enhanced Large Visual Language Model. Significantly upgraded for detailed recognition capabilities and text recognition abilities, supporting ultra-high pixel resolutions up to millions of pixels and extreme aspect ratios for image input. It delivers significant performance across a broad ...",
-    "context_length": 7500,
-    "pricing": {
-      "prompt": "0.00000021",
-      "completion": "0.00000063"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738731255
-  },
-  {
-    "id": "qwen/qwen-max",
-    "name": "Qwen: Qwen-Max ",
-    "description": "Qwen-Max, based on Qwen2.5, provides the best inference performance among [Qwen models](/qwen), especially for complex multi-step tasks. It's a large-scale MoE model that has been pretrained on over 20 trillion tokens and further post-trained with curated Supervised Fine-Tuning (SFT) and Reinforc...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000016",
-      "completion": "0.0000064"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738402289
+    "created": 1789754046
   },
   {
     "id": "qwen/qwen-plus",
     "name": "Qwen: Qwen-Plus",
     "description": "Qwen-Plus, based on the Qwen2.5 foundation model, is a 131K context model with a balanced performance, speed, and cost combination.",
-    "context_length": 131072,
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.0000012"
+      "prompt": "0.00000026",
+      "completion": "0.00000078"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1738409840
   },
   {
-    "id": "qwen/qwen-turbo",
-    "name": "Qwen: Qwen-Turbo",
-    "description": "Qwen-Turbo, based on Qwen2.5, is a 1M context model that provides fast speed and low cost, suitable for simple tasks.",
-    "context_length": 1000000,
+    "id": "qwen/qwen-2.5-7b-instruct",
+    "name": "Qwen: Qwen2.5 7B Instruct",
+    "description": "Qwen2.5 7B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2: - Significantly more knowledge and has greatly improved capabilities in coding and...",
+    "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000005",
+      "prompt": "0.0000001",
       "completion": "0.0000002"
     },
     "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1738410974
-  },
-  {
-    "id": "qwen/qwen-2.5-7b-instruct",
-    "name": "Qwen: Qwen2.5 7B Instruct",
-    "description": "Qwen2.5 7B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2:\n\n- Significantly more knowledge and has greatly improved capabilities in coding and mathematics, thanks to our specialized expert models in these domains.\n\n- Significant improvemen...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000004",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
       "tokenizer": "Qwen",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1729036800
   },
   {
-    "id": "qwen/qwen2.5-coder-7b-instruct",
-    "name": "Qwen: Qwen2.5 Coder 7B Instruct",
-    "description": "Qwen2.5-Coder-7B-Instruct is a 7B parameter instruction-tuned language model optimized for code-related tasks such as code generation, reasoning, and bug fixing. Based on the Qwen2.5 architecture, it incorporates enhancements like RoPE, SwiGLU, RMSNorm, and GQA attention with support for up to 12...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000009"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744734887
-  },
-  {
-    "id": "qwen/qwen2.5-vl-32b-instruct",
-    "name": "Qwen: Qwen2.5 VL 32B Instruct",
-    "description": "Qwen2.5-VL-32B is a multimodal vision-language model fine-tuned through reinforcement learning for enhanced mathematical reasoning, structured outputs, and visual problem-solving capabilities. It excels at visual analysis tasks, including object recognition, textual interpretation within images, ...",
-    "context_length": 16384,
-    "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.00000022"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1742839838
-  },
-  {
     "id": "qwen/qwen2.5-vl-72b-instruct",
     "name": "Qwen: Qwen2.5 VL 72B Instruct",
     "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
-    "context_length": 32768,
+    "context_length": 128000,
     "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000006"
+      "prompt": "0.0000008",
+      "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1738410311
   },
   {
-    "id": "qwen/qwen-2.5-vl-7b-instruct",
-    "name": "Qwen: Qwen2.5-VL 7B Instruct",
-    "description": "Qwen2.5 VL 7B is a multimodal LLM from the Qwen Team with the following key enhancements:\n\n- SoTA understanding of images of various resolution & ratio: Qwen2.5-VL achieves state-of-the-art performance on visual understanding benchmarks, including MathVista, DocVQA, RealWorldQA, MTVQA, etc.\n\n- Un...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000002"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1724803200
-  },
-  {
-    "id": "qwen/qwen-2.5-vl-7b-instruct:free",
-    "name": "Qwen: Qwen2.5-VL 7B Instruct (free)",
-    "description": "Qwen2.5 VL 7B is a multimodal LLM from the Qwen Team with the following key enhancements:\n\n- SoTA understanding of images of various resolution & ratio: Qwen2.5-VL achieves state-of-the-art performance on visual understanding benchmarks, including MathVista, DocVQA, RealWorldQA, MTVQA, etc.\n\n- Un...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1724803200
-  },
-  {
     "id": "qwen/qwen3-14b",
     "name": "Qwen: Qwen3 14B",
-    "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for tasks like math, programming, and logical inference, and a \"non-thinking\" mode for general-pur...",
+    "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
     "context_length": 40960,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.00000022"
+      "prompt": "0.00000012",
+      "completion": "0.00000024"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen3",
       "instruct_type": "qwen3"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1745876478
   },
   {
-    "id": "qwen/qwen3-235b-a22b",
-    "name": "Qwen: Qwen3 235B A22B",
-    "description": "Qwen3-235B-A22B is a 235B parameter mixture-of-experts (MoE) model developed by Qwen, activating 22B parameters per forward pass. It supports seamless switching between a \"thinking\" mode for complex reasoning, math, and code tasks, and a \"non-thinking\" mode for general conversational efficiency. ...",
-    "context_length": 40960,
-    "pricing": {
-      "prompt": "0.00000018",
-      "completion": "0.00000054"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3",
-      "instruct_type": "qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1745875757
-  },
-  {
     "id": "qwen/qwen3-235b-a22b-2507",
     "name": "Qwen: Qwen3 235B A22B Instruct 2507",
-    "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following, logical reasoning, math, co...",
+    "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.000000071",
-      "completion": "0.000000463"
+      "prompt": "0.00000009",
+      "completion": "0.00000055"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6668,22 +11316,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-235b-a22b-thinking-2507",
     "name": "Qwen: Qwen3 235B A22B Thinking 2507",
-    "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144 tokens of context. This \"thinking-only\" variant enhances str...",
-    "context_length": 262144,
+    "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
+    "context_length": 128000,
     "pricing": {
-      "prompt": "0.00000011",
-      "completion": "0.0000006"
+      "prompt": "0.00000045",
+      "completion": "0.0000035"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen3",
       "instruct_type": "qwen3"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6692,22 +11346,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-30b-a3b",
     "name": "Qwen: Qwen3 30B A3B",
-    "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique ability to switch seamlessly between a thinking mode for complex reasoning and a n...",
+    "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
     "context_length": 40960,
     "pricing": {
-      "prompt": "0.00000006",
-      "completion": "0.00000022"
+      "prompt": "0.00000012",
+      "completion": "0.0000005"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen3",
       "instruct_type": "qwen3"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6716,139 +11378,88 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-30b-a3b-instruct-2507",
     "name": "Qwen: Qwen3 30B A3B Instruct 2507",
-    "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and agentic tool use. Post-trained on instr...",
+    "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000008",
-      "completion": "0.00000033"
+      "prompt": "0.00000009",
+      "completion": "0.0000003"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1753806965
   },
   {
-    "id": "qwen/qwen3-30b-a3b-thinking-2507",
-    "name": "Qwen: Qwen3 30B A3B Thinking 2507",
-    "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated from final answers.\n\nCompared to earlier Qwen...",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.000000051",
-      "completion": "0.00000034"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1756399192
-  },
-  {
     "id": "qwen/qwen3-32b",
     "name": "Qwen: Qwen3 32B",
-    "description": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for tasks like math, coding, and logical inference, and a \"non-thinking\" mode for faster, general...",
-    "context_length": 40960,
+    "description": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
+    "context_length": 131072,
     "pricing": {
       "prompt": "0.00000008",
-      "completion": "0.00000024"
+      "completion": "0.00000028"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen3",
       "instruct_type": "qwen3"
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1745875945
   },
   {
-    "id": "qwen/qwen3-4b:free",
-    "name": "Qwen: Qwen3 4B (free)",
-    "description": "Qwen3-4B is a 4 billion parameter dense language model from the Qwen3 series, designed to support both general-purpose and reasoning-intensive tasks. It introduces a dual-mode architecture—thinking and non-thinking—allowing dynamic switching between high-precision logical reasoning and efficient ...",
-    "context_length": 40960,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3",
-      "instruct_type": "qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1746031104
-  },
-  {
-    "id": "qwen/qwen3-8b",
-    "name": "Qwen: Qwen3 8B",
-    "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math, coding, and logical inference, and \"non-thinking\" mode for general conversation. The mod...",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.000000035",
-      "completion": "0.000000138"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3",
-      "instruct_type": "qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1745876632
-  },
-  {
     "id": "qwen/qwen3-coder-30b-a3b-instruct",
     "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
-    "description": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the Qwen3 architecture, it supports a native context length of 256K ...",
-    "context_length": 160000,
+    "description": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the...",
+    "context_length": 262144,
     "pricing": {
       "prompt": "0.00000007",
-      "completion": "0.00000027"
+      "completion": "0.00000028"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6857,67 +11468,27 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-coder",
     "name": "Qwen: Qwen3 Coder 480B A35B",
-    "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billio...",
+    "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000022",
-      "completion": "0.00000095"
+      "prompt": "0.0000003",
+      "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1753230546
-  },
-  {
-    "id": "qwen/qwen3-coder:exacto",
-    "name": "Qwen: Qwen3 Coder 480B A35B (exacto)",
-    "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billio...",
-    "context_length": 262144,
-    "pricing": {
-      "prompt": "0.00000022",
-      "completion": "0.0000018"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1753230546
-  },
-  {
-    "id": "qwen/qwen3-coder:free",
-    "name": "Qwen: Qwen3 Coder 480B A35B (free)",
-    "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billio...",
-    "context_length": 262000,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3"
-    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -6926,90 +11497,84 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-coder-flash",
     "name": "Qwen: Qwen3 Coder Flash",
-    "description": "Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities.",
-    "context_length": 128000,
+    "description": "Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000015"
+      "prompt": "0.000000195",
+      "completion": "0.000000975"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1758115536
   },
   {
-    "id": "qwen/qwen3-coder-plus",
-    "name": "Qwen: Qwen3 Coder Plus",
-    "description": "Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities.",
-    "context_length": 128000,
+    "id": "qwen/qwen3-coder-next",
+    "name": "Qwen: Qwen3 Coder Next",
+    "description": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.000001",
-      "completion": "0.000005"
+      "prompt": "0.00000012",
+      "completion": "0.0000008"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1758662707
-  },
-  {
-    "id": "qwen/qwen3-max",
-    "name": "Qwen: Qwen3 Max",
-    "description": "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It delivers higher accuracy in math, coding, logic, and science tasks, follows c...",
-    "context_length": 256000,
-    "pricing": {
-      "prompt": "0.0000012",
-      "completion": "0.000006"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1758662808
+    "created": 1770164101
   },
   {
     "id": "qwen/qwen3-next-80b-a3b-instruct",
     "name": "Qwen: Qwen3 Next 80B A3B Instruct",
-    "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual use, while remaining robust on alignment and formattin...",
+    "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.00000009",
       "completion": "0.0000011"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7018,21 +11583,29 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-next-80b-a3b-thinking",
     "name": "Qwen: Qwen3 Next 80B A3B Thinking",
-    "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic planning, and reports strong results across knowledge, rea...",
+    "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.00000015",
       "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7041,70 +11614,58 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-vl-235b-a22b-instruct",
     "name": "Qwen: Qwen3 VL 235B A22B Instruct",
-    "description": "Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies strong text generation with visual understanding across images and video. The Instruct model targets general vision-language use (VQA, document parsing, chart/table extraction, multilingual OCR). The series emphasizes rob...",
+    "description": "Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies strong text generation with visual understanding across images and video. The Instruct model targets general vision-language use (VQA, document parsing, chart/table...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000012"
+      "prompt": "0.00000021",
+      "completion": "0.0000019"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1758668687
   },
   {
-    "id": "qwen/qwen3-vl-235b-a22b-thinking",
-    "name": "Qwen: Qwen3 VL 235B A22B Thinking",
-    "description": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math. The series emphasizes robust perception (recognition of diverse real-world and synthe...",
-    "context_length": 262144,
-    "pricing": {
-      "prompt": "0.00000045",
-      "completion": "0.0000035"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1758668690
-  },
-  {
     "id": "qwen/qwen3-vl-30b-a3b-instruct",
     "name": "Qwen: Qwen3 VL 30B A3B Instruct",
-    "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception of real-world/synthetic categories, 2D/3D spatial groundi...",
+    "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0.00000015",
       "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7113,142 +11674,810 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen3-vl-30b-a3b-thinking",
     "name": "Qwen: Qwen3 VL 30B A3B Thinking",
-    "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels in perception of real-world/synthetic categories, 2D/3D spatial grounding, and l...",
-    "context_length": 131072,
+    "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.0000002",
+      "prompt": "0.00000029",
       "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1759794479
   },
   {
-    "id": "qwen/qwen3-vl-32b-instruct",
-    "name": "Qwen: Qwen3 VL 32B Instruct",
-    "description": "Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model designed for high-precision understanding and reasoning across text, images, and video. With 32 billion parameters, it combines deep visual perception with advanced text comprehension, enabling fine-grained spatial reasoning,...",
-    "context_length": 262144,
-    "pricing": {
-      "prompt": "0.0000005",
-      "completion": "0.0000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1761231332
-  },
-  {
     "id": "qwen/qwen3-vl-8b-instruct",
     "name": "Qwen: Qwen3 VL 8B Instruct",
-    "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon temporal reasoning, DeepStack for fine-grained vi...",
-    "context_length": 131072,
+    "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000008",
-      "completion": "0.0000005"
+      "prompt": "0.00000025",
+      "completion": "0.00000075"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
         "image",
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1760463308
   },
   {
-    "id": "qwen/qwen3-vl-8b-thinking",
-    "name": "Qwen: Qwen3 VL 8B Thinking",
-    "description": "Qwen3-VL-8B-Thinking is the reasoning-optimized variant of the Qwen3-VL-8B multimodal model, designed for advanced visual and textual reasoning across complex scenes, documents, and temporal sequences. It integrates enhanced multimodal alignment and long-context processing (native 256K, expandabl...",
-    "context_length": 256000,
+    "id": "qwen/qwen3.5-397b-a17b",
+    "name": "Qwen: Qwen3.5 397B A17B",
+    "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
+    "context_length": 262144,
     "pricing": {
-      "prompt": "0.00000018",
-      "completion": "0.0000021"
+      "prompt": "0.0000005",
+      "completion": "0.0000036"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
       "input_modalities": [
+        "text",
         "image",
-        "text"
+        "video"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen3"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1760463746
+    "created": 1771223018
   },
   {
-    "id": "qwen/qwq-32b",
-    "name": "Qwen: QwQ 32B",
-    "description": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks, especially hard problems. QwQ-32B is the medium-sized reasoning model, which is ...",
-    "context_length": 32768,
+    "id": "qwen/qwen3.5-plus-02-15",
+    "name": "Qwen: Qwen3.5 Plus 2026-02-15",
+    "description": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.00000015",
-      "completion": "0.0000004"
+      "prompt": "0.00000026",
+      "completion": "0.00000156"
     },
     "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1771229416
+  },
+  {
+    "id": "qwen/qwen3.5-plus-20260420",
+    "name": "Qwen: Qwen3.5 Plus 2026-04-20",
+    "description": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.0000018"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777261368
+  },
+  {
+    "id": "qwen/qwen3.5-122b-a10b",
+    "name": "Qwen: Qwen3.5-122B-A10B",
+    "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000026",
+      "completion": "0.00000208"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772053789
+  },
+  {
+    "id": "qwen/qwen3.5-27b",
+    "name": "Qwen: Qwen3.5-27B",
+    "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000027",
+      "completion": "0.00000216"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772053810
+  },
+  {
+    "id": "qwen/qwen3.5-35b-a3b",
+    "name": "Qwen: Qwen3.5-35B-A3B",
+    "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.000001"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772053822
+  },
+  {
+    "id": "qwen/qwen3.5-9b",
+    "name": "Qwen: Qwen3.5-9B",
+    "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.00000015"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773152396
+  },
+  {
+    "id": "qwen/qwen3.5-flash-02-23",
+    "name": "Qwen: Qwen3.5-Flash",
+    "description": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000000065",
+      "completion": "0.00000026"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1772053776
+  },
+  {
+    "id": "qwen/qwen3.6-27b",
+    "name": "Qwen: Qwen3.6 27B",
+    "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000025",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777255064
+  },
+  {
+    "id": "qwen/qwen3.6-35b-a3b",
+    "name": "Qwen: Qwen3.6 35B A3B",
+    "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.000001"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777260255
+  },
+  {
+    "id": "qwen/qwen3.6-flash",
+    "name": "Qwen: Qwen3.6 Flash",
+    "description": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000001875",
+      "completion": "0.000001125"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777261362
+  },
+  {
+    "id": "qwen/qwen3.6-plus",
+    "name": "Qwen: Qwen3.6 Plus",
+    "description": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000000325",
+      "completion": "0.00000195"
+    },
+    "architecture": {
+      "tokenizer": "Qwen3",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775133557
+  },
+  {
+    "id": "qwen/qwen3.7-flash",
+    "name": "Qwen: Qwen3.7 Flash",
+    "description": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000003",
+      "completion": "0.00000013"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1785190561
+  },
+  {
+    "id": "qwen/qwen3.7-max",
+    "name": "Qwen: Qwen3.7 Max",
+    "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000001475",
+      "completion": "0.000004425"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Qwen",
-      "instruct_type": "qwq"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1741208814
+    "created": 1779376861
+  },
+  {
+    "id": "qwen/qwen3.7-plus",
+    "name": "Qwen: Qwen3.7 Plus",
+    "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000032",
+      "completion": "0.00000128"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780491783
+  },
+  {
+    "id": "qwen/qwen3.7-plus:batch",
+    "name": "Qwen: Qwen3.7 Plus (batch)",
+    "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000023",
+      "completion": "0.00000092"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1780491783
+  },
+  {
+    "id": "qwen/qwen3.8-2.4t-a95b",
+    "name": "Qwen: Qwen3.8 2.4T A95B",
+    "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786551702
+  },
+  {
+    "id": "qwen/qwen3.8-27b",
+    "name": "Qwen: Qwen3.8 27B",
+    "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000024",
+      "completion": "0.0000022"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786722910
+  },
+  {
+    "id": "qwen/qwen3.8-flash",
+    "name": "Qwen: Qwen3.8 Flash",
+    "description": "Qwen3.8 Flash is a multimodal reasoning model from Alibaba. It is suited for coding assistance, agentic workflows, visual understanding, document and codebase analysis, desktop interaction, chart analysis, and long-video analysis.",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.00000047"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787773060
+  },
+  {
+    "id": "qwen/qwen3.8-max-0902",
+    "name": "Qwen: Qwen3.8 Max (0902)",
+    "description": "Qwen3.8 Max 0902 is an updated snapshot of Qwen3.8 Max from Alibaba's Qwen team. It is a 2.4-trillion-parameter mixture-of-experts model that accepts text, image, and video input and returns text,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1788469704
+  },
+  {
+    "id": "qwen/qwen3.8-max-prime",
+    "name": "Qwen: Qwen3.8 Max Prime",
+    "description": "Qwen3.8 Max Prime is a higher-throughput variant of Qwen3.8 Max from Alibaba's Qwen team, served as a separate SKU at a higher price point. It accepts text, image, and video...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000004",
+      "completion": "0.000012"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790191228
+  },
+  {
+    "id": "qwen/qwen3.8-omni-flash",
+    "name": "Qwen: Qwen3.8 Omni Flash",
+    "description": "Qwen3.8 Omni Flash is an omni-modal reasoning model from Alibaba, the first Qwen model built around agentic capabilities with native audio-video understanding. It is suited for audio-video analysis and summarization,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000015",
+      "completion": "0.00000047"
+    },
+    "architecture": {
+      "tokenizer": "Qwen",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789959954
   },
   {
     "id": "qwen/qwen-2.5-72b-instruct",
     "name": "Qwen2.5 72B Instruct",
-    "description": "Qwen2.5 72B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2:\n\n- Significantly more knowledge and has greatly improved capabilities in coding and mathematics, thanks to our specialized expert models in these domains.\n\n- Significant improveme...",
+    "description": "Qwen2.5 72B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2: - Significantly more knowledge and has greatly improved capabilities in coding and...",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000012",
-      "completion": "0.00000039"
+      "prompt": "0.00000036",
+      "completion": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen",
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7257,44 +12486,136 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "qwen/qwen-2.5-coder-32b-instruct",
     "name": "Qwen2.5 Coder 32B Instruct",
-    "description": "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). Qwen2.5-Coder brings the following improvements upon CodeQwen1.5:\n\n- Significantly improvements in **code generation**, **code reasoning** and **code fixing**. \n- A more comprehensive foun...",
+    "description": "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). Qwen2.5-Coder brings the following improvements upon CodeQwen1.5: - Significantly improvements in **code generation**, **code reasoning**...",
     "context_length": 32768,
     "pricing": {
-      "prompt": "0.00000003",
-      "completion": "0.00000011"
+      "prompt": "0.00000066",
+      "completion": "0.000001"
     },
     "architecture": {
+      "tokenizer": "Qwen",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Qwen",
       "instruct_type": "chatml"
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1731368400
   },
   {
+    "id": "reflection/beam-1.0-501b-a23b",
+    "name": "Reflection: Beam 1.0 501B A23B",
+    "description": "Beam 1.0 is Reflection's open-weight reasoning model for coding and long-horizon agentic workflows. It uses a sparse mixture-of-experts architecture with 501B total and 23B active parameters per token, and a...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000003"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792160499
+  },
+  {
+    "id": "rekaai/reka-edge",
+    "name": "Reka Edge",
+    "description": "Reka Edge is an extremely efficient 7B multimodal vision-language model that accepts image/video+text inputs and generates text outputs. This model is optimized specifically to deliver industry-leading performance in image understanding,...",
+    "context_length": 16384,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000001"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1774026965
+  },
+  {
+    "id": "rekaai/reka-flash-3",
+    "name": "Reka Flash 3",
+    "description": "Reka Flash 3 is a general-purpose, instruction-tuned large language model with 21 billion parameters, developed by Reka. It excels at general chat, coding tasks, instruction-following, and function calling. Featuring a...",
+    "context_length": 65536,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1741812813
+  },
+  {
     "id": "relace/relace-apply-3",
     "name": "Relace: Relace Apply 3",
-    "description": "Relace Apply 3 is a specialized code-patching LLM that merges AI-suggested edits straight into your source files. It can apply updates from GPT-4o, Claude, and others into your files at 10,000 tokens/sec on average.\n\nThe model requires the prompt to be in the following format: \n<instruction>{inst...",
+    "description": "Relace Apply 3 is a specialized code-patching LLM that merges AI-suggested edits straight into your source files. It can apply updates from GPT-4o, Claude, and others into your files at...",
     "context_length": 256000,
     "pricing": {
       "prompt": "0.00000085",
       "completion": "0.00000125"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
@@ -7304,21 +12625,26 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "relace/relace-search",
     "name": "Relace: Relace Search",
-    "description": "The relace-search model uses 4-12 `view_file` and `grep` tools in parallel to explore a codebase and return relevant files to the user request. \n\nIn contrast to RAG, relace-search performs agentic multi-step reasoning to produce highly precise results 4x faster than any frontier model. It's desig...",
+    "description": "The relace-search model uses 4-12 `view_file` and `grep` tools in parallel to explore a codebase and return relevant files to the user request. In contrast to RAG, relace-search performs agentic...",
     "context_length": 256000,
     "pricing": {
       "prompt": "0.000001",
       "completion": "0.000003"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7330,114 +12656,205 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge",
     "context_length": 6144,
     "pricing": {
-      "prompt": "0.00000045",
+      "prompt": "0.00000035",
       "completion": "0.00000065"
     },
     "architecture": {
+      "tokenizer": "Llama2",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama2",
       "instruct_type": "alpaca"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1689984000
   },
   {
+    "id": "sakana/fugu-max",
+    "name": "Sakana: Fugu Max",
+    "description": "Fugu Max is the cost-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789104771
+  },
+  {
+    "id": "sakana/fugu-ultra",
+    "name": "Sakana: Fugu Ultra",
+    "description": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.00003"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1782276303
+  },
+  {
+    "id": "sakana/fugu-ultra-v2",
+    "name": "Sakana: Fugu Ultra v2",
+    "description": "Fugu Ultra v2 is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000005",
+      "completion": "0.00003"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789105383
+  },
+  {
+    "id": "sakana/sakana-namazu",
+    "name": "Sakana: Sakana Namazu",
+    "description": "Sakana Namazu is a Japanese-specialized reasoning model from Sakana AI, based on Kimi K2.6 with additional training for Japanese language and business contexts. It is suited for Japanese instruction following,...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000095",
+      "completion": "0.000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786410129
+  },
+  {
     "id": "sao10k/l3-lunaris-8b",
     "name": "Sao10K: Llama 3 8B Lunaris",
-    "description": "Lunaris 8B is a versatile generalist and roleplaying model based on Llama 3. It's a strategic merge of multiple models, designed to balance creativity with improved logic and general knowledge.\n\nCreated by [Sao10k](https://huggingface.co/Sao10k), this model aims to offer an improved experience ov...",
+    "description": "Lunaris 8B is a versatile generalist and roleplaying model based on Llama 3. It's a strategic merge of multiple models, designed to balance creativity with improved logic and general knowledge....",
     "context_length": 8192,
     "pricing": {
       "prompt": "0.00000004",
       "completion": "0.00000005"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1723507200
   },
   {
-    "id": "sao10k/l3-euryale-70b",
-    "name": "Sao10k: Llama 3 Euryale 70B v2.1",
-    "description": "Euryale 70B v2.1 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k).\n\n- Better prompt adherence.\n- Better anatomy / spatial awareness.\n- Adapts much better to unique and custom formatting / reply formats.\n- Very creative, lots of unique swipes.\n- Is not restrictive du...",
-    "context_length": 8192,
-    "pricing": {
-      "prompt": "0.00000148",
-      "completion": "0.00000148"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3",
-      "instruct_type": "llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1718668800
-  },
-  {
-    "id": "sao10k/l3.1-70b-hanami-x1",
-    "name": "Sao10K: Llama 3.1 70B Hanami x1",
-    "description": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b).",
-    "context_length": 16000,
-    "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000003"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Llama3"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1736302854
-  },
-  {
     "id": "sao10k/l3.1-euryale-70b",
     "name": "Sao10K: Llama 3.1 Euryale 70B v2.2",
     "description": "Euryale L3.1 70B v2.2 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.1](/models/sao10k/l3-euryale-70b).",
-    "context_length": 32768,
+    "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000065",
-      "completion": "0.00000075"
+      "prompt": "0.00000085",
+      "completion": "0.00000085"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
+    "supported_parameters": [
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7453,113 +12870,627 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.00000075"
     },
     "architecture": {
+      "tokenizer": "Llama3",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Llama3",
       "instruct_type": "llama3"
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1734535928
   },
   {
-    "id": "raifle/sorcererlm-8x22b",
-    "name": "SorcererLM 8x22B",
-    "description": "SorcererLM is an advanced RP and storytelling model, built as a Low-rank 16-bit LoRA fine-tuned on [WizardLM-2 8x22B](/microsoft/wizardlm-2-8x22b).\n\n- Advanced reasoning and emotional intelligence for engaging and immersive interactions\n- Vivid writing capabilities enriched with spatial and conte...",
-    "context_length": 16000,
+    "id": "scaledown/extract",
+    "name": "ScaleDown: Extract",
+    "description": "Extract is a description-driven entity extraction model from ScaleDown. Instead of a fixed set of entity types, callers describe the fields they want in plain English through `provider.options.scaledown.entities`, and the...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.0000045",
-      "completion": "0.0000045"
+      "prompt": "0.00000004",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Mistral",
-      "instruct_type": "vicuna"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1731105083
-  },
-  {
-    "id": "stepfun-ai/step3",
-    "name": "StepFun: Step3",
-    "description": "Step3 is a cutting-edge multimodal reasoning model—built on a Mixture-of-Experts architecture with 321B total parameters and 38B active. It is designed end-to-end to minimize decoding costs while delivering top-tier performance in vision–language reasoning. Through the co-design of Multi-Matrix F...",
-    "context_length": 65536,
-    "pricing": {
-      "prompt": "0.00000057",
-      "completion": "0.00000142"
-    },
-    "architecture": {
-      "input_modalities": [
+        "text",
         "image",
-        "text"
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1756415375
+    "created": 1791893351
   },
   {
-    "id": "switchpoint/router",
-    "name": "Switchpoint Router",
-    "description": "Switchpoint AI's router instantly analyzes your request and directs it to the optimal AI from an ever-evolving library. \n\nAs the world of LLMs advances, our router gets smarter, ensuring you always benefit from the industry's newest models without changing your workflow.\n\nThis model is configured...",
-    "context_length": 131072,
+    "id": "scaledown/summarize",
+    "name": "ScaleDown: Summarize",
+    "description": "Summarize is an abstractive summarization model from ScaleDown. It condenses long text and documents into a fluent, faithful rewrite rather than lifting sentences from the source, and is suited for...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.00000085",
-      "completion": "0.0000034"
+      "prompt": "0.00000004",
+      "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791893360
+  },
+  {
+    "id": "x-ai/grok-4.20",
+    "name": "SpaceXAI: Grok 4.20",
+    "description": "Grok 4.20 is a reasoning model from SpaceXAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering...",
+    "context_length": 2000000,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1774979019
+  },
+  {
+    "id": "x-ai/grok-4.20-multi-agent",
+    "name": "SpaceXAI: Grok 4.20 Multi-Agent",
+    "description": "Grok 4.20 Multi-Agent is a variant of SpaceXAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
+    "context_length": 2000000,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1774979158
+  },
+  {
+    "id": "x-ai/grok-4.3",
+    "name": "SpaceXAI: Grok 4.3",
+    "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.00000125",
+      "completion": "0.0000025"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777591821
+  },
+  {
+    "id": "x-ai/grok-4.3:batch",
+    "name": "SpaceXAI: Grok 4.3 (batch)",
+    "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1777591821
+  },
+  {
+    "id": "x-ai/grok-4.5",
+    "name": "SpaceXAI: Grok 4.5",
+    "description": "Grok 4.5 is a model from SpaceXAI with frontier performance on coding, knowledge work, and STEM.",
+    "context_length": 500000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1783523154
+  },
+  {
+    "id": "x-ai/grok-4.6",
+    "name": "SpaceXAI: Grok 4.6",
+    "description": "Grok 4.6 is a model from SpaceXAI with frontier performance on coding, knowledge work, and STEM. It is succeeded by [Grok 4.7](/x-ai/grok-4.7).",
+    "context_length": 500000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786548957
+  },
+  {
+    "id": "x-ai/grok-4.7",
+    "name": "SpaceXAI: Grok 4.7",
+    "description": "Grok 4.7 is SpaceXAI's flagship model for coding, agentic tasks, and knowledge work, succeeding Grok 4.6. It is particularly strong at long-running software engineering tasks, verifying its own work, and...",
+    "context_length": 500000,
+    "pricing": {
+      "prompt": "0.000002",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790007541
+  },
+  {
+    "id": "x-ai/grok-build-0.1",
+    "name": "SpaceXAI: Grok Build 0.1",
+    "description": "Grok Build 0.1 is SpaceXAI’s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding...",
+    "context_length": 256000,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Grok",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1779298123
+  },
+  {
+    "id": "stepfun/step-3.5-flash",
+    "name": "StepFun: Step 3.5 Flash",
+    "description": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token....",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000003"
+    },
+    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1752272899
+    "created": 1769728337
+  },
+  {
+    "id": "stepfun/step-3.7-flash",
+    "name": "StepFun: Step 3.7 Flash",
+    "description": "Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts model. It pairs a 196B-parameter language backbone with a vision encoder for native image and video understanding, activating roughly 11B parameters...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.00000115"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1779985069
+  },
+  {
+    "id": "stepfun/step-5-preview",
+    "name": "StepFun: Step 5 Preview",
+    "description": "Step 5 Preview is StepFun's flagship model for agentic work, built on a sparse Mixture-of-Experts architecture (27B active / 600B total parameters). It performs strongly in software engineering and professional...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.0000027"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1791462849
   },
   {
     "id": "tencent/hunyuan-a13b-instruct",
     "name": "Tencent: Hunyuan A13B Instruct",
-    "description": "Hunyuan-A13B is a 13B active parameter Mixture-of-Experts (MoE) language model developed by Tencent, with a total parameter count of 80B and support for reasoning via Chain-of-Thought. It offers competitive benchmark performance across mathematics, science, coding, and multi-turn reasoning tasks,...",
+    "description": "Hunyuan-A13B is a 13B active parameter Mixture-of-Experts (MoE) language model developed by Tencent, with a total parameter count of 80B and support for reasoning via Chain-of-Thought. It offers competitive benchmark...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.00000014",
       "completion": "0.00000057"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1751987664
+  },
+  {
+    "id": "tencent/hy-mt2-1.8b",
+    "name": "Tencent: Hy-MT2-1.8B",
+    "description": "Hy-MT2-1.8B is a compact 1.8B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided...",
+    "context_length": 8192,
+    "pricing": {
+      "prompt": "0.000000044",
+      "completion": "0.000000177"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787231581
+  },
+  {
+    "id": "tencent/hy-mt2-30b-a3b",
+    "name": "Tencent: Hy-MT2-30B-A3B",
+    "description": "Hy-MT2-30B-A3B is Tencent's flagship translation model in the Hy-MT2 family. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and...",
+    "context_length": 8192,
+    "pricing": {
+      "prompt": "0.000000074",
+      "completion": "0.000000295"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787231561
+  },
+  {
+    "id": "tencent/hy-mt2-7b",
+    "name": "Tencent: Hy-MT2-7B",
+    "description": "Hy-MT2-7B is a 7B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided translation.",
+    "context_length": 8192,
+    "pricing": {
+      "prompt": "0.000000074",
+      "completion": "0.000000295"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787148797
+  },
+  {
+    "id": "tencent/hy3",
+    "name": "Tencent: Hy3",
+    "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.000000132",
+      "completion": "0.000000528"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1783344048
+  },
+  {
+    "id": "tencent/hy3-preview",
+    "name": "Tencent: Hy3 preview",
+    "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
+    "context_length": 262144,
+    "pricing": {
+      "prompt": "0.00000018",
+      "completion": "0.0000006"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1776878150
+  },
+  {
+    "id": "tencent/hy4-preview",
+    "name": "Tencent: Hy4 preview",
+    "description": "Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000834",
+      "completion": "0.000002501"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787897375
   },
   {
     "id": "thedrummer/cydonia-24b-v4.1",
@@ -7571,42 +13502,22 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000005"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1758931878
-  },
-  {
-    "id": "thedrummer/rocinante-12b",
-    "name": "TheDrummer: Rocinante 12B",
-    "description": "Rocinante 12B is designed for engaging storytelling and rich prose.\n\nEarly testers have reported:\n- Expanded vocabulary with unique and expressive word choices\n- Enhanced creativity for vivid narratives\n- Adventure-filled and captivating stories",
-    "context_length": 32768,
-    "pricing": {
-      "prompt": "0.00000017",
-      "completion": "0.00000043"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Qwen",
-      "instruct_type": "chatml"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1727654400
   },
   {
     "id": "thedrummer/skyfall-36b-v2",
@@ -7618,14 +13529,18 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "completion": "0.0000008"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "response_format",
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7635,229 +13550,300 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "thedrummer/unslopnemo-12b",
     "name": "TheDrummer: UnslopNemo 12B",
     "description": "UnslopNemo v4.1 is the latest addition from the creator of Rocinante, designed for adventure writing and role-play scenarios.",
-    "context_length": 32768,
+    "context_length": 1024000,
     "pricing": {
       "prompt": "0.0000004",
       "completion": "0.0000004"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Mistral",
       "instruct_type": "mistral"
     },
+    "supported_parameters": [
+      "structured_outputs"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1731103448
   },
   {
-    "id": "thudm/glm-4.1v-9b-thinking",
-    "name": "THUDM: GLM 4.1V 9B Thinking",
-    "description": "GLM-4.1V-9B-Thinking is a 9B parameter vision-language model developed by THUDM, based on the GLM-4-9B foundation. It introduces a reasoning-centric \"thinking paradigm\" enhanced with reinforcement learning to improve multimodal reasoning, long-context understanding (up to 64K tokens), and complex...",
-    "context_length": 65536,
+    "id": "thinkingmachines/inkling",
+    "name": "Thinking Machines: Inkling",
+    "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
+    "context_length": 524288,
     "pricing": {
-      "prompt": "0.000000035",
-      "completion": "0.000000138"
+      "prompt": "0.000001",
+      "completion": "0.00000405"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
+        "text",
         "image",
-        "text"
+        "audio"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1752244385
+    "created": 1784325956
   },
   {
-    "id": "tngtech/deepseek-r1t-chimera",
-    "name": "TNG: DeepSeek R1T Chimera",
-    "description": "DeepSeek-R1T-Chimera is created by merging DeepSeek-R1 and DeepSeek-V3 (0324), combining the reasoning capabilities of R1 with the token efficiency improvements of V3. It is based on a DeepSeek-MoE Transformer architecture and is optimized for general text generation tasks.\n\nThe model merges pret...",
-    "context_length": 163840,
+    "id": "thinkingmachines/inkling:free",
+    "name": "Thinking Machines: Inkling (free)",
+    "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
+    "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000003",
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1784325956
+  },
+  {
+    "id": "thinkingmachines/inkling-small",
+    "name": "Thinking Machines: Inkling Small",
+    "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
+    "context_length": 524288,
+    "pricing": {
+      "prompt": "0.00000045",
       "completion": "0.0000012"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
+        "text",
+        "image",
+        "audio"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1745760875
+    "created": 1785443117
   },
   {
-    "id": "tngtech/deepseek-r1t-chimera:free",
-    "name": "TNG: DeepSeek R1T Chimera (free)",
-    "description": "DeepSeek-R1T-Chimera is created by merging DeepSeek-R1 and DeepSeek-V3 (0324), combining the reasoning capabilities of R1 with the token efficiency improvements of V3. It is based on a DeepSeek-MoE Transformer architecture and is optimized for general text generation tasks.\n\nThe model merges pret...",
-    "context_length": 163840,
+    "id": "thinkingmachines/inkling-small:free",
+    "name": "Thinking Machines: Inkling Small (free)",
+    "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
+    "context_length": 1048576,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
+        "text",
+        "image",
+        "audio"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1745760875
+    "created": 1785443117
   },
   {
-    "id": "tngtech/deepseek-r1t2-chimera",
-    "name": "TNG: DeepSeek R1T2 Chimera",
-    "description": "DeepSeek-TNG-R1T2-Chimera is the second-generation Chimera model from TNG Tech. It is a 671 B-parameter mixture-of-experts text-generation model assembled from DeepSeek-AI’s R1-0528, R1, and V3-0324 checkpoints with an Assembly-of-Experts merge. The tri-parent design yields strong reasoning perfo...",
-    "context_length": 163840,
+    "id": "typesafe/jev-router",
+    "name": "TypeSafe: Jev Router",
+    "description": "Jev Router picks the best model and reasoning effort for each request, balancing quality, speed, and cost. It runs on [Jev](https://openrouter.ai/~typesafe/jev-latest), TypeSafe's first System One model, and adapts as your...",
+    "context_length": 1000000,
     "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.00000085"
+      "prompt": "-1",
+      "completion": "-1"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
-        "text"
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1751986985
+    "created": 1790363560
   },
   {
-    "id": "tngtech/deepseek-r1t2-chimera:free",
-    "name": "TNG: DeepSeek R1T2 Chimera (free)",
-    "description": "DeepSeek-TNG-R1T2-Chimera is the second-generation Chimera model from TNG Tech. It is a 671 B-parameter mixture-of-experts text-generation model assembled from DeepSeek-AI’s R1-0528, R1, and V3-0324 checkpoints with an Assembly-of-Experts merge. The tri-parent design yields strong reasoning perfo...",
-    "context_length": 163840,
+    "id": "upstage/solar-mini4",
+    "name": "Upstage: Solar Mini 4",
+    "description": "Solar Mini 4 is Upstage's compact, cost-efficient language model, a 35B-parameter mixture-of-experts with 3B active parameters and a 524K context window. It is built for agentic use cases where response...",
+    "context_length": 524288,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000005",
+      "completion": "0.0000002"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "DeepSeek"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1751986985
+    "created": 1790160358
   },
   {
-    "id": "tngtech/tng-r1t-chimera",
-    "name": "TNG: R1T Chimera",
-    "description": "TNG-R1T-Chimera is an experimental LLM with a faible for creative storytelling and character interaction. It is a derivate of the original TNG/DeepSeek-R1T-Chimera released in April 2025 and is available exclusively via Chutes and OpenRouter.\n\nCharacteristics and improvements include:\n\nWe think t...",
-    "context_length": 163840,
-    "pricing": {
-      "prompt": "0.00000025",
-      "completion": "0.00000085"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1764184161
-  },
-  {
-    "id": "tngtech/tng-r1t-chimera:free",
-    "name": "TNG: R1T Chimera (free)",
-    "description": "TNG-R1T-Chimera is an experimental LLM with a faible for creative storytelling and character interaction. It is a derivate of the original TNG/DeepSeek-R1T-Chimera released in April 2025 and is available exclusively via Chutes and OpenRouter.\n\nCharacteristics and improvements include:\n\nWe think t...",
-    "context_length": 163840,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1764184161
-  },
-  {
-    "id": "alibaba/tongyi-deepresearch-30b-a3b",
-    "name": "Tongyi DeepResearch 30B A3B",
-    "description": "Tongyi DeepResearch is an agentic large language model developed by Tongyi Lab, with 30 billion total parameters activating only 3 billion per token. It's optimized for long-horizon, deep information-seeking tasks and delivers state-of-the-art performance on benchmarks like Humanity's Last Exam, ...",
+    "id": "upstage/solar-pro-3",
+    "name": "Upstage: Solar Pro 3",
+    "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000009",
-      "completion": "0.0000004"
+      "prompt": "0.00000015",
+      "completion": "0.0000006"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1758210804
+    "created": 1769481200
   },
   {
-    "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
-    "name": "Venice: Uncensored (free)",
-    "description": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM, preserving user control over alignment, system prompts, and behavior...",
-    "context_length": 32768,
+    "id": "upstage/solar-pro4",
+    "name": "Upstage: Solar Pro 4",
+    "description": "Solar Pro 4 is Upstage's cost-efficient large language model, featuring a 524K context window. It is built for long-horizon tasks and agentic workflows, with strong capabilities in office productivity, document-intensive...",
+    "context_length": 524288,
     "pricing": {
-      "prompt": "0",
-      "completion": "0"
+      "prompt": "0.00000009",
+      "completion": "0.00000036"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1786371636
+  },
+  {
+    "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+    "name": "Venice: Uncensored",
+    "description": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM, preserving...",
+    "context_length": 128000,
+    "pricing": {
+      "prompt": "0.0000002",
+      "completion": "0.0000009"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -7866,278 +13852,309 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   {
     "id": "microsoft/wizardlm-2-8x22b",
     "name": "WizardLM-2 8x22B",
-    "description": "WizardLM-2 8x22B is Microsoft AI's most advanced Wizard model. It demonstrates highly competitive performance compared to leading proprietary models, and it consistently outperforms all existing state-of-the-art opensource models.\n\nIt is an instruct finetune of [Mixtral 8x22B](/models/mistralai/m...",
-    "context_length": 65536,
+    "description": "WizardLM-2 8x22B is Microsoft AI's most advanced Wizard model. It demonstrates highly competitive performance compared to leading proprietary models, and it consistently outperforms all existing state-of-the-art opensource models. It is...",
+    "context_length": 65535,
     "pricing": {
-      "prompt": "0.00000048",
-      "completion": "0.00000048"
+      "prompt": "0.00000062",
+      "completion": "0.00000062"
     },
     "architecture": {
+      "tokenizer": "Mistral",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
       ],
-      "tokenizer": "Mistral",
       "instruct_type": "vicuna"
     },
+    "supported_parameters": [
+      "response_format"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1713225600
   },
   {
-    "id": "x-ai/grok-3",
-    "name": "xAI: Grok 3",
-    "description": "Grok 3 is the latest model from xAI. It's their flagship model that excels at enterprise use cases like data extraction, coding, and text summarization. Possesses deep domain knowledge in finance, healthcare, law, and science.\n\n",
-    "context_length": 131072,
+    "id": "writer/palmyra-x5",
+    "name": "Writer: Palmyra X5",
+    "description": "Palmyra X5 is Writer's most advanced model, purpose-built for building and scaling AI agents across the enterprise. It delivers industry-leading speed and efficiency on context windows up to 1 million...",
+    "context_length": 1040000,
     "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
+      "prompt": "0.0000006",
+      "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Grok"
+      ]
     },
     "top_provider": {
-      "is_moderated": false
+      "is_moderated": true
     },
-    "created": 1749582908
+    "created": 1769003823
   },
   {
-    "id": "x-ai/grok-3-beta",
-    "name": "xAI: Grok 3 Beta",
-    "description": "Grok 3 is the latest model from xAI. It's their flagship model that excels at enterprise use cases like data extraction, coding, and text summarization. Possesses deep domain knowledge in finance, healthcare, law, and science.\n\nExcels in structured tasks and benchmarks like GPQA, LCB, and MMLU-Pr...",
-    "context_length": 131072,
+    "id": "~x-ai/grok-latest",
+    "name": "xAI: Grok Latest",
+    "description": "This model always redirects to the latest Grok model from xAI.",
+    "context_length": 500000,
     "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
+      "prompt": "0.000002",
+      "completion": "0.000006"
     },
     "architecture": {
+      "tokenizer": "Router",
       "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Grok"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744240068
-  },
-  {
-    "id": "x-ai/grok-3-mini",
-    "name": "xAI: Grok 3 Mini",
-    "description": "A lightweight model that thinks before responding. Fast, smart, and great for logic-based tasks that do not require deep domain knowledge. The raw thinking traces are accessible.",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000005"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Grok"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1749583245
-  },
-  {
-    "id": "x-ai/grok-3-mini-beta",
-    "name": "xAI: Grok 3 Mini Beta",
-    "description": "Grok 3 Mini is a lightweight, smaller thinking model. Unlike traditional models that generate answers immediately, Grok 3 Mini thinks before responding. It’s ideal for reasoning-heavy tasks that don’t demand extensive domain knowledge, and shines in math-specific and quantitative use cases, such ...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000005"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Grok"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1744240195
-  },
-  {
-    "id": "x-ai/grok-4",
-    "name": "xAI: Grok 4",
-    "description": "Grok 4 is xAI's latest reasoning model with a 256k context window. It supports parallel tool calling, structured outputs, and both image and text inputs. Note that reasoning is not exposed, reasoning cannot be disabled, and the reasoning effort cannot be specified. Pricing increases once the tota...",
-    "context_length": 256000,
-    "pricing": {
-      "prompt": "0.000003",
-      "completion": "0.000015"
-    },
-    "architecture": {
-      "input_modalities": [
+        "text",
         "image",
-        "text"
+        "file"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Grok"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1752087689
+    "created": 1783519360
   },
   {
-    "id": "x-ai/grok-4-fast",
-    "name": "xAI: Grok 4 Fast",
-    "description": "Grok 4 Fast is xAI's latest multimodal model with SOTA cost-efficiency and a 2M token context window. It comes in two flavors: non-reasoning and reasoning. Read more about the model on xAI's [news post](http://x.ai/news/grok-4-fast).\n\nReasoning can be enabled/disabled using the `reasoning` `enabl...",
-    "context_length": 2000000,
+    "id": "xiaomi/mimo-v2.5",
+    "name": "Xiaomi: MiMo-V2.5",
+    "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
+    "context_length": 1050000,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000005"
+      "prompt": "0.00000014",
+      "completion": "0.00000028"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
-        "image"
+        "audio",
+        "image",
+        "video"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Grok"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1758240090
+    "created": 1776874269
   },
   {
-    "id": "x-ai/grok-4.1-fast",
-    "name": "xAI: Grok 4.1 Fast",
-    "description": "Grok 4.1 Fast is xAI's best agentic tool calling model that shines in real-world use cases like customer support and deep research. 2M context window.\n\nReasoning can be enabled/disabled using the `reasoning` `enabled` parameter in the API. [Learn more in our docs](https://openrouter.ai/docs/use-c...",
-    "context_length": 2000000,
+    "id": "xiaomi/mimo-v2.5-pro",
+    "name": "Xiaomi: MiMo-V2.5-Pro",
+    "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
+    "context_length": 1050000,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000005"
+      "prompt": "0.000000435",
+      "completion": "0.00000087"
     },
     "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1776874273
+  },
+  {
+    "id": "xiaomi/mimo-v2.6-flash",
+    "name": "Xiaomi: MiMo-V2.6-Flash",
+    "description": "MiMo-V2.6-Flash is an open-source foundation model developed by Xiaomi. Built on a Mixture-of-Experts architecture with 309B total parameters and 15B activated per token, it employs a hybrid attention mechanism for...",
+    "context_length": 1050000,
+    "pricing": {
+      "prompt": "0.00000014",
+      "completion": "0.00000028"
+    },
+    "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "video",
+        "audio"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Grok"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1763587502
+    "created": 1790021264
   },
   {
-    "id": "x-ai/grok-code-fast-1",
-    "name": "xAI: Grok Code Fast 1",
-    "description": "Grok Code Fast 1 is a speedy and economical reasoning model that excels at agentic coding. With reasoning traces visible in the response, developers can steer Grok Code for high-quality work flows.",
-    "context_length": 256000,
+    "id": "xiaomi/mimo-v2.6-pro",
+    "name": "Xiaomi: MiMo-V2.6-Pro",
+    "description": "MiMo-V2.6-Pro is the flagship foundation model developed by Xiaomi. Built at a scale of over 1T parameters, it is designed to push the ceiling of capability for the most demanding...",
+    "context_length": 1050000,
     "pricing": {
-      "prompt": "0.0000002",
-      "completion": "0.0000015"
+      "prompt": "0.000000435",
+      "completion": "0.00000087"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
-        "text"
+        "text",
+        "image",
+        "video",
+        "audio"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Grok"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1756238927
+    "created": 1790021259
   },
   {
-    "id": "xiaomi/mimo-v2-flash:free",
-    "name": "Xiaomi: MiMo-V2-Flash (free)",
-    "description": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a hybrid-thinking toggle and a 256K context window, and excels at re...",
+    "id": "xiaomi/mimo-v2.6-pro-ultraspeed",
+    "name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+    "description": "MiMo-V2.6-Pro-UltraSpeed is the fast speed edition of Xiaomi's flagship foundation model, MiMo-V2.6-Pro. Built from the same 1T MiMo-V2.6-Pro checkpoint, it matches the original model in quality while delivering roughly 10x...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000435",
+      "completion": "0.0000087"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790021267
+  },
+  {
+    "id": "xingchen-agi/xing4.0-29b-a4b:free",
+    "name": "XingChen: Xing4.0 29B A4B (free)",
+    "description": "Xing4.0-29B-A4B is an open-weight mixture-of-experts language model from China Telecom's AI team (TeleAI) and the successor to the TeleChat series. It has 29B total parameters with 4B active per token...",
     "context_length": 262144,
     "pricing": {
       "prompt": "0",
       "completion": "0"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
-    "created": 1765731308
-  },
-  {
-    "id": "z-ai/glm-4-32b",
-    "name": "Z.AI: GLM 4 32B ",
-    "description": "GLM 4 32B is a cost-effective foundation language model.\n\nIt can efficiently perform complex tasks and has significantly enhanced capabilities in tool use, online search, and code-related intelligent tasks.\n\nIt is made by the same lab behind the thudm models.",
-    "context_length": 128000,
-    "pricing": {
-      "prompt": "0.0000001",
-      "completion": "0.0000001"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1753376617
+    "created": 1792177496
   },
   {
     "id": "z-ai/glm-4.5",
-    "name": "Z.AI: GLM 4.5",
-    "description": "GLM-4.5 is our latest flagship foundation model, purpose-built for agent-based applications. It leverages a Mixture-of-Experts (MoE) architecture and supports a context length of up to 128k tokens. GLM-4.5 delivers significantly enhanced capabilities in reasoning, code generation, and agent align...",
+    "name": "Z.ai: GLM 4.5",
+    "description": "GLM-4.5 is our latest flagship foundation model, purpose-built for agent-based applications. It leverages a Mixture-of-Experts (MoE) architecture and supports a context length of up to 128k tokens. GLM-4.5 delivers significantly...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000035",
-      "completion": "0.00000155"
+      "prompt": "0.0000006",
+      "completion": "0.0000022"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -8145,45 +14162,28 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   },
   {
     "id": "z-ai/glm-4.5-air",
-    "name": "Z.AI: GLM 4.5 Air",
-    "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter size. GLM-4.5-Air also supports hybrid inference modes, offering a \"th...",
+    "name": "Z.ai: GLM 4.5 Air",
+    "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter...",
     "context_length": 131072,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.00000022"
+      "prompt": "0.00000013",
+      "completion": "0.00000085"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1753471258
-  },
-  {
-    "id": "z-ai/glm-4.5-air:free",
-    "name": "Z.AI: GLM 4.5 Air (free)",
-    "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter size. GLM-4.5-Air also supports hybrid inference modes, offering a \"th...",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0",
-      "completion": "0"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -8191,23 +14191,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   },
   {
     "id": "z-ai/glm-4.5v",
-    "name": "Z.AI: GLM 4.5V",
-    "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding, image Q&A, OCR, and document parsing, with strong gain...",
+    "name": "Z.ai: GLM 4.5V",
+    "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding,...",
     "context_length": 65536,
     "pricing": {
       "prompt": "0.0000006",
       "completion": "0.0000018"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text",
         "image"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -8215,45 +14222,30 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   },
   {
     "id": "z-ai/glm-4.6",
-    "name": "Z.AI: GLM 4.6",
-    "description": "Compared with GLM-4.5, this generation brings several key improvements:\n\nLonger context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex agentic tasks.\nSuperior coding performance: The model achieves higher scores on code benchmarks ...",
-    "context_length": 202752,
-    "pricing": {
-      "prompt": "0.00000035",
-      "completion": "0.0000015"
-    },
-    "architecture": {
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "tokenizer": "Other"
-    },
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1759235576
-  },
-  {
-    "id": "z-ai/glm-4.6:exacto",
-    "name": "Z.AI: GLM 4.6 (exacto)",
-    "description": "Compared with GLM-4.5, this generation brings several key improvements:\n\nLonger context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex agentic tasks.\nSuperior coding performance: The model achieves higher scores on code benchmarks ...",
+    "name": "Z.ai: GLM 4.6",
+    "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
     "context_length": 204800,
     "pricing": {
-      "prompt": "0.00000044",
-      "completion": "0.00000176"
+      "prompt": "0.00000055",
+      "completion": "0.0000022"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -8261,14 +14253,15 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   },
   {
     "id": "z-ai/glm-4.6v",
-    "name": "Z.AI: GLM 4.6V",
-    "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts and charts directly as visual inputs, and integrates native multimodal function ...",
+    "name": "Z.ai: GLM 4.6V",
+    "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts...",
     "context_length": 131072,
     "pricing": {
       "prompt": "0.0000003",
       "completion": "0.0000009"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "image",
         "text",
@@ -8276,9 +14269,15 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
@@ -8286,31 +14285,479 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
   },
   {
     "id": "z-ai/glm-4.7",
-    "name": "Z.AI: GLM 4.7",
-    "description": "GLM-4.7 is Z.AI’s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution. It demonstrates significant improvements in executing complex agent tasks while delivering more natural conversational experiences and su...",
-    "context_length": 202752,
+    "name": "Z.ai: GLM 4.7",
+    "description": "GLM-4.7 is Z.ai’s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution. It demonstrates significant improvements in executing complex agent tasks while...",
+    "context_length": 204800,
     "pricing": {
-      "prompt": "0.0000004",
-      "completion": "0.0000015"
+      "prompt": "0.00000054",
+      "completion": "0.00000198"
     },
     "architecture": {
+      "tokenizer": "Other",
       "input_modalities": [
         "text"
       ],
       "output_modalities": [
         "text"
-      ],
-      "tokenizer": "Other"
+      ]
     },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
     "top_provider": {
       "is_moderated": false
     },
     "created": 1766378014
+  },
+  {
+    "id": "z-ai/glm-4.7-flash",
+    "name": "Z.ai: GLM 4.7 Flash",
+    "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
+    "context_length": 200000,
+    "pricing": {
+      "prompt": "0.0000000605",
+      "completion": "0.0000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1768833913
+  },
+  {
+    "id": "z-ai/glm-5",
+    "name": "Z.ai: GLM 5",
+    "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
+    "context_length": 204800,
+    "pricing": {
+      "prompt": "0.000001",
+      "completion": "0.0000032"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1770829182
+  },
+  {
+    "id": "z-ai/glm-5-turbo",
+    "name": "Z.ai: GLM 5 Turbo",
+    "description": "GLM-5 Turbo is a new model from Z.ai designed for fast inference and strong performance in agent-driven environments such as OpenClaw scenarios. It is deeply optimized for real-world agent workflows...",
+    "context_length": 202752,
+    "pricing": {
+      "prompt": "0.0000012",
+      "completion": "0.000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1773583573
+  },
+  {
+    "id": "z-ai/glm-5.1",
+    "name": "Z.ai: GLM 5.1",
+    "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
+    "context_length": 204800,
+    "pricing": {
+      "prompt": "0.000000966",
+      "completion": "0.000003036"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775578025
+  },
+  {
+    "id": "z-ai/glm-5.2",
+    "name": "Z.ai: GLM 5.2",
+    "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000062",
+      "completion": "0.00000242"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1781631930
+  },
+  {
+    "id": "z-ai/glm-5.3",
+    "name": "Z.ai: GLM 5.3",
+    "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000079",
+      "completion": "0.0000014"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787086655
+  },
+  {
+    "id": "z-ai/glm-5.3:batch",
+    "name": "Z.ai: GLM 5.3 (batch)",
+    "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000045",
+      "completion": "0.000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787086655
+  },
+  {
+    "id": "z-ai/glm-5.3-flash",
+    "name": "Z.ai: GLM 5.3 Flash",
+    "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000000352",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787752741
+  },
+  {
+    "id": "z-ai/glm-5.3-flash:batch",
+    "name": "Z.ai: GLM 5.3 Flash (batch)",
+    "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000005",
+      "completion": "0.00000018"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787752741
+  },
+  {
+    "id": "z-ai/glm-5.3-flashx",
+    "name": "Z.ai: GLM 5.3 FlashX",
+    "description": "GLM-5.3-FlashX is the high-speed variant of Z.ai's GLM-5.3-Flash, a native multimodal model delivering inference speeds of up to 200 tokens/s. Built on the same hybrid sparse and linear attention architecture...",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000037",
+      "completion": "0.00000125"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1789744020
+  },
+  {
+    "id": "z-ai/glm-5.3-prime",
+    "name": "Z.ai: GLM 5.3 Prime",
+    "description": "GLM-5.3-Prime is the high-speed variant of Z.ai's GLM-5.3, inheriting its full capabilities while delivering 1.5–2× the output throughput through inference acceleration. It supports text input and output with a 1M-token...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000028",
+      "completion": "0.0000088"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1790199651
+  },
+  {
+    "id": "z-ai/glm-5v-turbo",
+    "name": "Z.ai: GLM 5V Turbo",
+    "description": "GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,...",
+    "context_length": 202752,
+    "pricing": {
+      "prompt": "0.0000012",
+      "completion": "0.000004"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1775061458
+  },
+  {
+    "id": "~z-ai/glm-flash-latest",
+    "name": "Z.ai: GLM Flash Latest",
+    "description": "This model always redirects to the latest model in the GLM Flash family.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.0000000352",
+      "completion": "0.0000002"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787817633
+  },
+  {
+    "id": "~z-ai/glm-latest",
+    "name": "Z.ai: GLM Latest",
+    "description": "This model always redirects to the latest GLM model from Z.ai.",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.00000004",
+      "completion": "0.000006"
+    },
+    "architecture": {
+      "tokenizer": "Router",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1787151053
   }
 ];
 
 export const OPENROUTER_DATA_META = {
-    generatedAt: '2026-01-09',
-    totalModels: 348,
+    generatedAt: '2026-10-19',
+    totalModels: 471,
     source: 'https://openrouter.ai',
 };

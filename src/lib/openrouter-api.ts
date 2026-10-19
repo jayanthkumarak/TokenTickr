@@ -159,6 +159,8 @@ export class OpenRouterAPI {
   public static formatPrice(price: string): string {
     const priceNum = parseFloat(price);
     if (isNaN(priceNum) || priceNum === 0) return 'Free';
+    // OpenRouter "-1" means unpublished/variable pricing (e.g. routers)
+    if (priceNum < 0) return 'Varies';
 
     // Convert to price per million tokens
     const pricePerMillion = priceNum * 1000000;

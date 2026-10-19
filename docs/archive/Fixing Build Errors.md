@@ -1,3 +1,8 @@
+> ARCHIVED 2026-10 — historical Pages-era troubleshooting log, kept for reference only.
+> Current build: `npm run build` → `out/`, deploy via `npm run deploy` (`npx wrangler deploy`) to Cloudflare Workers Static Assets.
+> Do not follow old Pages dashboard / `wrangler versions upload` steps below.
+>
+
 # Chat Conversation
 
 Note: _This is purely the output of the chat conversation and does not contain any raw data, codebase snippets, etc. used to generate the output._

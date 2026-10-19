@@ -13,7 +13,11 @@ import {
 import { X, DollarSign, Cpu, Settings, ChevronDown, Info } from "lucide-react";
 import { OpenRouterModel } from "@/types/models";
 import { OpenRouterAPI } from "@/lib/openrouter-api";
-import { SEMANTIC_COLORS, ACCESSIBLE_COLORS } from "@/lib/colorblind-colors";
+import { SEMANTIC_COLORS } from "@/lib/colorblind-colors";
+import {
+  getAgentCapabilitySummary,
+  getOutputPremiumRatio,
+} from "@/lib/capability-bonus";
 import { cn } from "@/lib/utils";
 
 export type ModelCardVariant = "detailed" | "compact";
@@ -37,6 +41,50 @@ interface ModelCardProps {
   columnCount?: number;
 }
 
+function AgenticReadinessRow({ model, compact = false }: { model: OpenRouterModel; compact?: boolean }) {
+  const summary = getAgentCapabilitySummary(model);
+  const outputRatio = getOutputPremiumRatio(model);
+  const cacheRead = model.pricing.input_cache_reads
+    ? OpenRouterAPI.formatPrice(model.pricing.input_cache_reads)
+    : null;
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">
+        Agentic Readiness
+      </p>
+      <div className="flex flex-wrap gap-1.5">
+        <Badge variant={summary.tools ? "default" : "outline"} className="text-xs px-2 py-0.5">
+          Tools
+        </Badge>
+        <Badge variant={summary.thinking ? "default" : "outline"} className="text-xs px-2 py-0.5">
+          Thinking
+        </Badge>
+        <Badge variant={summary.structuredOutputs ? "default" : "outline"} className="text-xs px-2 py-0.5">
+          JSON Schema
+        </Badge>
+        <Badge variant={summary.promptCaching ? "default" : "outline"} className="text-xs px-2 py-0.5">
+          Cache
+        </Badge>
+      </div>
+      {!compact && (
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+          {cacheRead && (
+            <span>
+              Cache Read: <span className="font-mono tabular-nums text-foreground">{cacheRead}</span>
+            </span>
+          )}
+          <span>
+            Output Ratio:{" "}
+            <span className="font-mono tabular-nums text-foreground">
+              {outputRatio > 0 ? `${outputRatio.toFixed(1)}x` : "—"}
+            </span>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ModelCard({
   model,
   onRemove,
@@ -49,6 +97,7 @@ export function ModelCard({
   ranking,
   columnCount = 3,
 }: ModelCardProps) {
+  void columnCount;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
@@ -94,35 +143,6 @@ export function ModelCard({
   const completionPrice = OpenRouterAPI.formatPrice(model.pricing.completion);
   const contextLength = OpenRouterAPI.formatContextLength(model.context_length);
 
-  // Helper to get ranking badge styles
-  const getCostRankingStyle = () => {
-    if (!ranking) return null;
-    if (ranking.costRank === "cheapest") {
-      return { bg: ACCESSIBLE_COLORS.success[600], label: "Cheapest" };
-    }
-    if (ranking.costRank === "expensive") {
-      return { bg: ACCESSIBLE_COLORS.warning[600], label: "Most Expensive" };
-    }
-    return null;
-  };
-
-  const getContextRankingStyle = () => {
-    if (!ranking) return null;
-    if (ranking.contextRank === "largest") {
-      return { bg: ACCESSIBLE_COLORS.success[600], label: "Largest Context" };
-    }
-    if (ranking.contextRank === "smallest") {
-      return { bg: ACCESSIBLE_COLORS.warning[600], label: "Smallest Context" };
-    }
-    return null;
-  };
-
-  const costRankStyle = getCostRankingStyle();
-  const contextRankStyle = getContextRankingStyle();
-
-  // Check if description is long enough to need truncation
-  const needsTruncation = model.description && model.description.length > 150;
-
   // Compact mode renders a minimal card
   if (variant === "compact") {
     return (
@@ -143,27 +163,34 @@ export function ModelCard({
                 size="sm"
                 onClick={onRemove}
                 className="h-7 w-7 p-0 shrink-0"
+                aria-label={`Remove ${model.name}`}
               >
                 <X className="h-3.5 w-3.5" />
               </Button>
             )}
           </div>
           {/* Ranking Badges - Compact */}
-          {(costRankStyle || contextRankStyle) && (
+          {ranking && (ranking.costRank !== "middle" || ranking.contextRank !== "middle") && (
             <div className="flex flex-wrap gap-1 mt-1.5">
-              {costRankStyle && (
-                <span
-                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: costRankStyle.bg }}
-                >
-                  {costRankStyle.label}
-                </span>
+              {ranking.costRank === "cheapest" && (
+                <Badge variant="default" className="text-xs px-1.5 py-0">
+                  Cheapest
+                </Badge>
               )}
-              {contextRankStyle && (
-                <span
-                  className="text-[10px] font-medium px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: contextRankStyle.bg }}
-                >
-                  {contextRankStyle.label}
-                </span>
+              {ranking.costRank === "expensive" && (
+                <Badge variant="destructive" className="text-xs px-1.5 py-0">
+                  Most Expensive
+                </Badge>
+              )}
+              {ranking.contextRank === "largest" && (
+                <Badge variant="default" className="text-xs px-1.5 py-0">
+                  Largest Context
+                </Badge>
+              )}
+              {ranking.contextRank === "smallest" && (
+                <Badge variant="secondary" className="text-xs px-1.5 py-0">
+                  Smallest Context
+                </Badge>
               )}
             </div>
           )}
@@ -173,7 +200,7 @@ export function ModelCard({
               <Badge
                 key={`in-${modality}`}
                 variant="outline"
-                className="text-[10px] px-1.5 py-0 h-4"
+                className="text-xs px-1.5 py-0 h-4"
               >
                 in: {modality}
               </Badge>
@@ -182,7 +209,7 @@ export function ModelCard({
               <Badge
                 key={`out-${modality}`}
                 variant="secondary"
-                className="text-[10px] px-1.5 py-0 h-4"
+                className="text-xs px-1.5 py-0 h-4"
               >
                 out: {modality}
               </Badge>
@@ -197,12 +224,12 @@ export function ModelCard({
               <div className="flex items-center gap-1">
                 <DollarSign className="h-3 w-3 shrink-0" style={{ color: SEMANTIC_COLORS.savings }} />
                 <span className="text-muted-foreground">Prompt:</span>
-                <span className="font-medium">{promptPrice}</span>
+                <span className="font-mono tabular-nums font-medium">{promptPrice}</span>
               </div>
               <div className="flex items-center gap-1">
                 <DollarSign className="h-3 w-3 shrink-0" style={{ color: SEMANTIC_COLORS.highlight }} />
                 <span className="text-muted-foreground">Completion:</span>
-                <span className="font-medium">{completionPrice}</span>
+                <span className="font-mono tabular-nums font-medium">{completionPrice}</span>
               </div>
             </div>
 
@@ -210,8 +237,10 @@ export function ModelCard({
             <div className="flex items-center gap-1 text-xs">
               <Cpu className="h-3 w-3" style={{ color: SEMANTIC_COLORS.neutral }} />
               <span className="text-muted-foreground">Context:</span>
-              <span className="font-medium">{contextLength} tokens</span>
+              <span className="font-mono tabular-nums font-medium">{contextLength} tokens</span>
             </div>
+
+            <AgenticReadinessRow model={model} compact />
           </div>
 
           {/* View Details Button - Anchored to bottom */}
@@ -230,27 +259,20 @@ export function ModelCard({
   }
 
   // Detailed mode (default)
-
-  const isVeryNarrow = columnCount >= 5;
+  const needsTruncation = model.description && model.description.length > 150;
 
   return (
     <Card className={cn("w-full transition-all duration-200", className)}>
-      <CardHeader className={cn("pb-3", isVeryNarrow ? "px-3" : "px-6")}>
+      <CardHeader className="pb-3 px-6">
         <div className="flex items-start justify-between gap-2 min-w-0 w-full relative">
           <div className="flex-1 min-w-0 pr-6">
             <CardTitle
-              className={cn(
-                "leading-tight line-clamp-2 break-words flex items-center",
-                isVeryNarrow ? "text-base min-h-[2.2rem]" : "text-lg min-h-[2.5rem]"
-              )}
+              className="leading-tight line-clamp-2 break-words flex items-center text-lg min-h-[2.5rem]"
               title={model.name}
             >
               {model.name}
             </CardTitle>
-            <p className={cn(
-              "text-muted-foreground mt-1 font-mono opacity-60 truncate",
-              isVeryNarrow ? "text-[10px]" : "text-xs"
-            )}>
+            <p className="text-xs text-muted-foreground mt-1 font-mono opacity-60 truncate">
               {model.id}
             </p>
           </div>
@@ -259,39 +281,35 @@ export function ModelCard({
               variant="ghost"
               size="sm"
               onClick={onRemove}
-              className={cn(
-                "p-0 shrink-0 absolute right-0 top-0 text-muted-foreground hover:text-destructive transition-colors",
-                isVeryNarrow ? "h-6 w-6" : "h-8 w-8"
-              )}
+              aria-label={`Remove ${model.name}`}
+              className="p-0 shrink-0 absolute right-0 top-0 h-8 w-8 text-muted-foreground hover:text-destructive transition-colors"
             >
-              <X className={cn(isVeryNarrow ? "h-3.5 w-3.5" : "h-4 w-4")} />
+              <X className="h-4 w-4" />
             </Button>
           )}
         </div>
         {/* Ranking Badges */}
-        {(costRankStyle || contextRankStyle) && (
+        {ranking && (ranking.costRank !== "middle" || ranking.contextRank !== "middle") && (
           <div className="flex flex-wrap gap-1 mt-2">
-            {costRankStyle && (
-              <span
-                className={cn(
-                  "font-medium px-2 py-0.5 rounded text-white", // theme-ignore
-                  isVeryNarrow ? "text-[9px]" : "text-xs"
-                )}
-                style={{ backgroundColor: costRankStyle.bg }}
-              >
-                {costRankStyle.label}
-              </span>
+            {ranking.costRank === "cheapest" && (
+              <Badge variant="default" className="text-xs px-2 py-0.5">
+                Cheapest
+              </Badge>
             )}
-            {contextRankStyle && (
-              <span
-                className={cn(
-                  "font-medium px-2 py-0.5 rounded text-white", // theme-ignore
-                  isVeryNarrow ? "text-[9px]" : "text-xs"
-                )}
-                style={{ backgroundColor: contextRankStyle.bg }}
-              >
-                {contextRankStyle.label}
-              </span>
+            {ranking.costRank === "expensive" && (
+              <Badge variant="destructive" className="text-xs px-2 py-0.5">
+                Most Expensive
+              </Badge>
+            )}
+            {ranking.contextRank === "largest" && (
+              <Badge variant="default" className="text-xs px-2 py-0.5">
+                Largest Context
+              </Badge>
+            )}
+            {ranking.contextRank === "smallest" && (
+              <Badge variant="secondary" className="text-xs px-2 py-0.5">
+                Smallest Context
+              </Badge>
             )}
           </div>
         )}
@@ -301,10 +319,7 @@ export function ModelCard({
             <Badge
               key={`in-${modality}`}
               variant="outline"
-              className={cn(
-                "px-2 py-0.5",
-                isVeryNarrow ? "text-[9px]" : "text-xs"
-              )}
+              className="text-xs px-2 py-0.5"
             >
               in: {modality}
             </Badge>
@@ -313,17 +328,14 @@ export function ModelCard({
             <Badge
               key={`out-${modality}`}
               variant="secondary"
-              className={cn(
-                "px-2 py-0.5",
-                isVeryNarrow ? "text-[9px]" : "text-xs"
-              )}
+              className="text-xs px-2 py-0.5"
             >
               out: {modality}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      <CardContent className={cn("space-y-4 pt-0", isVeryNarrow ? "px-3" : "px-6")}>
+      <CardContent className="space-y-4 pt-0 px-6">
         {/* Description with truncation */}
         {model.description && (
           <div>
@@ -355,7 +367,7 @@ export function ModelCard({
             />
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground">Prompt</p>
-              <p className="font-medium text-sm truncate">{promptPrice}</p>
+              <p className="font-mono tabular-nums font-medium text-sm truncate">{promptPrice}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 p-2.5 bg-muted/40 rounded-lg">
@@ -365,7 +377,7 @@ export function ModelCard({
             />
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground">Completion</p>
-              <p className="font-medium text-sm truncate">{completionPrice}</p>
+              <p className="font-mono tabular-nums font-medium text-sm truncate">{completionPrice}</p>
             </div>
           </div>
         </div>
@@ -377,9 +389,11 @@ export function ModelCard({
           />
           <div>
             <p className="text-xs text-muted-foreground">Context Window</p>
-            <p className="font-medium text-sm">{contextLength} tokens</p>
+            <p className="font-mono tabular-nums font-medium text-sm">{contextLength} tokens</p>
           </div>
         </div>
+
+        <AgenticReadinessRow model={model} />
 
         {/* Collapsible Details */}
         <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>

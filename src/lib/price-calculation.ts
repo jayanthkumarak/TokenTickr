@@ -3,10 +3,12 @@
 import { OpenRouterModel } from '@/types/models';
 import { getModelEval, CONTEXT_FALLBACKS } from './static-eval-map';
 
-import { calculateCapabilityBonus, getCapabilityFlags } from './capability-bonus';
+import { calculateCapabilityBonus, getCapabilityFlags, supportsStructuredOutputs } from './capability-bonus';
 import {
   AA_ATTRIBUTION,
-  getMMLUProSync
+  getMMLUProSync,
+  getAAIntelligenceIndexSync,
+  intelligenceIndexToElo,
 } from './artificial-analysis-api';
 import { TOKEN_ESTIMATES } from './token-estimates';
 
@@ -115,6 +117,14 @@ export interface PriceCalculationResult {
   tier?: 'sota' | 'pro' | 'standard' | 'basic'; // Added for UI display
   /** Detected capabilities (e.g., ['Thinking', 'Multimodal', 'Tools']) */
   capabilityFlags?: string[];
+  /** Completion-to-prompt per-token price ratio (0 when prompt price is 0). */
+  outputPremiumRatio: number;
+  /** Cost of filling the full context window with prompt tokens. */
+  contextFillCost: number;
+  /** Estimated agent turns that fit in context: floor((ctx - 4096) / 4000). */
+  agentTurnsCapacity: number;
+  /** Whether the model advertises structured-output support. */
+  structuredOutputSupported: boolean;
 }
 
 export interface ModelComparison {
@@ -139,13 +149,27 @@ export interface PriceComparisonData {
 }
 
 /**
+ * Tokens consumed per task. Defaults to the shared TOKEN_ESTIMATES values.
+ */
+export interface TokensPerTask {
+  prompt: number;
+  completion: number;
+}
+
+/**
  * Calculate cost for a single query using a specific model
  */
-export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResult {
+export function calculateQueryCost(
+  model: OpenRouterModel,
+  tokensPerTask: { prompt: number; completion: number } = {
+    prompt: TOKEN_ESTIMATES.PROMPT_TOKENS,
+    completion: TOKEN_ESTIMATES.COMPLETION_TOKENS,
+  },
+): PriceCalculationResult {
   // Parse pricing strings to numbers (handle "0" and various formats)
   const parsePrice = (priceStr: string | undefined): number => {
     if (!priceStr) return 0;
-    // Handle "-1" which OpenRouter sometimes returns for unknown prices? 
+    // Handle "-1" which OpenRouter sometimes returns for unknown prices?
     // Usually it's just "0" or "0.0000..."
     const parsed = parseFloat(priceStr);
     return isNaN(parsed) || parsed < 0 ? 0 : parsed;
@@ -161,9 +185,15 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
   const promptPricePerToken = rawPromptPrice;
   const completionPricePerToken = rawCompletionPrice;
 
-  const promptCost = promptPricePerToken * TOKEN_ESTIMATES.PROMPT_TOKENS;
-  const completionCost = completionPricePerToken * TOKEN_ESTIMATES.COMPLETION_TOKENS;
+  const promptCost = promptPricePerToken * tokensPerTask.prompt;
+  const completionCost = completionPricePerToken * tokensPerTask.completion;
   const costPerQuery = promptCost + completionCost;
+
+  const contextLength = model.context_length ?? 0;
+  const outputPremiumRatio =
+    promptPricePerToken > 0 ? completionPricePerToken / promptPricePerToken : 0;
+  const contextFillCost = contextLength * promptPricePerToken;
+  const agentTurnsCapacity = Math.max(0, Math.floor((contextLength - 4096) / 4000));
 
   return {
     modelId: model.id,
@@ -180,13 +210,17 @@ export function calculateQueryCost(model: OpenRouterModel): PriceCalculationResu
     percentageFromCheapest: 0, // Will be calculated later
     costRatioFromCheapest: 0, // Will be calculated later
     // Initialize new fields
-    contextLength: model.context_length,
+    contextLength,
     valueScore: 0,
     contextScore: 0,
     priceScore: 0,
     perfScore: 0,
     eloScore: undefined,
     eloSource: undefined,
+    outputPremiumRatio,
+    contextFillCost,
+    agentTurnsCapacity,
+    structuredOutputSupported: supportsStructuredOutputs(model),
   };
 }
 
@@ -225,7 +259,8 @@ function generateModelComparisons(results: PriceCalculationResult[]): ModelCompa
  */
 export function calculatePriceComparison(
   models: OpenRouterModel[],
-  queryVolume: number = DEFAULT_QUERY_VOLUME
+  queryVolume: number = DEFAULT_QUERY_VOLUME,
+  tokensPerTask?: { prompt: number; completion: number },
 ): PriceComparisonData {
   if (!models || models.length === 0) {
     return {
@@ -242,7 +277,9 @@ export function calculatePriceComparison(
   const results = models
     .map(model => {
       try {
-        const queryCost = calculateQueryCost(model);
+        const queryCost = tokensPerTask
+          ? calculateQueryCost(model, tokensPerTask)
+          : calculateQueryCost(model);
         const totalCost = queryCost.costPerQuery * queryVolume;
         const yearlyProjection = totalCost * 12;
 
@@ -275,6 +312,10 @@ export function calculatePriceComparison(
           perfScore: 0,
           eloScore: undefined,
           eloSource: undefined,
+          outputPremiumRatio: 0,
+          contextFillCost: 0,
+          agentTurnsCapacity: 0,
+          structuredOutputSupported: false,
         };
       }
     })
@@ -350,8 +391,8 @@ export function calculatePriceComparison(
       contextScore = Math.min(100, baseScore + bonus);
     }
 
-    // 3. Performance Score (Cascading: MMLU-Pro (AA) → Static Override → Insufficient Data)
-    // We strictly avoid "estimating" or "hallucinating" data for missing models.
+    // 3. Performance Score (Cascade: static-override → MMLU-Pro (AA) →
+    //    AA Intelligence Index → static lmsys/estimated → insufficient-data)
 
     let elo = 0;
     const mmluPro = getMMLUProSync(result.modelId);
@@ -392,11 +433,19 @@ export function calculatePriceComparison(
       eloSource = 'mmlu-pro';
 
     } else {
-      // Insufficient Data
-      // We do NOT fall back to heuristics or estimates.
-      // Effectively score is 0, will be filtered out or shown as "N/A"
-      elo = 0;
-      eloSource = 'insufficient-data';
+      const intelligenceIndex = getAAIntelligenceIndexSync(result.modelId);
+      if (intelligenceIndex !== null) {
+        elo = intelligenceIndexToElo(intelligenceIndex);
+        eloSource = 'artificial-analysis';
+      } else if (staticEval && (staticEval.source === 'lmsys' || staticEval.source === 'estimated')) {
+        elo = staticEval.elo;
+        eloSource = staticEval.source;
+      } else {
+        // Insufficient Data
+        // Effectively score is 0, will be filtered out or shown as "N/A"
+        elo = 0;
+        eloSource = 'insufficient-data';
+      }
     }
 
     // Apply capability bonuses only if we have a valid base score

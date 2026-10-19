@@ -96,29 +96,17 @@ function getOrCreateSession(): SessionData {
 }
 
 /**
- * Fire-and-forget log to the API
+ * Fire-and-forget log to the API.
+ * Offline stub: telemetry endpoint removed with Pages Functions.
+ * Kept as console.debug so logSessionStart/logComparison callers don't change.
  */
 async function sendLog(payload: {
     session_id: string;
     event_type: 'session_start' | 'comparison';
     models?: string[];
 }): Promise<void> {
-    // Don't log in development (localhost)
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        console.debug('[UsageLogger]', payload);
-        return;
-    }
-
-    try {
-        await fetch('/api/log', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-            keepalive: true, // Survives page navigation
-        });
-    } catch {
-        // Silently ignore - logging should never fail the app
-    }
+    console.debug('[UsageLogger] (offline stub, no endpoint)', payload);
+    return;
 }
 
 /**
