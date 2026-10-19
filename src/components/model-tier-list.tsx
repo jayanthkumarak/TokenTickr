@@ -174,7 +174,7 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
                                     <div className="flex items-center gap-3">
                                         {/* Intelligence Bar */}
                                         <div className="flex-1 flex flex-col gap-0.5">
-                                            <div className="flex justify-between text-[9px] text-muted-foreground uppercase tracking-wider font-medium">
+                                            <div className="flex justify-between text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
                                                 <span>Intel</span>
                                                 <span>{model.perfScore.toFixed(0)}</span>
                                             </div>
@@ -188,8 +188,8 @@ export function ModelTierList({ results, className }: ModelTierListProps) {
 
                                         {/* Memory Badge */}
                                         <div className="flex flex-col items-end gap-0.5 min-w-[36px]">
-                                            <span className="text-[9px] text-muted-foreground uppercase tracking-wider font-medium">Mem</span>
-                                            <span className="text-[10px] font-mono font-bold text-zinc-300">
+                                            <span className="text-[11px] text-muted-foreground uppercase tracking-wider font-medium">Mem</span>
+                                            <span className="text-xs font-mono font-bold text-foreground">
                                                 {formatContext(model.contextLength)}
                                             </span>
                                         </div>

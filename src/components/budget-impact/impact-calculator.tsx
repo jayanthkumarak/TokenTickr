@@ -75,7 +75,7 @@ export function ImpactCalculator({ results, className }: ImpactCalculatorProps) 
                 <div className="space-y-1">
                     <h3 className="text-xl font-bold flex items-center gap-2 text-foreground">
                         <Zap className="h-5 w-5 text-amber-500 fill-amber-500" />
-                        Real-World Impact
+                        Agent Runway
                     </h3>
                     <p className="text-sm text-muted-foreground">
                         Translate abstract token costs into agent tasks per budget.

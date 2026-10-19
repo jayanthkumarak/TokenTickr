@@ -3,7 +3,7 @@
  * 
  * Generated: 2026-10-19
  * Source: https://openrouter.ai/api/v1/models
- * Total models: 471
+ * Total models: 470
  * 
  * DO NOT EDIT MANUALLY - Run 'npm run generate:static-data' to regenerate
  */
@@ -1970,8 +1970,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000005",
-      "completion": "0.00000015"
+      "prompt": "0.00000004",
+      "completion": "0.0000006"
     },
     "architecture": {
       "tokenizer": "Router",
@@ -2002,7 +2002,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.000000225",
+      "prompt": "0.0000001307",
       "completion": "0.000008"
     },
     "architecture": {
@@ -2280,7 +2280,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000001208",
+      "prompt": "0.00000000688",
       "completion": "0.00000012"
     },
     "architecture": {
@@ -2343,8 +2343,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000095526",
-      "completion": "0.00000191052"
+      "prompt": "0.00000040716",
+      "completion": "0.00000081432"
     },
     "architecture": {
       "tokenizer": "DeepSeek",
@@ -2405,7 +2405,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000000456",
+      "prompt": "0.000000032",
       "completion": "0.00000008"
     },
     "architecture": {
@@ -2469,8 +2469,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "DeepSeek V4.1 Flash 1017 is the October 17, 2026 snapshot of DeepSeek V4.1 Flash, served by DeepSeek under the `deepseek-flash` API model name. V4.1 Flash is a sparse mixture-of-experts model...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000003",
-      "completion": "0.0000012"
+      "prompt": "0.00000015",
+      "completion": "0.0000006"
     },
     "architecture": {
       "tokenizer": "DeepSeek",
@@ -2494,37 +2494,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1792225624
-  },
-  {
-    "id": "deepseek/deepseek-r1",
-    "name": "DeepSeek: R1",
-    "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
-    "context_length": 64000,
-    "pricing": {
-      "prompt": "0.0000007",
-      "completion": "0.0000025"
-    },
-    "architecture": {
-      "tokenizer": "DeepSeek",
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "instruct_type": "deepseek-r1"
-    },
-    "supported_parameters": [
-      "include_reasoning",
-      "reasoning",
-      "response_format",
-      "tool_choice",
-      "tools"
-    ],
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1737381095
   },
   {
     "id": "deepseek/deepseek-r1-0528",
@@ -4376,6 +4345,37 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1788892137
   },
   {
+    "id": "inception/mercury-3",
+    "name": "Inception: Mercury 3",
+    "description": "Mercury 3 is a diffusion-based language model from Inception, and the lab's most capable model to date. It is suited for agentic workflows and real-time applications where latency compounds, such...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.00000035"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792158337
+  },
+  {
     "id": "inclusionai/ling-3.0-flash",
     "name": "inclusionAI: Ling 3.0 Flash",
     "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
@@ -4814,7 +4814,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "id": "meta-llama/llama-4-maverick",
     "name": "Meta: Llama 4 Maverick",
     "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
-    "context_length": 1048576,
+    "context_length": 524288,
     "pricing": {
       "prompt": "0.0000001875",
       "completion": "0.0000006525"
@@ -5399,6 +5399,38 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1780245374
+  },
+  {
+    "id": "minimax/minimax-m3.1-flash:free",
+    "name": "MiniMax: MiniMax M3.1 Flash (free)",
+    "description": "MiniMax-M3.1-Flash is a multimodal model from MiniMax. Compared with M3, it delivers significant improvements across multiple benchmarks, particularly in complex agentic tasks, coding, and cybersecurity. It is built for complex,...",
+    "context_length": 1000000,
+    "pricing": {
+      "prompt": "0",
+      "completion": "0"
+    },
+    "architecture": {
+      "tokenizer": "Other",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ]
+    },
+    "supported_parameters": [
+      "include_reasoning",
+      "reasoning",
+      "response_format",
+      "tool_choice",
+      "tools"
+    ],
+    "top_provider": {
+      "is_moderated": false
+    },
+    "created": 1792379569
   },
   {
     "id": "minimax/minimax-01",
@@ -12861,34 +12893,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "created": 1724803200
   },
   {
-    "id": "sao10k/l3.3-euryale-70b",
-    "name": "Sao10K: Llama 3.3 Euryale 70B",
-    "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
-    "context_length": 131072,
-    "pricing": {
-      "prompt": "0.00000065",
-      "completion": "0.00000075"
-    },
-    "architecture": {
-      "tokenizer": "Llama3",
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "instruct_type": "llama3"
-    },
-    "supported_parameters": [
-      "response_format",
-      "structured_outputs"
-    ],
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1734535928
-  },
-  {
     "id": "scaledown/extract",
     "name": "ScaleDown: Extract",
     "description": "Extract is a description-driven entity extraction model from ScaleDown. Instead of a fixed set of entity types, callers describe the fields they want in plain English through `provider.options.scaledown.entities`, and the...",
@@ -13407,8 +13411,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
     "context_length": 262144,
     "pricing": {
-      "prompt": "0.000000132",
-      "completion": "0.000000528"
+      "prompt": "0.0000000825",
+      "completion": "0.00000033"
     },
     "architecture": {
       "tokenizer": "Other",
@@ -13467,8 +13471,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.000000834",
-      "completion": "0.000002501"
+      "prompt": "0.0000007506",
+      "completion": "0.0000022509"
     },
     "architecture": {
       "tokenizer": "Other",
@@ -13848,33 +13852,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
       "is_moderated": false
     },
     "created": 1752094966
-  },
-  {
-    "id": "microsoft/wizardlm-2-8x22b",
-    "name": "WizardLM-2 8x22B",
-    "description": "WizardLM-2 8x22B is Microsoft AI's most advanced Wizard model. It demonstrates highly competitive performance compared to leading proprietary models, and it consistently outperforms all existing state-of-the-art opensource models. It is...",
-    "context_length": 65535,
-    "pricing": {
-      "prompt": "0.00000062",
-      "completion": "0.00000062"
-    },
-    "architecture": {
-      "tokenizer": "Mistral",
-      "input_modalities": [
-        "text"
-      ],
-      "output_modalities": [
-        "text"
-      ],
-      "instruct_type": "vicuna"
-    },
-    "supported_parameters": [
-      "response_format"
-    ],
-    "top_provider": {
-      "is_moderated": false
-    },
-    "created": 1713225600
   },
   {
     "id": "writer/palmyra-x5",
@@ -14536,8 +14513,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000000352",
-      "completion": "0.0000002"
+      "prompt": "0.000000048",
+      "completion": "0.00000016"
     },
     "architecture": {
       "tokenizer": "Other",
@@ -14696,8 +14673,8 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "This model always redirects to the latest model in the GLM Flash family.",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.0000000352",
-      "completion": "0.0000002"
+      "prompt": "0.000000048",
+      "completion": "0.00000016"
     },
     "architecture": {
       "tokenizer": "Router",
@@ -14729,7 +14706,7 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
     "description": "This model always redirects to the latest GLM model from Z.ai.",
     "context_length": 1048576,
     "pricing": {
-      "prompt": "0.00000004",
+      "prompt": "0.000000059",
       "completion": "0.000006"
     },
     "architecture": {
@@ -14758,6 +14735,6 @@ export const OPENROUTER_STATIC_DATA: OpenRouterModel[] = [
 
 export const OPENROUTER_DATA_META = {
     generatedAt: '2026-10-19',
-    totalModels: 471,
+    totalModels: 470,
     source: 'https://openrouter.ai',
 };

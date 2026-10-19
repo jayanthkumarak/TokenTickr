@@ -64,7 +64,7 @@ describe("ImpactCalculator", () => {
         render(<ImpactCalculator results={mockResults} />);
 
         // Header
-        expect(screen.getByText("Real-World Impact")).toBeDefined();
+        expect(screen.getByText("Agent Runway")).toBeDefined();
 
         // Coding archetype: 48k prompt + 12k completion per task.
         // Model A task cost = 48000e-6 + 12000*3e-6 = 0.084.
