@@ -84,12 +84,8 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
   };
 
   const applyPreset = (kind: "coding" | "reasoning" | "routers") => {
-    const taken = new Set(
-      selectedModels.filter((m): m is OpenRouterModel => m !== null).map((m) => m.id)
-    );
-    const pool = filteredModels
-      .filter((m) => !taken.has(m.id))
-      .filter((m) => combinedCostOf(m) > 0);
+    // Presets load a comparison set: current picks are replaced.
+    const pool = filteredModels.filter((m) => combinedCostOf(m) > 0);
     const scored = pool.map((model) => {
       const caps = getAgentCapabilitySummary(model);
       const cost = combinedCostOf(model);
@@ -103,15 +99,21 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
         .slice(0, maxModels)
         .map((s) => s.model);
     } else if (kind === "reasoning") {
-      const thinkers = scored
+      const thinkersDesc = scored
         .filter((s) => s.caps.thinking)
-        .sort((a, b) => a.cost - b.cost);
-      const speeds = scored
+        .sort((a, b) => b.cost - a.cost);
+      const speedsAsc = scored
         .filter((s) => !s.caps.thinking)
         .sort((a, b) => a.cost - b.cost);
-      const ordered = [...thinkers, ...speeds];
+      const thinkersAsc = [...thinkersDesc].reverse();
+      // Contrast: frontier reasoner, fastest cheap model, value reasoner, then fill.
+      const ordered = [thinkersDesc[0], speedsAsc[0], thinkersAsc[0], ...thinkersDesc, ...speedsAsc]
+        .filter((e): e is NonNullable<typeof e> => Boolean(e));
+      const seen = new Set<string>();
       for (const entry of ordered) {
         if (picks.length >= maxModels) break;
+        if (seen.has(entry.model.id)) continue;
+        seen.add(entry.model.id);
         picks.push(entry.model);
       }
     } else {
@@ -124,16 +126,11 @@ export function ComparisonLayout({ className }: ComparisonLayoutProps) {
     if (picks.length === 0) {
       picks = [...scored].sort((a, b) => a.cost - b.cost).slice(0, maxModels).map((s) => s.model);
     }
-    // Fill only empty slots; existing picks are preserved.
-    const next = selectedModels.slice(0, maxModels);
-    let pi = 0;
-    for (let i = 0; i < next.length && pi < picks.length; i++) {
-      if (next[i] === null) {
-        taken.add(picks[pi].id);
-        setSelectedModel(i, picks[pi]);
-        pi++;
-      }
+    // Replace current picks: clear slots, then load the preset set.
+    for (let i = 0; i < maxModels; i++) {
+      if (selectedModels[i] !== null) removeModel(i);
     }
+    picks.forEach((model, i) => setSelectedModel(i, model));
   };
 
   const handleModelSelect = (index: number, model: OpenRouterModel) => {
